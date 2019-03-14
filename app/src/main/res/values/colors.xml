@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="tran_white">#b0FFFFFF</color>
+    <color name="black">#000000</color>
+
+    <!--sweet view-->
+    <color name="sweet_color_1">#AEDEF4</color>
+    <color name="sweet_color_2">#ff009688</color>
+    <color name="sweet_color_3">#ff80cbc4</color>
+    <color name="sweet_color_4">#A5DC86</color>
+    <color name="sweet_color_5">#ff37474f</color>
+    <color name="sweet_color_6">#F8BB86</color>
+    <color name="tran_white_0">#00FFFFFF</color>
+
+    <color name="white">#ffffff</color>
+    <color name="red">#FFf21820</color>
+    <color name="background">#faf9f9</color>
+
+    <!--SaleFragment-->
+    <color name="chose_text_color">#000000</color>
+    <color name="chose_line_color">#F8BB86</color>
+    <color name="text_color">#AFAFAF</color>
+    <color name="text_color2">#000000</color>
+    <color name="line_color">#00ffffff</color>
+    <color name="head_line_color">#efe4e3e3</color>
+    <color name="botton_bg">#333333</color>
+    <color name="botton_right_bg_color">#FFB503</color>
+
+
+    <!--Itmes-->
+    <color name="item_line_color">#DCDCDC</color>
+    <color name="item_text_color">#ef0171e9</color>
+
+    <!--Create Items-->
+    <color name="save_bg_color">#efe8e9ea</color>
+    <color name="img_bg_color">#969696</color>
+    <color name="img_animation_color">#F8BB86</color>
+
+    <!--Create Category-->
+    <color name="category_img_bg_color">#ef052cda</color>
+    <color name="common_bg">#f0f0f0</color>
+    <color name="gray_translucent_color">#5e000000</color>
+    <color name="gray_translucent_color2">#ae000000</color>
+</resources>
