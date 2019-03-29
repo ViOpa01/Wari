@@ -1,0 +1,123 @@
+buildscript {
+    ext.kotlin_version = '1.2.71'
+    repositories {
+        jcenter()
+        google()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.1.1'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+
+    }
+}
+allprojects {
+    repositories {
+        jcenter()
+        google()
+
+    }
+}
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+
+
+dependencies {
+    implementation project(':poslib-commons-debug')
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.0'
+    implementation project(':poslib-host-debug')
+    implementation 'com.android.support:multidex:1.0.3'
+    implementation project(':poslib-device-debug')
+    implementation project(':cloudpossdk')
+    implementation 'org.bouncycastle:bcprov-jdk15:1.38'
+    // compile project(':poslib-device-debug')
+    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation ('com.android.support:cardview-v7:27.1.1')
+    implementation 'com.android.support:design:27.1.1'
+    implementation ('com.android.support:recyclerview-v7:27.1.1')
+    //implementation 'com.android.support:appcompat-v7:27.1.1'
+    //implementation 'com.android.support:support-v4:27.1.1'
+
+    def room_version = "1.1.0"
+
+    implementation ('android.arch.persistence.room:runtime:1.1.0'){
+        exclude module: 'commons-codec'
+    }
+//    implementation ('android.arch.persistence.room:compiler:1.1.0'){
+//        exclude module: 'commons-codec'
+//    }
+    annotationProcessor ('android.arch.persistence.room:compiler:1.1.0'){
+        exclude module: 'commons-codec'
+    }
+    // optional - RxJava support for Room
+
+}
+
+android {
+    compileSdkVersion 26
+
+    sourceSets {
+        main {
+            manifest.srcFile 'AndroidManifest.xml'
+            java.srcDirs = ['src']
+            resources.srcDirs = ['src']
+            aidl.srcDirs = ['src']
+            renderscript.srcDirs = ['src']
+            res.srcDirs = ['res']
+            assets.srcDirs = ['assets']
+        }
+
+        debug.setRoot('build-types/debug')
+        release.setRoot('build-types/release')
+    }
+    defaultConfig {
+        minSdkVersion 19
+        targetSdkVersion 21
+    }
+    lintOptions {
+        abortOnError false
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
+        }
+    }
+
+}
+
+//task buildNative(type: Exec, description: 'Compile JNI source via NDK') {
+//
+//    Properties property = new Properties()
+//    property.load(project.rootProject.file('local.properties').newDataInputStream())
+//
+//    def ndkDir = property.getProperty('ndk.dir')
+//    def jniDir = "jni"
+//    commandLine "/$ndkDir/ndk-build.cmd",
+//            '-C', file(jniDir).absolutePath,
+//            '-j', Runtime.runtime.availableProcessors(),
+//            'all',
+//            'NDK_DEBUG=0'
+//}
+//
+//tasks.withType(JavaCompile){
+//    compileTask -> compileTask.dependsOn buildNative
+//}
+//
+//
+//task cleanNative(type: Exec, description: 'Clean output files') {
+//    Properties property = new Properties()
+//    property.load(project.rootProject.file('local.properties').newDataInputStream())
+//
+//    def ndkDir = property.getProperty('ndk.dir')
+//    def jniDir = "jni"
+//    commandLine "/$ndkDir/ndk-build.cmd",
+//            '-C', file(jniDir).absolutePath,
+//            '-j', Runtime.runtime.availableProcessors(),
+//            'clean',
+//            'NDK_DEBUG=0'
+//}
+//
+//clean.dependsOn cleanNative

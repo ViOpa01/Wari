@@ -1,0 +1,123 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.wizarpos.emvsample"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="16"
+        android:targetSdkVersion="16" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CLOUDPOS_MSR" />
+    <uses-permission android:name="android.permission.CLOUDPOS_PRINTER" />
+    <uses-permission android:name="android.permission.CLOUDPOS_SMARTCARD" />
+    <uses-permission android:name="android.permission.CLOUDPOS_CONTACTLESS_CARD" />
+    <uses-permission android:name="android.permission.CLOUDPOS_PIN_GET_PIN_BLOCK" />
+    <uses-permission android:name="android.permission.CLOUDPOS_PIN_MAC" />
+    <uses-permission android:name="android.permission.CLOUDPOS_PIN_ENCRYPT_DATA" />
+    <uses-permission android:name="android.permission.CLOUDPOS_PIN_UPDATE_MASTER_KEY" />
+    <uses-permission android:name="android.permission.CLOUDPOS_PIN_UPDATE_USER_KEY" />
+    <uses-permission android:name="android.permission.CLOUDPOS_LED" />
+    <uses-permission android:name="android.permission.CLOUDPOS_SAFE_MODULE" />
+    <uses-permission android:name="android.permission.CLOUDPOS_HIDE_STATUS_BAR" />
+    <uses-permission android:name="android.permission.WIZARPOS_PIN_LOAD_KEY" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+    <application
+        android:name=".MainApp"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+
+        <!-- MENU Start -->
+        <activity android:name=".activity.IdleActivity"
+            android:theme="@style/AppTheme" android:screenOrientation="nosensor">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- MENU -->
+        <!--   <activity android:name=".activity.AIDMenuActivity" />
+           <activity android:name=".activity.BlackCardMenuActivity" />
+           <activity android:name=".activity.CAPKMenuActivity" />
+           <activity android:name=".activity.CardManageActivity" />
+           <activity android:name=".activity.CommParamActivity" />
+           <activity android:name=".activity.EnquireMenuActivity" />-->
+        <activity android:name=".activity.FuncMenuActivity"
+            android:screenOrientation="portrait"/>
+        <!-- <activity android:name=".activity.InitParamActivity" />
+         <activity android:name=".activity.ParamMenuActivity" />
+         <activity android:name=".activity.PrintMenuActivity" />
+         <activity android:name=".activity.RevokedCAPKMenuActivity" />
+         <activity android:name=".activity.TerminalMenuActivity" />
+         <activity android:name=".activity.TerminalParamActivity" />
+         <activity android:name=".activity.AIDTabActivity"             android:launchMode="singleTask" />
+         <activity android:name=".activity.CAPKTabActivity"            android:launchMode="singleTask" />
+         <activity android:name=".activity.RevokedCAPKTabActivity"     android:launchMode="singleTask" />
+         <activity android:name=".activity.ExceptionFileTabActivity"   android:launchMode="singleTask" />
+         <activity android:name=".activity.AIDQueryActivity"           android:launchMode="singleTask" />
+         <activity android:name=".activity.CAPKQueryActivity"          android:launchMode="singleTask" />
+         <activity android:name=".activity.RevokedCAPKQueryActivity"   android:launchMode="singleTask" />
+         <activity android:name=".activity.ExceptionFileQueryActivity" android:launchMode="singleTask" />-->
+        <!-- Process Screen -->
+        <activity android:name=".activity.RequestCardActivity" android:screenOrientation="portrait"/>
+        <!--
+                <activity android:name=".activity.RequestManualCardActivity" />
+        -->
+        <activity android:name=".activity.RemoveCardActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.ConfirmBypassPinActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.ConfirmCardActivity" android:screenOrientation="portrait"/>
+        <!-- <activity android:name=".activity.ConfirmIDActivity" />
+         <activity android:name=".activity.ConfirmReferralActivity" />-->
+        <activity android:name=".activity.DataClearActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.EnquireTransActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.ErrorActivity" android:screenOrientation="portrait"/>
+        <!--
+                <activity android:name=".activity.InputAdminPassActivity" />
+        -->
+        <activity android:name=".activity.InputAmountActivity" android:screenOrientation="portrait"/>
+        <!--
+                <activity android:name=".activity.InputCashBackAmountActivity" />
+        -->
+        <activity android:name=".activity.InputPINActivity" android:screenOrientation="portrait"/>
+        <!--  <activity android:name=".activity.InputTicketActivity" />
+          <activity android:name=".activity.ParameterActivity" />
+          <activity android:name=".activity.ParameterCHNActivity" />-->
+        <activity android:name=".activity.ProcessEMVCardActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.ProcessOnlineActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/notitle"/>
+        <!--<activity android:name=".activity.ReadCardActivity" />-->
+        <activity android:name=".activity.SelectEMVAppListActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.ShowPBOCCardRecordActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.ShowLastPBOCActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.ShowTransInfoActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.TransResultActivity" android:screenOrientation="portrait"/>
+
+        <!-- Trans -->
+        <activity android:name=".activity.Sale" android:screenOrientation="portrait"/>
+        <!-- <activity android:name=".activity.Cash" />
+         <activity android:name=".activity.CashBack" />-->
+        <activity android:name=".activity.Settle" />
+        <!--     <activity android:name=".activity.UpCashSale" />
+             <activity android:name=".activity.UpCashSaleNew" />
+             <activity android:name=".activity.UpCashBalance" />-->
+        <activity android:name=".activity.QueryCardRecord" />
+        <activity android:name=".activity.GetMasterKey" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.auth.PinInterFace"/>
+        <activity android:name=".activity.auth.EodMenu" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.auth.NetworkSettings" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.RefundActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/notitle"></activity>
+        <activity android:name=".activity.InputExtraAmountActivity"/>
+
+        <service android:name=".service.CallHomeService"/>
+
+    </application>
+
+</manifest>

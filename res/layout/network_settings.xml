@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/bg_color"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/layout_title_bar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:padding="@dimen/activity_vertical_margin"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:textColor="@color/title_bg"
+            android:textSize="30sp"
+            android:layout_height="wrap_content"
+            android:text="Host IP"/>
+
+        <EditText
+            android:padding="@dimen/activity_vertical_margin"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/ip"
+            android:maxLines="1"
+            android:textColor="@color/contents_text"
+            android:text="196.6.103.73"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:textColor="@color/title_bg"
+            android:textSize="30sp"
+            android:layout_height="wrap_content"
+            android:text="Host Port"/>
+
+        <EditText
+            android:padding="@dimen/activity_vertical_margin"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/port"
+            android:inputType="number"
+            android:maxLines="1"
+            android:textColor="@color/contents_text"
+            android:text="5043"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="match_parent"
+                android:textColor="@color/title_bg"
+                android:textSize="30sp"
+                android:layout_height="wrap_content"
+                android:text="SSL Connection ?"/>
+
+            <CheckBox
+                android:layout_width="30dp"
+                android:layout_alignParentRight="true"
+                android:backgroundTint="@color/title_bg"
+                android:buttonTint="@color/title_bg"
+                android:id="@+id/ssl"
+                android:checked="true"
+                android:layout_marginRight="5dp"
+                android:layout_height="30dp" />
+        </RelativeLayout>
+
+
+
+
+        <Button
+            android:layout_width="match_parent"
+            android:padding="@dimen/activity_vertical_margin"
+            android:layout_margin="@dimen/activity_vertical_margin"
+            android:text="SAVE"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:background="@drawable/btn"
+            android:onClick="saveConfig"
+            android:textColor="@color/white"
+            android:textSize="35sp"
+            android:layout_height="wrap_content" />
+
+
+
+
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>
