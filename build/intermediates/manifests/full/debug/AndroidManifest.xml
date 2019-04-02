@@ -33,7 +33,7 @@
     <application
         android:name="com.wizarpos.emvsample.MainApp"
         android:debuggable="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/wari"
         android:label="@string/app_name"
         android:testOnly="true"
         android:theme="@style/AppTheme" >
@@ -108,7 +108,8 @@
 <!--                 <activity android:name=".activity.InputAdminPassActivity" /> -->
         <activity
             android:name="com.wizarpos.emvsample.activity.InputAmountActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
 <!--                 <activity android:name=".activity.InputCashBackAmountActivity" /> -->
         <activity
             android:name="com.wizarpos.emvsample.activity.InputPINActivity"

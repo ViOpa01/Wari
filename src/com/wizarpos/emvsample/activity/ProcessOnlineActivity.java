@@ -2,6 +2,8 @@ package com.wizarpos.emvsample.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Window;
 import android.widget.Button;
@@ -84,16 +86,18 @@ public class ProcessOnlineActivity extends FuncActivity
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_process_online);
+		initToolbar();
+
     	// title
 		getEMVCardInfo();
 		appState.goneOnline = true;
-		textTitle = (TextView)findViewById(R.id.tAppTitle);
-		setTitle(textTitle);
-		buttonBack = (Button)findViewById(R.id.btn_back);
-        buttonBack.setBackgroundDrawable(getResources().getDrawable(R.drawable.btn_blank));
-        
-        buttonMore = (Button)findViewById(R.id.btn_more);
-        buttonMore.setBackgroundDrawable(getResources().getDrawable(R.drawable.btn_blank));
+//		textTitle = (TextView)findViewById(R.id.tAppTitle);
+//		setTitle(textTitle);
+//		buttonBack = (Button)findViewById(R.id.btn_back);
+//        buttonBack.setBackgroundDrawable(getResources().getDrawable(R.drawable.btn_blank));
+//
+//        buttonMore = (Button)findViewById(R.id.btn_more);
+//        buttonMore.setBackgroundDrawable(getResources().getDrawable(R.drawable.btn_blank));
 
         if(appState.nibssData == null){
         	//Terminal has not been configured
@@ -249,6 +253,20 @@ public class ProcessOnlineActivity extends FuncActivity
 
 
 
+	}
+
+	private void initToolbar() {
+		Toolbar toolbar = findViewById(R.id.toolbar);
+		setSupportActionBar(toolbar);
+		ActionBar actionBar = getSupportActionBar();
+		actionBar.setTitle("Purchase");
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+	}
+
+	@Override
+	public boolean onSupportNavigateUp() {
+		finish();
+		return super.onSupportNavigateUp();
 	}
 
 	private void getEMVCardInfo()

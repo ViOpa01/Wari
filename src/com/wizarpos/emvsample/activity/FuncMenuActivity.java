@@ -1,12 +1,10 @@
 package com.wizarpos.emvsample.activity;
 
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
@@ -16,13 +14,13 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wizarpos.emvsample.R;
 import com.wizarpos.emvsample.activity.auth.PinInterFace;
-import com.wizarpos.emvsample.db.TransactionResultService;
 import com.wizarpos.emvsample.transaction.Nibss;
 import com.wizarpos.jni.PinPadInterface;
 import com.wizarpos.util.StringUtil;
@@ -33,14 +31,14 @@ public class FuncMenuActivity extends FuncActivity
 	private Button   buttonBack = null;
 	private Button   buttonMore = null;
 
-	private Button buttonSale = null;
-	private Button buttonLastPBOC = null;
-	private Button buttonTrans = null;
-	private Button buttonSettle = null;
-	private Button buttonEncrypt = null;
-	private Button purchaseCashBack;
+	private ImageView ImageViewSale = null;
+	private ImageView ImageViewLastPBOC = null;
+	private ImageView ImageViewTrans = null;
+	private ImageView ImageViewSettle = null;
+	private ImageView ImageViewEncrypt = null;
+	private ImageView purchaseCashBack;
 	private AlertDialog alertDialog;
-	private Button buttonEod;
+	private ImageView ImageViewEod;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState)
@@ -53,40 +51,40 @@ public class FuncMenuActivity extends FuncActivity
 //		textTitle = (TextView)findViewById(R.id.tAppTitle);
 //		textTitle.setText("MAIN");
 //
-//		buttonBack = (Button)findViewById(R.id.btn_back);
-//		buttonBack.setOnClickListener(new ClickListener());
+//		ImageViewBack = findViewById(R.id.btn_back);
+//		ImageViewBack.setOnClickListener(new ClickListener());
 //
-//		buttonMore = (Button)findViewById(R.id.btn_more);
-//		buttonMore.setBackgroundDrawable(getResources().getDrawable(R.drawable.btn_blank));
+//		ImageViewMore = findViewById(R.id.btn_more);
+//		ImageViewMore.setBackgroundDrawable(getResources().getDrawable(R.drawable.btn_blank));
 
-		buttonSale = (Button)findViewById(R.id.bFunc_Sale);
-		buttonSale.setOnClickListener(new ClickListener());
+		ImageViewSale = findViewById(R.id.bFunc_Sale);
+		ImageViewSale.setOnClickListener(new ClickListener());
 
 
-		buttonLastPBOC = (Button)findViewById(R.id.bFunc_LastPBOC);
-		buttonLastPBOC.setOnClickListener(new ClickListener());
+		ImageViewLastPBOC = findViewById(R.id.bFunc_LastPBOC);
+		ImageViewLastPBOC.setOnClickListener(new ClickListener());
 
-		buttonTrans = (Button)findViewById(R.id.bFunc_Trans);
-		buttonTrans.setOnClickListener(new ClickListener());
+		ImageViewTrans = findViewById(R.id.bFunc_Trans);
+		ImageViewTrans.setOnClickListener(new ClickListener());
 
-		buttonSettle = (Button)findViewById(R.id.bFunc_Settle);
-		buttonSettle.setOnClickListener(new ClickListener());
+		ImageViewSettle = findViewById(R.id.bFunc_Settle);
+		ImageViewSettle.setOnClickListener(new ClickListener());
 
-		buttonEncrypt = (Button)findViewById(R.id.bFunc_encrypt);
-		buttonEncrypt.setOnClickListener(new ClickListener());
+		ImageViewEncrypt = findViewById(R.id.bFunc_encrypt);
+		ImageViewEncrypt.setOnClickListener(new ClickListener());
 
 		purchaseCashBack = findViewById(R.id.cashBack);
 		purchaseCashBack.setOnClickListener(new ClickListener());
 
-		buttonEod = (Button)findViewById(R.id.eod);
-		buttonEod.setOnClickListener(new ClickListener());
+		ImageViewEod = findViewById(R.id.eod);
+		ImageViewEod.setOnClickListener(new ClickListener());
 	}
 
 	private void initToolbar() {
 		Toolbar toolbar = findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
 		ActionBar actionBar = getSupportActionBar();
-		actionBar.setTitle("Wari");
+		actionBar.setTitle("WARI");
 	}
 
 	@Override
@@ -249,15 +247,20 @@ public class FuncMenuActivity extends FuncActivity
 		pwd.setInputType(InputType.TYPE_CLASS_NUMBER |
 				InputType.TYPE_NUMBER_VARIATION_PASSWORD);
 		pwd.setMaxLines(1);
+		pwd.setTextColor(getResources().getColor(R.color.white));
 		params.setMargins(20,0,20,0);
 		pwd.setLayoutParams(params);
+		pwd.setHintTextColor(getResources().getColor(R.color.grey_light));
 		pwd.setPadding(15,15,15,15);
-		pwd.setHint("Enter Authorised password");
+		pwd.setHint("Enter password");
 
 		//MerchartId firs
 		final EditText meid = new EditText(this);
 		meid.setInputType(InputType.TYPE_CLASS_TEXT);
 		meid.setMaxLines(1);
+		meid.setTextColor(getResources().getColor(R.color.white));
+		meid.setHint("Enter Terminal ID");
+		meid.setHintTextColor(getResources().getColor(R.color.grey_light));
 		params.setMargins(20,0,20,0);
 		meid.setLayoutParams(params);
 		meid.setPadding(15,15,15,15);
@@ -267,11 +270,12 @@ public class FuncMenuActivity extends FuncActivity
 
 		//Confirm Button
 		final  Button btn = new Button(this);
-		LinearLayout.LayoutParams pm = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+		LinearLayout.LayoutParams pm = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 		pm.setMargins(20,0,20,0);
 		btn.setLayoutParams(pm);
 		btn.setPadding(15,15,15,15);
 		btn.setText("Confirm");
+		btn.setBackgroundColor(getResources().getColor(R.color.white));
 		btn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -333,7 +337,7 @@ public class FuncMenuActivity extends FuncActivity
 		appState.prep(termId,this,new Nibss.Nibs<String>() {
 			@Override
 			public void complete(String res) {
-				Toast.makeText(FuncMenuActivity.this,"Successfull",Toast.LENGTH_LONG).show();
+				Toast.makeText(FuncMenuActivity.this,"Successfully Configured",Toast.LENGTH_LONG).show();
 			    startActivity(new Intent(FuncMenuActivity.this, GetMasterKey.class));
 			    finish();
 			}

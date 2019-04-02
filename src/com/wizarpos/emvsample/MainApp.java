@@ -421,15 +421,13 @@ public class MainApp extends Application implements Constants
 //		final ProgressDialog pd = new ProgressDialog(context, R.style.AlertDialogCustom);
 //		pd.setMessage("Preping please wait");
 //		pd.show();
-        Toast.makeText(context, "Preping please wait", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "Configuring please wait", Toast.LENGTH_SHORT).show();
 
 		setupNibbsData(termId,new Nibss.Nibs<String>() {
 			@Override
 			public void complete(String res) {
-//				if(pd.isShowing()){
-//					pd.cancel();
-//				}
 //				pd.dismiss();
+				Toast.makeText(context, "Succesfully Configured", Toast.LENGTH_SHORT).show();
 				callback.complete("Success");
 
 			}
@@ -437,6 +435,7 @@ public class MainApp extends Application implements Constants
 			@Override
 			public void error(String e) {
 				//pd.dismiss();
+				Toast.makeText(context, "Not Configured...Please Retry", Toast.LENGTH_SHORT).show();
 				callback.error(e);
 			}
 		});

@@ -5,7 +5,10 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -50,32 +53,32 @@ public class InputAmountActivity extends FuncActivity
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_input_amount);
-
+        initToolbar();
 
         // title
 		appState.goneOnline = false;
 		if(appState.refund || appState.balanceEnc || appState.revarsal){
 			refundNext(getIntent());
 		}
-        textTitle = (TextView)findViewById(R.id.tAppTitle);
-		setTitle(textTitle);
+//        textTitle = (TextView)findViewById(R.id.tAppTitle);
+//		setTitle(textTitle);
 
-	    buttonBack = (Button)findViewById(R.id.btn_back);
-        buttonBack.setOnClickListener(new ClickListener());
+//	    buttonBack = (Button)findViewById(R.id.btn_back);
+//        buttonBack.setOnClickListener(new ClickListener());
 
 
         
-        buttonMore = (Button)findViewById(R.id.btn_more);
-        buttonMore.setBackgroundDrawable(getResources().getDrawable(R.drawable.btn_blank));
+//        buttonMore = (Button)findViewById(R.id.btn_more);
+//        buttonMore.setBackgroundDrawable(getResources().getDrawable(R.drawable.btn_blank));
         // digit pad
         buttonEnter = (Button)findViewById(R.id.btn_digit_enter);
         buttonEnter.setOnClickListener(new ClickListener());
         
-        buttonCancel = (Button)findViewById(R.id.btn_digit_cancel);
-        buttonCancel.setOnClickListener(new ClickListener());
-        
-        buttonClear =  (Button)findViewById(R.id.btn_digit_clear);
-        buttonClear.setOnClickListener(new ClickListener());
+//        buttonCancel = (Button)findViewById(R.id.btn_digit_cancel);
+//        buttonCancel.setOnClickListener(new ClickListener());
+//
+//        buttonClear =  (Button)findViewById(R.id.btn_digit_clear);
+//        buttonClear.setOnClickListener(new ClickListener());
         
         buttonBackSpace =  (Button)findViewById(R.id.btn_digit_backspace);
         buttonBackSpace.setOnClickListener(new ClickListener());
@@ -112,7 +115,7 @@ public class InputAmountActivity extends FuncActivity
         
         textTransType = (TextView)findViewById(R.id.tInputAmount_TransType);
         textPrompt =(TextView)findViewById(R.id.tInputAmount_Prompt);
-        textPrompt.setText("PLEASE INPUT TRANS AMOUNT:");
+        textPrompt.setText("PLEASE INPUT AMOUNT:");
         textAmount = (EditText)findViewById(R.id.tInputAmount_Amount);
 		textAmount.setOnKeyListener(new View.OnKeyListener()
 		{
@@ -126,7 +129,21 @@ public class InputAmountActivity extends FuncActivity
 		});
 		textAmount.requestFocus();
     }
-    
+
+	private void initToolbar() {
+		Toolbar toolbar = findViewById(R.id.toolbar);
+		setSupportActionBar(toolbar);
+		ActionBar actionBar = getSupportActionBar();
+		actionBar.setTitle("WARI");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+	}
+
+    @Override
+    public boolean onSupportNavigateUp() {
+       finish();
+        return super.onSupportNavigateUp();
+    }
+
     @Override
     public void onStart()
     {
@@ -148,12 +165,7 @@ public class InputAmountActivity extends FuncActivity
     {
         super.onStop();
     }
-    
-    @Override
-    public void onBackPressed(){
 
-    }
-    
     private void setTextAmount(int digital)
     {
     	if(amount < 100000000)

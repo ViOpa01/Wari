@@ -36,7 +36,7 @@ public class InputExtraAmountActivity extends FuncActivity
 	private Button buttonDigital_8 = null;
 	private Button buttonDigital_9 = null;
 
-	private TextView textTransType = null;
+	//private TextView textTransType = null;
 	private TextView textPrompt = null;
 	private EditText textAmount = null;
 	private int amount = 0;
@@ -107,7 +107,7 @@ public class InputExtraAmountActivity extends FuncActivity
         buttonDigital_9 =  (Button)findViewById(R.id.btn_digit_9);
         buttonDigital_9.setOnClickListener(new ClickListener());
 
-        textTransType = (TextView)findViewById(R.id.tInputAmount_TransType);
+        //textTransType = (TextView)findViewById(R.id.tInputAmount_TransType);
         textPrompt =(TextView)findViewById(R.id.tInputAmount_Prompt);
         textPrompt.setText("PLEASE INPUT CASHBACK AMOUNT:");
         textAmount = (EditText)findViewById(R.id.tInputAmount_Amount);
@@ -128,7 +128,7 @@ public class InputExtraAmountActivity extends FuncActivity
     public void onStart()
     {
     	super.onStart();
-		setTitle(textTransType);
+		//setTitle(textTransType);
 		amount = 0;
         setTextAmount(amount);
         startIdleTimer(TIMER_FINISH, DEFAULT_IDLE_TIME_SECONDS);

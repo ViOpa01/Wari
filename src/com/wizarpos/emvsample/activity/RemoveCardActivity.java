@@ -3,6 +3,8 @@ package com.wizarpos.emvsample.activity;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Message;
+import android.support.v7.app.ActionBar;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -38,18 +40,27 @@ public class RemoveCardActivity extends FuncActivity
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_remove_card);
-        // title
-        textTitle = (TextView)findViewById(R.id.tAppTitle);
-		textTitle.setText(appState.getString(TransDefine.transInfo[appState.getTranType()].id_display_en));
-		
-	    buttonBack = (Button)findViewById(R.id.btn_back);
-        buttonBack.setOnClickListener(new ClickListener());
-        
-        buttonMore = (Button)findViewById(R.id.btn_more);
-        buttonMore.setBackgroundDrawable(getResources().getDrawable(R.drawable.btn_blank));
+		initToolbar();
+		// title
+//        textTitle = (TextView)findViewById(R.id.tAppTitle);
+//		textTitle.setText(appState.getString(TransDefine.transInfo[appState.getTranType()].id_display_en));
+//
+//	    buttonBack = (Button)findViewById(R.id.btn_back);
+//        buttonBack.setOnClickListener(new ClickListener());
+//
+//        buttonMore = (Button)findViewById(R.id.btn_more);
+//        buttonMore.setBackgroundDrawable(getResources().getDrawable(R.drawable.btn_blank));
 
         mHandler.setFunActivity(this);
     }
+
+	private void initToolbar() {
+		Toolbar toolbar = findViewById(R.id.toolbar);
+		setSupportActionBar(toolbar);
+		ActionBar actionBar = getSupportActionBar();
+		actionBar.setTitle("Purchase");
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+	}
 
     @Override 
     protected void onStart() { 

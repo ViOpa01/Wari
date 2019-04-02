@@ -43,7 +43,7 @@ public class IdleActivity extends FuncActivity implements Constants
         setContentView(R.layout.activity_idle);
         initToolbar();
         textTitle = (TextView)findViewById(R.id.tAppTitle);
-		textTitle.setText("Wari");
+		textTitle.setText("WARI");
 		
 	    buttonBack = (Button)findViewById(R.id.btn_back);
         buttonBack.setOnClickListener(new ClickListener());
@@ -158,12 +158,12 @@ public class IdleActivity extends FuncActivity implements Constants
 
     }
     
-    @Override 
-    protected void onStop() { 
-    	if(debug)Log.e(APP_TAG, "idleActivity onStop");
-        super.onStop();
-
-    }
+//    @Override
+//    protected void onStop() {
+//    	if(debug)Log.e(APP_TAG, "idleActivity onStop");
+//        super.onStop();
+//
+//    }
 
 	@Override
 	protected void onPause() {

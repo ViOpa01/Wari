@@ -15,14 +15,15 @@
 
     <ScrollView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
 
          <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/bg_main"
         android:orientation="vertical"
-        android:paddingTop="10dp">
+        android:padding="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -30,49 +31,52 @@
             android:layout_marginTop="10dp"
             android:gravity="center"
             android:orientation="horizontal"
-            android:paddingLeft="20dp">
+            android:layout_marginBottom="20dp">
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
 
-                <Button
+                <ImageView
                     android:id="@+id/bFunc_Sale"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:background="@drawable/selector_sale"/>
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:contentDescription="@string/purchase"
+                    android:src="@drawable/ic_credit_card_black_24dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Purchase"
-                    android:textSize="10sp"/>
+                    android:textStyle="bold"
+                    android:textSize="14sp"/>
             </LinearLayout>
 
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
+                
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
 
-                <Button
+                <ImageView
                     android:id="@+id/bFunc_LastPBOC"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:background="@drawable/selector_card_query"/>
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:contentDescription="@string/keys"
+                    android:src="@drawable/ic_lock_open_black_24dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Get Keys"
-                    android:textSize="10sp"/>
+                    android:textStyle="bold"
+                    android:textSize="14sp"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -82,51 +86,55 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:textStyle="bold"
             android:gravity="center_horizontal"
             android:orientation="horizontal"
-            android:paddingLeft="20dp">
+            android:layout_marginBottom="20dp">
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
+
                 android:layout_weight="1"
                 android:gravity="center"
                 android:orientation="vertical">
 
-                <Button
+                <ImageView
                     android:id="@+id/bFunc_encrypt"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:background="@drawable/btn_password"/>
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:contentDescription="@string/configure"
+                    android:src="@drawable/ic_settings_black_24dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textStyle="bold"
                     android:text="Configure Terminal"
-                    android:textSize="10sp"/>
+                    android:textSize="14sp"/>
             </LinearLayout>
 
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
 
-                <Button
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                <ImageView
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
                     android:id="@+id/eod"
-                    android:background="@drawable/selector_settle"/>
+                    android:contentDescription="@string/eod"
+                    android:src="@drawable/ic_event_note_black_24dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="EOD"
-                    android:textSize="10sp"/>
+                    android:textStyle="bold"
+                    android:textSize="14sp"/>
             </LinearLayout>
 
         </LinearLayout>
@@ -137,49 +145,51 @@
             android:layout_marginTop="10dp"
             android:gravity="center_horizontal"
             android:orientation="horizontal"
-            android:paddingLeft="20dp">
+            android:layout_marginBottom="20dp">
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:orientation="vertical">
 
-                <Button
+                <ImageView
                     android:id="@+id/bFunc_Trans"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:background="@drawable/selector_query_trans_detail"/>
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:contentDescription="@string/balance"
+                    android:src="@drawable/ic_account_balance_wallet_black_24dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Check Balance"
-                    android:textSize="10sp"/>
+                    android:textStyle="bold"
+                    android:textSize="14sp"/>
             </LinearLayout>
 
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
 
-                <Button
+                <ImageView
                     android:id="@+id/bFunc_Settle"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:background="@drawable/selector_settle"/>
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:contentDescription="@string/refund"
+                    android:src="@drawable/ic_refresh_black_24dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Refund"
-                    android:textSize="10sp"/>
+                    android:textStyle="bold"
+                    android:textSize="14sp"/>
             </LinearLayout>
 
         </LinearLayout>
@@ -188,29 +198,30 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:visibility="invisible"
             android:gravity="center_horizontal"
             android:orientation="horizontal"
-            android:paddingLeft="20dp">
+            android:layout_marginBottom="20dp">
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:orientation="vertical">
 
-                <Button
+                <ImageView
                     android:id="@+id/cashBack"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:background="@drawable/selector_query_trans_detail"/>
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:src="@drawable/ic_refresh_black_24dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Purchase With CashBack"
-                    android:textSize="10sp"/>
+                    android:textStyle="bold"
+                    android:textSize="14sp"/>
             </LinearLayout>
 
 

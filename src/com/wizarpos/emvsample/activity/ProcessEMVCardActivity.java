@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
+import android.support.v7.app.ActionBar;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Window;
 import android.widget.Button;
@@ -401,14 +403,16 @@ public class ProcessEMVCardActivity extends FuncActivity
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_process_emv_card);
+		initToolbar();
+
         // title
-        textTitle = (TextView)findViewById(R.id.tAppTitle);
-		setTitle(textTitle);
-	    buttonBack = (Button)findViewById(R.id.btn_back);
-        buttonBack.setBackgroundDrawable(getResources().getDrawable(R.drawable.btn_blank));
-        
-        buttonMore = (Button)findViewById(R.id.btn_more);
-        buttonMore.setBackgroundDrawable(getResources().getDrawable(R.drawable.btn_blank));
+//        textTitle = (TextView)findViewById(R.id.tAppTitle);
+//		setTitle(textTitle);
+//	    buttonBack = (Button)findViewById(R.id.btn_back);
+//        buttonBack.setBackgroundDrawable(getResources().getDrawable(R.drawable.btn_blank));
+//
+//        buttonMore = (Button)findViewById(R.id.btn_more);
+//        buttonMore.setBackgroundDrawable(getResources().getDrawable(R.drawable.btn_blank));
         
         textTransType = (TextView)findViewById(R.id.tProcessEMVCard_TransType);
         textTransType.setText(TransDefine.transInfo[appState.getTranType()].id_display_en);
@@ -421,7 +425,23 @@ public class ProcessEMVCardActivity extends FuncActivity
         mEMVThread.start();
     }
 
-    @Override 
+	private void initToolbar() {
+		Toolbar toolbar = findViewById(R.id.toolbar);
+		setSupportActionBar(toolbar);
+		ActionBar actionBar = getSupportActionBar();
+		actionBar.setTitle("Purchase");
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+	}
+
+
+
+	@Override
+	public boolean onSupportNavigateUp() {
+		finish();
+		return super.onSupportNavigateUp();
+	}
+
+	@Override
     protected void onStart() { 
         super.onStart(); 
         textLine1.setText("PROCESSING CARD，PLS WAITING...");
@@ -444,7 +464,7 @@ public class ProcessEMVCardActivity extends FuncActivity
     
     @Override
     public void onBackPressed(){
-
+		finish();
     }
     
 	@Override

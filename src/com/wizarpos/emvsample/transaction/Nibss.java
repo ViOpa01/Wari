@@ -6,6 +6,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.provider.Settings;
 import android.util.Log;
+import android.widget.Toast;
 
 
 import com.iisysgroup.poslib.ISO.GTMS.GtmsHost;
@@ -112,6 +113,7 @@ public class Nibss {
 
                                        @Override
                                        public void onSuccess(ConfigData configData) {
+                                           Toast.makeText(context, "Successfully Configured", Toast.LENGTH_SHORT);
                                            Log.i("okh", "Config data ready");
                                            Log.i("okh", configData.toString());
                                             NIbbsData nIbbsData = new NIbbsData(keyHolder, configData,connectionData);
@@ -184,6 +186,7 @@ public class Nibss {
 
                                     @Override
                                     public void onSuccess(ConfigData configData) {
+                                        Toast.makeText(context, "Successfully Configured", Toast.LENGTH_SHORT);
                                         Log.i("okh", "Config data ready");
                                         Log.i("okh", configData.toString());
                                         NIbbsData nIbbsData = new NIbbsData(keyHolder, configData,connectionData);

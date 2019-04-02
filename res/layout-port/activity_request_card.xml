@@ -4,21 +4,24 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" 
     android:id="@+id/layout_swipe_card" >
-    <include
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    layout="@layout/layout_title_bar" />
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <include layout="@layout/toolbar" />
+
+    </android.support.design.widget.AppBarLayout>
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:background="@drawable/bg_main"
         android:gravity="center"
         android:orientation="vertical" >
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_prompt_tray"
             android:gravity="center_horizontal|center_vertical"
             android:orientation="vertical" >
 
@@ -26,8 +29,8 @@
                 android:id="@+id/tRequestCard_TransType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#FFFFFF"
                 android:layout_marginBottom="60dp"
+                android:textStyle="bold"
                 android:textSize="25sp" />
             
             <TextView
@@ -35,14 +38,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
-                android:textColor="#FFFFFF"
+                android:textStyle="bold"
                 android:textSize="20sp" />
             <TextView
                 android:id="@+id/tRequestCard_Amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
-                android:textColor="#FFFFFF"
+                android:textStyle="bold"
                 android:textSize="20sp" />
             
             <TextView
@@ -50,7 +53,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
-                android:textColor="#FFFFFF"
+                android:textStyle="bold"
                 android:textSize="20sp" />
         </LinearLayout>
     </LinearLayout>

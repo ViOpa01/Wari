@@ -5,9 +5,12 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Message;
+import android.support.v7.app.ActionBar;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.wizarpos.emvsample.R;
@@ -38,6 +41,8 @@ public class TransResultActivity extends FuncActivity
 	private Timer mTimerSeconds;
 	private boolean printPaused = false;
 
+	private ImageView transactionStatus;
+
 	@Override
 	public void handleMessageSafe(Message msg)
 	{
@@ -60,26 +65,30 @@ public class TransResultActivity extends FuncActivity
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_trans_result);
+        initToolbar();
+
         // title
         textTitle = (TextView)findViewById(R.id.tAppTitle);
-		textTitle.setText(appState.getString(TransDefine.transInfo[appState.getTranType()].id_display_en));
-		
-	    buttonBack = (Button)findViewById(R.id.btn_back);
-        buttonBack.setOnClickListener(new ClickListener());
+		//textTitle.setText(appState.getString(TransDefine.transInfo[appState.getTranType()].id_display_en));
+
+        transactionStatus = findViewById(R.id.transactionStatus);
+
+//	    buttonBack = (Button)findViewById(R.id.btn_back);;;
+//        buttonBack.setOnClickListener(new ClickListener());
         
-        buttonMore = (Button)findViewById(R.id.btn_more);
-        buttonMore.setBackgroundDrawable(getResources().getDrawable(R.drawable.btn_blank));
+//        buttonMore = (Button)findViewById(R.id.btn_more);
+//        buttonMore.setBackgroundDrawable(getResources().getDrawable(R.drawable.btn_blank));
         
         textLine1 = (TextView)findViewById(R.id.tTransResult_Line1);
         textLine2 = (TextView)findViewById(R.id.tTransResult_Line2);
         textLine3 = (TextView)findViewById(R.id.tTransResult_Line3);
         textLine4 = (TextView)findViewById(R.id.tTransResult_Line4);
         
-        buttonOK  = (Button)findViewById(R.id.btn_digit_enter);
-        buttonOK.setOnClickListener(new ClickListener());
+//        buttonOK  = (Button)findViewById(R.id.btn_digit_enter);
+//        buttonOK.setOnClickListener(new ClickListener());
     	
-        buttonCancel  = (Button)findViewById(R.id.btn_digit_cancel);
-        buttonCancel.setOnClickListener(new ClickListener());
+//        buttonCancel  = (Button)findViewById(R.id.btn_digit_cancel);
+//        buttonCancel.setOnClickListener(new ClickListener());
 
         mHandler.setFunActivity(this);
 
@@ -121,6 +130,7 @@ public class TransResultActivity extends FuncActivity
 	        		}
 	        		else{
 	        			textLine1.setText("DECLINED");
+                        transactionStatus.setImageResource(R.drawable.ic_cancel_black_24dp);
 	        		}
 	        	}
 	        	else{
@@ -131,6 +141,7 @@ public class TransResultActivity extends FuncActivity
 						if(appState.trans.getEMVRetCode() == APPROVE_ONLINE)
 						{
 							textLine1.setText("Approved");
+                            transactionStatus.setImageResource(R.drawable.ic_check_circle_black_24dp);
 						}
 						else{
 							textLine1.setText("ACCEPTED OFFLINE");
@@ -160,8 +171,22 @@ public class TransResultActivity extends FuncActivity
         	}
         }
     }
-    
-	@Override
+
+    private void initToolbar() {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("Purchase");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+	    return super.onSupportNavigateUp();
+    }
+
+    @Override
 	protected void onStart()
 	{
 		super.onStart();

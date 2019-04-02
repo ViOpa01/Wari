@@ -18,4 +18,11 @@
 	<style name="AlertDialogCustom" parent="@android:style/Theme.Dialog">
 		<item name="android:textColorPrimary">@color/white</item>
 	</style>
+
+    <style name="button" parent="@android:style/Widget.Holo.ActionButton">
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>

@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
+import android.support.v7.app.ActionBar;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -31,14 +33,16 @@ public class RequestCardActivity extends FuncActivity
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_request_card);
+		initToolbar();
+
         // title
-        textTitle = (TextView)findViewById(R.id.tAppTitle);
-        setTitle(textTitle);
-	    buttonBack = (Button)findViewById(R.id.btn_back);
-        buttonBack.setOnClickListener(new ClickListener());
-        
-        buttonMore = (Button)findViewById(R.id.btn_more);
-        buttonMore.setBackgroundDrawable(getResources().getDrawable(R.drawable.btn_blank));
+//        textTitle = (TextView)findViewById(R.id.tAppTitle);
+//        setTitle(textTitle);
+//	    buttonBack = (Button)findViewById(R.id.btn_back);
+//        buttonBack.setOnClickListener(new ClickListener());
+//
+//        buttonMore = (Button)findViewById(R.id.btn_more);
+//        buttonMore.setBackgroundDrawable(getResources().getDrawable(R.drawable.btn_blank));
         
         txtTransType = (TextView)findViewById(R.id.tRequestCard_TransType);
         txtError = (TextView)findViewById(R.id.tRequestCard_Error);
@@ -48,7 +52,7 @@ public class RequestCardActivity extends FuncActivity
         
         if(appState.resetCardError == true)
         {
-        	txtError.setText("IC POWERON ERROR");
+        	txtError.setText("IC ERROR, PLEASE REBOOT DEVICE");
         }
         else if(appState.trans.getEmvCardError() == true)
         {
@@ -60,7 +64,23 @@ public class RequestCardActivity extends FuncActivity
         }
 
     }
-    @Override
+
+	private void initToolbar() {
+		Toolbar toolbar = findViewById(R.id.toolbar);
+		setSupportActionBar(toolbar);
+		ActionBar actionBar = getSupportActionBar();
+		actionBar.setTitle("Purchase");
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+	}
+
+	@Override
+	public boolean onSupportNavigateUp() {
+		finish();
+		return super.onSupportNavigateUp();
+	}
+
+
+	@Override
 	public void handleMessageSafe(Message msg)
 	{
 		/*这里是处理信息的方法*/
@@ -149,7 +169,7 @@ public class RequestCardActivity extends FuncActivity
 			exit();
 			break;
 		case CARD_ERROR_NOTIFIER:
-			txtError.setText("IC POWERON ERROR");
+			txtError.setText("IC ERROR, PLEASE REBOOT DEVICE");
 			txtPrompt.setText("PLEASE INSERT CARD");
 			appState.trans.setEmvCardError(true);
 			break;

@@ -14,7 +14,7 @@
     <string name="query_specific_en">QUERY SPECIFIC TRANS</string>
     <string name="query_trans_detail_en">QUERY TRANS DETAIL</string>
 
-    <string name="insert_card">please insert IC card</string>
+    <string name="insert_card">Please Insert Debit Card</string>
 
     <string name="error_amount_over_limit">AMOUNT OVER LIMIT</string>
     <string name="error_amount_zero">transaction terminated,please use other interface</string>
@@ -67,5 +67,11 @@
     <string name="tac_tag">TAC:</string>
     <string name="signature_tag">SIGNATURE:</string>
     <string name="prepTerminal">Configure terminal</string>
+    <string name="purchase">Make A Purchase</string>
+    <string name="keys">Get Keys from Server</string>
+    <string name="configure">Get Terminal Details from server</string>
+    <string name="eod">View the Tranactions done</string>
+    <string name="balance">Check Balance on Card</string>
+    <string name="refund">Make a Refund</string>
 
 </resources>
