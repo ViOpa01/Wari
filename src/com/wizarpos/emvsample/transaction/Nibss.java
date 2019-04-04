@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.os.AsyncTask;
 import android.provider.Settings;
 import android.util.Log;
 import android.widget.Toast;
@@ -17,6 +18,7 @@ import com.iisysgroup.poslib.commons.emv.EmvCard;
 
 import com.iisysgroup.poslib.host.Host;
 import com.iisysgroup.poslib.host.HostInteractor;
+import com.iisysgroup.poslib.host.dao.PosLibDatabase;
 import com.iisysgroup.poslib.host.entities.ConfigData;
 import com.iisysgroup.poslib.host.entities.ConnectionData;
 import com.iisysgroup.poslib.host.entities.KeyHolder;
@@ -30,9 +32,11 @@ import com.wizarpos.emvsample.db.TransDetailService;
 import com.wizarpos.emvsample.db.TransactionResultService;
 import com.wizarpos.emvsample.pfmState.PfmStateBuilder;
 import com.wizarpos.util.AppUtil;
+import com.wizarpos.util.SharedPreferenceUtils;
 
 
 import java.io.Serializable;
+import java.net.URL;
 import java.util.Arrays;
 
 import io.reactivex.Single;
@@ -61,7 +65,7 @@ public class Nibss {
         sslStatus = sharedPreferences.getBoolean("ssl", true);
     }
 
-
+    PosLibDatabase poslibdb = MainApp.getInstance().poslibdb;
 
     //Key Keys to
     public  void prepare (String terminalID, final Nibs<NIbbsData> t){
@@ -87,6 +91,8 @@ public class Nibss {
 
                       @Override
                       public void onSuccess(final KeyHolder keyHolder) {
+                          new Save().execute(keyHolder);
+
                           Log.i("okh", "KeyHolder Ready");
                           Log.i("okh", "Master key "  + keyHolder.getMasterKey());
                           Log.i("okh", "pin key "  + keyHolder.getPinKey());
@@ -132,6 +138,23 @@ public class Nibss {
 
                   });
 
+    }
+
+    private class Save extends AsyncTask<KeyHolder, Integer, Void> {
+        protected Void doInBackground(KeyHolder...keyholder) {
+            KeyHolder keyHolders = poslibdb.getKeyHolderDao().get();
+            poslibdb.getKeyHolderDao().save(keyholder[0]);
+            Log.d("OkH", keyholder[0].getMasterKey());
+            Log.d("sbd","dfddd");
+
+         //   SharedPreferenceUtils.setIsTerminalPrepped(this, true);
+
+            return null;
+        }
+
+        protected void onPostExecute(Long result) {
+
+        }
     }
 
     public  void configureTerminal (String terminalID, final Nibs<NIbbsData> t){

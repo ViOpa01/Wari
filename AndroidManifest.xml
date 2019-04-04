@@ -49,6 +49,10 @@
            <activity android:name=".activity.EnquireMenuActivity" />-->
         <activity android:name=".activity.FuncMenuActivity"
             android:screenOrientation="portrait"/>
+
+        <activity android:name=".payments_menu.transfer.TransferBankSelection"
+            android:screenOrientation="portrait"/>
+
         <!-- <activity android:name=".activity.InitParamActivity" />
          <activity android:name=".activity.ParamMenuActivity" />
          <activity android:name=".activity.PrintMenuActivity" />
@@ -65,6 +69,7 @@
          <activity android:name=".activity.ExceptionFileQueryActivity" android:launchMode="singleTask" />-->
         <!-- Process Screen -->
         <activity android:name=".activity.RequestCardActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.login.LoginActivity" android:screenOrientation="portrait"/>
         <!--
                 <activity android:name=".activity.RequestManualCardActivity" />
         -->

@@ -56,7 +56,11 @@ public class SmartCardControl implements Constants
 	{
 		this.cardType = cardType;
 		readerSlot = contactSlot;
-    	mSlotInfo = new com.wizarpos.jni.ContactICCardSlotInfo();
+		try{
+			mSlotInfo = new com.wizarpos.jni.ContactICCardSlotInfo();
+		}catch (Exception e){
+
+		}
 	}
 	
 	// readerSlot

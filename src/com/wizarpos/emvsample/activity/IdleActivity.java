@@ -3,7 +3,6 @@ package com.wizarpos.emvsample.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
-import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -11,17 +10,17 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.cloudpos.jniinterface.IFuntionListener;
 import com.wizarpos.emvsample.R;
+import com.wizarpos.emvsample.activity.login.LoginActivity;
 import com.wizarpos.emvsample.constant.Constants;
 import com.wizarpos.jni.ContactICCardReaderInterface;
 import com.wizarpos.jni.ContactlessICCardReaderInterface;
 
-import static com.cloudpos.jniinterface.EMVJNIInterface.loadEMVKernel;
 import static com.cloudpos.jniinterface.EMVJNIInterface.emv_get_version_string;
 import static com.cloudpos.jniinterface.EMVJNIInterface.emv_kernel_initialize;
 import static com.cloudpos.jniinterface.EMVJNIInterface.emv_set_force_online;
 import static com.cloudpos.jniinterface.EMVJNIInterface.emv_set_kernel_attr;
+import static com.cloudpos.jniinterface.EMVJNIInterface.loadEMVKernel;
 import static com.cloudpos.jniinterface.EMVJNIInterface.registerFunctionListener;
 
 public class IdleActivity extends FuncActivity implements Constants
@@ -78,7 +77,7 @@ public class IdleActivity extends FuncActivity implements Constants
     		}
     	}
 
-        Intent intent = new Intent(this, FuncMenuActivity.class);
+        Intent intent = new Intent(this, LoginActivity.class);
     	startActivity(intent);
     }
 

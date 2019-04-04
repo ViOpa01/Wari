@@ -2,19 +2,25 @@ package com.wizarpos.emvsample;
 
 import android.annotation.SuppressLint;
 import android.app.Application;
-import android.app.ProgressDialog;
-
+import android.arch.persistence.room.Room;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.iisysgroup.poslib.ISO.GTMS.GtmsHost;
+import com.iisysgroup.poslib.ISO.POSVAS.PosvasHost;
 import com.iisysgroup.poslib.ISO.common.IsoRefundProcessData;
 import com.iisysgroup.poslib.ISO.common.IsoReversalProcessData;
+import com.iisysgroup.poslib.TAMS.TamsHost;
+import com.iisysgroup.poslib.host.Host;
+import com.iisysgroup.poslib.host.HostInteractor;
 import com.iisysgroup.poslib.host.dao.PosLibDatabase;
+import com.wizarpos.emvsample.activity.login.securestorage.SecureStorage;
 import com.wizarpos.emvsample.card.SmartCardControl;
 import com.wizarpos.emvsample.constant.Constants;
 import com.wizarpos.emvsample.db.AIDService;
@@ -59,7 +65,7 @@ public class MainApp extends Application implements Constants
 
 
 	//Room DB
-
+	String TAG = "app_pit_ogl";
     private byte tranType = TRAN_GOODS;
     private byte paramType = -1;   // 参数设置类型
 	private byte processState = 0;  // 处理阶段
@@ -147,8 +153,9 @@ public class MainApp extends Application implements Constants
 	public boolean purchaseWithCashBack = true;
 	public boolean revarsal = false;
 	public int reversalAmout;
+	public HostInteractor hostInteractor;
 
-	public PosLibDatabase roomDatabase;
+	public PosLibDatabase poslibdb;
 
 	public static MainApp getInstance()
     {
@@ -157,17 +164,52 @@ public class MainApp extends Application implements Constants
 		return _instance;
     }
 
+	SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+
     @Override
     public void onCreate()
     {
+
+		poslibdb = Room.databaseBuilder(this, PosLibDatabase.class, "poslib.db")
+                .fallbackToDestructiveMigration()
+			.build();
+
+		String hostKey = getString(R.string.key_host_type);
+		Host host;
+		if (sharedPreferences.getString(hostKey, "").equalsIgnoreCase("TAMS")){
+			host =  new TamsHost(this);
+		}
+		else if (sharedPreferences.getString(hostKey, "").equalsIgnoreCase("POSVAS")){
+			host =  new PosvasHost(this);
+		}
+		else  {
+			host =  new GtmsHost(this);
+		}
+
+		hostInteractor = HostInteractor.getInstance(host);
+
 		super.onCreate();
 		if (null == _instance)
 		    _instance = MainApp.this;
 
 
+		try {
+			SecureStorage.init(this)
+                    .setEncryptionMethod(SecureStorage.Builder.EncryptionMethod.ENCRYPTED)
+                    .setPassword("4321dcbA")
+                    .setStoreName(TAG)
+                    .build();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
+		try{
+			contactUserCard = new com.wizarpos.emvsample.card.SmartCardControl(SmartCardControl.CARD_CONTACT, 0);
+		}catch (Exception e){
 
-		contactUserCard = new com.wizarpos.emvsample.card.SmartCardControl(SmartCardControl.CARD_CONTACT, 0);
+		}
+
 //		contactlessUserCard = new SmartCardControl(SmartCardControl.CARD_CONTACTLESS);
 		loadData();
 		initData();

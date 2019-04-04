@@ -1,35 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
-  <array name="country_codes">
-    <item>-</item>
-    <item>AR</item>
-    <item>AU</item>
-    <item>BR</item>
-    <item>BG</item>
-    <item>CA</item>
-    <item>CN</item>
-    <item>CZ</item>
-    <item>DE</item>
-    <item>DK</item>
-    <item>ES</item>
-    <item>FI</item>
-    <item>FR</item>
-    <item>GB</item>
-    <item>GR</item>
-    <item>HU</item>
-    <item>ID</item>
-    <item>IT</item>
-    <item>JP</item>
-    <item>KR</item>
-    <item>NL</item>
-    <item>PL</item>
-    <item>PT</item>
-    <item>RU</item>
-    <item>SE</item>
-    <item>SK</item>
-    <item>SI</item>
-    <item>TR</item>
-    <item>TW</item>
-    <item>US</item>
-  </array>
+
+    <string-array name="bank_codes">
+    <item>044150149</item>
+    <item>023150005</item>
+    <item>063150162</item>
+    <item>050150311</item>
+    <item>084150015</item>
+    <item>040150101</item>
+    <item>214150018</item>
+    <item>070150003</item>
+    <item>011152303</item>
+    <item>030159992</item>
+    <item>301080020</item>
+    <item>082150017</item>
+    <item>014150030</item>
+    <item>023150005</item>
+    <item>076151006</item>
+    <item>221159522</item>
+    <item>068150057</item>
+    <item>232150029</item>
+    <item>033154282</item>
+    <item>032156825</item>
+    <item>215082334</item>
+    <item>035150103</item>
+    <item>057150013</item>
+    <item>058152052</item>
+  </string-array>
+
+  <string-array name="bank_names">
+    <item>ACCESS BANK PLC</item>
+    <item>CITI BANK</item>
+    <item>DIAMOND BANK PLC</item>
+    <item>ECOBANK NIGERIA</item>
+    <item>ENTERPRISE BANK</item>
+    <item>ETB</item>
+    <item>FCMB PLC</item>
+    <item>FIDELITY BANK PLC</item>
+    <item>FIRST BANK PLC</item>
+    <item>HERITAGE BANK</item>
+    <item>JAIZ BANK</item>
+    <item>KEYSTONE BANK PLC</item>
+    <item>MAIN STREET BANK</item>
+    <item>NIB</item>
+    <item>SKYE BANK PLC</item>
+    <item>STANBIC IBTC BANK</item>
+    <item>STANDARD CHARTERED</item>
+    <item>STERLING BANK PLC</item>
+    <item>UBA PLC</item>
+    <item>UNION BANK PLC</item>
+    <item>UNITY BANK PLC</item>
+    <item>WEMA BANK PLC</item>
+    <item>ZENITH BANK PLC</item>
+    <item>GTB</item>
+  </string-array>
 </resources>

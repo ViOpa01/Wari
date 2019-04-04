@@ -19,6 +19,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.wizarpos.emvsample.payments_menu.transfer.TransferAmountEntry;
+import com.wizarpos.emvsample.payments_menu.transfer.TransferBankSelection;
 import com.wizarpos.emvsample.R;
 import com.wizarpos.emvsample.activity.auth.PinInterFace;
 import com.wizarpos.emvsample.transaction.Nibss;
@@ -36,6 +38,8 @@ public class FuncMenuActivity extends FuncActivity
 	private ImageView ImageViewTrans = null;
 	private ImageView ImageViewSettle = null;
 	private ImageView ImageViewEncrypt = null;
+	private ImageView ImageViewtransfer = null;
+	private ImageView ImageViewwithdrawal = null;
 	private ImageView purchaseCashBack;
 	private AlertDialog alertDialog;
 	private ImageView ImageViewEod;
@@ -60,7 +64,6 @@ public class FuncMenuActivity extends FuncActivity
 		ImageViewSale = findViewById(R.id.bFunc_Sale);
 		ImageViewSale.setOnClickListener(new ClickListener());
 
-
 		ImageViewLastPBOC = findViewById(R.id.bFunc_LastPBOC);
 		ImageViewLastPBOC.setOnClickListener(new ClickListener());
 
@@ -78,6 +81,12 @@ public class FuncMenuActivity extends FuncActivity
 
 		ImageViewEod = findViewById(R.id.eod);
 		ImageViewEod.setOnClickListener(new ClickListener());
+
+		ImageViewtransfer = findViewById(R.id.transfer);
+		ImageViewtransfer.setOnClickListener(new ClickListener());
+
+		ImageViewwithdrawal = findViewById(R.id.withdrawal);
+		ImageViewwithdrawal.setOnClickListener(new ClickListener());
 	}
 
 	private void initToolbar() {
@@ -230,6 +239,18 @@ public class FuncMenuActivity extends FuncActivity
 			case R.id.eod:
 			    startActivity(new Intent(FuncMenuActivity.this, PinInterFace.class));
 				break;
+
+			case R.id.transfer:
+				Intent transfer = new Intent(getApplicationContext(), TransferBankSelection.class);
+				transfer.putExtra("transfer_type", TransferAmountEntry.TRANSACTION_TYPE.TRANSFER);
+				startActivity(transfer);
+					break;
+
+			case R.id.withdrawal:
+				Intent withdrawal = new Intent(getApplicationContext(), TransferBankSelection.class);
+				withdrawal.putExtra("transfer_type", TransferAmountEntry.TRANSACTION_TYPE.WITHDRAWAL);
+				startActivity(withdrawal);
+					break;
 
 			}
 		}
