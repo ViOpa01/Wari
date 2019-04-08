@@ -60,7 +60,7 @@ abstract class BaseCardPaymentProcessor : AppCompatActivity() {
 
         //mUIModel = initializeDefaultUI()
         //setUpDeviceInteractor()
-        setDeviceStatusObserver()
+        //setDeviceStatusObserver()
 
         setUpHostInteractor()
         setUpConnectionData()
@@ -113,54 +113,54 @@ abstract class BaseCardPaymentProcessor : AppCompatActivity() {
 //    }
 
 
-    open fun setDeviceStatusObserver(){
-        Log.d("read card", "reading")
-        //uiManager = DefaultUIManager(contentView!!, mUIModel)
-
-        LiveDataReactiveStreams.fromPublisher(mEmvInteractor.observeStatus()
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread()))
-                .observe({ lifecycle }){
-                    it?.let{
-                        val intent = Intent()
-                        intent.putExtra("state", it.state)
-
-                        when {
-                            it.state == DeviceState.DECLINED -> {
-                                mHostInteractor.rollBackTransaction().subscribe { transactionResult ->
-                                    Log.d("OkHRollback", transactionResult.toString())
-                                    intent.putExtra("rrn", transactionResult.RRN)
-                                    setResult(Activity.RESULT_OK, intent)
-                                    finish()
-                                }
-
-                            }
-                            it.state == DeviceState.FAILED -> {
-
-                                toast("Failed")
-                                intent.putExtra("rrn", mRrn)
-                                setResult(Activity.RESULT_OK, intent)
-                                finish()
-                            }
-
-                            it.state == DeviceState.AWAITING_ONLINE_RESPONSE -> {
-                                Log.d("OkH", "Awaiting online response")
-                            }
-
-                            it.state == DeviceState.APPROVED -> {
-                                intent.putExtra("rrn", mRrn)
-                                setResult(Activity.RESULT_OK, intent)
-                                finish()
-                            }
-                        }
-
-                        Log.d("UI_STATE", it.state.toString())
-                        //uiManager.setState(it.state)
-                    }
-                }
-
-
-    }
+//    open fun setDeviceStatusObserver(){
+//        Log.d("read card", "reading")
+//        //uiManager = DefaultUIManager(contentView!!, mUIModel)
+//
+//        LiveDataReactiveStreams.fromPublisher(mEmvInteractor.observeStatus()
+//                .subscribeOn(Schedulers.newThread())
+//                .observeOn(AndroidSchedulers.mainThread()))
+//                .observe({ lifecycle }){
+//                    it?.let{
+//                        val intent = Intent()
+//                        intent.putExtra("state", it.state)
+//
+//                        when {
+//                            it.state == DeviceState.DECLINED -> {
+//                                mHostInteractor.rollBackTransaction().subscribe { transactionResult ->
+//                                    Log.d("OkHRollback", transactionResult.toString())
+//                                    intent.putExtra("rrn", transactionResult.RRN)
+//                                    setResult(Activity.RESULT_OK, intent)
+//                                    finish()
+//                                }
+//
+//                            }
+//                            it.state == DeviceState.FAILED -> {
+//
+//                                toast("Failed")
+//                                intent.putExtra("rrn", mRrn)
+//                                setResult(Activity.RESULT_OK, intent)
+//                                finish()
+//                            }
+//
+//                            it.state == DeviceState.AWAITING_ONLINE_RESPONSE -> {
+//                                Log.d("OkH", "Awaiting online response")
+//                            }
+//
+//                            it.state == DeviceState.APPROVED -> {
+//                                intent.putExtra("rrn", mRrn)
+//                                setResult(Activity.RESULT_OK, intent)
+//                                finish()
+//                            }
+//                        }
+//
+//                        Log.d("UI_STATE", it.state.toString())
+//                        //uiManager.setState(it.state)
+//                    }
+//                }
+//
+//
+//    }
 
 //    override fun finish() {
 //        VerifoneDevice.removeService(this);

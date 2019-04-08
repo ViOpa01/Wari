@@ -25,7 +25,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.insert_card.*
 import kotlinx.android.synthetic.main.transaction_status.*
-import kotlinx.coroutines.experimental.runBlocking
+import kotlinx.coroutines.runBlocking
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.cancelButton
 import org.jetbrains.anko.doAsync
@@ -325,7 +325,7 @@ class TransactionProcessActivity : AppCompatActivity(), Callback<Any>{
         //todo show dialogBox asking user to enter password
 
         if (isCard)
-            handleCardTransfer()
+          //  handleCardTransfer()
         else
             handleWalletTransfer()
 
@@ -333,12 +333,12 @@ class TransactionProcessActivity : AppCompatActivity(), Callback<Any>{
 
     private fun lookup(accountNumber : String, bank_code : String){
         val bankCode = bank_code.substring(0, 3)
-        /*TransferService.create().lookUpAccountNumber(terminalID = terminalId, toAccount = accountNumber, bankCode = bankCode).enqueue(this)*/
+//        TransferService.create().lookUpAccountNumber(terminalID = terminalId, toAccount = accountNumber, bankCode = bankCode).enqueue(this)
     }
 
-    private fun handleCardTransfer() = runBlocking{
-      //  performPurchase()
-    }
+//    private fun handleCardTransfer() = runBlocking{
+//      //  performPurchase()
+//    }
 
     fun processPassword(){
        // val password = payviceUserNameAlertDialog.et_payvice_password.text.toString()

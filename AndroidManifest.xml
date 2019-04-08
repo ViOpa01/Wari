@@ -53,6 +53,15 @@
         <activity android:name=".payments_menu.transfer.TransferBankSelection"
             android:screenOrientation="portrait"/>
 
+        <activity android:name=".payments_menu.transfer.TransferAmountEntry"
+                    android:screenOrientation="portrait"/>
+
+        <activity android:name=".VasPurchaseProcessor"
+                    android:screenOrientation="portrait"/>
+
+        <activity android:name=".activity.FuncActivity"
+                    android:screenOrientation="portrait"/>
+
         <!-- <activity android:name=".activity.InitParamActivity" />
          <activity android:name=".activity.ParamMenuActivity" />
          <activity android:name=".activity.PrintMenuActivity" />

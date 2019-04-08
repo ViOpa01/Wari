@@ -71,7 +71,7 @@ public class FuncActivity extends AppCompatActivity implements Constants, IFunti
 	protected static WeakReferenceHandler mHandler = new WeakReferenceHandler(null);
     protected static Socket socket = null;
     protected static FuncActivity funcRef;
-    protected static MainApp appState = null;
+    public static MainApp appState = null;
 
     protected ProgressDialog progressBar;
     

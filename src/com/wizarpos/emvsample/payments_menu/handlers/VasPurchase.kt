@@ -19,8 +19,7 @@ import com.iisysgroup.poslib.utils.TransactionData
 import com.wizarpos.emvsample.VasCommunicator
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
-import kotlinx.coroutines.experimental.CommonPool
-import kotlinx.coroutines.experimental.runBlocking
+import kotlinx.coroutines.runBlocking
 import org.jetbrains.anko.doAsync
 import kotlin.experimental.xor
 
@@ -39,7 +38,6 @@ class VasPurchase(owner: LifecycleOwner, val db: PosLibDatabase, val inputData: 
 
     fun getTransactionResult(): Single<TransactionResult> {
 
-
         val cardData = emvInteractor.startEmvTransaction(inputData.amount,
                 inputData.additionalAmount, EmvTransactionType.EMV_PURCHASE).subscribeOn(Schedulers.io())
 
@@ -49,7 +47,7 @@ class VasPurchase(owner: LifecycleOwner, val db: PosLibDatabase, val inputData: 
             val  varsr = VasCommunicator(context,transactionData,connData, keyHolder)
             //hostInteractor.getTransactionResult(Host.TransactionType.PURCHASE, connData, transactionData).subscribeOn(Schedulers.io())
             Single.fromCallable{
-                runBlocking(CommonPool) {
+                runBlocking {
                     varsr.processOnlineTransaction()
                 }
             }

@@ -8,6 +8,8 @@ import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.support.multidex.MultiDex;
+import android.support.multidex.MultiDexApplication;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -52,6 +54,7 @@ public class MainApp extends Application implements Constants
 {
 	//NIbbs data to use
 	public Nibss.NIbbsData nibssData;
+	public Nibss.VasData vasData;
 
 	public String clearPin;
 	public boolean balanceEnc = false;
@@ -152,10 +155,11 @@ public class MainApp extends Application implements Constants
    public  int refundAmount = 0;
 	public boolean purchaseWithCashBack = true;
 	public boolean revarsal = false;
+	public boolean withdrawal = false;
 	public int reversalAmout;
 	public HostInteractor hostInteractor;
+	public PosLibDatabase poslibdb = null;
 
-	public PosLibDatabase poslibdb;
 
 	public static MainApp getInstance()
     {
@@ -164,16 +168,21 @@ public class MainApp extends Application implements Constants
 		return _instance;
     }
 
-	SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-
 
     @Override
     public void onCreate()
     {
 
-		poslibdb = Room.databaseBuilder(this, PosLibDatabase.class, "poslib.db")
-                .fallbackToDestructiveMigration()
-			.build();
+        MultiDex.install(this);
+    	try{
+			poslibdb = Room.databaseBuilder(this, PosLibDatabase.class, "poslib.db")
+					.fallbackToDestructiveMigration()
+					.build();
+		}catch (Exception e){
+    		Log.d("okh", e.toString());
+		}
+		SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+
 
 		String hostKey = getString(R.string.key_host_type);
 		Host host;
@@ -221,9 +230,11 @@ public class MainApp extends Application implements Constants
 				String configString = configService.get();
 				if(configService == null || configString.isEmpty()){
 					nibssData = null;
+                    vasData = null;
 				}else{
 					Log.i("okh",configString);
 					nibssData = new Gson().fromJson(configString,Nibss.NIbbsData.class);
+                    vasData = new Gson().fromJson(configString,Nibss.VasData.class);
 					try {
 						PrinterHelper.getInstance().printConfiguration(nibssData);
 					} catch (PrinterException e) {
@@ -352,7 +363,7 @@ public class MainApp extends Application implements Constants
 			}
 		});
 	}
-
+	
 	public void initData()
     {
     	tranType = TRAN_GOODS;    // 交易类型

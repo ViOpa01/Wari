@@ -24,9 +24,11 @@ import com.iisysgroup.poslib.host.entities.ConnectionData;
 import com.iisysgroup.poslib.host.entities.KeyHolder;
 import com.iisysgroup.poslib.host.entities.TransactionResult;
 //import com.iisysgroup.poslib.utils.DeviceHealth;
+import com.iisysgroup.poslib.host.entities.VasTerminalData;
 import com.iisysgroup.poslib.utils.InputData;
 import com.iisysgroup.poslib.utils.TransactionData;
 import com.wizarpos.emvsample.MainApp;
+import com.wizarpos.emvsample.VasTerminalService;
 import com.wizarpos.emvsample.constant.Constants;
 import com.wizarpos.emvsample.db.TransDetailService;
 import com.wizarpos.emvsample.db.TransactionResultService;
@@ -65,10 +67,14 @@ public class Nibss {
         sslStatus = sharedPreferences.getBoolean("ssl", true);
     }
 
-    PosLibDatabase poslibdb = MainApp.getInstance().poslibdb;
+    static PosLibDatabase poslibdb = MainApp.getInstance().poslibdb;
 
     //Key Keys to
     public  void prepare (String terminalID, final Nibs<NIbbsData> t){
+
+        getVasKeys();
+
+
         Log.i("okh", "preping terminal");
         final ConnectionData connectionData = new ConnectionData( terminalID,ip,Integer.parseInt(port),sslStatus);
         Log.d("okh", terminalID+ "" + ip + " " + port + " " + sslStatus);
@@ -91,7 +97,7 @@ public class Nibss {
 
                       @Override
                       public void onSuccess(final KeyHolder keyHolder) {
-                          new Save().execute(keyHolder);
+                         // new saveKeyHolder().execute(keyHolder);
 
                           Log.i("okh", "KeyHolder Ready");
                           Log.i("okh", "Master key "  + keyHolder.getMasterKey());
@@ -140,7 +146,7 @@ public class Nibss {
 
     }
 
-    private class Save extends AsyncTask<KeyHolder, Integer, Void> {
+    private static class saveKeyHolder extends AsyncTask<KeyHolder, Integer, Void> {
         protected Void doInBackground(KeyHolder...keyholder) {
             KeyHolder keyHolders = poslibdb.getKeyHolderDao().get();
             poslibdb.getKeyHolderDao().save(keyholder[0]);
@@ -157,8 +163,28 @@ public class Nibss {
         }
     }
 
+    private static class saveVasKeyHolder extends AsyncTask<VasTerminalData, Integer, Void> {
+        protected Void doInBackground(VasTerminalData...vasTerminalData) {
+            poslibdb.getVasTerminalDataDao().save(vasTerminalData[0]);
+            Log.d("OkH", "vasmaster "+vasTerminalData[0].getMasterKey());
+            Log.d("sbd","dfddd");
+            Log.d("OkH", "vasname "+poslibdb.getVasTerminalDataDao().get().getMerchantName());
+            Log.d("OkH", "vasterminal "+poslibdb.getVasTerminalDataDao().get().getTid());
+            //   SharedPreferenceUtils.setIsTerminalPrepped(this, true);
+
+            return null;
+        }
+
+        protected void onPostExecute(Long result) {
+
+        }
+    }
+
     public  void configureTerminal (String terminalID, final Nibs<NIbbsData> t){
         Log.i("okh", "preping terminal");
+
+        getVasKeys();
+
 //        final ConnectionData connectionData = new ConnectionData( terminalID,ip,Integer.parseInt(port),sslStatus);
         final ConnectionData connectionData = new ConnectionData("2033GP23", "196.6.103.73", 5043, true);
         Single<KeyHolder> liveKeyHolder = hostInteractor.getKeyHolder(connectionData);
@@ -314,7 +340,6 @@ public class Nibss {
                 });
 
 
-
     }
 
 
@@ -353,7 +378,6 @@ public class Nibss {
                         resultNibs.error(e.getLocalizedMessage());
                     }
                 });
-
 
 
     }
@@ -406,10 +430,45 @@ public class Nibss {
 
 
     //Use for call back durring preparation
-  public   interface  Nibs<T>{
+  public  interface  Nibs<T>{
          void complete(T res);
         void error(String e);
   }
+
+    private Single<VasTerminalData> getVasTerminalService()  {
+        return VasTerminalService.Factory.INSTANCE.getService().getVasTerminalDetails();
+    }
+
+    private void getVasKeys()
+    {
+        getVasTerminalService()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new SingleObserver<VasTerminalData>() {
+
+                               @Override
+                               public void onSubscribe(Disposable d) {
+
+                               }
+
+                               @Override
+                               public void onSuccess(VasTerminalData vasTerminalData) {
+                                   Log.d("okh", "itex vas "+ vasTerminalData.getMerchantName());
+                                   Log.d("okh", "itex vas "+ vasTerminalData.getTid());
+                                    new saveVasKeyHolder().execute(vasTerminalData);
+//                                   launch {
+//                                       (application as App).db.vasTerminalDataDao.save(it)
+//                                   }
+                               }
+
+                               @Override
+                               public void onError(Throwable e) {
+
+                               }
+                           });
+
+    }
+
 
 
   public static class NIbbsData implements Serializable{
@@ -437,4 +496,31 @@ public class Nibss {
           return conD;
       }
   }
+
+
+    public static class VasData implements Serializable{
+        private KeyHolder k; private ConfigData cd; private ConnectionData conD;
+        public VasData(KeyHolder keyHolder, ConfigData configData, ConnectionData connectionData){
+            this.k = keyHolder;
+            this.cd = configData;
+            this.conD = connectionData;
+        }
+
+        public KeyHolder getKeyHolder() {
+            return k;
+        }
+
+        public void setKeyHolder(KeyHolder keys){
+            this.k = keys;
+            Log.i("okh", "Key saved");
+        }
+
+        public ConfigData getConfigData() {
+            return cd;
+        }
+
+        public ConnectionData getConnectionData() {
+            return conD;
+        }
+    }
 }

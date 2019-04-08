@@ -33,8 +33,6 @@ class VasPurchaseProcessor: BaseCardPaymentProcessor(){
     private val mAccountType= AccountType.DEFAULT_UNSPECIFIED
 
 
-
-
     private val mDb by lazy {
         (application as MainApp).poslibdb
     }

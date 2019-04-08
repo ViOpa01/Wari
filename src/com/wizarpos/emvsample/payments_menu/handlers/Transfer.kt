@@ -13,7 +13,7 @@ import com.iisysgroup.poslib.host.entities.ConnectionData
 import com.iisysgroup.poslib.host.entities.TransactionResult
 import com.iisysgroup.poslib.utils.InputData
 import com.iisysgroup.poslib.utils.TransactionData
-import kotlinx.coroutines.experimental.runBlocking
+import kotlinx.coroutines.runBlocking
 
 /**
  * Created by Agbede on 3/19/2018.

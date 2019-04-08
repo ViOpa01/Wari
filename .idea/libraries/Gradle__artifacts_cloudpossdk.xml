@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: artifacts:cloudpossdk">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/cloudpossdk.aar/1731ba8f408b41781d8f57e0084a6c3e/jars/libs/cloudpossdkinterface_en.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/cloudpossdk.aar/1731ba8f408b41781d8f57e0084a6c3e/jars/libs/printHtml.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/cloudpossdk.aar/1731ba8f408b41781d8f57e0084a6c3e/jars/libs/cloudpossdkinterfaceimpl_001_en.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/cloudpossdk.aar/1731ba8f408b41781d8f57e0084a6c3e/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/cloudpossdk.aar/1731ba8f408b41781d8f57e0084a6c3e/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
