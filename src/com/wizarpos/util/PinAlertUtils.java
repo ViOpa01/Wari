@@ -29,7 +29,12 @@ public class PinAlertUtils {
             @Override
             public void onComplete(String pin) {
                 dialog.dismiss();
-                listener.onPinEntered(pin);
+                try {
+                    listener.onPinEntered(pin);
+                }catch (Exception e){
+
+                }
+
 
             }
 

@@ -61,17 +61,17 @@ public class SelectEMVAppListActivity extends FuncActivity
         textTitle = (TextView)findViewById(R.id.tAppTitle);
         textTitle.setText(appState.getString(TransDefine.transInfo[appState.getTranType()].id_display_en));
         
-	    buttonBack = (Button)findViewById(R.id.btn_back);
-        buttonBack.setOnClickListener(new ClickListener());
+//	    buttonBack = (Button)findViewById(R.id.btn_back);
+//        buttonBack.setOnClickListener(new ClickListener());
         
-        buttonMore = (Button)findViewById(R.id.btn_more);
-        buttonMore.setBackgroundDrawable(getResources().getDrawable(R.drawable.btn_blank));
+//        buttonMore = (Button)findViewById(R.id.btn_more);
+//        buttonMore.setBackgroundDrawable(getResources().getDrawable(R.drawable.btn_blank));
         
         buttonOK = (Button)findViewById(R.id.btn_digit_enter);
         buttonOK.setOnClickListener(new ClickListener());
         
-        buttonCancel = (Button)findViewById(R.id.btn_digit_cancel);
-        buttonCancel.setOnClickListener(new ClickListener());
+//        buttonCancel = (Button)findViewById(R.id.btn_digit_cancel);
+//        buttonCancel.setOnClickListener(new ClickListener());
         
         buttonDigital_0 =  (Button)findViewById(R.id.btn_digit_0);
         buttonDigital_0.setOnClickListener(new ClickListener());
@@ -103,8 +103,8 @@ public class SelectEMVAppListActivity extends FuncActivity
         buttonDigital_9 =  (Button)findViewById(R.id.btn_digit_9);
         buttonDigital_9.setOnClickListener(new ClickListener());
         
-        buttonClear =  (Button)findViewById(R.id.btn_digit_clear);
-        buttonClear.setOnClickListener(new ClickListener());
+//        buttonClear =  (Button)findViewById(R.id.btn_digit_clear);
+//        buttonClear.setOnClickListener(new ClickListener());
         
         textPrompt = (TextView)findViewById(R.id.tSelectApp_Prompt);
         textValue = (TextView)findViewById(R.id.tSelectApp_Value);
@@ -226,8 +226,8 @@ public class SelectEMVAppListActivity extends FuncActivity
 			case R.id.btn_digit_9:
 				setText(9);
 				break;
-			case R.id.btn_digit_clear:
-				break;
+//			case R.id.btn_digit_clear:
+//				break;
 			case R.id.btn_digit_enter:
 				if(selectValue > 0 && selectValue <= appState.aidNumber)
 				{
@@ -238,10 +238,10 @@ public class SelectEMVAppListActivity extends FuncActivity
 				}
 				break;
 			case R.id.btn_back:
-			case R.id.btn_digit_cancel:
-				setResult(Activity.RESULT_CANCELED, intent);
-				exit();
-				break;			
+//			case R.id.btn_digit_cancel:
+//				setResult(Activity.RESULT_CANCELED, intent);
+//				exit();
+//				break;
 			}
 		}
     }

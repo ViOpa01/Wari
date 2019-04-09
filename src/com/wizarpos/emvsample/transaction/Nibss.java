@@ -60,14 +60,19 @@ public class Nibss {
     public Nibss(Context context){
         this.context = context;
         hostInteractor = HostInteractor.getInstance(new GtmsHost(context));
-        mainApp = MainApp.getInstance();
-        SharedPreferences sharedPreferences = context.getSharedPreferences(Constants.netWork_pref, Context.MODE_PRIVATE);
-        ip = sharedPreferences.getString("ip","196.6.103.73");
-        port = sharedPreferences.getString("port", "5043");
-        sslStatus = sharedPreferences.getBoolean("ssl", true);
+        try{
+            mainApp = MainApp.getInstance();
+            SharedPreferences sharedPreferences = context.getSharedPreferences(Constants.netWork_pref, Context.MODE_PRIVATE);
+            ip = sharedPreferences.getString("ip","196.6.103.73");
+            port = sharedPreferences.getString("port", "5043");
+            sslStatus = sharedPreferences.getBoolean("ssl", true);
+        }catch (Exception e){
+
+        }
+
     }
 
-    static PosLibDatabase poslibdb = MainApp.getInstance().poslibdb;
+    public static PosLibDatabase poslibdb = MainApp.getInstance().poslibdb;
 
     //Key Keys to
     public  void prepare (String terminalID, final Nibs<NIbbsData> t){
@@ -91,6 +96,7 @@ public class Nibss {
                       @Override
                       public void onError(Throwable e) {
                           Log.i("okh", "Error on prepare getKeyHolder method " + e.getMessage());
+                          Toast.makeText(context, "Could not prep, please retry", Toast.LENGTH_SHORT).show();
                           e.printStackTrace();
                          t.error(e.getMessage());
                       }
@@ -125,7 +131,7 @@ public class Nibss {
 
                                        @Override
                                        public void onSuccess(ConfigData configData) {
-                                           Toast.makeText(context, "Successfully Configured", Toast.LENGTH_SHORT);
+                                           Toast.makeText(context, "Successfully Configured", Toast.LENGTH_SHORT).show();
                                            Log.i("okh", "Config data ready");
                                            Log.i("okh", configData.toString());
                                             NIbbsData nIbbsData = new NIbbsData(keyHolder, configData,connectionData);
@@ -203,6 +209,7 @@ public class Nibss {
                     @Override
                     public void onError(Throwable e) {
                         Log.i("okh", "Error on prepare getKeyHolder method " + e.getMessage());
+                        Toast.makeText(context, "Could not prep, please retry", Toast.LENGTH_SHORT).show();
                         e.printStackTrace();
                         t.error(e.getMessage());
                     }
@@ -235,7 +242,7 @@ public class Nibss {
 
                                     @Override
                                     public void onSuccess(ConfigData configData) {
-                                        Toast.makeText(context, "Successfully Configured", Toast.LENGTH_SHORT);
+                                        Toast.makeText(context, "Successfully Configured", Toast.LENGTH_SHORT).show();
                                         Log.i("okh", "Config data ready");
                                         Log.i("okh", configData.toString());
                                         NIbbsData nIbbsData = new NIbbsData(keyHolder, configData,connectionData);

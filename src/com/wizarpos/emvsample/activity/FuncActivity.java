@@ -873,6 +873,7 @@ public class FuncActivity extends AppCompatActivity implements Constants, IFunti
 		appState.setErrorCode(errorCode);
 		Intent intent = new Intent(this, ErrorActivity.class);
 		startActivity(intent);
+		finish();
 	}
 	
 	// menu
@@ -881,6 +882,7 @@ public class FuncActivity extends AppCompatActivity implements Constants, IFunti
 		cancelIdleTimer();
 		Intent intent = new Intent(this, FuncMenuActivity.class);
 		startActivity(intent);
+		finish();
 	}
 	
 	public void requestDataClear()
@@ -888,6 +890,7 @@ public class FuncActivity extends AppCompatActivity implements Constants, IFunti
 		cancelIdleTimer();
 		Intent intent = new Intent(this, DataClearActivity.class);
 		startActivity(intent);
+		finish();
 	}
 
 	public void requestEnquireTrans()
@@ -895,6 +898,7 @@ public class FuncActivity extends AppCompatActivity implements Constants, IFunti
 		cancelIdleTimer();
 		Intent intent = new Intent(this, EnquireTransActivity.class);
 		startActivity(intent);
+		finish();
 	}
 
 	public void showLastPBOC()
@@ -902,6 +906,7 @@ public class FuncActivity extends AppCompatActivity implements Constants, IFunti
 		cancelIdleTimer();
 		Intent intent = new Intent(this, ShowLastPBOCActivity.class);
 		startActivity(intent);
+		finish();
 	}
 
 
@@ -948,6 +953,7 @@ public class FuncActivity extends AppCompatActivity implements Constants, IFunti
 		appState.setState(STATE_REMOVE_CARD);
 		Intent intent = new Intent(this, RemoveCardActivity.class);
 		startActivityForResult(intent, appState.getState());
+		finish();
 	}
 	
 //	public void requestManualCard(boolean acceptMSR, boolean acceptContact, boolean acceptContactless)

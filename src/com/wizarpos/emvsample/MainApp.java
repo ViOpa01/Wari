@@ -6,6 +6,7 @@ import android.arch.persistence.room.Room;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.AsyncTask;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.multidex.MultiDex;
@@ -22,6 +23,7 @@ import com.iisysgroup.poslib.TAMS.TamsHost;
 import com.iisysgroup.poslib.host.Host;
 import com.iisysgroup.poslib.host.HostInteractor;
 import com.iisysgroup.poslib.host.dao.PosLibDatabase;
+import com.iisysgroup.poslib.host.dao.VasTerminalDataDao;
 import com.wizarpos.emvsample.activity.login.securestorage.SecureStorage;
 import com.wizarpos.emvsample.card.SmartCardControl;
 import com.wizarpos.emvsample.constant.Constants;
@@ -163,6 +165,7 @@ public class MainApp extends Application implements Constants
 
 	public static MainApp getInstance()
     {
+
 		if (null == _instance)
 		    _instance = new MainApp();
 		return _instance;
@@ -234,7 +237,6 @@ public class MainApp extends Application implements Constants
 				}else{
 					Log.i("okh",configString);
 					nibssData = new Gson().fromJson(configString,Nibss.NIbbsData.class);
-                    vasData = new Gson().fromJson(configString,Nibss.VasData.class);
 					try {
 						PrinterHelper.getInstance().printConfiguration(nibssData);
 					} catch (PrinterException e) {
@@ -243,11 +245,6 @@ public class MainApp extends Application implements Constants
 				}
 			}
 		}).start();
-
-
-
-
-
 
 		//显示上下导航栏 全系统有效
 		try {
@@ -363,7 +360,7 @@ public class MainApp extends Application implements Constants
 			}
 		});
 	}
-	
+
 	public void initData()
     {
     	tranType = TRAN_GOODS;    // 交易类型
@@ -383,8 +380,8 @@ public class MainApp extends Application implements Constants
 
 
     }
-    
-    // tranType
+
+	// tranType
     public byte getTranType()
     {
     	return tranType;

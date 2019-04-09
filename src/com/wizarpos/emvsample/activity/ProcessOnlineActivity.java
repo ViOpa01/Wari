@@ -1,6 +1,7 @@
 package com.wizarpos.emvsample.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -12,7 +13,13 @@ import android.widget.TextView;
 
 import com.iisysgroup.poslib.commons.emv.EmvCard;
 import com.iisysgroup.poslib.host.Host;
+import com.iisysgroup.poslib.host.dao.PosLibDatabase;
+import com.iisysgroup.poslib.host.dao.VasTerminalDataDao;
+import com.iisysgroup.poslib.host.entities.ConfigData;
+import com.iisysgroup.poslib.host.entities.ConnectionData;
+import com.iisysgroup.poslib.host.entities.KeyHolder;
 import com.iisysgroup.poslib.host.entities.TransactionResult;
+import com.iisysgroup.poslib.host.entities.VasTerminalData;
 import com.iisysgroup.poslib.utils.AccountType;
 import com.iisysgroup.poslib.utils.InputData;
 import com.iisysgroup.poslib.utils.TransactionData;
@@ -23,12 +30,11 @@ import com.wizarpos.emvsample.transaction.Nibss;
 import com.wizarpos.util.ByteUtil;
 import com.wizarpos.util.StringUtil;
 
-import io.reactivex.Single;
-
 import static com.cloudpos.jniinterface.EMVJNIInterface.emv_get_tag_data;
 import static com.cloudpos.jniinterface.EMVJNIInterface.emv_get_tag_list_data;
 import static com.cloudpos.jniinterface.EMVJNIInterface.emv_is_tag_present;
 import static com.cloudpos.jniinterface.EMVJNIInterface.emv_set_online_result;
+import static com.wizarpos.emvsample.transaction.Nibss.poslibdb;
 
 public class ProcessOnlineActivity extends FuncActivity
 {
@@ -36,6 +42,7 @@ public class ProcessOnlineActivity extends FuncActivity
 	private Button   buttonBack = null;
     private Button   buttonMore = null;
     Host.TransactionType transactionType = Host.TransactionType.PURCHASE;
+    private static TransactionResult transactionResult;
 
 	private int nibsTag[] = { 0x9F1A ,0x82 , 0x5F2A , 0x9F02 , 0x9C, 0x9A, 0x95, 0x9F36 , 0x9F37 ,
 			0x9F10 , 0x9F34 , 0x9F35, 0x5F34, 0x9F33, 0x9F27 , 0x9F26};
@@ -43,6 +50,9 @@ public class ProcessOnlineActivity extends FuncActivity
 
     boolean socketThreadRun = false;
     boolean requestDataReady = false;
+
+    private static InputData inputData = null;
+    private static EmvCard emvCard = null;
 
 	@Override
     public void onCreate(Bundle savedInstanceState)
@@ -121,11 +131,11 @@ public class ProcessOnlineActivity extends FuncActivity
 				pinInfo = null;
 			}
 			//Build emv carf
-			EmvCard emvCard = new EmvCard(appState.trans.getCardHolderName(),appState.trans.getTrack2Data(),
+			emvCard = new EmvCard(appState.trans.getCardHolderName(),appState.trans.getTrack2Data(),
 					appState.trans.getICCData(),pinInfo);
 
 			//Build InputData
-			InputData inputData = new InputData(appState.trans.getTransAmount().longValue(),
+			inputData = new InputData(appState.trans.getTransAmount().longValue(),
 					appState.trans.getOthersAmount().longValue(), AccountType.DEFAULT_UNSPECIFIED);
 
 			//Go online
@@ -270,78 +280,129 @@ public class ProcessOnlineActivity extends FuncActivity
 				pinInfo = null;
 			}
 			//Build emv carf
-			EmvCard emvCard = new EmvCard(appState.trans.getCardHolderName(),appState.trans.getTrack2Data(),
+			emvCard = new EmvCard(appState.trans.getCardHolderName(),appState.trans.getTrack2Data(),
 					appState.trans.getICCData(),pinInfo);
 
 			//Build InputData
-			InputData inputData = new InputData(appState.trans.getTransAmount().longValue(),
+			inputData = new InputData(appState.trans.getTransAmount().longValue(),
 					appState.trans.getOthersAmount().longValue(), AccountType.DEFAULT_UNSPECIFIED);
 
-			nibss.goOnline(emvCard, transactionType, inputData,
-					appState.vasData.getKeyHolder(), appState.vasData.getConfigData(),
-					appState.vasData.getConnectionData(), new Nibss.Nibs<TransactionResult>() {
-						@Override
-						public void complete(TransactionResult res) {
-							appState.trans.setMaskPan(res.PAN);
-							appState.trans.setRrn(res.RRN);
-							appState.trans.setTransactionResult(res);
-							if(res.isApproved()){
-								Log.i("okh", res.toString());
-								appState.trans.setTrace(appState.terminalConfig.getTrace());
+//			nibss.goOnline(emvCard, transactionType, inputData,
+//					appState.vasData.getKeyHolder(), appState.vasData.getConfigData(),
+//					appState.vasData.getConnectionData(), new Nibss.Nibs<TransactionResult>() {
+//						@Override
+//						public void complete(TransactionResult res) {
+//							appState.trans.setMaskPan(res.PAN);
+//							appState.trans.setRrn(res.RRN);
+//							appState.trans.setTransactionResult(res);
+//							if(res.isApproved()){
+//								Log.i("okh", res.toString());
+//								appState.trans.setTrace(appState.terminalConfig.getTrace());
+//
+//								appState.trans.setResponseCode(res.responseCode.getBytes());
+//								try{
+//									appState.trans.setIssuerAuthData(res.issuerAuthData91.getBytes(),0,res.issuerAuthData91.getBytes().length);
+//								}catch (Exception e){
+//									e.printStackTrace();
+//								}
+//								appState.trans.setTransactionStatus(true);
+//								appState.terminalConfig.incTrace();
+//								processResult();
+//							}else{
+//								Log.i("okh", res.toString());
+//								appState.trans.setTrace(appState.terminalConfig.getTrace());
+//								appState.trans.setResponseCode(new byte[]{'F','F'});
+//								appState.trans.setTransactionStatus(false);
+//								appState.terminalConfig.incTrace();
+//								processResult();
+//							}
+//						}
+//
+//						@Override
+//						public void error(String e) {
+//							Log.i("okh", e );
+//							appState.trans.setTrace(appState.terminalConfig.getTrace());
+//							appState.trans.setResponseCode(new byte[]{'F','F'});
+//							appState.terminalConfig.incTrace();
+//							processResult();
+//						}
+//					});
 
-								appState.trans.setResponseCode(res.responseCode.getBytes());
-								try{
-									appState.trans.setIssuerAuthData(res.issuerAuthData91.getBytes(),0,res.issuerAuthData91.getBytes().length);
-								}catch (Exception e){
-									e.printStackTrace();
-								}
-								appState.trans.setTransactionStatus(true);
-								appState.terminalConfig.incTrace();
-								processResult();
-							}else{
-								Log.i("okh", res.toString());
-								appState.trans.setTrace(appState.terminalConfig.getTrace());
-								appState.trans.setResponseCode(new byte[]{'F','F'});
-								appState.trans.setTransactionStatus(false);
-								appState.terminalConfig.incTrace();
-								processResult();
-							}
-						}
 
-						@Override
-						public void error(String e) {
-							Log.i("okh", e );
-							appState.trans.setTrace(appState.terminalConfig.getTrace());
-							appState.trans.setResponseCode(new byte[]{'F','F'});
-							appState.terminalConfig.incTrace();
-							processResult();
-						}
-					});
-
-			TransactionData transactionData = new TransactionData(inputData, emvCard, appState.vasData.getConfigData(), appState.vasData.getKeyHolder());
-			Log.d("okh", inputData.getAmount() + emvCard.getCardHolderName() + appState.vasData.getConfigData());
-			VasCommunicator  varsr = new VasCommunicator(this,transactionData,appState.vasData.getConnectionData(), appState.vasData.getKeyHolder());
-			//hostInteractor.getTransactionResult(Host.TransactionType.PURCHASE, connData, transactionData).subscribeOn(Schedulers.io())
-				doVAs.execute((Runnable) varsr);
-					varsr.processOnlineTransaction();
+			new saveVasKeyHolder(this).execute();
 
 		}
 
 
 	}
 
-
-	static class doVAs extends AsyncTask<VasCommunicator, Void, TransactionResult>{
+	public static class doVAs extends AsyncTask<PosLibDatabase, Void, VasTerminalDataDao> {
 
 		@Override
-		protected TransactionResult doInBackground(VasCommunicator... vasCommunicators) {
-			return vasCommunicators[0].processOnlineTransaction();
+		protected VasTerminalDataDao doInBackground(PosLibDatabase... posLibDatabases) {
+			return posLibDatabases[0].getVasTerminalDataDao();
 		}
 
 		@Override
-		protected void onPostExecute(TransactionResult transactionResult) {
-			Log.d("okh", "vas transresult "+transactionResult.cardHolderName+ transactionResult.merchantID);
-			super.onPostExecute(transactionResult);
+		protected void onPostExecute(VasTerminalDataDao vasTerminalDataDao) {
+			Log.d("okh", "vas transresult "+vasTerminalDataDao.get().getTid()+ vasTerminalDataDao.get().getMasterKey());
+			super.onPostExecute(vasTerminalDataDao);
+		}
+	}
+
+	private static class saveVasKeyHolder extends AsyncTask<Void, Integer, TransactionResult> {
+
+		private Context mContext;
+
+		private saveVasKeyHolder (Context context){
+			mContext = context;
+		}
+
+		protected TransactionResult doInBackground(Void...voids) {
+			poslibdb.getVasTerminalDataDao().get();
+			Log.d("OkH", "vasterminal "+poslibdb.getVasTerminalDataDao().get().getTid());
+			VasTerminalData vasTerminalDetails = poslibdb.getVasTerminalDataDao().get();
+			//   SharedPreferenceUtils.setIsTerminalPrepped(this, true);
+			Log.d("okh", vasTerminalDetails.getTid()+" tid");
+			ConfigData configData = new ConfigData();
+			String TID = vasTerminalDetails.getTid();
+			ConnectionData connectionData = new ConnectionData(TID, "196.6.103.73", 5043, true);
+
+			KeyHolder keyHolder = new KeyHolder(vasTerminalDetails.getMasterKey(), vasTerminalDetails.getSessionKey(), vasTerminalDetails.getPinKey());
+
+
+			configData.storeConfigData("04002", "90");
+
+			//Country Code
+			configData.storeConfigData("06003", vasTerminalDetails.getCountryCode());
+
+			//MCC
+			configData.storeConfigData("08004", vasTerminalDetails.getMcc());
+
+
+			//Merchant's name - 40 length
+			configData.storeConfigData("52040", vasTerminalDetails.getMerchantName());
+
+			//Merchant Id - 15 length
+			configData.storeConfigData("03015", vasTerminalDetails.getMid());
+
+			//Currency Code
+			configData.storeConfigData("05003", vasTerminalDetails.getCurrencyCode());
+
+
+			TransactionData transactionData = new TransactionData(inputData, emvCard, configData, keyHolder);
+			Log.d("okh", inputData.getAmount() + emvCard.getCardHolderName() + configData);
+			Log.d("okh",  transactionData.getKeyHolder().getMasterKey() + ""+connectionData.getTerminalID()+"");
+			VasCommunicator  varsr = new VasCommunicator(mContext,transactionData,connectionData, keyHolder);
+			//hostInteractor.getTransactionResult(Host.TransactionType.PURCHASFE, connData, transactionData).subscribeOn(Schedulers.io())
+			//doVAs.execute(varsr);
+			transactionResult = varsr.processOnlineTransaction();
+			return null;
+		}
+
+		protected void onPostExecute(TransactionResult transactionResults) {
+			Log.d("okh", transactionResult.transactionStatus+" status ");
+
 		}
 	}
 
