@@ -60,16 +60,11 @@ public class Nibss {
     public Nibss(Context context){
         this.context = context;
         hostInteractor = HostInteractor.getInstance(new GtmsHost(context));
-        try{
-            mainApp = MainApp.getInstance();
-            SharedPreferences sharedPreferences = context.getSharedPreferences(Constants.netWork_pref, Context.MODE_PRIVATE);
-            ip = sharedPreferences.getString("ip","196.6.103.73");
-            port = sharedPreferences.getString("port", "5043");
-            sslStatus = sharedPreferences.getBoolean("ssl", true);
-        }catch (Exception e){
-
-        }
-
+        mainApp = MainApp.getInstance();
+        SharedPreferences sharedPreferences = context.getSharedPreferences(Constants.netWork_pref, Context.MODE_PRIVATE);
+        ip = sharedPreferences.getString("ip","196.6.103.73");
+        port = sharedPreferences.getString("port", "5043");
+        sslStatus = sharedPreferences.getBoolean("ssl", true);
     }
 
     public static PosLibDatabase poslibdb = MainApp.getInstance().poslibdb;

@@ -13,6 +13,8 @@ import android.widget.Toast;
 import com.iisysgroup.poslib.ISO.GTMS.GtmsKeyProcessor;
 import com.wizarpos.emvsample.R;
 
+import static com.wizarpos.emvsample.getMasterKey.getMasterKey;
+
 
 public class GetMasterKey extends FuncActivity {
     private Button buttonBack;
@@ -74,7 +76,7 @@ public class GetMasterKey extends FuncActivity {
     private String decrypt(){
         String clearMaster = "";
         try {
-            clearMaster = GtmsKeyProcessor.getMasterKey(appState.nibssData.getKeyHolder().getMasterKey(), true);
+            clearMaster = getMasterKey(appState.nibssData.getKeyHolder().getMasterKey(), true);
             Log.i("okh", clearMaster);
         }catch (Exception e ){
 

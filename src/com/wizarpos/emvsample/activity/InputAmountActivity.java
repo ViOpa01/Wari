@@ -272,7 +272,6 @@ public class InputAmountActivity extends FuncActivity
 
 					if(appState.purchaseWithCashBack){
                    	 startActivityForResult(new Intent(InputAmountActivity.this,InputExtraAmountActivity.class), 6565);
-                   	 finish();
 				   }else {
 					   setResult(Activity.RESULT_OK, intent);
 					   exit();

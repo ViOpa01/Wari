@@ -165,7 +165,6 @@ public class MainApp extends Application implements Constants
 
 	public static MainApp getInstance()
     {
-
 		if (null == _instance)
 		    _instance = new MainApp();
 		return _instance;

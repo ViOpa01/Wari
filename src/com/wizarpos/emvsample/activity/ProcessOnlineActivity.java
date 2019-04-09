@@ -42,7 +42,6 @@ public class ProcessOnlineActivity extends FuncActivity
 	private Button   buttonBack = null;
     private Button   buttonMore = null;
     Host.TransactionType transactionType = Host.TransactionType.PURCHASE;
-    private static TransactionResult transactionResult;
 
 	private int nibsTag[] = { 0x9F1A ,0x82 , 0x5F2A , 0x9F02 , 0x9C, 0x9A, 0x95, 0x9F36 , 0x9F37 ,
 			0x9F10 , 0x9F34 , 0x9F35, 0x5F34, 0x9F33, 0x9F27 , 0x9F26};
@@ -394,14 +393,16 @@ public class ProcessOnlineActivity extends FuncActivity
 			Log.d("okh", inputData.getAmount() + emvCard.getCardHolderName() + configData);
 			Log.d("okh",  transactionData.getKeyHolder().getMasterKey() + ""+connectionData.getTerminalID()+"");
 			VasCommunicator  varsr = new VasCommunicator(mContext,transactionData,connectionData, keyHolder);
-			//hostInteractor.getTransactionResult(Host.TransactionType.PURCHASFE, connData, transactionData).subscribeOn(Schedulers.io())
+			//hostInteractor.getTransactionResult(Host.TransactionType.PURCHASE, connData, transactionData).subscribeOn(Schedulers.io())
 			//doVAs.execute(varsr);
-			transactionResult = varsr.processOnlineTransaction();
+			varsr.processOnlineTransaction();
 			return null;
 		}
 
-		protected void onPostExecute(TransactionResult transactionResults) {
-			Log.d("okh", transactionResult.transactionStatus+" status ");
+		protected void onPostExecute(TransactionResult transactionResult) {
+//			Log.d("okh", transactionResult.cardHolderName);
+//			Log.d("okh", transactionResult.terminalID);
+//			Log.d("okh", transactionResult.transactionStatus);
 
 		}
 	}

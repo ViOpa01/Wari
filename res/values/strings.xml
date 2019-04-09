@@ -11,10 +11,7 @@
     <string name="key_pref_port">key_port</string>
     <string name="key_pref_port_type">key_port_type</string>
     <string name="insert_card">Please Insert Debit Card</string>
-    <string name="component_keys1">6DD69715CDBA10737CEF3E0E0D38544C</string>
-    <string name="check_value1">2D8D98</string>
-    <string name="component_keys2">5852B67F76DCCBA4D58AA18589D37575</string>
-    <string name="check_value2">308C7E</string>
+
     <string name="key_is_user_logged_in">is_user_logged_in</string>
     <string name="key_is_terminal_prepped">is_terminal_prepped</string>
 

@@ -69,7 +69,7 @@ public class RequestCardActivity extends FuncActivity
 		Toolbar toolbar = findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
 		ActionBar actionBar = getSupportActionBar();
-		actionBar.setTitle("Insert Card");
+		actionBar.setTitle("Purchase");
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 	}
 
@@ -217,8 +217,7 @@ public class RequestCardActivity extends FuncActivity
     {
     	cancelAllCard();
     	setResult(Activity.RESULT_CANCELED, getIntent());
-		onSupportNavigateUp();
-		super.onBackPressed();
+    	finish();
     }
     
 	@Override

@@ -31,6 +31,9 @@ import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
+import static com.iisysgroup.poslib.ISO.POSVAS.PosvasKeyProcessor.decryptKey;
+import static com.wizarpos.emvsample.getMasterKey.getMasterKey;
+
 public class InputPINActivity extends FuncActivity implements PinPadCallbackHandler
 {
 	private final int PINPAD_CANCEL  = -65792;
@@ -222,9 +225,9 @@ public class InputPINActivity extends FuncActivity implements PinPadCallbackHand
 				return;
 			}
 
-			String clearMaster = GtmsKeyProcessor.getMasterKey(appState.nibssData.getKeyHolder().getMasterKey(),false);
+			String clearMaster = getMasterKey(appState.nibssData.getKeyHolder().getMasterKey(),false);
 			try {
-				clearPinKey = GtmsKeyProcessor.decryptKey(appState.nibssData.getKeyHolder().getPinKey(), clearMaster);
+				clearPinKey = decryptKey(appState.nibssData.getKeyHolder().getPinKey(), clearMaster);
 				Log.i("clearkey",clearPinKey);
 			} catch (Exception e) {
 				e.printStackTrace();

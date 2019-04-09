@@ -552,7 +552,7 @@ public class PrinterHelper
 
 			printerWrite(PrinterCommand.setAlignMode(0));
 			printerWrite(PrinterCommand.setAlignMode(1));
-			printerWrite(("Configuration complete").getBytes("GB2312"));
+			printerWrite(("Configurartion complete").getBytes("GB2312"));
             printerWrite(PrinterCommand.linefeed());
 			printerWrite(("Terminal Id: " + data.getConnectionData().getTerminalID()).getBytes("GB2312"));
             printerWrite(PrinterCommand.linefeed());

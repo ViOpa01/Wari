@@ -87,11 +87,9 @@ public class Sale extends FuncActivity
             if(appState.needCard)
             {
                 requestCard(true,true, true);
-                finish();
             }
             else
 			    inputPIN();
-            finish();
 			break;
 		case STATE_REQUEST_CARD:
             if(appState.trans.getCardEntryMode() == INSERT_ENTRY)
@@ -101,17 +99,14 @@ public class Sale extends FuncActivity
             else if(appState.trans.getCardEntryMode() == CONTACTLESS_ENTRY)
             {
                 processEMVCard(QPBOC_KERNAL);
-                finish();
             }
             else
             {
                 confirmCard();
-                finish();
             }
 			break;
         case STATE_CONFIRM_CARD:
             inputPIN();
-
             break;
 		case STATE_INPUT_PIN:
 			processOnline();

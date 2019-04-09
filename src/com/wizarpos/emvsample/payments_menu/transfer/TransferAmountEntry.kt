@@ -410,7 +410,7 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
             FuncActivity.appState.withdrawal = true
             val intent = Intent(this, Sale::class.java)
             startActivity(intent)
-            finish();
+
 //            val intent = Intent(this, VasPurchaseProcessor::class.java)
 //            intent.putExtra(BasePaymentActivity.TRANSACTION_ACCOUNT_TYPE, AccountType.DEFAULT_UNSPECIFIED)
 //
@@ -731,7 +731,7 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
 //        progressDialog.setMessage("Debitting wallet")
 //        progressDialog.show()
 
-       // longToast("Wallet \n\n Debitting wallet").setGravity(Gravity.CENTER, 0, 0)
+        longToast("Wallet \n\n Debitting wallet").setGravity(Gravity.CENTER, 0, 0)
 
         val clientReference = getClientRef(this@TransferAmountEntry, "")
         lateinit var transferResponse : TransferSuccessModel
@@ -772,7 +772,7 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
                     val amount = txtAmount.text.toString()
                     TransferService.create().transfer(transferDetails, "application/json", signature, nonce).enqueue(object  : Callback<TransferSuccessModel>{
                         override fun onFailure(call: Call<TransferSuccessModel>, t: Throwable) {
-                         //   Log.d("okh", t.message)
+                            Log.d("okh", t.message)
                         }
 
                         override fun onResponse(call: Call<TransferSuccessModel>, response: Response<TransferSuccessModel>) {

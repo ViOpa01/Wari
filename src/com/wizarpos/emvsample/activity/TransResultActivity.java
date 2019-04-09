@@ -207,7 +207,7 @@ public class TransResultActivity extends FuncActivity
     
     @Override
     public void onBackPressed(){
-		finish();
+
     }
     
 	public class ClickListener implements View.OnClickListener
@@ -322,5 +322,4 @@ public class TransResultActivity extends FuncActivity
 			textLine2.setText("PRINT_COMPLETED");
 		}
     }
-
 }
