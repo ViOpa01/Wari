@@ -62,6 +62,18 @@
         <activity android:name=".activity.FuncActivity"
                     android:screenOrientation="portrait"/>
 
+        <activity android:name=".activity.AirtimeActivity"
+                    android:screenOrientation="portrait"/>
+
+        <activity android:name=".activity.DataActivity"
+                    android:screenOrientation="portrait"/>
+
+        <activity android:name=".activity.AllData"
+                    android:screenOrientation="portrait"/>
+
+        <activity android:name=".activity.SelectionActivity"
+                    android:screenOrientation="portrait"/>
+
         <!-- <activity android:name=".activity.InitParamActivity" />
          <activity android:name=".activity.ParamMenuActivity" />
          <activity android:name=".activity.PrintMenuActivity" />

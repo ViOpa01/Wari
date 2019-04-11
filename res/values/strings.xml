@@ -62,5 +62,10 @@
     <string name="key_ip_address">ip_address</string>
     <string name="key_host_type">key_host_type</string>
     <string name="key_payvice_username">key_payvice_login_username</string>
+    <string name="airtime">Airtime</string>
+    <string name="amount">amount</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="action_select_provider">Select airtime provider</string>
+    <string name="key_payvice_wallet_pin">key_payvice_wallet_pin</string>
 
 </resources>

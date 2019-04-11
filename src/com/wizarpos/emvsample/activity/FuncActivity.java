@@ -84,9 +84,7 @@ public class FuncActivity extends AppCompatActivity implements Constants, IFunti
     protected static boolean contactlessOpened = false;
     
     protected static Thread mOpenPinpadThread = null;
-    
-    
-    
+
 	private Timer mTimerSeconds;
     private int mIntIdleSeconds;
     private boolean mBoolInitialized=false;
@@ -841,7 +839,7 @@ public class FuncActivity extends AppCompatActivity implements Constants, IFunti
     public void exit()
     {
     	cancelIdleTimer();
-    	finish();
+    	//finish();
     }
     
 	public void exitTrans()
@@ -855,7 +853,7 @@ public class FuncActivity extends AppCompatActivity implements Constants, IFunti
 		else
 		{
 			appState.initData();
-			finish();
+			//finish();
 		}
 	}
 	
@@ -1052,7 +1050,7 @@ public class FuncActivity extends AppCompatActivity implements Constants, IFunti
 	// Trans Object
 	public void sale()
 	{
-		cancelIdleTimer();
+		//cancelIdleTimer();
 		Intent intent = new Intent(this, Sale.class);
 		startActivity(intent);
 	}
@@ -1084,10 +1082,6 @@ public class FuncActivity extends AppCompatActivity implements Constants, IFunti
 		resetPurchase();
 	}
 
-	protected void onBack()
-	{
-	}
-
 	protected void onDel()
 	{
 	}
@@ -1103,7 +1097,7 @@ public class FuncActivity extends AppCompatActivity implements Constants, IFunti
 		switch (keyCode)
 		{
 		case KeyEvent.KEYCODE_BACK:
-			onBack();
+			onBackPressed();
 			break;
 		case KeyEvent.KEYCODE_ESCAPE:
 			onCancel();

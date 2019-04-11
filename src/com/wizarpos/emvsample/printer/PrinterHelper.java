@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.google.gson.Gson;
+import com.wizarpos.emvsample.activity.AirtimeSuccessResponse;
 import com.wizarpos.emvsample.constant.Constants;
 import com.wizarpos.emvsample.db.EodModel;
 import com.wizarpos.emvsample.db.TransDetailInfo;
@@ -508,6 +509,169 @@ public class PrinterHelper
 			printerWrite("***********".getBytes("GB2312"));
 			printerWrite(PrinterCommand.linefeed());
 			printerWrite(("NGN "+AppUtil.formatAmount(eodModel.getAmmount(),false)).getBytes("UTF-8"));
+			printerWrite(PrinterCommand.linefeed());
+			printerWrite("***********".getBytes("GB2312"));
+			printerWrite(PrinterCommand.feedLine(1));
+			printerWrite(PrinterCommand.setAlignMode(0));
+			printerWrite("--------------------------------".getBytes("GB2312"));
+			printerWrite(PrinterCommand.setAlignMode(1));
+			printerWrite(PrinterCommand.setFontBold(0));
+			printerWrite("WARI ".getBytes("GB2312"));
+			printerWrite(PrinterCommand.linefeed());
+			printerWrite("www.iisysgroup.com".getBytes("GB2312"));
+			printerWrite(PrinterCommand.linefeed());
+			printerWrite("0700-2255-4839".getBytes("GB2312"));
+			printerWrite(PrinterCommand.linefeed());
+			printerWrite(PrinterCommand.setAlignMode(0));
+			printerWrite("--------------------------------".getBytes("GB2312"));
+			printerWrite(PrinterCommand.feedLine(1));
+			printerWrite(PrinterCommand.feedLine(3));
+		} catch (UnsupportedEncodingException e) {
+			throw new PrinterException("PrinterHelper.printReceipt():" + e.getMessage(), e);
+		} catch (IllegalArgumentException e) {
+			throw new PrinterException(e.getMessage(), e);
+		} finally {
+			PrinterInterface.end();
+			PrinterInterface.close();
+		}
+	}
+
+
+	synchronized public void airtimeReceipt(MainApp appState, int receipt, AirtimeSuccessResponse airtimeSuccessResponse) throws PrinterException
+	{
+		try {
+			PrinterInterface.open();
+			PrinterInterface.begin();
+
+			printerWrite(PrinterCommand.init());
+			printerWrite(PrinterCommand.setHeatTime(180));
+			printerWrite(PrinterCommand.setAlignMode(1));
+			printerWrite(PrinterCommand.setFontBold(1));
+			printerWrite(PrinterCommand.feedLine(2));
+			printerWrite(PrinterCommand.setAlignMode(0));
+			//Merchant name
+			printerWrite(PrinterCommand.linefeed());
+			printerWrite(PrinterCommand.setFontBold(1));
+			printerWrite(PrinterCommand.setAlignMode(49));
+			printerWrite(PrinterCommand.setFont(0));
+			String[] nameArr = appState.terminalConfig.getMerchantName1().split(" ");
+			nameArr = Arrays.copyOf(nameArr, nameArr.length -2);
+			printerWrite((StringUtil.join(nameArr," ")).getBytes("GB2312"));
+			printerWrite(PrinterCommand.linefeed());
+			printerWrite(PrinterCommand.setFontBold(0));
+			printerWrite(PrinterCommand.setFont(0));
+
+			if(receipt == 0)
+			{
+				printerWrite(("*** MERCHANT COPY ***").getBytes("GB2312"));
+				printerWrite(PrinterCommand.linefeed());
+			}
+			else if(receipt == 1)
+			{
+				printerWrite(("** CUSTOMER COPY **").getBytes("GB2312"));
+
+				printerWrite(PrinterCommand.linefeed());
+			}
+			else if(receipt == 2)
+			{
+				printerWrite(("**** BANK COPY ****").getBytes("GB2312"));
+				printerWrite(PrinterCommand.linefeed());
+			}
+			printerWrite(PrinterCommand.setFontBold(1));
+
+			if(airtimeSuccessResponse.getError()){
+				printerWrite("APPROVED".getBytes("GB2312"));
+				printerWrite(PrinterCommand.linefeed());
+			}
+			else{
+				printerWrite("DECLINED".getBytes("GB2312"));
+				printerWrite(PrinterCommand.linefeed());
+			}
+			printerWrite(PrinterCommand.setFontBold(0));
+
+			printerWrite(PrinterCommand.setAlignMode(0));
+			printerWrite("--------------------------------".getBytes("GB2312"));
+			printerWrite(PrinterCommand.linefeed());
+//			printerWrite((appState.getString(R.string.tid_tag) + " " + appState.nibssData.getConnectionData().getTerminalID()).getBytes("GB2312"));
+//			printerWrite(PrinterCommand.linefeed());
+//
+//			printerWrite((appState.getString(R.string.mid_tag) + " " + appState.nibssData.getConfigData().getConfigData("03015")).getBytes("GB2312"));
+//			printerWrite(PrinterCommand.linefeed());
+
+//			printerWrite(("Customer: " + " " + eodModel.getResults().cardHolderName).getBytes("GB2312"));
+//			printerWrite(PrinterCommand.linefeed());
+
+			String pan = appState.getString(R.string.pan_tag) + " " + airtimeSuccessResponse.getError();
+			switch(appState.trans.getCardEntryMode())
+			{
+				case 0:
+					pan = pan ;
+					break;
+				case Constants.SWIPE_ENTRY:
+					pan = pan ;
+					break;
+				case Constants.INSERT_ENTRY:
+					pan = pan ;
+					break;
+				case Constants.MANUAL_ENTRY:
+					pan = pan ;
+					break;
+				default:
+					pan = pan ;
+					break;
+			}
+			printerWrite(("REF: " + airtimeSuccessResponse.getRef()).getBytes("GB2312") );
+			printerWrite(PrinterCommand.linefeed());
+
+//			printerWrite(pan.getBytes("GB2312"));
+//			printerWrite(PrinterCommand.linefeed());
+
+//			printerWrite((  appState.getString(R.string.date_tag)
+//					+ DateFormat.format("MM/dd/yyyy", new Date(eodModel.getResults().longDateTime)).toString()).getBytes("GB2312"));
+//			printerWrite(PrinterCommand.linefeed());
+
+//			printerWrite(( "TICKET:" + StringUtil.fillZero(Integer.toString(transDetailInfo.getTrace()), 6)).getBytes("GB2312"));
+//			printerWrite(PrinterCommand.linefeed());
+
+		   /* printerWrite(appState.getString(TransDefine.transInfo[appState.trans.getTransType()].id_display_en).getBytes("GB2312"));
+		    printerWrite(PrinterCommand.linefeed());*/
+
+		   /* printerWrite(("AMOUNT:" + StringUtil.fillString(AppUtil.formatAmount(appState.trans.getTransAmount()), 22, ' ', true)).getBytes("GB2312"));
+		    printerWrite(PrinterCommand.linefeed());*/
+
+			  /*  printerWrite(("CSN:" + StringUtil.fillZero(Byte.toString(appState.trans.getCSN()),2)).getBytes());
+			    printerWrite(PrinterCommand.linefeed());*/
+
+
+
+				/*printerWrite(("AC: Not avialable").getBytes());
+				printerWrite(PrinterCommand.linefeed());
+
+				printerWrite(("TVR:" + appState.trans.getTVR()).getBytes());
+				printerWrite(PrinterCommand.linefeed());
+
+				printerWrite(("AID:" + appState.trans.getAID()).getBytes());
+				printerWrite(PrinterCommand.linefeed());
+
+				printerWrite(("TSI:" + appState.trans.getTSI()).getBytes());
+				printerWrite(PrinterCommand.linefeed());*/
+
+			   /* printerWrite(("APPLAB:" + appState.trans.getAppLabel()).getBytes());
+			    printerWrite(PrinterCommand.linefeed());*/
+
+			  /*  printerWrite(("IAD:" + appState.trans.getIAD()).getBytes());
+			    printerWrite(PrinterCommand.linefeed());*/
+
+			//printerWrite(("TermCap:" + appState.terminalConfig.getTerminalCapabilities()).getBytes());
+			printerWrite(PrinterCommand.linefeed());
+			printerWrite(PrinterCommand.feedLine(1));
+			printerWrite("--------------------------------".getBytes("GB2312"));
+			printerWrite(PrinterCommand.feedLine(1));
+			printerWrite(PrinterCommand.setAlignMode(1));
+			printerWrite(PrinterCommand.setFontBold(1));
+			printerWrite("***********".getBytes("GB2312"));
+			printerWrite(PrinterCommand.linefeed());
+			printerWrite(("NGN "+AppUtil.formatAmount(airtimeSuccessResponse.getAmount()+"",false)).getBytes("UTF-8"));
 			printerWrite(PrinterCommand.linefeed());
 			printerWrite("***********".getBytes("GB2312"));
 			printerWrite(PrinterCommand.feedLine(1));

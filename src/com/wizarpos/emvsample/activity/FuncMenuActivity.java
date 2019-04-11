@@ -40,6 +40,7 @@ public class FuncMenuActivity extends FuncActivity
 	private ImageView ImageViewEncrypt = null;
 	private ImageView ImageViewtransfer = null;
 	private ImageView ImageViewwithdrawal = null;
+	private ImageView ImageViewAirtime = null;
 	private ImageView purchaseCashBack;
 	private AlertDialog alertDialog;
 	private ImageView ImageViewEod;
@@ -70,14 +71,17 @@ public class FuncMenuActivity extends FuncActivity
 		ImageViewTrans = findViewById(R.id.bFunc_Trans);
 		ImageViewTrans.setOnClickListener(new ClickListener());
 
+		ImageViewAirtime = findViewById(R.id.bFunc_Airtime);
+		ImageViewAirtime.setOnClickListener(new ClickListener());
+
 		ImageViewSettle = findViewById(R.id.bFunc_Settle);
 		ImageViewSettle.setOnClickListener(new ClickListener());
 
 		ImageViewEncrypt = findViewById(R.id.bFunc_encrypt);
 		ImageViewEncrypt.setOnClickListener(new ClickListener());
 
-		purchaseCashBack = findViewById(R.id.cashBack);
-		purchaseCashBack.setOnClickListener(new ClickListener());
+//		purchaseCashBack = findViewById(R.id.cashBack);
+//		purchaseCashBack.setOnClickListener(new ClickListener());
 
 		ImageViewEod = findViewById(R.id.eod);
 		ImageViewEod.setOnClickListener(new ClickListener());
@@ -148,11 +152,6 @@ public class FuncMenuActivity extends FuncActivity
 		onBackPressed();
 	}
 
-	@Override
-	protected void onBack()
-	{
-		onBackPressed();
-	}
 
 	public class ClickListener implements View.OnClickListener
 	{
@@ -161,19 +160,21 @@ public class FuncMenuActivity extends FuncActivity
 		{
 			switch(v.getId())
 			{
-			case R.id.cashBack:
-				appState.needCard = true;
-				appState.purchaseWithCashBack = true;
-				sale();
-				break;
+//			case R.id.cashBack:
+//				appState.needCard = true;
+//				appState.purchaseWithCashBack = true;
+//				sale();
+//				break;
 			case R.id.bFunc_Sale:
 				appState.needCard = true;
-				sale();
+				//sale();
+				Intent intent = new Intent(FuncMenuActivity.this, Sale.class);
+				startActivity(intent);
 				break;
 
 			case R.id.bFunc_LastPBOC:
 				startActivity(new Intent(FuncMenuActivity.this, GetMasterKey.class));
-				finish();
+				//finish();
 				break;
 
 			case R.id.bFunc_Trans:
@@ -181,6 +182,10 @@ public class FuncMenuActivity extends FuncActivity
 				appState.balanceEnc = true;
 				sale();
 				break;
+
+			case R.id.bFunc_Airtime:
+				startActivity(new Intent(FuncMenuActivity.this, AirtimeActivity.class));
+					break;
 
 			case R.id.bFunc_Settle:
 				AlertDialog.Builder alert = new AlertDialog.Builder(FuncMenuActivity.this, R.style.AlertDialogCustom);
@@ -360,7 +365,7 @@ public class FuncMenuActivity extends FuncActivity
 			public void complete(String res) {
 				Toast.makeText(FuncMenuActivity.this,"Successfully Configured",Toast.LENGTH_LONG).show();
 			    startActivity(new Intent(FuncMenuActivity.this, GetMasterKey.class));
-			    finish();
+			    //finish();
 			}
 
 			@Override

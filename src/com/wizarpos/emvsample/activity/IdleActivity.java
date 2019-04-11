@@ -178,12 +178,6 @@ public class IdleActivity extends FuncActivity implements Constants
     }
 
 	@Override
-	protected void onBack()
-	{
-		onBackPressed();
-	}
-
-	@Override
 	protected void onCancel()
 	{
 		onBackPressed();

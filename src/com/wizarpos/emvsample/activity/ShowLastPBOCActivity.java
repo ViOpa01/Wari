@@ -80,12 +80,6 @@ public class ShowLastPBOCActivity extends FuncActivity
 	}
 
 	@Override
-	protected void onBack()
-	{
-		onBackPressed();
-	}
-
-	@Override
 	protected void onEnter()
 	{
 		onBackPressed();

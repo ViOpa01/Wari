@@ -197,11 +197,6 @@ public class InputExtraAmountActivity extends FuncActivity
 		exit();
 	}
 
-	@Override
-	protected void onBack()
-	{
-		onCancel();
-	}
 
 	public class ClickListener implements View.OnClickListener
     {

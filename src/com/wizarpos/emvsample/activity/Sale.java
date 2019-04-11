@@ -47,7 +47,7 @@ public class Sale extends FuncActivity
 			}
 		}
     }
-        
+
 	@Override
 	public void onStart()
 	{

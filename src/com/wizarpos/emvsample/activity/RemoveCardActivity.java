@@ -97,11 +97,6 @@ public class RemoveCardActivity extends FuncActivity
 		onBackPressed();
 	}
 
-	@Override
-	protected void onBack()
-	{
-		onBackPressed();
-	}
 
 	@Override
 	protected void onCancel()

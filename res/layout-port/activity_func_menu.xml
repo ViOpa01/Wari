@@ -178,16 +178,16 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:id="@+id/bFunc_Settle"
+                    android:id="@+id/bFunc_Airtime"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
-                    android:contentDescription="@string/refund"
-                    android:src="@drawable/ic_refresh_black_24dp"/>
+                    android:contentDescription="@string/airtime"
+                    android:src="@drawable/ic_phone_android_black_24dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Refund"
+                    android:text="@string/airtime"
                     android:textStyle="bold"
                     android:textSize="14sp"/>
             </LinearLayout>
@@ -266,7 +266,7 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:id="@+id/cashBack"
+                    android:id="@+id/bFunc_Settle"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:src="@drawable/ic_refresh_black_24dp"/>
