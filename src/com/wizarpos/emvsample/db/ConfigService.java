@@ -21,18 +21,23 @@ public class ConfigService {
     }
 
     public String get(){
-       queryCursor = db.rawQuery("Select  * from `config`",new String[]{});
-       if(queryCursor.moveToFirst()){
-           try{
-               return queryCursor.getString(queryCursor.getColumnIndex("config"));
-           }
-           catch (Exception e){
-               return "";
-           }
-       }else{
-           return "";
-       }
+        try{
+            queryCursor = db.rawQuery("Select  * from `config`",new String[]{});
 
+        }catch (Exception e){
+
+        }
+
+        if(queryCursor.moveToFirst()){
+            try{
+                return queryCursor.getString(queryCursor.getColumnIndex("config"));
+            }
+            catch (Exception e){
+                return "";
+            }
+        }else{
+            return "";
+        }
     }
 
 }

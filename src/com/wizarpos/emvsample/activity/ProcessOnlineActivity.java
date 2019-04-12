@@ -122,13 +122,24 @@ public class ProcessOnlineActivity extends FuncActivity
 
 			//Build Pin info
 			EmvCard.PinInfo pinInfo;
-			if(appState.trans.getPinBlock() != null){
-                Log.i("okh", "pinblock :" + appState.trans.getPinBlock());
+			byte[] pinblock = appState.trans.getPinBlock();
+			if(pinblock != null){
+                Log.d("okh", "pinblock1 :" + pinblock);
 				pinInfo = new EmvCard.PinInfo(appState.trans.getPinBlock(),null, StringUtil.hexString2bytes(appState.clearPin));
+
+//                emvCard = new EmvCard(appState.trans.getCardHolderName(),appState.trans.getTrack2Data(),
+//                        appState.trans.getICCData(),pinInfo);
 			}
 			else{
-				pinInfo = null;
-			}
+				Log.d("okh", "pinblock2 :" + pinblock);
+                pinInfo = new EmvCard.PinInfo(null, null, null);
+            }
+//			else{
+//				Log.i("okh", "pinblock2 :" + pinblock);
+//				pinInfo = null;
+////                emvCard = new EmvCard(appState.trans.getCardHolderName(),appState.trans.getTrack2Data(),
+////                        appState.trans.getICCData(),pinInfo);
+//			}
 			//Build emv carf
 			emvCard = new EmvCard(appState.trans.getCardHolderName(),appState.trans.getTrack2Data(),
 					appState.trans.getICCData(),pinInfo);
@@ -139,6 +150,7 @@ public class ProcessOnlineActivity extends FuncActivity
 
 			//Go online
 			if(transactionType == Host.TransactionType.REFUND){
+				Log.d("okh", "refund");
 				nibss.goOnline(emvCard, transactionType, inputData,
 						appState.nibssData.getKeyHolder(), appState.nibssData.getConfigData(),
 						appState.nibssData.getConnectionData(), appState.isoRefundProcessData ,new Nibss.Nibs<TransactionResult>() {
@@ -181,6 +193,7 @@ public class ProcessOnlineActivity extends FuncActivity
 						});
 
 			}else if(transactionType == Host.TransactionType.REVERSAL){
+				Log.d("okh", "reversal");
 				nibss.reverse(emvCard,transactionType,inputData,appState.nibssData.getKeyHolder(), appState.nibssData.getConfigData(),
 						appState.nibssData.getConnectionData(),appState.iisoReverSal,new Nibss.Nibs<TransactionResult>() {
 							@Override
@@ -222,6 +235,7 @@ public class ProcessOnlineActivity extends FuncActivity
 						});
 			}
 			else{
+				Log.d("okh", "purchase");
 				nibss.goOnline(emvCard, transactionType, inputData,
 						appState.nibssData.getKeyHolder(), appState.nibssData.getConfigData(),
 						appState.nibssData.getConnectionData(), new Nibss.Nibs<TransactionResult>() {

@@ -174,7 +174,7 @@ public class MainApp extends Application implements Constants
     @Override
     public void onCreate()
     {
-
+		super.onCreate();
         MultiDex.install(this);
     	try{
 			poslibdb = Room.databaseBuilder(this, PosLibDatabase.class, "poslib.db")
@@ -200,7 +200,7 @@ public class MainApp extends Application implements Constants
 
 		hostInteractor = HostInteractor.getInstance(host);
 
-		super.onCreate();
+
 		if (null == _instance)
 		    _instance = MainApp.this;
 

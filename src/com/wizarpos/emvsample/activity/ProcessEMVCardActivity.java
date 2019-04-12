@@ -107,6 +107,7 @@ public class ProcessEMVCardActivity extends FuncActivity
 	
     private Thread mEMVThread = null;
     private Thread mEMVProcessNextThread = null;
+    private Thread mEMVProcessNextThread2 = null;
 
 	@Override
 	public void handleMessageSafe(Message msg) {
@@ -194,18 +195,28 @@ public class ProcessEMVCardActivity extends FuncActivity
 					textLine1.setText("PLEASE INPUT PIN ON THE PINPAD");
 					mEMVProcessNextThread = new EMVProcessNextThread();
 					mEMVProcessNextThread.start();
+					Log.d("okh", "offline pin");
 					break;
+
 				case EMV_ONLINE_ENC_PIN:
-					inputPIN();
+//					inputPIN();
+					mEMVProcessNextThread = new EMVProcessNextThread();
+					mEMVProcessNextThread.start();
+					Log.d("okh", "online pin");
+				//	appState.trans.setEMVOnlineFlag(true);
 					break;
 				case EMV_PIN_BYPASS_CONFIRM:
 					confirmBypassPin();
+					Log.d("okh", "confirm");
 					break;
 				case EMV_PROCESS_ONLINE:
+					Log.d("okh", "process online");
 					getEMVCardInfo();
 					appState.trans.setEMVOnlineFlag(true);
 						processOnline();
-					
+//                    textLine1.setText("PLEASE INPUT PIN ON THE PINPAD");
+//                    mEMVProcessNextThread = new EMVProcessNextThread();
+//                    mEMVProcessNextThread.start();
 					break;
 				default:
 					mEMVProcessNextThread = new EMVProcessNextThread();

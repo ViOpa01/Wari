@@ -265,9 +265,9 @@ public class Nibss {
         TransactionData transactionData = new TransactionData(inputData,emvCard, configData, keyHolder);
 
        try{
-           Log.i("ok2", emvCard.getPinInfo().getKey().toString());
+           Log.d("okh", "nibss pinblock "+emvCard.getPinInfo().getKey());
        }catch (Exception e){
-           Log.i("ok2", "No pin block");
+           Log.d("okh", "No pin block");
        }
 
 //       Log.d("okh", Arrays.toString(emvCard.getPinInfo().getPinBlock()) + " " + transactionType + " " + inputData.getAccountType() + " " + keyHolder + " " + configData + " " + connectionData + resultNibs);

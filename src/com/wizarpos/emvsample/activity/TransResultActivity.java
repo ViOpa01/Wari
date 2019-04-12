@@ -186,7 +186,13 @@ public class TransResultActivity extends FuncActivity
 	    return super.onSupportNavigateUp();
     }
 
-    @Override
+	@Override
+	protected void onBack() {
+		finish();
+		super.onBack();
+	}
+
+	@Override
 	protected void onStart()
 	{
 		super.onStart();

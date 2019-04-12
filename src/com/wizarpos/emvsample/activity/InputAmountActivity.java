@@ -213,10 +213,10 @@ public class InputAmountActivity extends FuncActivity
 	}
 
 	@Override
-	public void onBackPressed() {
+	protected void onBack()
+	{
 		onCancel();
 	}
-
 
 	public class ClickListener implements View.OnClickListener
     {

@@ -18,36 +18,64 @@ import org.jetbrains.anko.toast
 
 class LoginActivity : AppCompatActivity(), LoginView {
     override fun showProgress() {
-        loginProgressDialog.show()
+        try{
+            loginProgressDialog.dismiss()
+        }catch (e : Exception){
+
+        }
     }
 
     override fun dismissProgress() {
-        loginProgressDialog.dismiss()
+        try{
+            loginProgressDialog.dismiss()
+        }catch (e : Exception){
+
+        }
 
     }
 
     override fun setInvalidUser() {
-        loginProgressDialog.dismiss()
+        try{
+            loginProgressDialog.dismiss()
+        }catch (e : Exception){
+
+        }
         toast("Your username is invalid")
     }
 
     override fun setInvalidPassword() {
-        loginProgressDialog.dismiss()
+        try{
+            loginProgressDialog.dismiss()
+        }catch (e : Exception){
+
+        }
         toast("Your password is invalid")
     }
 
     override fun showMessage(message: String) {
-        loginProgressDialog.dismiss()
+        try{
+            loginProgressDialog.dismiss()
+        }catch (e : Exception){
+
+        }
         toast(message)
     }
 
     override fun setLoginError(throwable: Throwable) {
-        loginProgressDialog.dismiss()
+        try{
+            loginProgressDialog.dismiss()
+        }catch (e : Exception){
+
+        }
         toast("Login Error")
     }
 
     override fun setLoginSuccessful() {
-        loginProgressDialog.dismiss()
+        try{
+            loginProgressDialog.dismiss()
+        }catch (e : Exception){
+
+        }
         SharedPreferenceUtils.setUserLoggedIn(this@LoginActivity, true)
         val intent = Intent(this@LoginActivity, FuncMenuActivity::class.java)
         startActivity(intent)
@@ -117,7 +145,11 @@ class LoginActivity : AppCompatActivity(), LoginView {
                     password.error = "Please enter a vaid password"
                 }
 
-                loginProgressDialog.show()
+                try{
+                    loginProgressDialog.show()
+                }catch (e : Exception){
+
+                }
                 presenter.login(wallet_username, wallet_password)
 
 
