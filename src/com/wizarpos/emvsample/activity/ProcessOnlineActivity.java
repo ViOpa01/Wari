@@ -300,47 +300,31 @@ public class ProcessOnlineActivity extends FuncActivity
 			inputData = new InputData(appState.trans.getTransAmount().longValue(),
 					appState.trans.getOthersAmount().longValue(), AccountType.DEFAULT_UNSPECIFIED);
 
-//			nibss.goOnline(emvCard, transactionType, inputData,
-//					appState.vasData.getKeyHolder(), appState.vasData.getConfigData(),
-//					appState.vasData.getConnectionData(), new Nibss.Nibs<TransactionResult>() {
-//						@Override
-//						public void complete(TransactionResult res) {
-//							appState.trans.setMaskPan(res.PAN);
-//							appState.trans.setRrn(res.RRN);
-//							appState.trans.setTransactionResult(res);
-//							if(res.isApproved()){
-//								Log.i("okh", res.toString());
-//								appState.trans.setTrace(appState.terminalConfig.getTrace());
-//
-//								appState.trans.setResponseCode(res.responseCode.getBytes());
-//								try{
-//									appState.trans.setIssuerAuthData(res.issuerAuthData91.getBytes(),0,res.issuerAuthData91.getBytes().length);
-//								}catch (Exception e){
-//									e.printStackTrace();
-//								}
-//								appState.trans.setTransactionStatus(true);
-//								appState.terminalConfig.incTrace();
-//								processResult();
-//							}else{
-//								Log.i("okh", res.toString());
-//								appState.trans.setTrace(appState.terminalConfig.getTrace());
-//								appState.trans.setResponseCode(new byte[]{'F','F'});
-//								appState.trans.setTransactionStatus(false);
-//								appState.terminalConfig.incTrace();
-//								processResult();
-//							}
-//						}
-//
-//						@Override
-//						public void error(String e) {
-//							Log.i("okh", e );
-//							appState.trans.setTrace(appState.terminalConfig.getTrace());
-//							appState.trans.setResponseCode(new byte[]{'F','F'});
-//							appState.terminalConfig.incTrace();
-//							processResult();
-//						}
-//					});
+			new saveVasKeyHolder(this).execute();
 
+		}
+
+
+		if (appState.airtime){
+			Log.i("okh", "airtime");
+			Nibss nibss = new Nibss(ProcessOnlineActivity.this);
+
+			//Build Pin info
+			EmvCard.PinInfo pinInfo;
+			if(appState.trans.getPinBlock() != null){
+				Log.i("okh", "pinblock :" + appState.trans.getPinBlock());
+				pinInfo = new EmvCard.PinInfo(appState.trans.getPinBlock(),null, StringUtil.hexString2bytes(appState.clearPin));
+			}
+			else{
+				pinInfo = null;
+			}
+			//Build emv carf
+			emvCard = new EmvCard(appState.trans.getCardHolderName(),appState.trans.getTrack2Data(),
+					appState.trans.getICCData(),pinInfo);
+
+			//Build InputData
+			inputData = new InputData(appState.trans.getTransAmount().longValue(),
+					appState.trans.getOthersAmount().longValue(), AccountType.DEFAULT_UNSPECIFIED);
 
 			new saveVasKeyHolder(this).execute();
 

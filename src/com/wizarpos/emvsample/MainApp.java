@@ -158,6 +158,7 @@ public class MainApp extends Application implements Constants
 	public boolean purchaseWithCashBack = true;
 	public boolean revarsal = false;
 	public boolean withdrawal = false;
+	public boolean airtime = false;
 	public int reversalAmout;
 	public HostInteractor hostInteractor;
 	public PosLibDatabase poslibdb = null;
