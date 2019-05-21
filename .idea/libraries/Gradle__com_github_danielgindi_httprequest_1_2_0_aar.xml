@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.danielgindi:httprequest:1.2.0@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/httprequest-1.2.0.aar/4594542b3dd47aa0908de7645b56fa20/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/httprequest-1.2.0.aar/4594542b3dd47aa0908de7645b56fa20/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.danielgindi/httprequest/1.2.0/5b89b59827cd61c1c080d838e2f30ea38821017a/httprequest-1.2.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
