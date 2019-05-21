@@ -7,20 +7,40 @@ import android.os.Bundle;
 import android.os.Message;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.wizarpos.emvsample.generators.PfmStateGenerator;
+import com.iisysgroup.androidlite.models.WithdrawalWalletResponse.WithdrawalWalletCreditModel;
+import com.iisysgroup.poslib.commons.emv.EmvCard;
 import com.wizarpos.emvsample.R;
+import com.wizarpos.emvsample.activity.login.securestorage.SecureStorage;
+import com.wizarpos.emvsample.models.PfmJournalGenerator;
+import com.wizarpos.emvsample.models.Pfm;
+import com.wizarpos.emvsample.payments_menu.Services.TransferServices;
+import com.wizarpos.emvsample.payments_menu.models.WithdrawalDetails;
 import com.wizarpos.emvsample.printer.PrinterException;
 import com.wizarpos.emvsample.printer.PrinterHelper;
 import com.wizarpos.emvsample.transaction.TransDefine;
 import com.wizarpos.jni.PinPadInterface;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static com.wizarpos.emvsample.payments_menu.utils.EncryptionUtilsKt.Hashing;
+import static com.wizarpos.util.StringUtil.getClientRef;
 
 public class TransResultActivity extends FuncActivity 
 {
@@ -42,6 +62,7 @@ public class TransResultActivity extends FuncActivity
 	private boolean printPaused = false;
 
 	private ImageView transactionStatus;
+	private WithdrawalDetails withdrawalDetails;
 
 	@Override
 	public void handleMessageSafe(Message msg)
@@ -141,7 +162,17 @@ public class TransResultActivity extends FuncActivity
 						if(appState.trans.getEMVRetCode() == APPROVE_ONLINE)
 						{
 							textLine1.setText("Approved");
-                            transactionStatus.setImageResource(R.drawable.ic_check_circle_black_24dp);
+							if (appState.withdrawal){
+								Log.d("okh", "result withdrawal credit now");
+								creditWallet();
+								FuncActivity.appState.withdrawal = false;
+							}
+							if (appState.airtime){
+								Log.d("okh", "result airtime credit now");
+								creditAirtime();
+								FuncActivity.appState.airtime = false;
+							}
+							transactionStatus.setImageResource(R.drawable.ic_check_circle_black_24dp);
 						}
 						else{
 							textLine1.setText("ACCEPTED OFFLINE");
@@ -171,6 +202,105 @@ public class TransResultActivity extends FuncActivity
         	}
         }
     }
+
+	private void creditAirtime() {
+
+		String phone_number = SecureStorage.retrieve("phonerecharge", "").replace(" ", "");
+		String airtimeProvider = SecureStorage.retrieve("airtimeprovider", "");
+		String mpin = SecureStorage.retrieve("pinentered", "");
+		String airtime_amount = SecureStorage.retrieve("amountrecharge", "");;
+		String wallet = SecureStorage.retrieve("wallet", "");
+		String password = SecureStorage.retrieve("password", "");
+		String username = SecureStorage.retrieve("username", "");
+
+		AirtimeRequestDetails details = new AirtimeRequestDetails(wallet, username, airtime_amount, phone_number, airtimeProvider, mpin, password);
+
+		AirtimeServices airtimeServices = new AirtimeServices();
+		airtimeServices.create().airtimePurchase(details).enqueue(new Callback<Object>() {
+			@Override
+			public void onResponse(Call<Object> call, Response<Object> response) {
+
+
+			}
+
+			@Override
+			public void onFailure(Call<Object> call, Throwable t) {
+
+			}
+		});
+
+	}
+
+	private void creditWallet() {
+		Double amount = SecureStorage.retrieve("amount", 2.0);
+		Log.d("okh", amount + "");
+		String channel = SecureStorage.retrieve("channel", "");
+		String password = SecureStorage.retrieve("password", "");
+		String paymentMethod = SecureStorage.retrieve("paymentMethod", "");
+		String pin = SecureStorage.retrieve("pin", "");
+		String productCode = SecureStorage.retrieve("productCode", "");
+		String type = SecureStorage.retrieve("type", "");
+		String vendorBankCode = SecureStorage.retrieve("vendorBankCode", "");
+		String wallet = SecureStorage.retrieve("wallet", "");
+		String username = SecureStorage.retrieve("username", "");
+		String phone = SecureStorage.retrieve("phone", "");
+		Log.d("okh", " settocredit" + vendorBankCode);
+		WithdrawalWalletCreditModel transferResponse;
+		String clientReference = getClientRef(this, "");
+
+		EmvCard.PinInfo pinInfo = new EmvCard.PinInfo(appState.trans.getPinBlock(), null, null);
+		EmvCard emvCard = new EmvCard(appState.trans.getCardHolderName(), appState.trans.getTrack2Data(), appState.trans.getICCData(), pinInfo);
+
+		Pfm pfm = new Pfm(new PfmStateGenerator(this).generateState(), new PfmJournalGenerator(appState.trans.getTransactionResult(), appState.nibssData.getConfigData(), false,  amount.longValue(), emvCard).generateJournal());
+
+		withdrawalDetails =  new WithdrawalDetails(wallet, username, password, pin, "default", amount, "", vendorBankCode, "ANDROIDPOS", "card", productCode,  pfm);
+
+		Log.d("okh", appState.trans.getTransactionResult().terminalID);
+		Log.d("okh", appState.trans.getTransactionResult().transactionStatus);
+		Log.d("okh", appState.trans.getTransactionResult().responseCode);
+		Log.d("okh", appState.trans.getTransactionResult().isApproved()+"");
+		Gson gson = new Gson();
+		String jsonPayload = gson.toJson(withdrawalDetails);
+		String base64encoded = new String(org.apache.commons.codec.binary.Base64.encodeBase64(jsonPayload.getBytes()));
+		String encoded = null;
+		try {
+			encoded = URLEncoder.encode(base64encoded, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		String nonce = clientReference;
+		Log.e("sign", base64encoded + " " + encoded);
+		String encryptedStuff = nonce+"IL0v3Th1sAp11111111UC4NDoV4SSWITHVICEBANKING"+encoded;
+		String signature = Hashing(encryptedStuff);
+		//String signature = EncryptionUtilsKt.Hashing(encryptedStuff);
+
+//		String signature = hash(encryptedStuff);
+		//String signature = EncryptionUtilsKt.Hashing(encryptedStuff).toLowerCase();
+		TransferServices transferServices = new TransferServices();
+
+		transferServices.TransferService().withdraw(withdrawalDetails, "application/json", signature, nonce).enqueue(new Callback<WithdrawalWalletCreditModel>() {
+
+			@Override
+			public void onResponse(Call<WithdrawalWalletCreditModel> call, Response<WithdrawalWalletCreditModel> response) {
+				if (response != null) {
+
+					Log.d("okh", "result " + response.body());
+					if (response.body().getStatus() != 1) {
+						Toast.makeText(getBaseContext(), response.body().getMessage() + "", Toast.LENGTH_LONG).show();
+					} else {
+						Toast.makeText(getBaseContext(), "Your wallet has been debitted \n " + response.body().getAmountSettled() / 100 + " \n " + "Beneficiary : " + response.body().getBeneficiaryName(), Toast.LENGTH_LONG).show();
+					}
+				}
+
+			}
+
+			@Override
+			public void onFailure(Call<WithdrawalWalletCreditModel> call, Throwable t) {
+
+			}
+		});
+
+	}
 
     private void initToolbar() {
         Toolbar toolbar = findViewById(R.id.toolbar);

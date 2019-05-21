@@ -1,10 +1,10 @@
 <component name="libraryTable">
   <library name="Gradle: artifacts:poslib-commons-debug:unspecified@jar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/poslib-commons-debug.aar/3a7ab74baa38c8dfb8c7c3c8efccfeae/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/poslib-commons-debug.aar/3a7ab74baa38c8dfb8c7c3c8efccfeae/jars/libs/commons-codec-1.10.jar!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/poslib-commons-debug.aar/3a7ab74baa38c8dfb8c7c3c8efccfeae/jars/libs/crimson.jar!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/poslib-commons-debug.aar/3a7ab74baa38c8dfb8c7c3c8efccfeae/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/poslib-commons-debug.aar/ec2d7c18343096e35b1b1a830dcdb519/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/poslib-commons-debug.aar/ec2d7c18343096e35b1b1a830dcdb519/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/poslib-commons-debug.aar/ec2d7c18343096e35b1b1a830dcdb519/jars/libs/crimson.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/poslib-commons-debug.aar/ec2d7c18343096e35b1b1a830dcdb519/jars/libs/commons-codec-1.10.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

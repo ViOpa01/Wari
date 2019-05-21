@@ -1,8 +1,5 @@
 package com.wizarpos.emvsample.models
 
-import com.iisysgroup.androidlite.models.transfer.description
-
-
 data class LookupSuccessModel(val status : Int, val message : String, val description : description, val convenienceFee : Int, val amountSettled : Int, val amountCharged : Int, val beneficiaryName : String, val account : String, val vendorBankCode : String, val productCode : String)
 
 data class WithdrawalLookupSuccessModel(val status : Int, val error : String, val message : String, val description : String, val convenienceFee : Int, val amountSettled : Int, val amountToDebit : Int, val percentageCharged : String, val beneficiaryName : String, val beneficiaryWallet : String, val productCode : String)

@@ -3,8 +3,10 @@ package com.wizarpos.emvsample.activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
@@ -19,6 +21,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.wizarpos.emvsample.activity.login.LoginActivity;
+import com.wizarpos.emvsample.activity.login.securestorage.SecureStorage;
 import com.wizarpos.emvsample.payments_menu.transfer.TransferAmountEntry;
 import com.wizarpos.emvsample.payments_menu.transfer.TransferBankSelection;
 import com.wizarpos.emvsample.R;
@@ -38,6 +42,7 @@ public class FuncMenuActivity extends FuncActivity
 	private ImageView ImageViewTrans = null;
 	private ImageView ImageViewSettle = null;
 	private ImageView ImageViewEncrypt = null;
+	private ImageView ImageViewsignOut = null;
 	private ImageView ImageViewtransfer = null;
 	private ImageView ImageViewwithdrawal = null;
 	private ImageView ImageViewAirtime = null;
@@ -74,9 +79,6 @@ public class FuncMenuActivity extends FuncActivity
 		ImageViewAirtime = findViewById(R.id.bFunc_Airtime);
 		ImageViewAirtime.setOnClickListener(new ClickListener());
 
-		ImageViewSettle = findViewById(R.id.bFunc_Settle);
-		ImageViewSettle.setOnClickListener(new ClickListener());
-
 		ImageViewEncrypt = findViewById(R.id.bFunc_encrypt);
 		ImageViewEncrypt.setOnClickListener(new ClickListener());
 
@@ -91,6 +93,9 @@ public class FuncMenuActivity extends FuncActivity
 
 		ImageViewwithdrawal = findViewById(R.id.withdrawal);
 		ImageViewwithdrawal.setOnClickListener(new ClickListener());
+
+		ImageViewsignOut = findViewById(R.id.signOut);
+		ImageViewsignOut.setOnClickListener(new ClickListener());
 	}
 
 	private void initToolbar() {
@@ -187,7 +192,7 @@ public class FuncMenuActivity extends FuncActivity
 				break;
 
 			case R.id.bFunc_Airtime:
-				startActivity(new Intent(FuncMenuActivity.this, AirtimeActivity.class));
+				startActivity(new Intent(FuncMenuActivity.this, SelectionActivity.class));
 				//finish();
 					break;
 
@@ -259,6 +264,15 @@ public class FuncMenuActivity extends FuncActivity
 				Intent withdrawal = new Intent(getApplicationContext(), TransferBankSelection.class);
 				withdrawal.putExtra("transfer_type", TransferAmountEntry.TRANSACTION_TYPE.WITHDRAWAL);
 				startActivity(withdrawal);
+					break;
+
+				case R.id.signOut:
+					SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+					sharedPreferences.edit().clear().apply();
+					SecureStorage.deleteAll();
+					finish();
+					startActivity(new Intent(getBaseContext(), LoginActivity.class));
+
 					break;
 
 			}

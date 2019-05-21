@@ -236,6 +236,9 @@ class AirtimeActivity : AirTimeBaseActivity(), AirtimeProcessor.onAirtimeTransac
             isCard = true
             mAirtimeProvider = airtimeProvider
 
+            SecureStorage.store("phonerecharge", phone_number)
+            SecureStorage.store("airtimeprovider", airtimeProvider)
+            SecureStorage.store("pinentered", mPin)
             FuncActivity.appState.needCard = true
             FuncActivity.appState.airtime = true
             val intent = Intent(this, Sale::class.java)

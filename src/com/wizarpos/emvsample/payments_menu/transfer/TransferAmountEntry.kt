@@ -3,6 +3,7 @@ package com.wizarpos.emvsample.payments_menu.transfer
 //import AmpEmvL2Android.AMPDevice
 import android.app.Activity
 import android.app.ProgressDialog
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -10,38 +11,33 @@ import android.util.Log
 import android.view.Gravity
 import android.view.View
 import com.google.gson.Gson
-import com.wizarpos.emvsample.models.LookupSuccessModel
+import com.wizarpos.emvsample.generators.PfmJournalGenerator
+import com.wizarpos.emvsample.models.PfmStateGenerator
+//import com.wizarpos.emvsample.models.LookupSuccessModel
 import com.iisysgroup.androidlite.models.ReceiptModel
 import com.wizarpos.emvsample.models.WithdrawalLookupSuccessModel
 import com.iisysgroup.androidlite.models.WithdrawalWalletResponse.WithdrawalWalletCreditModel
-import com.iisysgroup.androidlite.models.transfer.TransferSuccessModel
+import com.wizarpos.emvsample.models.transfer.TransferSuccessModel
 import com.wizarpos.emvsample.payments_menu.Services.TransferService
-import com.iisysgroup.androidlite.payments_menu.utils.HashUtils
+import com.wizarpos.emvsample.payments_menu.utils.HashUtils
 import com.iisysgroup.poslib.deviceinterface.DeviceState
-import com.iisysgroup.poslib.utils.AccountType
-import com.wizarpos.emvsample.MainApp
+import com.iisysgroup.poslib.host.entities.TransactionResult
 import com.wizarpos.emvsample.R
-import com.wizarpos.emvsample.VasPurchaseProcessor
 import com.wizarpos.emvsample.activity.FuncActivity
 import com.wizarpos.emvsample.activity.Sale
 import com.wizarpos.emvsample.activity.login.Helper
 import com.wizarpos.emvsample.activity.login.securestorage.SecureStorage
 import com.wizarpos.emvsample.activity.login.securestorage.SecureStorageUtils
-import com.wizarpos.emvsample.payments_menu.BasePaymentActivity
-import com.wizarpos.emvsample.payments_menu.models.AccountLookUpDetailTransfer
-import com.wizarpos.emvsample.payments_menu.models.AccountLookUpDetailWithdrawal
-import com.wizarpos.emvsample.payments_menu.models.TransferDetails
-import com.wizarpos.emvsample.payments_menu.models.WithdrawalDetails
+import com.wizarpos.emvsample.payments_menu.models.*
+import com.wizarpos.util.ClientReferenceKey
 import com.wizarpos.util.PinAlertUtils
 import com.wizarpos.util.SharedPreferenceUtils
 import com.wizarpos.util.StringUtil.getClientRef
 import kotlinx.android.synthetic.main.activity_transfer_amount_entry.*
-import kotlinx.android.synthetic.main.single_transaction.*
 import kotlinx.coroutines.*
 import org.jetbrains.anko.*
 import retrofit2.Call
 import retrofit2.Callback
-import retrofit2.Response
 import java.math.BigDecimal
 import java.net.ConnectException
 import java.net.SocketTimeoutException
@@ -405,22 +401,29 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
         PinAlertUtils.getPin(this, view){
             mEncryptedPin = SecureStorageUtils.hashIt(it!!, encryptedPassword)!!
 
-
+            val clientReferenceKey : ClientReferenceKey
             FuncActivity.appState.needCard = true
             FuncActivity.appState.withdrawal = true
+//            val withdrawaldetails = WithdrawalDetails(wallet = mWalletId, username = mWalletUsername, password = mPlainPassword, pin = mEncryptedPin, type = "default", amount = amountToDebit, vendorBankCode = mBankCode, channel = "ANDROIDPOS", phone = "", paymentMethod = "card", productCode = mProductCode, reference = clientReferenceKey.generateReference(getBaseContext()), pfm = clientReferenceKey.generatePFM(transactionResult, getBaseContext()))
+            Log.d("okh", "$amountToDebit init amount");
+            //  intent.putExtra("withdrawaldetails", withdrawaldetails);
+            SecureStorage.store("amount", 2.0)
+            SecureStorage.store("channel", "ANDROIDPOS")
+            SecureStorage.store("password", mPlainPassword)
+            SecureStorage.store("paymentMethod", "card")
+            SecureStorage.store("pin", mEncryptedPin)
+            SecureStorage.store("productCode", mProductCode)
+            SecureStorage.store("type", "default")
+            SecureStorage.store("vendorBankCode", mBankCode)
+            SecureStorage.store("wallet", mWalletId)
+            SecureStorage.store("username", mWalletUsername)
+            SecureStorage.store("phone", "")
+            val vendorBankCode = SecureStorage.retrieve("vendorBankCode", "")
+            Log.d("okh", "saved "+ vendorBankCode)
             val intent = Intent(this, Sale::class.java)
-            startActivity(intent)
 
-//            val intent = Intent(this, VasPurchaseProcessor::class.java)
-//            intent.putExtra(BasePaymentActivity.TRANSACTION_ACCOUNT_TYPE, AccountType.DEFAULT_UNSPECIFIED)
-//
-//
-//            //times 100 because of the conversion to kobo
-//            val amount = (txtAmount.text.toString().toFloat() * 100) + response.convenienceFee
-//            Log.e("okh", "amount "+ amount.toString())
-//            intent.putExtra(BasePaymentActivity.TRANSACTION_AMOUNT,  amount.toLong())
-//            intent.putExtra(BasePaymentActivity.TRANSACTION_ADDITIONAL_AMOUNT, 0L)
-//            startActivityForResult(intent, 9090)
+            startActivityForResult(intent, 9090)
+
         }
 
     }
@@ -470,96 +473,39 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
 
 
         if (requestCode == 9090){
+            Log.d("okh", "coming back withdrawal")
             if (resultCode == Activity.RESULT_OK) {
 
-                    val state = data?.getSerializableExtra("state") as DeviceState
-                    mRrn = data.getStringExtra("rrn")
+                val state = data?.getSerializableExtra("state") as DeviceState
+                mRrn = data.getStringExtra("rrn")
 
-                    when (state){
-                        DeviceState.DECLINED, DeviceState.FAILED -> {
-                          alert {
-                                title = "Transaction Result"
-                                message = "Transaction declined. Please try again later"
-                                positiveButton(buttonText = "Print"){
-//                                    (application as App).db.transactionResultDao.get(mRrn).observe({lifecycle}){
-//
-//                                        it?.let {
-//                                            transactionResult ->
-//
-//                                            val map = hashMapOf<String, String>(
-//                                                    "MID" to transactionResult.merchantID,
-//                                                    "RRN" to transactionResult.RRN,
-//                                                    "Transaction approved" to "False",
-//                                                    "Terminal ID" to mTerminalId,
-//                                                    "Card Holder" to transactionResult.cardHolderName,
-//                                                    "Card Expiry" to transactionResult.cardExpiry,
-//                                                    "PAN" to transactionResult.PAN,
-//                                                    "STAN" to transactionResult.STAN,
-//                                                    "Auth ID" to transactionResult.authID,
-//                                                    "Bank Name" to mBankName,
-//                                                    "Beneficiary" to mAccountName,
-//                                                    "Fee" to (mConvenienceFee.toDouble()/100).toString()
-//                                            )
-//                                             val date = TimeUtils.convertLongToString(transactionResult.longDateTime)
-//                                            val receiptModel = ReceiptModel(date, "Transfer", transactionResult.transactionStatus, map,  amountToDebit.toLong().toString(), transactionResult.transactionStatusReason)
-//
-//                                            val intent = Intent(this@TransferAmountEntry, PrintActivity::class.java)
-//                                            intent.putExtra(PrintActivity.KEYS.PRINT_RECEIPT_MODEL_KEY, receiptModel)
-//                                            intent.putExtra(PrintActivity.KEYS.PRINT_RECEIPT_VAS_TYPE, PrintActivity.VasType.NOT_INCLUDED)
-//                                            //finish()
-//                                            startActivity(intent)
-//                                        }
-//
-//                                    }
-                                }
-                            }.show()
+                when (state){
+                    DeviceState.DECLINED, DeviceState.FAILED -> {
+                        alert {
+                            title = "Transaction Result"
+                            message = "Transaction declined. Please try again later"
+                            positiveButton(buttonText = "Print"){
 
-                        }
+                            }
+                        }.show()
 
-                        DeviceState.APPROVED -> {
-                           // completeCardPayment()
-
-                            creditWallet()
-                            alert {
-                                title = "Transaction Result"
-                                message = "Transaction approved."
-                                positiveButton(buttonText = "Print"){
-//                                    (application as MainApp).db.transactionResultDao.get(mRrn).observe({lifecycle}){
-//
-//                                        it?.let {
-//                                            transactionResult ->
-//
-//                                            val map = hashMapOf<String, String>(
-//                                                    "MID" to transactionResult.merchantID,
-//                                                    "RRN" to transactionResult.RRN,
-//                                                    "Transaction approved" to "True",
-//                                                    "Terminal ID" to mTerminalId,
-//                                                    "Card Holder" to transactionResult.cardHolderName,
-//                                                    "Card Expiry" to transactionResult.cardExpiry,
-//                                                    "PAN" to transactionResult.PAN,
-//                                                    "STAN" to transactionResult.STAN,
-//                                                    "Amount" to transactionResult.amount.toString(),
-//                                                    "Auth ID" to transactionResult.authID,
-//                                                    "Bank Name" to mBankName,
-//                                                    "Beneficiary" to mAccountName,
-//                                                    "Fee" to (mConvenienceFee.toInt()/100).toString()
-//                                            )
-//                                            val date = TimeUtils.convertLongToString(transactionResult.longDateTime)
-//                                            val receiptModel = ReceiptModel(date, "Transfer", transactionResult.transactionStatus, map,  (amountToDebit.toLong()/100).toString(), transactionResult.transactionStatusReason)
-//
-//                                            val intent = Intent(this@TransferAmountEntry, PrintActivity::class.java)
-//                                            intent.putExtra(PrintActivity.KEYS.PRINT_RECEIPT_MODEL_KEY, receiptModel)
-//                                            intent.putExtra(PrintActivity.KEYS.PRINT_RECEIPT_VAS_TYPE, PrintActivity.VasType.NOT_INCLUDED)
-//                                            startActivity(intent)
-//                                        }
-//
-//                                    }
-                                }
-                            }.show()
-                        } else -> {
-                        toast("No data!")
                     }
-                    }
+
+                    DeviceState.APPROVED -> {
+                        // completeCardPayment()
+                        Log.d("okh", "credit wallet now")
+                        creditWallet(this)
+                        alert {
+                            title = "Transaction Result"
+                            message = "Transaction approved."
+                            positiveButton(buttonText = "Print"){
+
+                            }
+                        }.show()
+                    } else -> {
+                    toast("No data!")
+                }
+                }
             }
         }
     }
@@ -574,40 +520,39 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
         mWalletId = SharedPreferenceUtils.getPayviceWalletId(this@TransferAmountEntry)
 
 
-            try {
+        try {
 
-                val accountDetails = AccountLookUpDetailWithdrawal(wallet = mWalletId, username = mWalletUsername, type = "default", password = mWalletPassword, amount = txtAmount.text.toString().toFloat() * 100, channel = "POS")
-                TransferService.create().lookUpAccountNumberWithdrawal(accountDetails).enqueue(object : Callback<WithdrawalLookupSuccessModel> {
-                    override fun onFailure(call: Call<WithdrawalLookupSuccessModel>, t: Throwable) {
-                        Log.d("okh", t.message)
+            val accountDetails = AccountLookUpDetailWithdrawal(wallet = mWalletId, username = mWalletUsername, type = "default", password = mWalletPassword, amount = txtAmount.text.toString().toFloat() * 100, channel = "POS")
+            TransferService.create().lookUpAccountNumberWithdrawal(accountDetails).enqueue(object : Callback<WithdrawalLookupSuccessModel> {
+                override fun onFailure(call: Call<WithdrawalLookupSuccessModel>, t: Throwable) {
+                    Log.d("okh", t.message)
+                }
+
+                override fun onResponse(call: Call<WithdrawalLookupSuccessModel>, response: retrofit2.Response<WithdrawalLookupSuccessModel>) {
+
+                    Log.d("okh", response.toString())
+                    val amount = txtAmount.text.toString()
+                    if (response.body()!!.status != 1) {
+                        alert {
+                            title = "Response"
+                            message = response.body()!!.message
+                            okButton { }
+                        }.show()
+                    } else {
+                        mProductCode = response.body()!!.productCode
+                        mAccountName = response.body()!!.beneficiaryName
+                        mConvenienceFee = response.body()!!.convenienceFee.toString()
+                        alert {
+                            title = "${response.body()!!.message}"
+                            message = "${response.body()!!.beneficiaryName}\nAmount - N$amount\nConvenience fee - N${response.body()!!.convenienceFee.toFloat() / 100}"
+                            positiveButton("Continue") {
+                                payWithCard(response.body()!!)
+                            }
+                        }.show()
                     }
+                }
 
-                    override fun onResponse(call: Call<WithdrawalLookupSuccessModel>, response: Response<WithdrawalLookupSuccessModel>) {
-
-                        Log.d("okh", response.toString())
-                        val amount = txtAmount.text.toString()
-                        if (response.body()!!.status != 1) {
-                            alert {
-                                title = "Response"
-                                message = "${response.body()!!.message}"
-                                okButton { }
-                            }.show()
-                        } else {
-                            mProductCode = response.body()!!.productCode
-                            mAccountName = response.body()!!.beneficiaryName
-                            mConvenienceFee = response.body()!!.convenienceFee.toString()
-                            alert {
-                                title = "Account number"
-                                message = "${response.body()!!.message} - ${response.body()!!.beneficiaryName}\nAmount - N$amount\nConvenience fee - N${response.body()!!.convenienceFee.toFloat() / 100}"
-
-                                okButton {
-                                    payWithCard(response.body()!!)
-                                }
-                            }.show()
-                        }
-                    }
-
-                })
+            })
 
 
 //                try {
@@ -663,65 +608,63 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
 
 
 
-    }
+        }
         catch (e : Exception) {
-             }
+        }
     }
-
 
     private fun verifyTransferAccountDetails(){
-//        val progressDialog = ProgressDialog(this)
-//        progressDialog.setCancelable(false)
-//        progressDialog.setTitle("Verification")
-//        progressDialog.setMessage("Now looking for account details")
-//        progressDialog.show()
-//
         longToast("Verification \n \n Now looking for account details").setGravity(Gravity.CENTER, 0, 0)
 
         lateinit var response : LookupSuccessModel
         mWalletId = SharedPreferenceUtils.getPayviceWalletId(this@TransferAmountEntry)
 
-                    val  accountDetails = AccountLookUpDetailTransfer(wallet = mWalletId, username = mWalletUsername, type = "default", password = mWalletPassword, amount = txtAmount.text.toString().toDouble() * 100, channel = "POS", beneficiary = mAccountNumber, vendorBankCode = mBankCode)
+        val  accountDetails = AccountLookUpDetailTransfer(wallet = mWalletId, username = mWalletUsername, type = "default", password = mWalletPassword, amount = txtAmount.text.toString().toDouble() * 100, channel = "POS", beneficiary = mAccountNumber, vendorBankCode = mBankCode)
 
-               // response = TransferService.create().lookUpAccountNumberTransfer(accountDetails).await()
+        // response = TransferService.create().lookUpAccountNumberTransfer(accountDetails).await()
         val amount = txtAmount.text.toString()
-                val service = TransferService.create()
-              service.lookUpAccountNumberTransfer(accountDetails).enqueue(object : Callback<LookupSuccessModel> {
 
-                  override fun onFailure(call: Call<LookupSuccessModel>, t: Throwable) {
-                      Log.d("okh", "error " + t.message)
-                  }
+        try{
+            val service = TransferService.create()
+            service.lookUpAccountNumberTransfer(accountDetails).enqueue(object : Callback<LookupSuccessModel> {
 
-                  override fun onResponse(call: Call<LookupSuccessModel>, response: Response<LookupSuccessModel>) {
+                override fun onFailure(call: Call<LookupSuccessModel>, t: Throwable) {
+                    Log.d("okh", "error " + t.message)
+                }
+
+                override fun onResponse(call: Call<LookupSuccessModel>, response: retrofit2.Response<LookupSuccessModel>) {
                     //  val responses = response as LookupSuccessModel
 
-                      if (response.body() != null) {
-                          Log.d("okh", "response " + response.body().toString())
-                          if (response.body()!!.status != 1) {
-                              alert {
-                                  title = "Response"
-                                  message = "${response.body()!!.message}"
-                                  okButton { }
-                              }.show()
-                          } else {
-                              mProductCode = response.body()!!.productCode
-                              mAccountName = response.body()!!.beneficiaryName
-                              mConvenienceFee = response.body()!!.convenienceFee.toString()
-                              alert {
-                                  title = "Account number"
-                                  message = "${response.body()!!.message} - ${response.body()!!.beneficiaryName}\nAmount - N$amount\nConvenience fee - N${response.body()!!.convenienceFee.toFloat() / 100}"
+                    if (response.body() != null) {
+                        Log.d("okh", "response " + response.body().toString())
+                        if (response.body()!!.status != 1) {
+                            alert {
+                                title = "Response"
+                                message = response.body()!!.message
+                                okButton { }
+                            }.show()
+                        } else {
+                            mProductCode = response.body()!!.productCode
+                            mAccountName = response.body()!!.beneficiaryName
+                            mConvenienceFee = response.body()!!.convenienceFee.toString()
+                            alert {
+                                title = "${response.body()!!.message}"
+                                message = "${response.body()!!.message} - ${response.body()!!.beneficiaryName}\nAmount - N$amount\nConvenience fee - N${response.body()!!.convenienceFee.toFloat() / 100}"
+                                positiveButton("Continue") {
+                                    debitWallet()
+                                }
 
-                                  okButton {
-                                      debitWallet()
-                                  }
+                            }.show()
 
-                              }.show()
+                        }
+                    }
 
-                          }
-                      }
+                }
+            })
+        }catch (e : Exception){
 
-                  }
-              })
+        }
+
     }
 
     public fun debitWallet(){
@@ -730,8 +673,6 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
 //        progressDialog.setTitle("Wallet")
 //        progressDialog.setMessage("Debitting wallet")
 //        progressDialog.show()
-
-        longToast("Wallet \n\n Debitting wallet").setGravity(Gravity.CENTER, 0, 0)
 
         val clientReference = getClientRef(this@TransferAmountEntry, "")
         lateinit var transferResponse : TransferSuccessModel
@@ -770,40 +711,44 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
                     val signature = HashUtils.sha512(encryptedStuff)
 
                     val amount = txtAmount.text.toString()
-                    TransferService.create().transfer(transferDetails, "application/json", signature, nonce).enqueue(object  : Callback<TransferSuccessModel>{
-                        override fun onFailure(call: Call<TransferSuccessModel>, t: Throwable) {
-                            Log.d("okh", t.message)
-                        }
 
-                        override fun onResponse(call: Call<TransferSuccessModel>, response: Response<TransferSuccessModel>) {
-                            Log.d("okh", response.body().toString())
-                            if (response.body()!!.status != 1) {
-                                alert {
-                                    title = "Response"
-                                    message = "${response.body()!!.message}"
-                                    okButton { }
-                                }.show()
-                            } else {
-                                alert {
-                                    title = "Response"
-                                    message = "${response.body()!!.message}. Your wallet has been debitted \n " +
-                                            "\n#${response.body()!!.amountDebited} \nBeneficiary : ${response.body()!!.beneficiaryName}"
-                                    positiveButton(buttonText = "Print") {
+                    try{
+                        TransferService.create().transfer(transferDetails, "application/json", signature, nonce).enqueue(object  : Callback<TransferSuccessModel>{
+                            override fun onFailure(call: Call<TransferSuccessModel>, t: Throwable) {
+                                Log.d("okh", t.message)
+                            }
 
-                                        val map = hashMapOf<String, String>(
-                                                "Reference" to response.body()!!.reference,
-                                                "Message" to response.body()!!.message,
-                                                "Account Name" to response.body()!!.beneficiaryName,
-                                                "Bank Name" to mBankName,
-                                                "Account Number" to response.body()!!.beneficiary,
-                                                "Amount Debited" to (response.body()!!.amountDebited/100).toString(),
-                                                "Convenience Fee" to (response.body()!!.convenienceFee/100).toString()
-                                        )
-                                        val formattedDate = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().time)
+                            override fun onResponse(call: Call<TransferSuccessModel>, response: retrofit2.Response<TransferSuccessModel>) {
+                                Log.d("okh", "result "+response.body()!!)
+                                if (response.body()!!.status != 1) {
+//                                val failResponse = response as TransferFailureModel
+//                                Log.d("okh", failResponse.description + " result")
+                                    alert {
+                                        title = "Response"
+                                        message = response.body()!!.message + "\n"+ response.body()!!.reason
+                                        okButton { }
+                                    }.show()
+                                } else {
+                                    alert {
+                                        title = "Response"
+                                        message = "${response.body()!!.message}. Your wallet has been debitted \n " +
+                                                "\n#${response.body()!!.amountDebited/100} \nBeneficiary : ${response.body()!!.beneficiaryName}"
+                                        positiveButton(buttonText = "Print") {
 
-                                        val receiptModel = ReceiptModel(formattedDate, "Transfer", response.body()!!.message, map, (response.body()!!.amountDebited / 100).toString(), response.body()!!.message)
+                                            val map = hashMapOf<String, String>(
+                                                    "Reference" to response.body()!!.reference,
+                                                    "Message" to response.body()!!.message,
+                                                    "Account Name" to response.body()!!.beneficiaryName,
+                                                    "Bank Name" to mBankName,
+                                                    "Account Number" to response.body()!!.beneficiary,
+                                                    "Amount Debited" to (response.body()!!.amountDebited/100).toString(),
+                                                    "Convenience Fee" to (response.body()!!.convenienceFee/100).toString()
+                                            )
+                                            val formattedDate = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().time)
 
-                                        Log.d("debit print",  response.body()!!.amountDebited.toString())
+                                            val receiptModel = ReceiptModel(formattedDate, "Transfer", response.body()!!.message, map, (response.body()!!.amountDebited / 100).toString(), response.body()!!.message)
+
+                                            Log.d("debit print",  response.body()!!.amountDebited.toString())
 
 //                                                val intent = Intent(this@TransferAmountEntry, PrintActivity::class.java)
 //                                                intent.putExtra(PrintActivity.KEYS.PRINT_RECEIPT_MODEL_KEY, receiptModel)
@@ -811,13 +756,17 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
 //                                                //finish()
 //                                                startActivity(intent)
 
-                                    }
-                                }.show()
+                                        }
+                                    }.show()
 
+                                }
                             }
-                        }
 
-                    })
+                        })
+                    }catch (e : Exception){
+
+                    }
+
 
 //                    try {
 //                        GlobalScope.launch(Dispatchers.Main) {
@@ -833,7 +782,7 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
 //                            alert {
 //                                title = "Response"
 //                                message = transferResponse.message
-//                            }.show()
+//                            }.show()0
 //                        }
 //                    }
 //                } catch (e: SocketTimeoutException) {
@@ -867,7 +816,7 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
 //                    }
 //                }
 
-            }catch (E : java.lang.Exception){
+                }catch (E : java.lang.Exception){
                 }
             }
         }
@@ -875,78 +824,82 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
 
     var amountToDebit : Double = 0.0
 
-    private fun creditWallet(){
-        val progressDialog = ProgressDialog(this)
-        progressDialog.setCancelable(false)
-        progressDialog.setTitle("Wallet")
-        progressDialog.setMessage("Crediting wallet")
-        progressDialog.show()
+    public fun creditWallet(context : Context){
+//        val progressDialog = ProgressDialog(this)
+//        progressDialog.setCancelable(false)
+//        progressDialog.setTitle("Wallet")
+//        progressDialog.setMessage("Crediting wallet")
+//        progressDialog.show()
 
-        val clientReference = getClientRef(this@TransferAmountEntry, "")
+        // toast("Wallet \n\n Crediting wallet")
+
+//        val clientReference = getClientRef(this@TransferAmountEntry, "")
+        val clientReference = getClientRef(context, "")
         lateinit var transferResponse : WithdrawalWalletCreditModel
         lateinit var transferDetails : WithdrawalDetails
-        amountToDebit = (txtAmount.text.toString().toDouble() * 100) + withdrawalResponse.convenienceFee*100
-        Log.d("credit amount", txtAmount.text.toString().toFloat().toString())
-        Log.d("credit amount to debit",  amount.toString())
+        //amountToDebit = (txtAmount.text.toString().toDouble() * 100) + withdrawalResponse.convenienceFee*100
+        amountToDebit = 2.0
+        //  Log.d("credit amount", txtAmount.text.toString().toFloat().toString())
+        // Log.d("credit amount to debit",  amount.toString())
 
         GlobalScope.launch(Dispatchers.Default) {
-                try {
+            try {
 
-                    val action = when (mTransactionType) {
-                        TRANSACTION_TYPE.TRANSFER -> "transfer"
-                        TRANSACTION_TYPE.DEPOSIT -> "deposit"
-                        TRANSACTION_TYPE.WITHDRAWAL -> "withdrawal"
-                    }
+                val action = when (mTransactionType) {
+                    TRANSACTION_TYPE.TRANSFER -> "transfer"
+                    TRANSACTION_TYPE.DEPOSIT -> "deposit"
+                    TRANSACTION_TYPE.WITHDRAWAL -> "withdrawal"
+                }
 
 //clientReference = clientReference,
-                    transferDetails = WithdrawalDetails(wallet = mWalletId, username = mWalletUsername, password = mPlainPassword, pin = mEncryptedPin, type = "default", amount = amountToDebit, vendorBankCode = mBankCode, channel = "ANDROIDPOS", phone = "", paymentMethod = "card", productCode = mProductCode)
+//                    transferDetails = WithdrawalDetails(wallet = mWalletId, username = mWalletUsername, password = mPlainPassword, pin = mEncryptedPin, type = "default", amount = amountToDebit, vendorBankCode = mBankCode, channel = "ANDROIDPOS", phone = "", paymentMethod = "card", productCode = mProductCode)
 
-                    val clientReference = getClientRef(this@TransferAmountEntry, "")
+//                    val clientReference = getClientRef(this@TransferAmountEntry, "")
+                val clientReference = getClientRef(context, "")
 
-                    Log.e("transfer details", mWalletId + " " + mWalletUsername + " " + mWalletPassword + " " + mEncryptedPin + " " + " " + "" + txtAmount.text.toString() + " " + mAccountNumber + " " + mBankCode)
-                    val gson = Gson()
-                    val jsonPayload = gson.toJson(transferDetails)
-                    val base64encoded = String(org.apache.commons.codec.binary.Base64.encodeBase64(jsonPayload.toByteArray()))
-                    val encoded = URLEncoder.encode(base64encoded, "UTF-8")
-                    val nonce = clientReference
-                    Log.e("sign", base64encoded + " " + encoded)
-                    val encryptedStuff = "${nonce}IL0v3Th1sAp11111111UC4NDoV4SSWITHVICEBANKING$encoded"
-                    val signature = HashUtils.sha512(encryptedStuff)
+                Log.d("transfer details", mWalletId + " " + mWalletUsername + " " + mWalletPassword + " " + mEncryptedPin + " " + " " + "" + txtAmount.text.toString() + " " + mAccountNumber + " " + mBankCode)
+                val gson = Gson()
+                val jsonPayload = gson.toJson(transferDetails)
+                val base64encoded = String(org.apache.commons.codec.binary.Base64.encodeBase64(jsonPayload.toByteArray()))
+                val encoded = URLEncoder.encode(base64encoded, "UTF-8")
+                val nonce = clientReference
+                Log.d("sign", base64encoded + " " + encoded)
+                val encryptedStuff = "${nonce}IL0v3Th1sAp11111111UC4NDoV4SSWITHVICEBANKING$encoded"
+                val signature = HashUtils.sha512(encryptedStuff)
 
+                transferResponse = TransferService.create().withdraws(transferDetails, "application/json", signature, nonce).await();
+                // val amount = txtAmount.text.toString()
+                try {
+                    GlobalScope.launch(Dispatchers.Main) {
+                        //progressDialog.dismiss()
 
-                    transferResponse = TransferService.create().withdraw(transferDetails, "application/json", signature, nonce).await();
-                    val amount = txtAmount.text.toString()
-                    try {
-                        GlobalScope.launch(Dispatchers.Main) {
-                            progressDialog.dismiss()
+                        if (transferResponse.status != 1) {
+                            alert {
+                                title = "Response"
+                                message = "${transferResponse.message}"
+                                okButton { }
+                            }.show()
+                        } else {
+                            alert {
+                                title = "Response"
+                                message = "${transferResponse.message}. You been debited from your wallet \n " +
+                                        "\n#${transferResponse.amountSettled} \nBeneficiary : ${transferResponse.beneficiaryName}"
+                                positiveButton(buttonText = "Print") {
 
-                            if (transferResponse.status != 1) {
-                                alert {
-                                    title = "Response"
-                                    message = "${transferResponse.message}"
-                                    okButton { }
-                                }.show()
-                            } else {
-                                alert {
-                                    title = "Response"
-                                    message = "${transferResponse.message}. You been debited from your wallet \n " +
-                                            "\n#${transferResponse.amountSettled} \nBeneficiary : ${transferResponse.beneficiaryName}"
-                                    positiveButton(buttonText = "Print") {
+                                    val map = hashMapOf<String, String>(
+                                            "Reference" to transferResponse.reference,
+                                            "Message" to transferResponse.message,
+                                            "Account Name" to transferResponse.beneficiaryName,
+                                            "Bank Name" to mBankName,
+                                            "Account Number" to transferResponse.beneficiaryName,
+                                            "Amount Settled" to transferResponse.amountSettled.toString(),
+                                            "Convenience Fee" to transferResponse.convenienceFee.toString()
+                                    )
+                                    val formattedDate = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().time)
+                                    val receiptModel = ReceiptModel(formattedDate, "Transfer", transferResponse.message, map, (txtAmount.text.toString().toFloat() * 100).toString(), transferResponse.message)
 
-                                        val map = hashMapOf<String, String>(
-                                                "Reference" to transferResponse.reference,
-                                                "Message" to transferResponse.message,
-                                                "Account Name" to transferResponse.beneficiaryName,
-                                                "Bank Name" to mBankName,
-                                                "Account Number" to transferResponse.beneficiaryName,
-                                                "Amount Settled" to transferResponse.amountSettled.toString(),
-                                                "Convenience Fee" to transferResponse.convenienceFee.toString()
-                                        )
-                                        val formattedDate = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().time)
-                                        val receiptModel = ReceiptModel(formattedDate, "Transfer", transferResponse.message, map, (txtAmount.text.toString().toFloat() * 100).toString(), transferResponse.message)
-
-                                        Log.d("debit print amountSet",  transferResponse.amountSettled.toString())
-                                        Log.d("debit print fee",  transferResponse.convenienceFee.toString())
+                                    Log.d("debit print amountSet",  transferResponse.amountSettled.toString())
+                                    Log.d("debit print fee",  transferResponse.convenienceFee.toString())
 
 //                                        val intent = Intent(this@TransferAmountEntry, PrintActivity::class.java)
 //                                        intent.putExtra(PrintActivity.KEYS.PRINT_RECEIPT_MODEL_KEY, receiptModel)
@@ -954,53 +907,53 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
 //                                        //finish()
 //                                        startActivity(intent)
 
-                                    }
                                 }
-
                             }
 
                         }
 
-                    } catch (e: Exception) {
-                        GlobalScope.launch(Dispatchers.Main) {
-                            progressDialog.dismiss()
-                            alert {
-                                title = "Response"
-                                message = transferResponse.message
-                            }.show()
-                        }
-                    }
-                } catch (e: SocketTimeoutException) {
-                    GlobalScope.launch(Dispatchers.Main) {
-                        progressDialog.dismiss()
-                        alert {
-                            title = "Error"
-                            message = "Connection taking too long to be established. Please try again"
-                            okButton { onBackPressed() }
-                        }.show()
                     }
 
-                } catch (e: ConnectException) {
+                } catch (e: Exception) {
                     GlobalScope.launch(Dispatchers.Main) {
-                        progressDialog.dismiss()
+                        //progressDialog.dismiss()
                         alert {
-                            title = "Error"
-                            message = "Connection not established. Please try again"
-                            okButton { }
-                        }.show()
-                    }
-
-                } catch (e: retrofit2.HttpException) {
-                    GlobalScope.launch(Dispatchers.Main) {
-                        progressDialog.dismiss()
-                        alert {
-                            title = "Error"
-                            message = "Error from server. Please try again"
-                            okButton { }
+                            title = "Response"
+                            message = transferResponse.message
                         }.show()
                     }
                 }
+            } catch (e: SocketTimeoutException) {
+                GlobalScope.launch(Dispatchers.Main) {
+                    //progressDialog.dismiss()
+                    alert {
+                        title = "Error"
+                        message = "Connection taking too long to be established. Please try again"
+                        okButton { onBackPressed() }
+                    }.show()
+                }
+
+            } catch (e: ConnectException) {
+                GlobalScope.launch(Dispatchers.Main) {
+                    //   progressDialog.dismiss()
+                    alert {
+                        title = "Error"
+                        message = "Connection not established. Please try again"
+                        okButton { }
+                    }.show()
+                }
+
+            } catch (e: retrofit2.HttpException) {
+                GlobalScope.launch(Dispatchers.Main) {
+                    //progressDialog.dismiss()
+                    alert {
+                        title = "Error"
+                        message = "Error from server. Please try again"
+                        okButton { }
+                    }.show()
+                }
             }
+        }
     }
 
 //    private fun paymentSelection(response: LookupSuccessModel) {

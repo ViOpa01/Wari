@@ -1,6 +1,10 @@
-package com.iisysgroup.androidlite.payments_menu.utils
+package com.wizarpos.emvsample.payments_menu.utils
 
 import java.security.MessageDigest
+
+public fun Hashing(input : String) : String{
+    return HashUtils.hashString("SHA-512", input)
+}
 
 object HashUtils {
     fun sha512(input: String) = hashString("SHA-512", input)
@@ -20,7 +24,7 @@ object HashUtils {
      * SHA-384	    1+
      * SHA-512	    1+
      */
-    private fun hashString(type: String, input: String): String {
+    public fun hashString(type: String, input: String): String {
         val HEX_CHARS = "0123456789ABCDEF"
         val bytes = MessageDigest
                 .getInstance(type)

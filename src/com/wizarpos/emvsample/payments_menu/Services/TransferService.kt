@@ -5,8 +5,8 @@ import com.google.gson.GsonBuilder
 import com.wizarpos.emvsample.models.LookupSuccessModel
 import com.wizarpos.emvsample.models.WithdrawalLookupSuccessModel
 import com.iisysgroup.androidlite.models.WithdrawalWalletResponse.WithdrawalWalletCreditModel
-import com.iisysgroup.androidlite.models.transfer.TransferSuccessModel
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import com.wizarpos.emvsample.models.transfer.TransferSuccessModel
 import com.wizarpos.emvsample.payments_menu.models.*
 import kotlinx.coroutines.Deferred
 import okhttp3.OkHttpClient
@@ -29,7 +29,7 @@ interface TransferService {
 //    fun lookUpAccountNumberTransfer(@Body lookUpRequestDetails : AccountLookUpDetailTransfer) : Deferred<LookupSuccessModel>
 
     @POST("/vas/vice-banking/transfer/lookup")
-    fun lookUpAccountNumberTransfer(@Body lookUpRequestDetails : AccountLookUpDetailTransfer) : Call<LookupSuccessModel>
+    fun lookUpAccountNumberTransfer(@Body lookUpRequestDetails : AccountLookUpDetailTransfer) : Call<com.wizarpos.emvsample.payments_menu.models.LookupSuccessModel>
 
     @POST("/vas/vice-banking/withdrawal/lookup")
     fun lookUpAccountNumberWithdrawal(@Body lookUpRequestDetails : AccountLookUpDetailWithdrawal) : Call<WithdrawalLookupSuccessModel>
@@ -43,18 +43,20 @@ interface TransferService {
 
     //API endpoint for withdraw
     @POST("/vas/vice-banking/withdrawal/payment")
-    fun withdraw(@Body withdrawalModel : WithdrawalDetails, @Header("Content-Type") contentType : String = "application/json", @Header("ITEX-Signature") signature : String, @Header("ITEX-Nonce") nonce : String) : Deferred<WithdrawalWalletCreditModel>
+    fun withdraw(@Body withdrawalModel : WithdrawalDetails, @Header("Content-Type") contentType : String = "application/json", @Header("ITEX-Signature") signature : String, @Header("ITEX-Nonce") nonce : String) : Call<WithdrawalWalletCreditModel>
 
     //API endpoint for deposit - cash
     @POST("/tams/tams/transfer-engine.php")
     fun deposit(@Body transferModel : TransactionDetails, @Header("Content-Type") contentType : String = "application/json", @Header("ITEX-Signature") signature : String, @Header("ITEX-Nonce") nonce : String) : Deferred<TransactionResponse>
 
+    fun withdraws(@Body withdrawalModel : WithdrawalDetails, @Header("Content-Type") contentType : String = "application/json", @Header("ITEX-Signature") signature : String, @Header("ITEX-Nonce") nonce : String) : Deferred<WithdrawalWalletCreditModel>
 
     companion object Factory {
         //private val BASE_URL = "http://197.253.19.75"
-        private val BASE_URL = "http://basehuge.itexapp.com:8090"
+        val BASE_URL = "http://basehuge.itexapp.com:8090"
+        //  val BASE_URL = "http://vas.itexapp.com/"
         private var retrofit: Retrofit? = null
-        fun create(): TransferService {
+        public fun create(): TransferService {
             val clientBuilder = OkHttpClient.Builder()
 
             val logging = HttpLoggingInterceptor()
@@ -64,9 +66,9 @@ interface TransferService {
             clientBuilder.readTimeout(30, TimeUnit.SECONDS)
             clientBuilder.writeTimeout(30, TimeUnit.SECONDS)
 
-         //   clientBuilder.addInterceptor(logging)
+            //   clientBuilder.addInterceptor(logging)
 
-             clientBuilder.addInterceptor(logging).build()
+            clientBuilder.addInterceptor(logging).build()
 
             val service = Retrofit.Builder()
                     .baseUrl(BASE_URL)
@@ -74,7 +76,7 @@ interface TransferService {
                     .client(clientBuilder.build())
                     .build().create(TransferService::class.java)
 
-       // val service = retrofit.create(TransferService::class.java)
+            // val service = retrofit.create(TransferService::class.java)
 //            val gson = GsonBuilder().setLenient().create()
 //            val retrofit = Retrofit.Builder().client(clientBuilder.build()).addConverterFactory(GsonConverterFactory.create(gson)).addCallAdapterFactory(CoroutineCallAdapterFactory()).baseUrl(BASE_URL).build()
 //            val service = retrofit.create(TransferService::class.java)
