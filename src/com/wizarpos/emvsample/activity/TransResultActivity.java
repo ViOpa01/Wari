@@ -211,6 +211,7 @@ public class TransResultActivity extends FuncActivity
 		String airtime_amount = SecureStorage.retrieve("amountrecharge", "");;
 		String wallet = SecureStorage.retrieve("wallet", "");
 		String password = SecureStorage.retrieve("password", "");
+
 		String username = SecureStorage.retrieve("username", "");
 
 		AirtimeRequestDetails details = new AirtimeRequestDetails(wallet, username, airtime_amount, phone_number, airtimeProvider, mpin, password);

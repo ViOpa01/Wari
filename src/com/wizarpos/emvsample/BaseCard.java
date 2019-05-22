@@ -168,7 +168,7 @@ public class BaseCard implements Constants
 		
 		if(capkService.getCAPKCount() == 0)
 		{
-			capkService.createDefaultCAPK();
+			capkService.createDefaultCapk();
 		}
     }
 

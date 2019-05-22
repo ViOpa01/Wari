@@ -199,11 +199,11 @@ public class ProcessEMVCardActivity extends FuncActivity
 					break;
 
 				case EMV_ONLINE_ENC_PIN:
-//					inputPIN();
-					mEMVProcessNextThread = new EMVProcessNextThread();
-					mEMVProcessNextThread.start();
+					inputPIN();
+//					mEMVProcessNextThread = new EMVProcessNextThread();
+//					mEMVProcessNextThread.start();
 					Log.d("okh", "online pin");
-				//	appState.trans.setEMVOnlineFlag(true);
+					//appState.trans.setEMVOnlineFlag(true);
 					break;
 				case EMV_PIN_BYPASS_CONFIRM:
 					confirmBypassPin();

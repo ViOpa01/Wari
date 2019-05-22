@@ -294,6 +294,7 @@ class AirtimeActivity : AirTimeBaseActivity(), AirtimeProcessor.onAirtimeTransac
             2 -> {
                 if (amount.text.toString().isNotEmpty() || amount.text.toString().toInt() < 50) {
                     airtime_amount = amount.text.toString()
+                    SecureStorage.store("amountrecharge", airtime_amount.toString())
                     performTransaction(airtime_provider)
                 } else {
                     toast("Enter valid amount - amount must not be less than 50 Naira")

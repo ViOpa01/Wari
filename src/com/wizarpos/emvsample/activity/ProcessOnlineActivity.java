@@ -304,31 +304,31 @@ public class ProcessOnlineActivity extends FuncActivity
 
 		}
 
-
-		if (appState.airtime){
-			Log.i("okh", "airtime");
-			Nibss nibss = new Nibss(ProcessOnlineActivity.this);
-
-			//Build Pin info
-			EmvCard.PinInfo pinInfo;
-			if(appState.trans.getPinBlock() != null){
-				Log.i("okh", "pinblock :" + appState.trans.getPinBlock());
-				pinInfo = new EmvCard.PinInfo(appState.trans.getPinBlock(),null, StringUtil.hexString2bytes(appState.clearPin));
-			}
-			else{
-				pinInfo = null;
-			}
-			//Build emv carf
-			emvCard = new EmvCard(appState.trans.getCardHolderName(),appState.trans.getTrack2Data(),
-					appState.trans.getICCData(),pinInfo);
-
-			//Build InputData
-			inputData = new InputData(appState.trans.getTransAmount().longValue(),
-					appState.trans.getOthersAmount().longValue(), AccountType.DEFAULT_UNSPECIFIED);
-
-			new saveVasKeyHolder(this).execute();
-
-		}
+//
+//		if (appState.airtime){
+//			Log.i("okh", "airtime");
+//			Nibss nibss = new Nibss(ProcessOnlineActivity.this);
+//
+//			//Build Pin info
+//			EmvCard.PinInfo pinInfo;
+//			if(appState.trans.getPinBlock() != null){
+//				Log.i("okh", "pinblock :" + appState.trans.getPinBlock());
+//				pinInfo = new EmvCard.PinInfo(appState.trans.getPinBlock(),null, StringUtil.hexString2bytes(appState.clearPin));
+//			}
+//			else{
+//				pinInfo = null;
+//			}
+//			//Build emv carf
+//			emvCard = new EmvCard(appState.trans.getCardHolderName(),appState.trans.getTrack2Data(),
+//					appState.trans.getICCData(),pinInfo);
+//
+//			//Build InputData
+//			inputData = new InputData(appState.trans.getTransAmount().longValue(),
+//					appState.trans.getOthersAmount().longValue(), AccountType.DEFAULT_UNSPECIFIED);
+//
+//			new saveVasKeyHolder(this).execute();
+//
+//		}
 
 
 	}

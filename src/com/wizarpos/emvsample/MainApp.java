@@ -287,7 +287,7 @@ public class MainApp extends Application implements Constants
 
 		if(capkService.getCAPKCount() == 0)
 		{
-			capkService.createDefaultCAPK();
+			capkService.createDefaultCapk();
 		}
 	}
     
@@ -321,7 +321,7 @@ public class MainApp extends Application implements Constants
 		
 		if(capkService.getCAPKCount() == 0)
 		{
-			capkService.createDefaultCAPK();
+			capkService.createDefaultCapk();
 		}
     }
 
@@ -342,13 +342,19 @@ public class MainApp extends Application implements Constants
 					@Override
 					public void run() {
 						String infi = new Gson().toJson(res, Nibss.NIbbsData.class);
-						ConfigService configService = new ConfigService(db);
-						String former = configService.get();
-						if(!former.isEmpty()){
-							configService.update(infi);
-						}else{
-							configService.save(infi);
+
+						try{
+							ConfigService configService = new ConfigService(db);
+							String former = configService.get();
+							if(!former.isEmpty()){
+								configService.update(infi);
+							}else{
+								configService.save(infi);
+							}
+						}catch (Exception e){
+
 						}
+
 					}
 				}).start();
 			}

@@ -213,6 +213,7 @@ public class IdleActivity extends FuncActivity implements Constants
 				capkChecksumErrorDialog(IdleActivity.this);
 			}*/
 			loadAID();
+			loadCAPK();
 			loadExceptionFile();
 			loadRevokedCAPK();
 			setEMVTermInfo();
