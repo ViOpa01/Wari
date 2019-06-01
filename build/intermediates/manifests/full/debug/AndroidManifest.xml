@@ -82,6 +82,9 @@
             android:name="com.wizarpos.emvsample.activity.DataActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name="com.wizarpos.emvsample.activity.DataPhoneEntry"
+            android:screenOrientation="portrait" />
+        <activity
             android:name="com.wizarpos.emvsample.activity.AllData"
             android:screenOrientation="portrait" />
         <activity

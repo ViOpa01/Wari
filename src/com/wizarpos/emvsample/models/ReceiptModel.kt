@@ -1,4 +1,4 @@
-package com.iisysgroup.androidlite.models
+package com.wizarpos.emvsample.models
 
 import java.io.Serializable
 

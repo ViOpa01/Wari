@@ -2148,6 +2148,10 @@
         "source": "C:\\Users\\Agbede\\AndroidStudioProjects\\NewNibss\\NIBSS\\res\\drawable\\insert_card.png"
     },
     {
+        "merged": "C:\\Users\\Agbede\\AndroidStudioProjects\\NewNibss\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable_itex.png.flat",
+        "source": "C:\\Users\\Agbede\\AndroidStudioProjects\\NewNibss\\NIBSS\\res\\drawable\\itex.png"
+    },
+    {
         "merged": "C:\\Users\\Agbede\\AndroidStudioProjects\\NewNibss\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_btn_switch_to_on_mtrl_00001.9.png.flat",
         "source": "C:\\Users\\Agbede\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\5386c80366bd668530aa242d9fda8c4a\\res\\drawable-xhdpi-v4\\abc_btn_switch_to_on_mtrl_00001.9.png"
     },
@@ -2622,6 +2626,10 @@
     {
         "merged": "C:\\Users\\Agbede\\AndroidStudioProjects\\NewNibss\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4_ic_plus_circle.png.flat",
         "source": "C:\\Users\\Agbede\\.gradle\\caches\\transforms-1\\files-1.1\\poslib-device-debug.aar\\5d8997b15259a25624af9faeddfce178\\res\\drawable-xxxhdpi-v4\\ic_plus_circle.png"
+    },
+    {
+        "merged": "C:\\Users\\Agbede\\AndroidStudioProjects\\NewNibss\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable_bank2033.png.flat",
+        "source": "C:\\Users\\Agbede\\AndroidStudioProjects\\NewNibss\\NIBSS\\res\\drawable\\bank2033.png"
     },
     {
         "merged": "C:\\Users\\Agbede\\AndroidStudioProjects\\NewNibss\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_ic_star_black_48dp.png.flat",

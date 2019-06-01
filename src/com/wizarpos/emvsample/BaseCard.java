@@ -104,6 +104,7 @@ public class BaseCard implements Constants
 	public int currentSecond;
 	
 	public int printReceipt = 0;
+	public int printVasReceipt = 0;
 	// 读卡设备信息
 	public boolean icInitFlag = false;       // IC卡是否已初始化
 	public boolean idleFlag = false;
@@ -184,6 +185,7 @@ public class BaseCard implements Constants
         promptCardCanRemoved = false;
         promptOfflineDataAuthSucc = false;
         printReceipt = 0;
+		printVasReceipt = 0;
         resetCardError = false;
         
         trans.init();

@@ -145,6 +145,7 @@ public class MainApp extends Application implements Constants
 	public int currentSecond;
 	
 	public int printReceipt = 0;
+	public int printVasReceipt = 0;
 	// 读卡设备信息
 	public boolean icInitFlag = false;       // IC卡是否已初始化
 	public boolean idleFlag = false;
@@ -237,11 +238,11 @@ public class MainApp extends Application implements Constants
 				}else{
 					Log.i("okh",configString);
 					nibssData = new Gson().fromJson(configString,Nibss.NIbbsData.class);
-					try {
-						PrinterHelper.getInstance().printConfiguration(nibssData);
-					} catch (PrinterException e) {
-						e.printStackTrace();
-					}
+//					try {
+//						PrinterHelper.getInstance().printConfiguration(nibssData);
+//					} catch (PrinterException e) {
+//						e.printStackTrace();
+//					}
 				}
 			}
 		}).start();
@@ -333,11 +334,11 @@ public class MainApp extends Application implements Constants
 			@Override
 			public void complete(final Nibss.NIbbsData res) {
 				nibssData = res;
-				try {
-					PrinterHelper.getInstance().printConfiguration(res);
-				} catch (PrinterException e) {
-					e.printStackTrace();
-				}
+//				try {
+//					PrinterHelper.getInstance().printConfiguration(res);
+//				} catch (PrinterException e) {
+//					e.printStackTrace();
+//				}
 				new Thread(new Runnable() {
 					@Override
 					public void run() {
@@ -379,6 +380,7 @@ public class MainApp extends Application implements Constants
         promptCardCanRemoved = false;
         promptOfflineDataAuthSucc = false;
         printReceipt = 0;
+		printVasReceipt = 0;
         resetCardError = false;
         
         trans.init();

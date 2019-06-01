@@ -186,8 +186,8 @@ public class Nibss {
 
         getVasKeys();
 
-//        final ConnectionData connectionData = new ConnectionData( terminalID,ip,Integer.parseInt(port),sslStatus);
-        final ConnectionData connectionData = new ConnectionData("2033GP23", "196.6.103.73", 5043, true);
+        final ConnectionData connectionData = new ConnectionData(terminalID,ip,Integer.parseInt(port),sslStatus);
+//        final ConnectionData connectionData = new ConnectionData("2033GP23", "196.6.103.73", 5043, true);
         Single<KeyHolder> liveKeyHolder = hostInteractor.getKeyHolder(connectionData);
 
         Log.d("okh", terminalID+ "" + ip + " " + port + " " + sslStatus);

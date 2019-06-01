@@ -10,7 +10,7 @@ data class Response(val CODE : String, val ACCOUNTNAME : String)
 
 data class LookupFailedModel(val status : Int, val message : String)
 
-//@SerializedName("GetAccountInGTBResult") val result : GetAccountInGTBResult
+//@SerializedName("GetAccountInGTBResult") val result : GetAccouLookupSuccessModelntInGTBResult
 
 /*data class GetAccountInGTBResult(@SerializedName("Response") val response : Response)
 

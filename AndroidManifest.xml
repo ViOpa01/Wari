@@ -67,6 +67,9 @@
 
         <activity android:name=".activity.DataActivity"
                     android:screenOrientation="portrait"/>
+        
+        <activity android:name=".activity.DataPhoneEntry"
+                    android:screenOrientation="portrait"/>
 
         <activity android:name=".activity.AllData"
                     android:screenOrientation="portrait"/>

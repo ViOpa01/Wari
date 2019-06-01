@@ -40,6 +40,7 @@
 
     <!-- tag for print -->
     <string name="mid_tag">MID:</string>
+    <string name="midname_tag">Merchant:</string>
     <string name="tid_tag">TID:</string>
     <string name="pan_tag">CARD:</string>
     <string name="date_tag">DATE:</string>

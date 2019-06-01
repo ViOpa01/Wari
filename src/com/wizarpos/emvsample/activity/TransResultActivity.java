@@ -3,6 +3,9 @@ package com.wizarpos.emvsample.activity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.v7.app.ActionBar;
@@ -17,7 +20,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.wizarpos.emvsample.generators.PfmStateGenerator;
-import com.iisysgroup.androidlite.models.WithdrawalWalletResponse.WithdrawalWalletCreditModel;
+import com.wizarpos.emvsample.models.WithdrawalWalletResponse.WithdrawalWalletCreditModel;
 import com.iisysgroup.poslib.commons.emv.EmvCard;
 import com.wizarpos.emvsample.R;
 import com.wizarpos.emvsample.activity.login.securestorage.SecureStorage;
@@ -30,6 +33,7 @@ import com.wizarpos.emvsample.printer.PrinterHelper;
 import com.wizarpos.emvsample.transaction.TransDefine;
 import com.wizarpos.jni.PinPadInterface;
 
+import java.io.ByteArrayOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Timer;
@@ -146,6 +150,7 @@ public class TransResultActivity extends FuncActivity
 						{
 		        			textLine2.setText("PRINTING...");
 		        			appState.printReceipt = 0;
+		        			appState.printVasReceipt = 0;
 		        			printReceipt();
 						}
 	        		}
@@ -181,6 +186,7 @@ public class TransResultActivity extends FuncActivity
 						{
 		        			textLine2.setText("PRINTING...");
 		        			appState.printReceipt = 0;
+		        			appState.printVasReceipt = 0;
 		        			printReceipt();
 						}
 		    		}
@@ -193,6 +199,7 @@ public class TransResultActivity extends FuncActivity
 						else{
 							textLine1.setText("DECLINED");
 							appState.printReceipt = 0;
+							appState.printVasReceipt = 0;
 							printReceipt();
 						}
 					}
@@ -426,6 +433,7 @@ public class TransResultActivity extends FuncActivity
     private void continuePrintReceipt()
     {
     	appState.printReceipt++;
+    	appState.printVasReceipt++;
     	printReceipt();
     }
     
@@ -459,4 +467,37 @@ public class TransResultActivity extends FuncActivity
 			textLine2.setText("PRINT_COMPLETED");
 		}
     }
+
+	private void printVasReceipt()
+	{
+		try {
+			PrinterHelper.getInstance().printVasReceipt(appState, 1);
+			AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+			alertDialog.setMessage("Print Merchant copy");
+			alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialogInterface, int i) {
+					try {
+						PrinterHelper.getInstance().printVasReceipt(appState, 0);
+					} catch (PrinterException e) {
+						e.printStackTrace();
+					}
+				}
+			});
+			alertDialog.show();
+		} catch (PrinterException e) {
+		}
+
+		if( appState.terminalConfig.getReceipt() > (appState.printVasReceipt + 1) )
+		{
+			textLine2.setText("CONTINUE PRINT?");
+			startPrintPauseTimer(4);
+		}
+		else
+		{
+			textLine2.setText("PRINT_COMPLETED");
+		}
+	}
+
+
 }

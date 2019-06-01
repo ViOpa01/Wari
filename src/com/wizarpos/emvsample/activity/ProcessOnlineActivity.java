@@ -76,7 +76,8 @@ public class ProcessOnlineActivity extends FuncActivity
 			appState.trans.setReversal(false);
 
 		}
-	if(appState.purchaseWithCashBack){
+
+		if(appState.purchaseWithCashBack){
 			transactionType = Host.TransactionType.PURCHASE_WITH_CASH_BACK;
 			appState.purchaseWithCashBack = false;
 			appState.trans.setBalanceTxn(false);
@@ -85,6 +86,7 @@ public class ProcessOnlineActivity extends FuncActivity
 			appState.trans.setReversal(false);
 
 		}
+
 		if(appState.revarsal){
 			transactionType = Host.TransactionType.REVERSAL;
 			appState.revarsal = false;
@@ -95,6 +97,7 @@ public class ProcessOnlineActivity extends FuncActivity
 			appState.trans.setReversal(true);
 
 		}
+
 		showPropress("Please wait..");
 		if(debug)Log.d(APP_TAG, "processOnlineActivity onCreate");
 		super.onCreate(savedInstanceState);

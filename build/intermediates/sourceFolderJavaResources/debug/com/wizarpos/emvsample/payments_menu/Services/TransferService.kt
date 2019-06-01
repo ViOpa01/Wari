@@ -1,11 +1,7 @@
 package com.wizarpos.emvsample.payments_menu.Services
 
-import android.util.Log
-import com.google.gson.GsonBuilder
-import com.wizarpos.emvsample.models.LookupSuccessModel
 import com.wizarpos.emvsample.models.WithdrawalLookupSuccessModel
-import com.iisysgroup.androidlite.models.WithdrawalWalletResponse.WithdrawalWalletCreditModel
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import com.wizarpos.emvsample.models.WithdrawalWalletResponse.WithdrawalWalletCreditModel
 import com.wizarpos.emvsample.models.transfer.TransferSuccessModel
 import com.wizarpos.emvsample.payments_menu.models.*
 import kotlinx.coroutines.Deferred
@@ -15,7 +11,6 @@ import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
-import retrofit2.http.Field
 import retrofit2.http.Header
 import retrofit2.http.POST
 import java.util.concurrent.TimeUnit

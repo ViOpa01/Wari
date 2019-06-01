@@ -22,7 +22,23 @@ class TransferBankSelection : AppCompatActivity() {
         val bankNames = resources.getStringArray(R.array.bank_names)
 
         initializeBankList()
-        
+
+        if (mTransactionType == TransferAmountEntry.TRANSACTION_TYPE.WITHDRAWAL){
+            val enterAmountIntent = Intent(this@TransferBankSelection, TransferAmountEntry::class.java)
+
+            val bankCode = bankVendorCodes[spinner_banks_list.selectedItemPosition]
+            val bankName = bankNames[spinner_banks_list.selectedItemPosition]
+            val accountNumber = tv_account_number.text.toString()
+
+            enterAmountIntent.putExtra(BANK_CODE, bankCode)
+            enterAmountIntent.putExtra(ACCOUNT_NUMBER, accountNumber)
+            enterAmountIntent.putExtra(BANK_NAME, bankName)
+            enterAmountIntent.putExtra(TRANSACTION_TYPE, mTransactionType)
+            finish()
+
+            startActivity(enterAmountIntent)
+        }
+
         action_next.setOnClickListener { 
             if (validateInputs()){
                 val enterAmountIntent = Intent(this@TransferBankSelection, TransferAmountEntry::class.java)

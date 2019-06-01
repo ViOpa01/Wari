@@ -1,4 +1,4 @@
-package com.iisysgroup.androidlite.models.WithdrawalResponseDescription
+package com.wizarpos.emvsample.models.WithdrawalResponseDescription
 
 
 

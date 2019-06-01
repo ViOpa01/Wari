@@ -4,8 +4,8 @@
 //import android.support.v7.app.AppCompatActivity
 //import android.util.Log
 //import com.google.gson.Gson
-//import com.iisysgroup.androidlite.models.ReceiptModel
-//import com.iisysgroup.androidlite.models.WithdrawalWalletResponse.WithdrawalWalletCreditModel
+//import com.wizarpos.emvsample.models.ReceiptModel
+//import com.wizarpos.emvsample.models.WithdrawalWalletResponse.WithdrawalWalletCreditModel
 //import com.wizarpos.emvsample.payments_menu.utils.HashUtils
 //import com.wizarpos.emvsample.R.id.txtAmount
 //import com.wizarpos.emvsample.payments_menu.Services.TransferService

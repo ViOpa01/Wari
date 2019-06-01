@@ -7,6 +7,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -34,6 +37,7 @@ import com.wizarpos.util.Logger;
 import com.wizarpos.util.NumberUtil;
 import com.wizarpos.util.StringUtil;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.net.InetSocketAddress;
@@ -1171,4 +1175,31 @@ public class FuncActivity extends AppCompatActivity implements Constants, IFunti
         //Todo set Alias and password
         return CipherUtils.sig((PrivateKey) keyStore.getKey("server","Itex4839".toCharArray()),res);
     }
+
+	public byte [] getDrawableFromTerminalId(String terminalId) {
+
+		try {
+			String bankLogoName = "bank"+terminalId.substring(0, 4);
+			int resourceId = this.getResources().getIdentifier(bankLogoName, "drawable",
+					this.getPackageName());
+
+			Drawable drawable = this.getResources().getDrawable(resourceId);
+/*
+       val bitmap = BitmapFactory.decodeResource(context.getResources(),
+               resourceId)*/
+			Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
+			ByteArrayOutputStream stream = new ByteArrayOutputStream();
+			bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+			byte[] bitmapdata = stream.toByteArray();
+
+			return bitmapdata;
+		} catch (Exception e){
+			Bitmap bitmap = ((BitmapDrawable) this.getResources().getDrawable(R.drawable.itex)).getBitmap();
+			ByteArrayOutputStream stream = new ByteArrayOutputStream();
+			bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+			byte[] bitmapdata = stream.toByteArray();
+			return bitmapdata;
+		}
+
+	}
 }
