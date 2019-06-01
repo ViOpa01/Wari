@@ -168,11 +168,13 @@ public class TransResultActivity extends FuncActivity
 						{
 							textLine1.setText("Approved");
 							if (appState.withdrawal){
+								appState.withdrawal = true;
 								Log.d("okh", "result withdrawal credit now");
 								creditWallet();
 								FuncActivity.appState.withdrawal = false;
 							}
 							if (appState.airtime){
+								appState.airtime = true;
 								Log.d("okh", "result airtime credit now");
 								creditAirtime();
 								FuncActivity.appState.airtime = false;
@@ -433,7 +435,6 @@ public class TransResultActivity extends FuncActivity
     private void continuePrintReceipt()
     {
     	appState.printReceipt++;
-    	appState.printVasReceipt++;
     	printReceipt();
     }
     
@@ -467,37 +468,5 @@ public class TransResultActivity extends FuncActivity
 			textLine2.setText("PRINT_COMPLETED");
 		}
     }
-
-	private void printVasReceipt()
-	{
-		try {
-			PrinterHelper.getInstance().printVasReceipt(appState, 1);
-			AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-			alertDialog.setMessage("Print Merchant copy");
-			alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialogInterface, int i) {
-					try {
-						PrinterHelper.getInstance().printVasReceipt(appState, 0);
-					} catch (PrinterException e) {
-						e.printStackTrace();
-					}
-				}
-			});
-			alertDialog.show();
-		} catch (PrinterException e) {
-		}
-
-		if( appState.terminalConfig.getReceipt() > (appState.printVasReceipt + 1) )
-		{
-			textLine2.setText("CONTINUE PRINT?");
-			startPrintPauseTimer(4);
-		}
-		else
-		{
-			textLine2.setText("PRINT_COMPLETED");
-		}
-	}
-
 
 }

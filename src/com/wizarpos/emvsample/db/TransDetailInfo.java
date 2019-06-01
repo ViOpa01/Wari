@@ -21,8 +21,14 @@ public class TransDetailInfo extends TransDetailTable implements Constants {
     private  boolean purchasewithCash = false;
     private boolean transactionStatus = false;
     private  boolean reversal = false;
+    private  boolean airtime = false;
+    private  boolean transfer = false;
+    private  boolean withdrawal = false;
+    private  boolean disco = false;
+    private  boolean cabletv = false;
     private String transStatus;
     private String cardHolderName;
+    private String transactionType;
     private TransactionResult transactionResult;
     // EMV
     private boolean appSelected = false;
@@ -387,11 +393,29 @@ public class TransDetailInfo extends TransDetailTable implements Constants {
         else if(reversal){
 	        return "Reversal";
         }
+        else if(transfer){
+            return "Transfer";
+        }
+        else if(withdrawal){
+            return "Withdrawal";
+        }
+        else if(airtime){
+            return "Airtime";
+        }
+        else if(disco){
+            return "Electricity";
+        }
+        else if(cabletv){
+            return "Cable TV";
+        }
         else{
 	        return "Purchase";
         }
     }
 
+    public void setTransactionType(String transactionType){
+         this.transactionType = transactionType;
+    }
     public boolean isReversal() {
         return reversal;
     }

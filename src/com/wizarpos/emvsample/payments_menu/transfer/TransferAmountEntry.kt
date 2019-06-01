@@ -2,8 +2,10 @@ package com.wizarpos.emvsample.payments_menu.transfer
 
 //import AmpEmvL2Android.AMPDevice
 import android.app.Activity
+import android.app.AlertDialog
 import android.app.ProgressDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -26,6 +28,8 @@ import com.wizarpos.emvsample.activity.login.Helper
 import com.wizarpos.emvsample.activity.login.securestorage.SecureStorage
 import com.wizarpos.emvsample.activity.login.securestorage.SecureStorageUtils
 import com.wizarpos.emvsample.payments_menu.models.*
+import com.wizarpos.emvsample.printer.PrinterException
+import com.wizarpos.emvsample.printer.PrinterHelper
 import com.wizarpos.util.ClientReferenceKey
 import com.wizarpos.util.PinAlertUtils
 import com.wizarpos.util.SharedPreferenceUtils
@@ -158,240 +162,8 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
 
     }
 
-//    private fun payWithWallet(response: LookupSuccessModel) {
-//        progressDialog.show()
-//        val amount = (txtAmount.text.toString().toDouble() * 100).toInt()
-//        Log.d("amount ", amount.toString())
-//
-//        val action = when (mTransactionType){
-//            TRANSACTION_TYPE.TRANSFER -> "transfer"
-//            TRANSACTION_TYPE.DEPOSIT -> "deposit"
-//            TRANSACTION_TYPE.WITHDRAWAL -> "withdrawal"
-//        }
-//
-//
-//        val view = View.inflate(this, R.layout.activity_enter_pin, null)
-//        val encryptedPassword = SecureStorage.retrieve(Helper.STORED_PASSWORD, "")
-//
-//        PinAlertUtils.getPin(this, view){
-//            val encryptedPin = SecureStorageUtils.hashIt(it!!, encryptedPassword)
-//
-//            launch(CommonPool){
-//                val transferDetails = TransactionDetails(action = action, beneficiary = mAccountNumber, vendorBankCode =mBankCode, walletID = mWalletId, username = mWalletUsername, password = mWalletPassword, amount = amount.toString(), method = "cash", pin = encryptedPin!!)
-//                val gson = Gson()
-//                val jsonPayload = gson.toJson(transferDetails)
-//
-//
-//                val base64encoded = String(org.apache.commons.codec.binary.Base64.encodeBase64(jsonPayload.toByteArray()))
-//                val encoded = URLEncoder.encode(base64encoded, "UTF-8")
-//                val nonce = "${Calendar.getInstance().timeInMillis}$mWalletId$encoded"
-//
-//                val encryptedStuff = "${nonce}BisiG03sToSk00lMak3sM0nEyAnDCanN0wS3ndMon3yViaTh1sAP1$encoded"
-//                val signature = HashUtils.sha512(encryptedStuff)
-//
-//                try {
-//                    val response =  TransferService.create().transfer(transferDetails, nonce = nonce, signature = signature).await()
-//
-//                    val isApproved = response.status == 1
-//
-//                    val status = if (isApproved) {
-//                        "Approved"
-//                    } else {
-//                        "Declined"
-//                    }
-//
-//                    val transferDetails = TransferDetails(mTransactionType, isApproved, mAccountName, transferDetails.amount, mConvenienceFee, mBankName, mTerminalId)
-//
-//                    val amounts = transferDetails.amount.toFloat()/100
-//                    val fees = transferDetails.fee.toFloat()/100
-//                    Log.d("amounts", amounts.toString())
-//                        val map = hashMapOf<String, String>(
-//                                "Transaction approved" to isApproved.toString().capitalize(),
-//                                "Terminal ID" to transferDetails.terminalId,
-//                                "Bank Name" to transferDetails.bankName,
-//                                "Beneficiary" to transferDetails.beneficiary,
-//
-//                                //"Amount" to ( transferDetails.amount.toDouble().toInt() /100).toString(),
-//                                "Amount" to ("₦"+(amounts).toString()),
-//                                "Fee" to ("₦"+fees).toString()
-//                        )
-//
-//                        val receiptModel = ReceiptModel("", "Transfer using wallet", status, map, (amounts).toString(), "")
-//
-//                        val intent = Intent(this@TransferAmountEntry, PrintActivity::class.java)
-//                        intent.putExtra(PrintActivity.KEYS.PRINT_RECEIPT_MODEL_KEY, receiptModel)
-//                        intent.putExtra(PrintActivity.KEYS.PRINT_RECEIPT_VAS_TYPE, PrintActivity.VasType.NOT_INCLUDED)
-//                        startActivity(intent)
-//
-//
-//
-//                } catch (e : ConnectException){
-//                    GlobalScope.launch(Dispatchers.Main) {
-//                        progressDialog.dismiss()
-//                        alert {
-//                            title = "Error"
-//                            message = "Connection not established. Please try again"
-//                            okButton {  }
-//                        }.show()
-//                    }
-//                } catch (e : SocketTimeoutException){
-//                    GlobalScope.launch(Dispatchers.Main) {
-//                        progressDialog.dismiss()
-//                        alert {
-//                            title = "Error"
-//                            message = "Connection taking too long to be established. Please try again"
-//                            okButton { onBackPressed() }
-//                        }.show()
-//                    }
-//
-//                } catch (e : retrofit2.HttpException){
-//                    GlobalScope.launch(Dispatchers.Main) {
-//                        progressDialog.dismiss()
-//                        alert {
-//                            title = "Error"
-//                            message = "Error from server. Please try again"
-//                            okButton {  }
-//                        }.show()
-//                    }
-//                } catch (e : com.google.gson.JsonSyntaxException){
-//                    GlobalScope.launch(Dispatchers.Main) {
-//                        progressDialog.dismiss()
-//                        alert {
-//                            title = "Error"
-//                            message = "Error from server. Please try again"
-//                            okButton {  }
-//                        }.show()
-//                    }
-//                }
-//            }
-//        }
-//    }
-
-//    private fun completeCardPayment(){
-//        progressDialog.show()
-//        val amount = txtAmount.text.toString().toDouble() * 100
-//
-//        val action = when (mTransactionType){
-//            TRANSACTION_TYPE.TRANSFER -> "transfer"
-//            TRANSACTION_TYPE.DEPOSIT -> "deposit"
-//            TRANSACTION_TYPE.WITHDRAWAL -> "withdrawal"
-//        }
-//
-//
-//            val transferDetails = TransactionDetails(action = action, beneficiary = mAccountNumber, vendorBankCode =mBankCode, walletID = mWalletId, username = mWalletUsername, password = mWalletPassword, amount = amount.toString(), method = "card", pin = mEncryptedPin)
-//
-//
-//
-//            launch(CommonPool){
-//                val gson = Gson()
-//                val jsonPayload = gson.toJson(transferDetails)
-//                val base64encoded = String(org.apache.commons.codec.binary.Base64.encodeBase64(jsonPayload.toByteArray()))
-//                val encoded = URLEncoder.encode(base64encoded, "UTF-8")
-//                val nonce = "${Calendar.getInstance().timeInMillis}$mWalletId$encoded"
-//                val encryptedStuff = "${nonce}BisiG03sToSk00lMak3sM0nEyAnDCanN0wS3ndMon3yViaTh1sAP1$encoded"
-//                val signature = HashUtils.sha512(encryptedStuff)
-//
-//
-//                try {
-//                    val response =  TransferService.create().transfer(transferDetails, nonce = nonce, signature = signature).await()
-//
-//                    Log.i("okh", response.toString())
-//
-//
-//                    val isApproved = response.status == 1
-//                    (application as App).db.transactionResultDao.get(mRrn).observe({lifecycle}){
-//                        val transferDetails = TransferDetails(mTransactionType, isApproved, mAccountName, transferDetails.amount, mConvenienceFee, mBankName, mTerminalId)
-//
-//                        it?.let {
-//                            transactionResult ->
-//
-//                            val map = hashMapOf<String, String>(
-//                                    "MID" to transactionResult.merchantID,
-//                                    "RRN" to transactionResult.RRN,
-//                                    "Transaction approved" to isApproved.toString(),
-//                                    "Terminal ID" to transferDetails.terminalId,
-//                                    "Card Holder" to transactionResult.cardHolderName,
-//                                    "Card Expiry" to transactionResult.cardExpiry,
-//                                    "PAN" to transactionResult.PAN,
-//                                    "STAN" to transactionResult.STAN,
-//                                    "Auth ID" to transactionResult.authID,
-//                                    "Bank Name" to transferDetails.bankName,
-//                                    "Beneficiary" to transferDetails.beneficiary,
-//                                    "Amount" to transferDetails.amount,
-//                                    "Fee" to transferDetails.fee
-//                            )
-//
-//                            val date = TimeUtils.convertLongToString(transactionResult.longDateTime)
-//                            val receiptModel = ReceiptModel(date, "Transfer", transactionResult.transactionStatus, map, (transferDetails.amount.toFloat()/100).toString(), transactionResult.transactionStatusReason)
-//
-//                            val intent = Intent(this@TransferAmountEntry, PrintActivity::class.java)
-//                            intent.putExtra(PrintActivity.KEYS.PRINT_RECEIPT_MODEL_KEY, receiptModel)
-//                            intent.putExtra(PrintActivity.KEYS.PRINT_RECEIPT_VAS_TYPE, PrintActivity.VasType.NOT_INCLUDED)
-//                            //finish()
-//                            startActivity(intent)
-//                        }
-//
-//                    }
-//
-//                }
-//                catch (e : SocketTimeoutException){
-//                    GlobalScope.launch(Dispatchers.Main) {
-//                        progressDialog.dismiss()
-//                        alert {
-//                            title = "Error"
-//                            message = "Connection taking too long to be established. Please try again"
-//                            okButton { onBackPressed() }
-//                        }.show()
-//                    }
-//
-//                }
-//                catch (e : ConnectException){
-//                    GlobalScope.launch(Dispatchers.Main) {
-//                        progressDialog.dismiss()
-//                        alert {
-//                            title = "Error"
-//                            message = "Connection not established. Please try again"
-//                            okButton {  }
-//                        }.show()
-//                    }
-//
-//                }
-//                catch (e : retrofit2.HttpException) {
-//                    launch(UI) {
-//                        launch(UI) {
-//                            progressDialog.dismiss()
-//                            alert {
-//                                title = "Error"
-//                                message = "Error from server. Please try again"
-//                                okButton { }
-//                            }.show()
-//                        }
-//                    }
-//                }
-//                catch (e : com.google.gson.JsonSyntaxException){
-//                    GlobalScope.launch(Dispatchers.Main) {
-//                        progressDialog.dismiss()
-//                        alert {
-//                            title = "Error"
-//                            message = "Error from server. Please try again"
-//                            okButton {  }
-//                        }.show()
-//                    }
-//                } catch (e : Exception){
-//                GlobalScope.launch(Dispatchers.Main) {
-//                    progressDialog.dismiss()
-//                    alert {
-//                        title = "Error"
-//                        message = "Error from server. Please try again"
-//                        okButton {  }
-//                    }.show()
-//                }
-//            }
-//
-//            }
-//        }
-
     private fun payWithCard(response: WithdrawalLookupSuccessModel) {
+
         val view = View.inflate(this, R.layout.activity_enter_pin, null)
         val encryptedPassword = SecureStorage.retrieve(Helper.STORED_PASSWORD, "")
 
@@ -747,6 +519,7 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
 
                                             Log.d("debit print",  response.body()!!.amountDebited.toString())
 
+
 //                                                val intent = Intent(this@TransferAmountEntry, PrintActivity::class.java)
 //                                                intent.putExtra(PrintActivity.KEYS.PRINT_RECEIPT_MODEL_KEY, receiptModel)
 //                                                intent.putExtra(PrintActivity.KEYS.PRINT_RECEIPT_VAS_TYPE, PrintActivity.VasType.NOT_INCLUDED)
@@ -764,55 +537,6 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
 
                     }
 
-
-//                    try {
-//                        GlobalScope.launch(Dispatchers.Main) {
-//                         //   progressDialog.dismiss()
-//
-//
-//
-//                        }
-//
-//                    } catch (e: Exception) {
-//                        GlobalScope.launch(Dispatchers.Main) {
-//                           // progressDialog.dismiss()
-//                            alert {
-//                                title = "Response"
-//                                message = transferResponse.message
-//                            }.show()0
-//                        }
-//                    }
-//                } catch (e: SocketTimeoutException) {
-//                    GlobalScope.launch(Dispatchers.Main) {
-//                        //progressDialog.dismiss()
-//                        alert {
-//                            title = "Error"
-//                            message = "Connection taking too long to be established. Please try again"
-//                            okButton { onBackPressed() }
-//                        }.show()
-//                    }
-//
-//                } catch (e: ConnectException) {
-//                    GlobalScope.launch(Dispatchers.Main) {
-//                        //progressDialog.dismiss()
-//                        alert {
-//                            title = "Error"
-//                            message = "Connection not established. Please try again"
-//                            okButton { }
-//                        }.show()
-//                    }
-//
-//                } catch (e: retrofit2.HttpException) {
-//                    GlobalScope.launch(Dispatchers.Main) {
-//                        //progressDialog.dismiss()
-//                        alert {
-//                            title = "Error"
-//                            message = "Error from server. Please try again"
-//                            okButton { }
-//                        }.show()
-//                    }
-//                }
-
                 }catch (E : java.lang.Exception){
                 }
             }
@@ -822,15 +546,7 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
     var amountToDebit : Double = 0.0
 
     public fun creditWallet(context : Context){
-//        val progressDialog = ProgressDialog(this)
-//        progressDialog.setCancelable(false)
-//        progressDialog.setTitle("Wallet")
-//        progressDialog.setMessage("Crediting wallet")
-//        progressDialog.show()
 
-        // toast("Wallet \n\n Crediting wallet")
-
-//        val clientReference = getClientRef(this@TransferAmountEntry, "")
         val clientReference = getClientRef(context, "")
         lateinit var transferResponse : WithdrawalWalletCreditModel
         lateinit var transferDetails : WithdrawalDetails
@@ -897,7 +613,7 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
 
                                     Log.d("debit print amountSet",  transferResponse.amountSettled.toString())
                                     Log.d("debit print fee",  transferResponse.convenienceFee.toString())
-
+                                    printVasReceipt()
 //                                        val intent = Intent(this@TransferAmountEntry, PrintActivity::class.java)
 //                                        intent.putExtra(PrintActivity.KEYS.PRINT_RECEIPT_MODEL_KEY, receiptModel)
 //                                        intent.putExtra(PrintActivity.KEYS.PRINT_RECEIPT_VAS_TYPE, PrintActivity.VasType.NOT_INCLUDED)
@@ -953,13 +669,23 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
         }
     }
 
-//    private fun paymentSelection(response: LookupSuccessModel) {
-//        alert {
-//            title = "Transaction Type"
-//            message = "Select the type of transaction you want to make"
-//            positiveButton(buttonText = "Card") { _ -> payWithCard(response) }
-//            negativeButton(buttonText = "Wallet") { _ -> payWithWallet(response) }
-//        }.show()
-//    }
 
+    private fun printVasReceipt() {
+        FuncActivity.appState.printVasReceipt++
+        try {
+            PrinterHelper.getInstance().printVasReceipt(FuncActivity.appState, 1)
+            val alertDialog = AlertDialog.Builder(this)
+            alertDialog.setMessage("Print Merchant copy")
+            alertDialog.setPositiveButton("OK") { dialogInterface, i ->
+                try {
+                    PrinterHelper.getInstance().printVasReceipt(FuncActivity.appState, 0)
+                } catch (e: PrinterException) {
+                    e.printStackTrace()
+                }
+            }
+            alertDialog.show()
+        } catch (e: PrinterException) {
+        }
+
+    }
 }
