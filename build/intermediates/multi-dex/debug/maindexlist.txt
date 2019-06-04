@@ -1988,11 +1988,19 @@ com/andrognito/pinlockview/R$drawable.class
 com/andrognito/pinlockview/R$styleable.class
 com/andrognito/pinlockview/ResourceUtils.class
 com/andrognito/pinlockview/ShuffleArrayUtils.class
+com/cloudpos/Device.class
+com/cloudpos/DeviceException.class
+com/cloudpos/DeviceSpec.class
+com/cloudpos/POSTerminal.class
+com/cloudpos/TerminalSpec.class
+com/cloudpos/TimeConstants.class
 com/cloudpos/jniinterface/EMVJNIInterface.class
 com/cloudpos/jniinterface/IFuntionListener.class
 com/cloudpos/jniinterface/JNILoad.class
 com/cloudpos/jniinterface/PrinterHtmlInterface.class
 com/cloudpos/jniinterface/PrinterInterface.class
+com/cloudpos/printer/Format.class
+com/cloudpos/printer/PrinterDevice.class
 com/dg/http/Base64.class
 com/dg/http/HttpRequest$1.class
 com/dg/http/HttpRequest$2.class
@@ -2549,6 +2557,9 @@ com/wizarpos/emvsample/activity/InputPINActivity$1.class
 com/wizarpos/emvsample/activity/InputPINActivity$2.class
 com/wizarpos/emvsample/activity/InputPINActivity$ReadPINThread.class
 com/wizarpos/emvsample/activity/InputPINActivity.class
+com/wizarpos/emvsample/activity/MainActivity$1.class
+com/wizarpos/emvsample/activity/MainActivity$2.class
+com/wizarpos/emvsample/activity/MainActivity.class
 com/wizarpos/emvsample/activity/ProcessEMVCardActivity$EMVProcessNextThread.class
 com/wizarpos/emvsample/activity/ProcessEMVCardActivity$EMVThread.class
 com/wizarpos/emvsample/activity/ProcessEMVCardActivity.class
@@ -2794,6 +2805,7 @@ com/wizarpos/emvsample/payments_menu/transfer/TransferAmountEntry$onActivityResu
 com/wizarpos/emvsample/payments_menu/transfer/TransferAmountEntry$onActivityResult$2$1.class
 com/wizarpos/emvsample/payments_menu/transfer/TransferAmountEntry$onActivityResult$2.class
 com/wizarpos/emvsample/payments_menu/transfer/TransferAmountEntry$payWithCard$1.class
+com/wizarpos/emvsample/payments_menu/transfer/TransferAmountEntry$printVasReceipt$1.class
 com/wizarpos/emvsample/payments_menu/transfer/TransferAmountEntry$verifyTransferAccountDetails$1$onResponse$1$1.class
 com/wizarpos/emvsample/payments_menu/transfer/TransferAmountEntry$verifyTransferAccountDetails$1$onResponse$1.class
 com/wizarpos/emvsample/payments_menu/transfer/TransferAmountEntry$verifyTransferAccountDetails$1$onResponse$2$1.class
@@ -2814,6 +2826,7 @@ com/wizarpos/emvsample/payments_menu/utils/HashUtils.class
 com/wizarpos/emvsample/pfmState/PfmStateBuilder.class
 com/wizarpos/emvsample/printer/PrinterCommand.class
 com/wizarpos/emvsample/printer/PrinterException.class
+com/wizarpos/emvsample/printer/PrinterHelper$1.class
 com/wizarpos/emvsample/printer/PrinterHelper.class
 com/wizarpos/emvsample/service/CallHomeService$1.class
 com/wizarpos/emvsample/service/CallHomeService.class
@@ -2875,6 +2888,7 @@ com/wizarpos/util/PinAlertUtils.class
 com/wizarpos/util/SharedPreferenceUtils.class
 com/wizarpos/util/StringUtil$1.class
 com/wizarpos/util/StringUtil.class
+com/wizarpos/util/TransactionModel.class
 io/reactivex/BackpressureOverflowStrategy.class
 io/reactivex/BackpressureStrategy.class
 io/reactivex/Completable.class

@@ -3,6 +3,7 @@ package com.wizarpos.emvsample.activity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -32,10 +33,13 @@ import com.wizarpos.emvsample.printer.PrinterException;
 import com.wizarpos.emvsample.printer.PrinterHelper;
 import com.wizarpos.emvsample.transaction.TransDefine;
 import com.wizarpos.jni.PinPadInterface;
+import com.wizarpos.util.StringUtil;
+import com.wizarpos.util.TransactionModel;
 
 import java.io.ByteArrayOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -285,7 +289,7 @@ public class TransResultActivity extends FuncActivity
 		//String signature = EncryptionUtilsKt.Hashing(encryptedStuff);
 
 //		String signature = hash(encryptedStuff);
-		//String signature = EncryptionUtilsKt.Hashing(encryptedStuff).toLowerCase();
+		//String signature = EncryptitransferResponseonUtilsKt.Hashing(encryptedStuff).toLowerCase();
 		TransferServices transferServices = new TransferServices();
 
 		transferServices.TransferService().withdraw(withdrawalDetails, "application/json", signature, nonce).enqueue(new Callback<WithdrawalWalletCreditModel>() {
@@ -440,23 +444,68 @@ public class TransResultActivity extends FuncActivity
     
     private void printReceipt()
     {
-		try {
-			PrinterHelper.getInstance().printReceipt(appState, 1);
+
+        String[] nameArr = appState.terminalConfig.getMerchantName1().split(" ");
+        nameArr = Arrays.copyOf(nameArr, nameArr.length - 2);
+        String terminalConfig = StringUtil.join(nameArr, " ");
+        String transactionstatus = "DECLINED";
+        if (appState.trans.isTransactionStatus()){
+            transactionstatus = "APPROVED";
+        }
+        String transactionstatusReason = appState.trans.getTransactionResult().transactionStatusReason;
+        String responseCode = appState.trans.getTransactionResult().responseCode;
+        String terminalID = appState.nibssData.getConnectionData().getTerminalID();
+        String merchantID = appState.nibssData.getConfigData().getConfigData("03015").toString();
+        String merchantName = appState.nibssData.getConfigData().getConfigData("52040").toString();
+        String transactionType = appState.trans.getTransactionType();
+        String cardholderName = appState.trans.getCardHolderName();
+        String pan = appState.trans.getMaskPan();
+        String rrn = appState.trans.getRrn();
+        String date = appState.trans.getTransDate().substring(0, 4)
+                + "/" + appState.trans.getTransDate().substring(4, 6)
+                + "/" + appState.trans.getTransDate().substring(6, 8)
+                + " " + appState.trans.getTransTime().substring(0, 2)
+                + ":" + appState.trans.getTransTime().substring(2, 4)
+                + ":" + appState.trans.getTransTime().substring(4, 6);
+        String ticket = appState.trans.getTrace().toString();
+        String UNPR = appState.trans.getUnpredictableNumber();
+        String AC = appState.trans.getAC();
+        String TVR = appState.trans.getTVR();
+        String AID = appState.trans.getAID();
+        String TSI = appState.trans.getTSI();
+        String cardType = appState.trans.getAppName();
+        String AIP = appState.trans.getAIP();
+        String amount = appState.trans.getTransAmount().toString();
+        String othersAmount = appState.trans.getOthersAmount().toString();
+		String bankLogoName = "";
+        try{
+			bankLogoName = "bank"+terminalID.substring(0, 4);
+		}catch (Exception e){
+
+		}
+
+
+        final TransactionModel transactionModel = new TransactionModel(terminalID,rrn,  cardholderName, pan, amount, othersAmount, transactionType, responseCode, transactionstatus, transactionstatusReason,merchantID, merchantName, ticket, UNPR, AC, TVR, AID, TSI, date, cardType, AIP, bankLogoName);
+		//try {
+			Intent intent = new Intent(this, MainActivity.class);
+			intent.putExtra("transactionModel", transactionModel);
+			intent.putExtra("copy", "** CUSTOMER COPY **");
+			startActivity(intent);
+			//PrinterHelper.getInstance().printReceipt( appState, 1);
 			AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
 			alertDialog.setMessage("Print Merchant copy");
 			alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialogInterface, int i) {
-					try {
-						PrinterHelper.getInstance().printReceipt(appState, 0);
-					} catch (PrinterException e) {
-						e.printStackTrace();
-					}
+                        Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                        intent.putExtra("transactionModel", transactionModel);
+                        intent.putExtra("copy", "*** MERCHANT COPY ***");
+						startActivity(intent);
 				}
 			});
 			alertDialog.show();
-		} catch (PrinterException e) {
-		}
+//		} catch (PrinterException e) {
+//		}
 		
 		if( appState.terminalConfig.getReceipt() > (appState.printReceipt + 1) )
 		{

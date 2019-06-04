@@ -1176,7 +1176,7 @@ public class FuncActivity extends AppCompatActivity implements Constants, IFunti
         return CipherUtils.sig((PrivateKey) keyStore.getKey("server","Itex4839".toCharArray()),res);
     }
 
-	public byte [] getDrawableFromTerminalId(String terminalId) {
+	public Bitmap getDrawableFromTerminalId(String terminalId) {
 
 		try {
 			String bankLogoName = "bank"+terminalId.substring(0, 4);
@@ -1190,15 +1190,20 @@ public class FuncActivity extends AppCompatActivity implements Constants, IFunti
 			Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
 			ByteArrayOutputStream stream = new ByteArrayOutputStream();
 			bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-			byte[] bitmapdata = stream.toByteArray();
+		//	byte[] bitmapdata = stream.toByteArray();
+			Log.d("okh", bankLogoName);
+			return bitmap;
 
-			return bitmapdata;
+            //	return bitmapdata;
 		} catch (Exception e){
 			Bitmap bitmap = ((BitmapDrawable) this.getResources().getDrawable(R.drawable.itex)).getBitmap();
 			ByteArrayOutputStream stream = new ByteArrayOutputStream();
 			bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-			byte[] bitmapdata = stream.toByteArray();
-			return bitmapdata;
+
+		//	byte[] bitmapdata = stream.toByteArray();
+
+			return bitmap;
+//			return bitmapdata;
 		}
 
 	}

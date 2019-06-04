@@ -21,6 +21,7 @@ import com.wizarpos.emvsample.models.transfer.TransferSuccessModel
 import com.wizarpos.emvsample.payments_menu.Services.TransferService
 import com.wizarpos.emvsample.payments_menu.utils.HashUtils
 import com.iisysgroup.poslib.deviceinterface.DeviceState
+import com.wizarpos.emvsample.MainApp
 import com.wizarpos.emvsample.R
 import com.wizarpos.emvsample.activity.FuncActivity
 import com.wizarpos.emvsample.activity.Sale
@@ -56,7 +57,7 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
 
     private lateinit var mEncryptedPin : String
 
-
+    var appState: MainApp? = null
     lateinit var withdrawalResponse : WithdrawalLookupSuccessModel
 
     private val mTerminalId by lazy {
@@ -235,7 +236,6 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
 
         txtAmount.text = bd.toString()
     }
-
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -518,8 +518,10 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
                                             val receiptModel = ReceiptModel(formattedDate, "Transfer", response.body()!!.message, map, (response.body()!!.amountDebited / 100).toString(), response.body()!!.message)
 
                                             Log.d("debit print",  response.body()!!.amountDebited.toString())
-
-
+                                                appState!!.transfer = true;
+                                                appState!!.trans.transactionType = "transfer"
+                                                val printhelper = PrinterHelper.getInstance()
+                                                printhelper.printVasReceipt(appState, 0)
 //                                                val intent = Intent(this@TransferAmountEntry, PrintActivity::class.java)
 //                                                intent.putExtra(PrintActivity.KEYS.PRINT_RECEIPT_MODEL_KEY, receiptModel)
 //                                                intent.putExtra(PrintActivity.KEYS.PRINT_RECEIPT_VAS_TYPE, PrintActivity.VasType.NOT_INCLUDED)

@@ -1,8 +1,8 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:1:1-153:12
-INJECTED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:1:1-153:12
-INJECTED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:1:1-153:12
+ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:1:1-161:12
+INJECTED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:1:1-161:12
+INJECTED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:1:1-161:12
 MERGED from [com.android.support:multidex:1.0.3] C:\Users\Agbede\.gradle\caches\transforms-1\files-1.1\multidex-1.0.3.aar\f82a599b881fa3cd8e1572bccaf3daf3\AndroidManifest.xml:17:1-22:12
 MERGED from [:poslib-commons-debug] C:\Users\Agbede\.gradle\caches\transforms-1\files-1.1\poslib-commons-debug.aar\ec2d7c18343096e35b1b1a830dcdb519\AndroidManifest.xml:2:1-16:12
 MERGED from [io.reactivex.rxjava2:rxandroid:2.1.0] C:\Users\Agbede\.gradle\caches\transforms-1\files-1.1\rxandroid-2.1.0.aar\7d860a1d3790e15b59d7fced7d9c3235\AndroidManifest.xml:15:1-20:12
@@ -34,8 +34,8 @@ MERGED from [android.arch.core:runtime:1.1.1] C:\Users\Agbede\.gradle\caches\tra
 MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\Agbede\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.1.aar\15ff553de0f347a7a989b33f471fda9d\AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.persistence:db-framework:1.1.0] C:\Users\Agbede\.gradle\caches\transforms-1\files-1.1\db-framework-1.1.0.aar\313e9061ce5d636193d97953a7c7d024\AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.persistence:db:1.1.0] C:\Users\Agbede\.gradle\caches\transforms-1\files-1.1\db-1.1.0.aar\0554f7b5e46e28999305bd2989f20361\AndroidManifest.xml:17:1-22:12
-INJECTED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:1:1-153:12
-INJECTED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:1:1-153:12
+INJECTED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:1:1-161:12
+INJECTED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:1:1-161:12
 	package
 		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:2:5-37
 	android:versionName
@@ -189,7 +189,7 @@ ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.
 	android:name
 		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:25:22-78
 application
-ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:27:5-151:19
+ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:27:5-159:19
 MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\Agbede\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\ef79d7d21fa0fb3e3145f0dec1b7b990\AndroidManifest.xml:9:5-20
 MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\Agbede\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\ef79d7d21fa0fb3e3145f0dec1b7b990\AndroidManifest.xml:9:5-20
 MERGED from [android.arch.lifecycle:extensions:1.1.1] C:\Users\Agbede\.gradle\caches\transforms-1\files-1.1\extensions-1.1.1.aar\01ddcef46a39503d845f1fc84a354d3f\AndroidManifest.xml:22:5-28:19
@@ -286,164 +286,168 @@ ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.
 		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:78:21-57
 	android:name
 		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:77:19-61
+activity#com.wizarpos.emvsample.activity.MainActivity
+ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:80:9-58
+	android:name
+		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:80:19-56
 activity#com.wizarpos.emvsample.activity.RequestCardActivity
-ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:95:9-102
+ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:103:9-102
 	android:screenOrientation
-		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:95:64-100
+		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:103:64-100
 	android:name
-		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:95:19-63
+		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:103:19-63
 activity#com.wizarpos.emvsample.activity.login.LoginActivity
-ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:96:9-102
+ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:104:9-102
 	android:screenOrientation
-		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:96:64-100
+		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:104:64-100
 	android:name
-		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:96:19-63
+		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:104:19-63
 activity#com.wizarpos.emvsample.activity.RemoveCardActivity
-ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:100:9-101
+ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:108:9-101
 	android:screenOrientation
-		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:100:63-99
+		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:108:63-99
 	android:name
-		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:100:19-62
+		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:108:19-62
 activity#com.wizarpos.emvsample.activity.ConfirmBypassPinActivity
-ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:101:9-107
+ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:109:9-107
 	android:screenOrientation
-		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:101:69-105
+		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:109:69-105
 	android:name
-		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:101:19-68
+		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:109:19-68
 activity#com.wizarpos.emvsample.activity.ConfirmCardActivity
-ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:102:9-102
+ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:110:9-102
 	android:screenOrientation
-		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:102:64-100
+		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:110:64-100
 	android:name
-		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:102:19-63
+		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:110:19-63
 activity#com.wizarpos.emvsample.activity.DataClearActivity
-ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:105:9-100
+ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:113:9-100
 	android:screenOrientation
-		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:105:62-98
+		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:113:62-98
 	android:name
-		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:105:19-61
+		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:113:19-61
 activity#com.wizarpos.emvsample.activity.EnquireTransActivity
-ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:106:9-103
+ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:114:9-103
 	android:screenOrientation
-		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:106:65-101
+		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:114:65-101
 	android:name
-		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:106:19-64
+		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:114:19-64
 activity#com.wizarpos.emvsample.activity.ErrorActivity
-ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:107:9-96
+ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:115:9-96
 	android:screenOrientation
-		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:107:58-94
+		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:115:58-94
 	android:name
-		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:107:19-57
+		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:115:19-57
 activity#com.wizarpos.emvsample.activity.InputAmountActivity
-ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:111:9-112:83
+ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:119:9-120:83
 	android:screenOrientation
-		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:112:45-81
+		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:120:45-81
 	android:theme
-		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:112:13-44
+		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:120:13-44
 	android:name
-		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:111:19-63
+		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:119:19-63
 activity#com.wizarpos.emvsample.activity.InputPINActivity
-ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:116:9-99
+ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:124:9-99
 	android:screenOrientation
-		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:116:61-97
+		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:124:61-97
 	android:name
-		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:116:19-60
+		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:124:19-60
 activity#com.wizarpos.emvsample.activity.ProcessEMVCardActivity
-ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:120:9-105
+ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:128:9-105
 	android:screenOrientation
-		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:120:67-103
+		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:128:67-103
 	android:name
-		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:120:19-66
+		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:128:19-66
 activity#com.wizarpos.emvsample.activity.ProcessOnlineActivity
-ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:121:9-123:45
+ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:129:9-131:45
 	android:screenOrientation
-		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:122:13-49
+		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:130:13-49
 	android:theme
-		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:123:13-43
+		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:131:13-43
 	android:name
-		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:121:19-65
+		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:129:19-65
 activity#com.wizarpos.emvsample.activity.SelectEMVAppListActivity
-ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:125:9-107
+ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:133:9-107
 	android:screenOrientation
-		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:125:69-105
+		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:133:69-105
 	android:name
-		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:125:19-68
+		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:133:19-68
 activity#com.wizarpos.emvsample.activity.ShowPBOCCardRecordActivity
-ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:126:9-109
+ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:134:9-109
 	android:screenOrientation
-		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:126:71-107
+		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:134:71-107
 	android:name
-		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:126:19-70
+		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:134:19-70
 activity#com.wizarpos.emvsample.activity.ShowLastPBOCActivity
-ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:127:9-103
+ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:135:9-103
 	android:screenOrientation
-		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:127:65-101
+		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:135:65-101
 	android:name
-		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:127:19-64
+		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:135:19-64
 activity#com.wizarpos.emvsample.activity.ShowTransInfoActivity
-ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:128:9-104
+ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:136:9-104
 	android:screenOrientation
-		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:128:66-102
+		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:136:66-102
 	android:name
-		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:128:19-65
+		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:136:19-65
 activity#com.wizarpos.emvsample.activity.TransResultActivity
-ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:129:9-102
+ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:137:9-102
 	android:screenOrientation
-		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:129:64-100
+		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:137:64-100
 	android:name
-		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:129:19-63
+		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:137:19-63
 activity#com.wizarpos.emvsample.activity.Sale
-ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:132:9-87
+ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:140:9-87
 	android:screenOrientation
-		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:132:49-85
+		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:140:49-85
 	android:name
-		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:132:19-48
+		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:140:19-48
 activity#com.wizarpos.emvsample.activity.Settle
-ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:135:9-53
+ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:143:9-53
 	android:name
-		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:135:19-50
+		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:143:19-50
 activity#com.wizarpos.emvsample.activity.QueryCardRecord
-ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:139:9-62
+ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:147:9-62
 	android:name
-		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:139:19-59
+		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:147:19-59
 activity#com.wizarpos.emvsample.activity.GetMasterKey
-ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:140:9-95
+ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:148:9-95
 	android:screenOrientation
-		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:140:57-93
+		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:148:57-93
 	android:name
-		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:140:19-56
+		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:148:19-56
 activity#com.wizarpos.emvsample.activity.auth.PinInterFace
-ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:141:9-63
+ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:149:9-63
 	android:name
-		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:141:19-61
+		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:149:19-61
 activity#com.wizarpos.emvsample.activity.auth.EodMenu
-ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:142:9-95
+ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:150:9-95
 	android:screenOrientation
-		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:142:57-93
+		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:150:57-93
 	android:name
-		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:142:19-56
+		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:150:19-56
 activity#com.wizarpos.emvsample.activity.auth.NetworkSettings
-ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:143:9-103
+ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:151:9-103
 	android:screenOrientation
-		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:143:65-101
+		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:151:65-101
 	android:name
-		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:143:19-64
+		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:151:19-64
 activity#com.wizarpos.emvsample.activity.RefundActivity
-ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:144:9-146:55
+ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:152:9-154:55
 	android:screenOrientation
-		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:145:13-49
+		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:153:13-49
 	android:theme
-		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:146:13-43
+		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:154:13-43
 	android:name
-		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:144:19-58
+		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:152:19-58
 activity#com.wizarpos.emvsample.activity.InputExtraAmountActivity
-ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:147:9-70
+ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:155:9-70
 	android:name
-		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:147:19-68
+		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:155:19-68
 service#com.wizarpos.emvsample.service.CallHomeService
-ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:149:9-59
+ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:157:9-59
 	android:name
-		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:149:18-57
+		ADDED from C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\AndroidManifest.xml:157:18-57
 uses-permission#android.permission.READ_PHONE_STATE
 ADDED from [:poslib-commons-debug] C:\Users\Agbede\.gradle\caches\transforms-1\files-1.1\poslib-commons-debug.aar\ec2d7c18343096e35b1b1a830dcdb519\AndroidManifest.xml:12:5-75
 MERGED from [:poslib-host-debug] C:\Users\Agbede\.gradle\caches\transforms-1\files-1.1\poslib-host-debug.aar\5e7cf4ccb986db29ca5f52ea624bac45\AndroidManifest.xml:12:5-75

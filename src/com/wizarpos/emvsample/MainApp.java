@@ -158,6 +158,7 @@ public class MainApp extends Application implements Constants
    public  int refundAmount = 0;
 	public boolean purchaseWithCashBack = true;
 	public boolean revarsal = false;
+	public boolean transfer = false;
 	public boolean withdrawal = false;
 	public boolean airtime = false;
 	public int reversalAmout;

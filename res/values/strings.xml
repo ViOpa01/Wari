@@ -68,5 +68,10 @@
     <string name="action_select_provider">Select Network</string>
     <string name="amount">Amount</string>
     <string name="key_payvice_wallet_pin">key_payvice_wallet_pin</string>
+    <string name="signPrint">Print</string>
+    <string name="close">Close</string>
+    <string name="printBarCode">Barcode</string>
+    <string name="printEsc">Esc</string>
+    <string name="print_merchant_s_copy">Print Merchant\'s Copy</string>
 
 </resources>
