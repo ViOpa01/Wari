@@ -4,9 +4,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.v7.app.ActionBar;
@@ -29,14 +26,11 @@ import com.wizarpos.emvsample.models.PfmJournalGenerator;
 import com.wizarpos.emvsample.models.Pfm;
 import com.wizarpos.emvsample.payments_menu.Services.TransferServices;
 import com.wizarpos.emvsample.payments_menu.models.WithdrawalDetails;
-import com.wizarpos.emvsample.printer.PrinterException;
-import com.wizarpos.emvsample.printer.PrinterHelper;
 import com.wizarpos.emvsample.transaction.TransDefine;
 import com.wizarpos.jni.PinPadInterface;
 import com.wizarpos.util.StringUtil;
 import com.wizarpos.util.TransactionModel;
 
-import java.io.ByteArrayOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Arrays;
@@ -487,7 +481,7 @@ public class TransResultActivity extends FuncActivity
 
         final TransactionModel transactionModel = new TransactionModel(terminalID,rrn,  cardholderName, pan, amount, othersAmount, transactionType, responseCode, transactionstatus, transactionstatusReason,merchantID, merchantName, ticket, UNPR, AC, TVR, AID, TSI, date, cardType, AIP, bankLogoName);
 		//try {
-			Intent intent = new Intent(this, MainActivity.class);
+			Intent intent = new Intent(this, PrinterActivity.class);
 			intent.putExtra("transactionModel", transactionModel);
 			intent.putExtra("copy", "** CUSTOMER COPY **");
 			startActivity(intent);
@@ -497,7 +491,7 @@ public class TransResultActivity extends FuncActivity
 			alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialogInterface, int i) {
-                        Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                        Intent intent = new Intent(getBaseContext(), PrinterActivity.class);
                         intent.putExtra("transactionModel", transactionModel);
                         intent.putExtra("copy", "*** MERCHANT COPY ***");
 						startActivity(intent);

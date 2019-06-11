@@ -18,23 +18,12 @@ import com.cloudpos.DeviceException;
 import com.cloudpos.POSTerminal;
 import com.cloudpos.printer.Format;
 import com.cloudpos.printer.PrinterDevice;
-import com.google.gson.Gson;
-import com.wizarpos.emvsample.MainApp;
 import com.wizarpos.emvsample.R;
-import com.wizarpos.emvsample.constant.Constants;
-import com.wizarpos.emvsample.parameter.BalanceResponse;
-import com.wizarpos.emvsample.printer.PrinterCommand;
-import com.wizarpos.emvsample.printer.PrinterException;
-import com.wizarpos.jni.PrinterInterface;
-import com.wizarpos.util.AppUtil;
-import com.wizarpos.util.StringUtil;
 import com.wizarpos.util.TransactionModel;
 
 import java.io.ByteArrayOutputStream;
-import java.io.UnsupportedEncodingException;
-import java.util.Arrays;
 
-public class MainActivity extends Activity {
+public class PrinterActivity extends Activity {
 
     private Button btnprintMerchant;
     private PrinterDevice printerDevice;
@@ -42,7 +31,7 @@ public class MainActivity extends Activity {
     private Format format2;
     private TextView txt;
     private String str;
-    private Context context = MainActivity.this;
+    private Context context = PrinterActivity.this;
 
 
     @Override
@@ -114,12 +103,10 @@ public class MainActivity extends Activity {
                     ByteArrayOutputStream stream = new ByteArrayOutputStream();
                     bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
 
-
                     printerDevice.printBitmap(format, bitmap);
                 }catch (Exception e){
 
                 }
-
 
                 printerDevice.printText(format, copy);
                 printerDevice.printText(format, transactionModel.getTransactionStatus());

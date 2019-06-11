@@ -77,7 +77,7 @@
         <activity android:name=".activity.SelectionActivity"
                     android:screenOrientation="portrait"/>
 
-        <activity android:name=".activity.MainActivity"/>
+        <activity android:name=".activity.PrinterActivity"/>
             <!--<intent-filter>-->
                 <!--<action android:name="android.intent.action.MAIN" />-->
 
