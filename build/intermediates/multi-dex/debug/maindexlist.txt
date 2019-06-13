@@ -2591,6 +2591,7 @@ com/wizarpos/emvsample/activity/ShowPBOCCardRecordActivity$ClickListener.class
 com/wizarpos/emvsample/activity/ShowPBOCCardRecordActivity.class
 com/wizarpos/emvsample/activity/ShowTransInfoActivity$ClickListener.class
 com/wizarpos/emvsample/activity/ShowTransInfoActivity.class
+com/wizarpos/emvsample/activity/TransResultActivity$1$1.class
 com/wizarpos/emvsample/activity/TransResultActivity$1.class
 com/wizarpos/emvsample/activity/TransResultActivity$2.class
 com/wizarpos/emvsample/activity/TransResultActivity$3.class
@@ -2787,6 +2788,7 @@ com/wizarpos/emvsample/payments_menu/transfer/TransferAmountEntry$creditWallet$1
 com/wizarpos/emvsample/payments_menu/transfer/TransferAmountEntry$creditWallet$1.class
 com/wizarpos/emvsample/payments_menu/transfer/TransferAmountEntry$debitWallet$1$1$1$onResponse$1$1.class
 com/wizarpos/emvsample/payments_menu/transfer/TransferAmountEntry$debitWallet$1$1$1$onResponse$1.class
+com/wizarpos/emvsample/payments_menu/transfer/TransferAmountEntry$debitWallet$1$1$1$onResponse$2$1$1.class
 com/wizarpos/emvsample/payments_menu/transfer/TransferAmountEntry$debitWallet$1$1$1$onResponse$2$1.class
 com/wizarpos/emvsample/payments_menu/transfer/TransferAmountEntry$debitWallet$1$1$1$onResponse$2.class
 com/wizarpos/emvsample/payments_menu/transfer/TransferAmountEntry$debitWallet$1$1$1.class

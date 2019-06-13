@@ -1,6 +1,8 @@
 package com.wizarpos.emvsample.printer;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -18,6 +20,7 @@ import com.cloudpos.POSTerminal;
 import com.cloudpos.printer.PrinterDevice;
 import com.google.gson.Gson;
 import com.wizarpos.emvsample.activity.FuncActivity;
+import com.wizarpos.emvsample.activity.MainActivity;
 import com.wizarpos.emvsample.constant.Constants;
 import com.wizarpos.emvsample.db.EodModel;
 import com.wizarpos.emvsample.db.TransDetailInfo;

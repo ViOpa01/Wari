@@ -183,7 +183,7 @@ class TransactionProcessActivity : AppCompatActivity(), Callback<Any>{
             }
         } ?: kotlin.run {
 //            finishButton.setOnClickListener {
-////                startActivity(Intent(this, MainActivity::class.java))
+////                startActivity(Intent(this, PrinterActivity::class.java))
 ////                finish()
 //            }
         }

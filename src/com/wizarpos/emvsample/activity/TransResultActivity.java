@@ -215,11 +215,13 @@ public class TransResultActivity extends FuncActivity
 		String phone_number = SecureStorage.retrieve("phonerecharge", "").replace(" ", "");
 		String airtimeProvider = SecureStorage.retrieve("airtimeprovider", "");
 		String mpin = SecureStorage.retrieve("pinentered", "");
-		String airtime_amount = SecureStorage.retrieve("amountrecharge", "");;
-		String wallet = SecureStorage.retrieve("wallet", "");
+		final String airtime_amount = SecureStorage.retrieve("amountrecharge", "");;
+		final String wallet = SecureStorage.retrieve("wallet", "");
 		String password = SecureStorage.retrieve("password", "");
-
-		String username = SecureStorage.retrieve("username", "");
+		final String merchantID = appState.nibssData.getConfigData().getConfigData("03015").toString();
+		final String merchantName = appState.nibssData.getConfigData().getConfigData("52040").toString();
+		final String username = SecureStorage.retrieve("username", "");
+		final String airtimetype = SecureStorage.retrieve("airtimeType", "");
 
 		AirtimeRequestDetails details = new AirtimeRequestDetails(wallet, username, airtime_amount, phone_number, airtimeProvider, mpin, password);
 
@@ -227,8 +229,33 @@ public class TransResultActivity extends FuncActivity
 		airtimeServices.create().airtimePurchase(details).enqueue(new Callback<Object>() {
 			@Override
 			public void onResponse(Call<Object> call, Response<Object> response) {
+				TransactionModel transactionModel = null;
+				if (airtimetype.equalsIgnoreCase("wallet")){
+					transactionModel = new TransactionModel(wallet, "",  "", "phone_number", airtime_amount, "", "airtel", "00", "Approved", "" , merchantID , merchantName, "", "", "", "", "", "", "", "", "", "");
+				}
+				else if (airtimetype.equalsIgnoreCase("card")){
+					transactionModel = new TransactionModel(wallet, "",  "", "phone_number", airtime_amount, "", "airtel", "00", "Approved", "" , merchantID , merchantName, "", "", "", "", "", "", "", "", "", "");
+				}
 
 
+				Intent intent = new Intent(getBaseContext(), MainActivity.class);
+
+				intent.putExtra("transactionModel", transactionModel);
+				intent.putExtra("copy", "** CUSTOMER COPY **");
+				startActivity(intent);
+				AlertDialog.Builder alertDialog = new AlertDialog.Builder(getBaseContext());
+				alertDialog.setMessage("Print Merchant copy");
+				final TransactionModel finalTransactionModel = transactionModel;
+				alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialogInterface, int i) {
+						Intent intent = new Intent(getBaseContext(), MainActivity.class);
+						intent.putExtra("transactionModel", finalTransactionModel);
+						intent.putExtra("copy", "*** MERCHANT COPY ***");
+						startActivity(intent);
+					}
+				});
+				alertDialog.show();
 			}
 
 			@Override
@@ -298,6 +325,8 @@ public class TransResultActivity extends FuncActivity
 					} else {
 						Toast.makeText(getBaseContext(), "Your wallet has been debitted \n " + response.body().getAmountSettled() / 100 + " \n " + "Beneficiary : " + response.body().getBeneficiaryName(), Toast.LENGTH_LONG).show();
 					}
+
+
 				}
 
 			}
@@ -478,10 +507,9 @@ public class TransResultActivity extends FuncActivity
 
 		}
 
-
         final TransactionModel transactionModel = new TransactionModel(terminalID,rrn,  cardholderName, pan, amount, othersAmount, transactionType, responseCode, transactionstatus, transactionstatusReason,merchantID, merchantName, ticket, UNPR, AC, TVR, AID, TSI, date, cardType, AIP, bankLogoName);
 		//try {
-			Intent intent = new Intent(this, PrinterActivity.class);
+			Intent intent = new Intent(this, MainActivity.class);
 			intent.putExtra("transactionModel", transactionModel);
 			intent.putExtra("copy", "** CUSTOMER COPY **");
 			startActivity(intent);
@@ -491,7 +519,7 @@ public class TransResultActivity extends FuncActivity
 			alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialogInterface, int i) {
-                        Intent intent = new Intent(getBaseContext(), PrinterActivity.class);
+                        Intent intent = new Intent(getBaseContext(), MainActivity.class);
                         intent.putExtra("transactionModel", transactionModel);
                         intent.putExtra("copy", "*** MERCHANT COPY ***");
 						startActivity(intent);

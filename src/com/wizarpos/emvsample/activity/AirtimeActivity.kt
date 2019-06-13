@@ -207,7 +207,7 @@ class AirtimeActivity : AirTimeBaseActivity(), AirtimeProcessor.onAirtimeTransac
 
     private fun payWithWallet(phone_number: String, airtimeProvider: String) {
         isCard = false
-
+        SecureStorage.store("airtimeType", "wallet")
         val pinView = LayoutInflater.from(this).inflate(R.layout.activity_enter_pin, null, false)
         PinAlertUtils.getPin(this, pinView) {
             val encryptedPassword = SecureStorage.retrieve(Helper.STORED_PASSWORD, "")
@@ -227,7 +227,7 @@ class AirtimeActivity : AirTimeBaseActivity(), AirtimeProcessor.onAirtimeTransac
 
     private fun payWithCard(phone_number: String, airtimeProvider: String) {
         val view = View.inflate(this, R.layout.activity_enter_pin, null)
-
+        SecureStorage.store("airtimeType", "card")
         PinAlertUtils.getPin(this, view) {
             //todo validate pin
             val password = SecureStorage.retrieve(Helper.STORED_PASSWORD, "")

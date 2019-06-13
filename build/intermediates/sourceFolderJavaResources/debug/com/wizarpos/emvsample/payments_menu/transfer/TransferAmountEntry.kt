@@ -24,6 +24,7 @@ import com.iisysgroup.poslib.deviceinterface.DeviceState
 import com.wizarpos.emvsample.MainApp
 import com.wizarpos.emvsample.R
 import com.wizarpos.emvsample.activity.FuncActivity
+import com.wizarpos.emvsample.activity.MainActivity
 import com.wizarpos.emvsample.activity.Sale
 import com.wizarpos.emvsample.activity.login.Helper
 import com.wizarpos.emvsample.activity.login.securestorage.SecureStorage
@@ -35,6 +36,7 @@ import com.wizarpos.util.ClientReferenceKey
 import com.wizarpos.util.PinAlertUtils
 import com.wizarpos.util.SharedPreferenceUtils
 import com.wizarpos.util.StringUtil.getClientRef
+import com.wizarpos.util.TransactionModel
 import kotlinx.android.synthetic.main.activity_transfer_amount_entry.*
 import kotlinx.coroutines.*
 import org.jetbrains.anko.*
@@ -484,7 +486,7 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
                     try{
                         TransferService.create().transfer(transferDetails, "application/json", signature, nonce).enqueue(object  : Callback<TransferSuccessModel>{
                             override fun onFailure(call: Call<TransferSuccessModel>, t: Throwable) {
-                                Log.d("okh", t.message)
+                         //       Log.d("okh", t.message)
                             }
 
                             override fun onResponse(call: Call<TransferSuccessModel>, response: retrofit2.Response<TransferSuccessModel>) {
@@ -495,7 +497,29 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
                                     alert {
                                         title = "Response"
                                         message = response.body()!!.message + "\n"+ response.body()!!.reason
-                                        okButton { }
+                                        okButton {
+
+                                            val userId = SecureStorage.retrieve(Helper.USER_ID, "")
+                                            val emailid = SecureStorage.retrieve(Helper.USER_EMAIL, "")
+
+                                            val transactionModel = TransactionModel(userId, "", "", "phone_number", (response.body()!!.amountDebited/100).toString(), "", "transfer", "", "Declined", response.body()!!.message, userId, emailid, "", "", "", "", "", "", "", "", "", mBankName)
+
+                                            val intent = Intent(baseContext, MainActivity::class.java)
+
+                                            intent.putExtra("transactionModel", transactionModel)
+                                            intent.putExtra("copy", "** CUSTOMER COPY **")
+                                            startActivity(intent)
+//                                            val alertDialog = AlertDialog.Builder(baseContext)
+//                                            alertDialog.setMessage("Print Merchant copy")
+//                                            alertDialog.setPositiveButton("OK") { dialogInterface, i ->
+//                                                val intent = Intent(baseContext, PrinterActivity::class.java)
+//                                                intent.putExtra("transactionModel", transactionModel)
+//                                                intent.putExtra("copy", "*** MERCHANT COPY ***")
+//                                                startActivity(intent)
+//                                            }
+//                                            alertDialog.show()
+
+                                        }
                                     }.show()
                                 } else {
                                     alert {
@@ -520,8 +544,26 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
                                             Log.d("debit print",  response.body()!!.amountDebited.toString())
                                                 appState!!.transfer = true;
                                                 appState!!.trans.transactionType = "transfer"
-                                                val printhelper = PrinterHelper.getInstance()
-                                                printhelper.printVasReceipt(appState, 0)
+
+                                            val userId = SecureStorage.retrieve(Helper.USER_ID, "")
+                                            val emailid = SecureStorage.retrieve(Helper.USER_EMAIL, "")
+
+                                            val transactionModel = TransactionModel(userId, "", "", "phone_number", (response.body()!!.amountDebited/100).toString(), "", "transfer", "00", "Approved", "", userId, emailid, "", "", "", "", "", "", "", "", "", mBankName)
+
+                                            val intent = Intent(baseContext, MainActivity::class.java)
+
+                                            intent.putExtra("transactionModel", transactionModel)
+                                            intent.putExtra("copy", "** CUSTOMER COPY **")
+                                            startActivity(intent)
+                                            val alertDialog = AlertDialog.Builder(baseContext)
+                                            alertDialog.setMessage("Print Merchant copy")
+                                            alertDialog.setPositiveButton("OK") { dialogInterface, i ->
+                                                val intent = Intent(baseContext, MainActivity::class.java)
+                                                intent.putExtra("transactionModel", transactionModel)
+                                                intent.putExtra("copy", "*** MERCHANT COPY ***")
+                                                startActivity(intent)
+                                            }
+                                            alertDialog.show()
 //                                                val intent = Intent(this@TransferAmountEntry, PrintActivity::class.java)
 //                                                intent.putExtra(PrintActivity.KEYS.PRINT_RECEIPT_MODEL_KEY, receiptModel)
 //                                                intent.putExtra(PrintActivity.KEYS.PRINT_RECEIPT_VAS_TYPE, PrintActivity.VasType.NOT_INCLUDED)
