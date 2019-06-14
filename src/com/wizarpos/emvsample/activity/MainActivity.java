@@ -129,20 +129,24 @@ public class MainActivity extends Activity {
                 printerDevice.printText(format2, "--------------------------------");
                 printerDevice.printlnText(format2,  "TID: "+transactionModel.getTerminalID());
                 printerDevice.printlnText(format2, "MID: "+transactionModel.getMerchantId());
-                printerDevice.printlnText(format2, "MERCHANT: "+transactionModel.getMerchantName());
                 printerDevice.printlnText(format2, "TRANSACTION TYPE: "+transactionModel.getTransactionType());
                 printerDevice.printlnText(format2, "CUSTOMER: "+transactionModel.getCardholderName());
-                printerDevice.printlnText(format2, "RRN: "+transactionModel.getRrn());
-                printerDevice.printlnText(format2, "PAN: "+transactionModel.getPan());
                 printerDevice.printlnText(format2, "DATE: "+transactionModel.getISODateTime());
-                printerDevice.printlnText(format2, "TICKET: "+transactionModel.getTicket());
-                printerDevice.printlnText(format2, "UNRP: "+transactionModel.getUNRP());
-                printerDevice.printlnText(format2, "AC: "+transactionModel.getAC());
-                printerDevice.printlnText(format2, "TVR: "+transactionModel.getTVR());
-                printerDevice.printlnText(format2, "AID: "+transactionModel.getAID());
-                printerDevice.printlnText(format2, "TSI: "+transactionModel.getTSI());
-                printerDevice.printlnText(format2, "CARD TYPE"+transactionModel.getCardType());
-                printerDevice.printlnText(format2, "AIP: "+transactionModel.getAIP());
+                printerDevice.printlnText(format2, "RRN: "+transactionModel.getRrn());
+
+                if (!transactionModel.getTransactionType().equalsIgnoreCase("transfer")){
+                    printerDevice.printlnText(format2, "MERCHANT: "+transactionModel.getMerchantName());
+                    printerDevice.printlnText(format2, "PAN: "+transactionModel.getPan());
+                    printerDevice.printlnText(format2, "TICKET: "+transactionModel.getTicket());
+                    printerDevice.printlnText(format2, "UNRP: "+transactionModel.getUNRP());
+                    printerDevice.printlnText(format2, "AC: "+transactionModel.getAC());
+                    printerDevice.printlnText(format2, "TVR: "+transactionModel.getTVR());
+                    printerDevice.printlnText(format2, "AID: "+transactionModel.getAID());
+                    printerDevice.printlnText(format2, "TSI: "+transactionModel.getTSI());
+                    printerDevice.printlnText(format2, "CARD TYPE"+transactionModel.getCardType());
+                    printerDevice.printlnText(format2, "AIP: "+transactionModel.getAIP());
+                }
+
 
                 printerDevice.printlnText("\n");
                 printerDevice.printlnText(format, "***********************");

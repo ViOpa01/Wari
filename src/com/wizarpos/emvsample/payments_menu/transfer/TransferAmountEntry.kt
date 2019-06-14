@@ -501,23 +501,14 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
 
                                             val userId = SecureStorage.retrieve(Helper.USER_ID, "")
                                             val emailid = SecureStorage.retrieve(Helper.USER_EMAIL, "")
-
-                                            val transactionModel = TransactionModel(userId, "", "", "phone_number", (response.body()!!.amountDebited/100).toString(), "", "transfer", "", "Declined", response.body()!!.message, userId, emailid, "", "", "", "", "", "", "", "", "", mBankName)
+                                            val currentTime = Calendar.getInstance().time.toString()
+                                            val transactionModel = TransactionModel(userId, response.body()!!.transactionID.toString(), "", "", amount, "", "transfer", "", "Declined", response.body()!!.message, userId, emailid, "", "", "", "", "", "", currentTime, "", "", mBankName)
 
                                             val intent = Intent(baseContext, MainActivity::class.java)
 
                                             intent.putExtra("transactionModel", transactionModel)
                                             intent.putExtra("copy", "** CUSTOMER COPY **")
                                             startActivity(intent)
-//                                            val alertDialog = AlertDialog.Builder(baseContext)
-//                                            alertDialog.setMessage("Print Merchant copy")
-//                                            alertDialog.setPositiveButton("OK") { dialogInterface, i ->
-//                                                val intent = Intent(baseContext, PrinterActivity::class.java)
-//                                                intent.putExtra("transactionModel", transactionModel)
-//                                                intent.putExtra("copy", "*** MERCHANT COPY ***")
-//                                                startActivity(intent)
-//                                            }
-//                                            alertDialog.show()
 
                                         }
                                     }.show()
