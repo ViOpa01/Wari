@@ -212,7 +212,7 @@ public class TransResultActivity extends FuncActivity
 
 	private void creditAirtime() {
 
-		String phone_number = SecureStorage.retrieve("phonerecharge", "").replace(" ", "");
+		final String phone_number = SecureStorage.retrieve("phonerecharge", "").replace(" ", "");
 		String airtimeProvider = SecureStorage.retrieve("airtimeprovider", "");
 		String mpin = SecureStorage.retrieve("pinentered", "");
 		final String airtime_amount = SecureStorage.retrieve("amountrecharge", "");;
@@ -231,10 +231,10 @@ public class TransResultActivity extends FuncActivity
 			public void onResponse(Call<Object> call, Response<Object> response) {
 				TransactionModel transactionModel = null;
 				if (airtimetype.equalsIgnoreCase("wallet")){
-					transactionModel = new TransactionModel(wallet, "",  "", "phone_number", airtime_amount, "", "airtel", "00", "Approved", "" , merchantID , merchantName, "", "", "", "", "", "", "", "", "", "");
+					transactionModel = new TransactionModel(wallet, "",  "", "", airtime_amount, "", "airtime", "00", "Approved", "" , merchantID , merchantName, "", "", "", "", "", "", "", "", "", "", phone_number);
 				}
 				else if (airtimetype.equalsIgnoreCase("card")){
-					transactionModel = new TransactionModel(wallet, "",  "", "phone_number", airtime_amount, "", "airtel", "00", "Approved", "" , merchantID , merchantName, "", "", "", "", "", "", "", "", "", "");
+					transactionModel = new TransactionModel(wallet, "",  "", "", airtime_amount, "", "airtime", "00", "Approved", "" , merchantID , merchantName, "", "", "", "", "", "", "", "", "", "", phone_number);
 				}
 
 
@@ -243,19 +243,19 @@ public class TransResultActivity extends FuncActivity
 				intent.putExtra("transactionModel", transactionModel);
 				intent.putExtra("copy", "** CUSTOMER COPY **");
 				startActivity(intent);
-				AlertDialog.Builder alertDialog = new AlertDialog.Builder(getBaseContext());
-				alertDialog.setMessage("Print Merchant copy");
-				final TransactionModel finalTransactionModel = transactionModel;
-				alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialogInterface, int i) {
-						Intent intent = new Intent(getBaseContext(), MainActivity.class);
-						intent.putExtra("transactionModel", finalTransactionModel);
-						intent.putExtra("copy", "*** MERCHANT COPY ***");
-						startActivity(intent);
-					}
-				});
-				alertDialog.show();
+//				AlertDialog.Builder alertDialog = new AlertDialog.Builder(getBaseContext());
+//				alertDialog.setMessage("Print Merchant copy");
+//				final TransactionModel finalTransactionModel = transactionModel;
+//				alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//					@Override
+//					public void onClick(DialogInterface dialogInterface, int i) {
+//						Intent intent = new Intent(getBaseContext(), MainActivity.class);
+//						intent.putExtra("transactionModel", finalTransactionModel);
+//						intent.putExtra("copy", "*** MERCHANT COPY ***");
+//						startActivity(intent);
+//					}
+//				});
+//				alertDialog.show();
 			}
 
 			@Override
@@ -498,7 +498,7 @@ public class TransResultActivity extends FuncActivity
         String TSI = appState.trans.getTSI();
         String cardType = appState.trans.getAppName();
         String AIP = appState.trans.getAIP();
-        String amount = appState.trans.getTransAmount().toString();
+        String amount = (appState.trans.getTransAmount()/100)+"";
         String othersAmount = appState.trans.getOthersAmount().toString();
 		String bankLogoName = "";
         try{
@@ -507,7 +507,7 @@ public class TransResultActivity extends FuncActivity
 
 		}
 
-        final TransactionModel transactionModel = new TransactionModel(terminalID,rrn,  cardholderName, pan, amount, othersAmount, transactionType, responseCode, transactionstatus, transactionstatusReason,merchantID, merchantName, ticket, UNPR, AC, TVR, AID, TSI, date, cardType, AIP, bankLogoName);
+        final TransactionModel transactionModel = new TransactionModel(terminalID,rrn,  cardholderName, pan, amount, othersAmount, transactionType, responseCode, transactionstatus, transactionstatusReason,merchantID, merchantName, ticket, UNPR, AC, TVR, AID, TSI, date, cardType, AIP, bankLogoName, "");
 		//try {
 			Intent intent = new Intent(this, MainActivity.class);
 			intent.putExtra("transactionModel", transactionModel);

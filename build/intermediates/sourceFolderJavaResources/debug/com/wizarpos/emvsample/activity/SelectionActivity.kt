@@ -38,4 +38,9 @@ class SelectionActivity : AppCompatActivity() {
         val intent = Intent(this@SelectionActivity, AirtimeActivity::class.java)
         startActivity(intent)
     }
+
+    override fun onBackPressed() {
+        finish()
+        super.onBackPressed()
+    }
 }

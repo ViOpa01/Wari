@@ -40,7 +40,7 @@ class PfmStateGenerator(val context : Context) {
 
     private fun getSerialNumber() = Build.SERIAL
 
-    private fun getCurrentTime() : String {
+    public fun getCurrentTime() : String {
         val date = Calendar.getInstance().time
 
         val timePattern = "yyyyMMDDhhmmss"

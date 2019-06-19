@@ -29,6 +29,7 @@ import com.wizarpos.emvsample.activity.Sale
 import com.wizarpos.emvsample.activity.login.Helper
 import com.wizarpos.emvsample.activity.login.securestorage.SecureStorage
 import com.wizarpos.emvsample.activity.login.securestorage.SecureStorageUtils
+import com.wizarpos.emvsample.generators.PfmStateGenerator
 import com.wizarpos.emvsample.payments_menu.models.*
 import com.wizarpos.emvsample.printer.PrinterException
 import com.wizarpos.emvsample.printer.PrinterHelper
@@ -498,11 +499,17 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
                                         title = "Response"
                                         message = response.body()!!.message + "\n"+ response.body()!!.reason
                                         okButton {
+                                            val terminalID = SecureStorage.retrieve(Helper.TERMINAL_ID, "")
+                                            var bankLogoName = ""
+                                            try {
+                                                bankLogoName = "bank" + terminalID.substring(0, 4)
+                                            } catch (e: Exception) {
 
+                                            }
                                             val userId = SecureStorage.retrieve(Helper.USER_ID, "")
                                             val emailid = SecureStorage.retrieve(Helper.USER_EMAIL, "")
-                                            val currentTime = Calendar.getInstance().time.toString()
-                                            val transactionModel = TransactionModel(userId, response.body()!!.transactionID.toString(), "", "", amount, "", "transfer", "", "Declined", response.body()!!.message, userId, emailid, "", "", "", "", "", "", currentTime, "", "", mBankName)
+                                            val date = PfmStateGenerator(baseContext).getCurrentTime()
+                                            val transactionModel = TransactionModel(userId, response.body()!!.transactionID.toString(), "", "", amount, "", "transfer", "", "Declined", response.body()!!.message, userId, emailid, "", "", "", "", "", "", date, "", "", bankLogoName, "")
 
                                             val intent = Intent(baseContext, MainActivity::class.java)
 
@@ -518,7 +525,13 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
                                         message = "${response.body()!!.message}. Your wallet has been debitted \n " +
                                                 "\n#${response.body()!!.amountDebited/100} \nBeneficiary : ${response.body()!!.beneficiaryName}"
                                         positiveButton(buttonText = "Print") {
+                                            val terminalID = SecureStorage.retrieve(Helper.TERMINAL_ID, "")
+                                            var bankLogoName = ""
+                                            try {
+                                                bankLogoName = "bank" + terminalID.substring(0, 4)
+                                            } catch (e: Exception) {
 
+                                            }
                                             val map = hashMapOf<String, String>(
                                                     "Reference" to response.body()!!.reference,
                                                     "Message" to response.body()!!.message,
@@ -538,8 +551,8 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
 
                                             val userId = SecureStorage.retrieve(Helper.USER_ID, "")
                                             val emailid = SecureStorage.retrieve(Helper.USER_EMAIL, "")
-
-                                            val transactionModel = TransactionModel(userId, "", "", "phone_number", (response.body()!!.amountDebited/100).toString(), "", "transfer", "00", "Approved", "", userId, emailid, "", "", "", "", "", "", "", "", "", mBankName)
+                                            val date = PfmStateGenerator(baseContext).getCurrentTime()
+                                            val transactionModel = TransactionModel(userId, "", "", "phone_number", (response.body()!!.amountDebited/100).toString(), "", "transfer", "00", "Approved", "", userId, emailid, "", "", "", "", "", "", date, "", "", bankLogoName, "")
 
                                             val intent = Intent(baseContext, MainActivity::class.java)
 

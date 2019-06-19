@@ -175,6 +175,7 @@ public class IdleActivity extends FuncActivity implements Constants
 		cancelMSRThread();
 		cancelContactCard();
         requestFuncMenu();
+        finish();
     }
 
 	@Override
@@ -248,4 +249,8 @@ public class IdleActivity extends FuncActivity implements Constants
 		}
     }
 
+	@Override
+	public void finish() {
+		super.finish();
+	}
 }

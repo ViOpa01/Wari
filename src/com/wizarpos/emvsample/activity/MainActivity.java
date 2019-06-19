@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.cloudpos.DeviceException;
@@ -43,6 +44,7 @@ public class MainActivity extends Activity {
     private TextView txt;
     private String str;
     private Context context = MainActivity.this;
+    private RelativeLayout printLayout;
 
 
     @Override
@@ -53,13 +55,22 @@ public class MainActivity extends Activity {
                 "cloudpos.device.printer");
         Intent intent = getIntent();
         final TransactionModel transactionModel = (TransactionModel) intent.getSerializableExtra("transactionModel");
-        final String copy = intent.getStringExtra("copy");
+        final String[] copy = {intent.getStringExtra("copy")};
         btnprintMerchant = findViewById(R.id.printMerchant);
-        printImage(transactionModel, copy);
+        printLayout = findViewById(R.id.printLayout);
+        printLayout.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        printImage(transactionModel, copy[0]);
         btnprintMerchant.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                printImage(transactionModel, copy);
+                copy[0] = "*** MERCHANT COPY ***";
+                printImage(transactionModel, copy[0]);
+                finish();
             }
         });
 
@@ -119,8 +130,8 @@ public class MainActivity extends Activity {
                 }catch (Exception e){
 
                 }
-               
 
+                printerDevice.printlnText("\n");
                 printerDevice.printText(format, copy);
                 printerDevice.printText(format, transactionModel.getTransactionStatus());
                 printerDevice.printlnText("\n");
@@ -129,12 +140,16 @@ public class MainActivity extends Activity {
                 printerDevice.printText(format2, "--------------------------------");
                 printerDevice.printlnText(format2,  "TID: "+transactionModel.getTerminalID());
                 printerDevice.printlnText(format2, "MID: "+transactionModel.getMerchantId());
-                printerDevice.printlnText(format2, "TRANSACTION TYPE: "+transactionModel.getTransactionType());
+                printerDevice.printlnText(format2, "TRANSACTION TYPE: "+transactionModel.getTransactionType().toUpperCase());
                 printerDevice.printlnText(format2, "CUSTOMER: "+transactionModel.getCardholderName());
                 printerDevice.printlnText(format2, "DATE: "+transactionModel.getISODateTime());
                 printerDevice.printlnText(format2, "RRN: "+transactionModel.getRrn());
 
-                if (!transactionModel.getTransactionType().equalsIgnoreCase("transfer")){
+                if (transactionModel.getTransactionType().equalsIgnoreCase("airtime")){
+                    printerDevice.printlnText(format2, "PHONE: "+transactionModel.getPhoneNumber());
+                }
+
+                if (!transactionModel.getTransactionType().equalsIgnoreCase("transfer") && !transactionModel.getTransactionType().equalsIgnoreCase("airtime")){
                     printerDevice.printlnText(format2, "MERCHANT: "+transactionModel.getMerchantName());
                     printerDevice.printlnText(format2, "PAN: "+transactionModel.getPan());
                     printerDevice.printlnText(format2, "TICKET: "+transactionModel.getTicket());

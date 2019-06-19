@@ -157,4 +157,9 @@ class LoginActivity : AppCompatActivity(), LoginView {
 
         }
     }
+
+    override fun onBackPressed() {
+        finish()
+        super.onBackPressed()
+    }
 }

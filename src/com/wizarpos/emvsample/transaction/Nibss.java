@@ -29,6 +29,8 @@ import com.iisysgroup.poslib.utils.InputData;
 import com.iisysgroup.poslib.utils.TransactionData;
 import com.wizarpos.emvsample.MainApp;
 import com.wizarpos.emvsample.VasTerminalService;
+import com.wizarpos.emvsample.activity.login.Helper;
+import com.wizarpos.emvsample.activity.login.securestorage.SecureStorage;
 import com.wizarpos.emvsample.constant.Constants;
 import com.wizarpos.emvsample.db.TransDetailService;
 import com.wizarpos.emvsample.db.TransactionResultService;
@@ -128,6 +130,7 @@ public class Nibss {
                                        public void onSuccess(ConfigData configData) {
                                            Toast.makeText(context, "Successfully Configured", Toast.LENGTH_SHORT).show();
                                            Log.i("okh", "Config data ready");
+                                           SecureStorage.store(Helper.TERMINAL_ID, connectionData.getTerminalID());
                                            Log.i("okh", configData.toString());
                                             NIbbsData nIbbsData = new NIbbsData(keyHolder, configData,connectionData);
                                             t.complete(nIbbsData);

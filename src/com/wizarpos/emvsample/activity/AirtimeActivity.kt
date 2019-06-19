@@ -1,6 +1,8 @@
 package com.wizarpos.emvsample.activity
 
 import android.app.Activity
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.support.constraint.ConstraintLayout
@@ -20,12 +22,15 @@ import com.wizarpos.emvsample.activity.AirtimeActivity.TAGS.AIRTIME_REQUEST_CODE
 import com.wizarpos.emvsample.activity.login.Helper
 import com.wizarpos.emvsample.activity.login.securestorage.SecureStorage
 import com.wizarpos.emvsample.activity.login.securestorage.SecureStorageUtils
+import com.wizarpos.emvsample.generators.PfmStateGenerator
 import com.wizarpos.emvsample.payments_menu.BasePaymentActivity
 import com.wizarpos.emvsample.printer.PrinterHelper
 import com.wizarpos.util.PinAlertUtils
 import com.wizarpos.util.SharedPreferenceUtils
+import com.wizarpos.util.TransactionModel
 import kotlinx.android.synthetic.main.airtime_provider_select.*
 import kotlinx.android.synthetic.main.enter_amount.*
+import kotlinx.android.synthetic.main.single_transaction.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -75,17 +80,47 @@ class AirtimeActivity : AirTimeBaseActivity(), AirtimeProcessor.onAirtimeTransac
 
     lateinit var enter: Button
     lateinit var cancel: Button
+    private var ref : String = ""
 
     var isFromVasPage = false
 
     override fun onResponse(model: AirtimeSuccessResponse) {
 
+       val terminalID =  SecureStorage.retrieve(Helper.TERMINAL_ID, "")
         if (isBeneficiary) {
             alert {
                 title = "Response"
                 message = model.message
                 positiveButton(buttonText = "Print") {
+                    var transactionModel: TransactionModel? = null
+                    val merchantID = FuncActivity.appState.nibssData.configData.getConfigData("03015").toString()
+                    val merchantName = FuncActivity.appState.nibssData.configData.getConfigData("52040").toString()
                   try{
+                      val date = PfmStateGenerator(baseContext).getCurrentTime()
+                      var bankLogoName = ""
+                      try {
+                          bankLogoName = "bank" + terminalID.substring(0, 4)
+                      } catch (e: Exception) {
+
+                      }
+
+                      transactionModel = TransactionModel(terminalID, "", "", "", airtime_amount, "", "airtime", "", "Approved", "", merchantID, merchantName, "", "", "", "", "", "", date, "", "", bankLogoName, phone_number);
+
+                      val intent = Intent(baseContext, MainActivity::class.java)
+
+                      intent.putExtra("transactionModel", transactionModel)
+                      intent.putExtra("copy", "** CUSTOMER COPY **")
+                      startActivity(intent)
+                      val alertDialog = AlertDialog.Builder(baseContext)
+                      alertDialog.setMessage("Print Merchant copy")
+                      val finalTransactionModel = transactionModel
+                      alertDialog.setPositiveButton("OK") { dialogInterface, i ->
+                          val intent = Intent(baseContext, MainActivity::class.java)
+                          intent.putExtra("transactionModel", finalTransactionModel)
+                          intent.putExtra("copy", "*** MERCHANT COPY ***")
+                          startActivity(intent)
+                      }
+                      alertDialog.show()
                      // PrinterHelper.getInstance().airtimeReceipt(FuncActivity.appState, 1,  model)
                   }catch (e : Exception){
 
@@ -97,6 +132,7 @@ class AirtimeActivity : AirTimeBaseActivity(), AirtimeProcessor.onAirtimeTransac
             alert {
                 title = "Beneficiary"
                 message = "${model.message}. This number is not currently saved. Would you want to save this number for future transactions"
+                ref = model.ref
                 yesButton {
                     //addBeneficiary(model)
                 }
@@ -106,6 +142,37 @@ class AirtimeActivity : AirTimeBaseActivity(), AirtimeProcessor.onAirtimeTransac
 
             }.show()
 
+            var transactionModel: TransactionModel? = null
+            val merchantID = FuncActivity.appState.nibssData.configData.getConfigData("03015").toString()
+            val merchantName = FuncActivity.appState.nibssData.configData.getConfigData("52040").toString()
+            try {
+                val date = PfmStateGenerator(this).getCurrentTime()
+                var bankLogoName = ""
+                try {
+                    bankLogoName = "bank" + terminalID.substring(0, 4)
+                } catch (e: Exception) {
+
+                }
+                transactionModel = TransactionModel(terminalID, ref, "", "", airtime_amount, "", "airtime", "00", "Approved", "", merchantID, merchantName, "", "", "", "", "", "", date, "", "", bankLogoName, phone_number);
+
+                val intent = Intent(baseContext, MainActivity::class.java)
+
+                intent.putExtra("transactionModel", transactionModel)
+                intent.putExtra("copy", "** CUSTOMER COPY **")
+                startActivity(intent)
+                val alertDialog = AlertDialog.Builder(baseContext)
+                alertDialog.setMessage("Print Merchant copy")
+                val finalTransactionModel = transactionModel
+                alertDialog.setPositiveButton("OK") { dialogInterface, i ->
+                    val intent = Intent(baseContext, MainActivity::class.java)
+                    intent.putExtra("transactionModel", finalTransactionModel)
+                    intent.putExtra("copy", "*** MERCHANT COPY ***")
+                    startActivity(intent)
+                }
+                alertDialog.show()
+            }catch (e : Exception){
+
+            }
         }
 
         progressDialog.hide()
@@ -113,13 +180,49 @@ class AirtimeActivity : AirTimeBaseActivity(), AirtimeProcessor.onAirtimeTransac
     }
 
     override fun onError(errorMessage: String, isCard: Boolean) {
+        val terminalID =  SecureStorage.retrieve(Helper.TERMINAL_ID, "")
         if (isCard) {
             hostInteractor.rollBackTransaction()
         }
         alert {
             title = "Response"
             message = errorMessage
-            okButton { finish() }
+            okButton {
+                //finish()
+                var transactionModel: TransactionModel? = null
+                val merchantID = FuncActivity.appState.nibssData.configData.getConfigData("03015").toString()
+                val merchantName = FuncActivity.appState.nibssData.configData.getConfigData("52040").toString()
+                try{
+                    var bankLogoName = ""
+                    try {
+                        bankLogoName = "bank" + terminalID.substring(0, 4)
+                    } catch (e: Exception) {
+
+                    }
+                    val date = PfmStateGenerator(baseContext).getCurrentTime()
+                    transactionModel = TransactionModel(terminalID, "", "", "", airtime_amount, "", "airtime", "", "Declined", "", merchantID, merchantName, "", "", "", "", "", "", date, "", "", bankLogoName, phone_number);
+
+                    val intent = Intent(baseContext, MainActivity::class.java)
+
+                    intent.putExtra("transactionModel", transactionModel)
+                    intent.putExtra("copy", "** CUSTOMER COPY **")
+                    startActivity(intent)
+                    val alertDialog = AlertDialog.Builder(baseContext)
+                    alertDialog.setMessage("Print Merchant copy")
+                    val finalTransactionModel = transactionModel
+                    alertDialog.setPositiveButton("OK") { dialogInterface, i ->
+                        val intent = Intent(baseContext, MainActivity::class.java)
+                        intent.putExtra("transactionModel", finalTransactionModel)
+                        intent.putExtra("copy", "*** MERCHANT COPY ***")
+                        startActivity(intent)
+                    }
+                    alertDialog.show()
+                    // PrinterHelper.getInstance().airtimeReceipt(FuncActivity.appState, 1,  model)
+                }catch (e : Exception){
+
+                }
+
+            }
         }.show()
         progressDialog.hide()
     }
@@ -293,7 +396,7 @@ class AirtimeActivity : AirTimeBaseActivity(), AirtimeProcessor.onAirtimeTransac
             }
             2 -> {
                 if (amount.text.toString().isNotEmpty() || amount.text.toString().toInt() < 50) {
-                    airtime_amount = amount.text.toString()
+                    airtime_amount = amount.text.toString().replace(" ", "")
                     SecureStorage.store("amountrecharge", airtime_amount.toString())
                     performTransaction(airtime_provider)
                 } else {
@@ -395,7 +498,7 @@ class AirtimeActivity : AirTimeBaseActivity(), AirtimeProcessor.onAirtimeTransac
 
                         }
                         Activity.RESULT_CANCELED -> {
-                            toast("Request unsuccessful")
+                           // toast("Request unsuccessful")
                         }
                     }
                 }
@@ -429,7 +532,7 @@ class AirtimeActivity : AirTimeBaseActivity(), AirtimeProcessor.onAirtimeTransac
 
                         }
                         Activity.RESULT_CANCELED -> {
-                            toast("Request unsuccessful")
+                           // toast("Request unsuccessful")
                         }
                     }
                 }

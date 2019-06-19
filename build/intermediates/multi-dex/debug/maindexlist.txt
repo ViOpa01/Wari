@@ -2397,13 +2397,16 @@ com/wizarpos/emvsample/activity/AirtimeActivity$onCreate$3.class
 com/wizarpos/emvsample/activity/AirtimeActivity$onCreate$4.class
 com/wizarpos/emvsample/activity/AirtimeActivity$onCreate$5.class
 com/wizarpos/emvsample/activity/AirtimeActivity$onCreate$6.class
+com/wizarpos/emvsample/activity/AirtimeActivity$onError$1$1$1.class
 com/wizarpos/emvsample/activity/AirtimeActivity$onError$1$1.class
 com/wizarpos/emvsample/activity/AirtimeActivity$onError$1.class
+com/wizarpos/emvsample/activity/AirtimeActivity$onResponse$1$1$1.class
 com/wizarpos/emvsample/activity/AirtimeActivity$onResponse$1$1.class
 com/wizarpos/emvsample/activity/AirtimeActivity$onResponse$1.class
 com/wizarpos/emvsample/activity/AirtimeActivity$onResponse$2$1.class
 com/wizarpos/emvsample/activity/AirtimeActivity$onResponse$2$2.class
 com/wizarpos/emvsample/activity/AirtimeActivity$onResponse$2.class
+com/wizarpos/emvsample/activity/AirtimeActivity$onResponse$3.class
 com/wizarpos/emvsample/activity/AirtimeActivity$payWithCard$1.class
 com/wizarpos/emvsample/activity/AirtimeActivity$payWithWallet$1.class
 com/wizarpos/emvsample/activity/AirtimeActivity$performTransaction$1$1.class
@@ -2559,6 +2562,7 @@ com/wizarpos/emvsample/activity/InputPINActivity$ReadPINThread.class
 com/wizarpos/emvsample/activity/InputPINActivity.class
 com/wizarpos/emvsample/activity/MainActivity$1.class
 com/wizarpos/emvsample/activity/MainActivity$2.class
+com/wizarpos/emvsample/activity/MainActivity$3.class
 com/wizarpos/emvsample/activity/MainActivity.class
 com/wizarpos/emvsample/activity/ProcessEMVCardActivity$EMVProcessNextThread.class
 com/wizarpos/emvsample/activity/ProcessEMVCardActivity$EMVThread.class
@@ -2591,7 +2595,6 @@ com/wizarpos/emvsample/activity/ShowPBOCCardRecordActivity$ClickListener.class
 com/wizarpos/emvsample/activity/ShowPBOCCardRecordActivity.class
 com/wizarpos/emvsample/activity/ShowTransInfoActivity$ClickListener.class
 com/wizarpos/emvsample/activity/ShowTransInfoActivity.class
-com/wizarpos/emvsample/activity/TransResultActivity$1$1.class
 com/wizarpos/emvsample/activity/TransResultActivity$1.class
 com/wizarpos/emvsample/activity/TransResultActivity$2.class
 com/wizarpos/emvsample/activity/TransResultActivity$3.class

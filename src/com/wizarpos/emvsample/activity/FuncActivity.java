@@ -1207,4 +1207,10 @@ public class FuncActivity extends AppCompatActivity implements Constants, IFunti
 		}
 
 	}
+
+	@Override
+	public void onBackPressed() {
+		finish();
+		super.onBackPressed();
+	}
 }
