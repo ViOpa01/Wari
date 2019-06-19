@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.Gravity
 import android.view.View
+import android.widget.Toast
 import com.google.gson.Gson
 //import com.wizarpos.emvsample.models.LookupSuccessModel
 import com.wizarpos.emvsample.models.ReceiptModel
@@ -386,7 +387,7 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
     }
 
     private fun verifyTransferAccountDetails(){
-        longToast("Verification \n \n Now looking for account details").setGravity(Gravity.CENTER, 0, 0)
+        longToast("Verification \n \n Now looking for account details. ").duration = Toast.LENGTH_LONG
 
         lateinit var response : LookupSuccessModel
         mWalletId = SharedPreferenceUtils.getPayviceWalletId(this@TransferAmountEntry)
@@ -458,6 +459,7 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
         Log.d("debit amount to debit",  amount.toString())
         PinAlertUtils.getPin(this, view) {
             mEncryptedPin = SecureStorageUtils.hashIt(it!!, encryptedPassword)!!
+
             GlobalScope.launch(Dispatchers.Default) {
                 try {
 
@@ -485,6 +487,7 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
                     val amount = txtAmount.text.toString()
 
                     try{
+
                         TransferService.create().transfer(transferDetails, "application/json", signature, nonce).enqueue(object  : Callback<TransferSuccessModel>{
                             override fun onFailure(call: Call<TransferSuccessModel>, t: Throwable) {
                          //       Log.d("okh", t.message)
@@ -508,7 +511,7 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
                                             }
                                             val userId = SecureStorage.retrieve(Helper.USER_ID, "")
                                             val emailid = SecureStorage.retrieve(Helper.USER_EMAIL, "")
-                                            val date = PfmStateGenerator(baseContext).getCurrentTime()
+                                            val date = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().time)
                                             val transactionModel = TransactionModel(userId, response.body()!!.transactionID.toString(), "", "", amount, "", "transfer", "", "Declined", response.body()!!.message, userId, emailid, "", "", "", "", "", "", date, "", "", bankLogoName, "")
 
                                             val intent = Intent(baseContext, MainActivity::class.java)
@@ -532,6 +535,8 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
                                             } catch (e: Exception) {
 
                                             }
+
+                                            val ref = response.body()!!.reference
                                             val map = hashMapOf<String, String>(
                                                     "Reference" to response.body()!!.reference,
                                                     "Message" to response.body()!!.message,
@@ -543,36 +548,20 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
                                             )
                                             val formattedDate = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().time)
 
-                                            val receiptModel = ReceiptModel(formattedDate, "Transfer", response.body()!!.message, map, (response.body()!!.amountDebited / 100).toString(), response.body()!!.message)
-
                                             Log.d("debit print",  response.body()!!.amountDebited.toString())
-                                                appState!!.transfer = true;
-                                                appState!!.trans.transactionType = "transfer"
+//                                                appState!!.transfer = true;
+//                                                appState!!.trans.transactionType = "transfer"
 
                                             val userId = SecureStorage.retrieve(Helper.USER_ID, "")
                                             val emailid = SecureStorage.retrieve(Helper.USER_EMAIL, "")
-                                            val date = PfmStateGenerator(baseContext).getCurrentTime()
-                                            val transactionModel = TransactionModel(userId, "", "", "phone_number", (response.body()!!.amountDebited/100).toString(), "", "transfer", "00", "Approved", "", userId, emailid, "", "", "", "", "", "", date, "", "", bankLogoName, "")
+                                            val date = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().time)
+                                            val transactionModel = TransactionModel(terminalID, ref, "", "", (response.body()!!.amountDebited/100).toString(), "", "transfer", "", "Approved", "", userId, emailid, "", "", "", "", "", "", formattedDate, "", "", bankLogoName, "")
 
                                             val intent = Intent(baseContext, MainActivity::class.java)
 
                                             intent.putExtra("transactionModel", transactionModel)
                                             intent.putExtra("copy", "** CUSTOMER COPY **")
                                             startActivity(intent)
-                                            val alertDialog = AlertDialog.Builder(baseContext)
-                                            alertDialog.setMessage("Print Merchant copy")
-                                            alertDialog.setPositiveButton("OK") { dialogInterface, i ->
-                                                val intent = Intent(baseContext, MainActivity::class.java)
-                                                intent.putExtra("transactionModel", transactionModel)
-                                                intent.putExtra("copy", "*** MERCHANT COPY ***")
-                                                startActivity(intent)
-                                            }
-                                            alertDialog.show()
-//                                                val intent = Intent(this@TransferAmountEntry, PrintActivity::class.java)
-//                                                intent.putExtra(PrintActivity.KEYS.PRINT_RECEIPT_MODEL_KEY, receiptModel)
-//                                                intent.putExtra(PrintActivity.KEYS.PRINT_RECEIPT_VAS_TYPE, PrintActivity.VasType.NOT_INCLUDED)
-//                                                //finish()
-//                                                startActivity(intent)
 
                                         }
                                     }.show()
@@ -661,7 +650,24 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
 
                                     Log.d("debit print amountSet",  transferResponse.amountSettled.toString())
                                     Log.d("debit print fee",  transferResponse.convenienceFee.toString())
-                                    printVasReceipt()
+                                    val walletId = SecureStorage.retrieve("wallet", "")
+                                    val date = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().time)
+                                    val transactionModel = TransactionModel(walletId, "", "", transferResponse.beneficiaryName, transferResponse.amountSettled.toString(), "", "transfer", "", "Approved", "", "", "", mBankName, "", "", "", "", "", date, "", "", "", "")
+
+                                    val intent = Intent(baseContext, MainActivity::class.java)
+
+                                    intent.putExtra("transactionModel", transactionModel)
+                                    intent.putExtra("copy", "** CUSTOMER COPY **")
+                                    startActivity(intent)
+                                    val alertDialog = AlertDialog.Builder(baseContext)
+                                    alertDialog.setMessage("Print Merchant copy")
+                                    alertDialog.setPositiveButton("OK") { dialogInterface, i ->
+                                        val intent = Intent(baseContext, MainActivity::class.java)
+                                        intent.putExtra("transactionModel", transactionModel)
+                                        intent.putExtra("copy", "*** MERCHANT COPY ***")
+                                        startActivity(intent)
+                                    }
+                                    alertDialog.show()
 //                                        val intent = Intent(this@TransferAmountEntry, PrintActivity::class.java)
 //                                        intent.putExtra(PrintActivity.KEYS.PRINT_RECEIPT_MODEL_KEY, receiptModel)
 //                                        intent.putExtra(PrintActivity.KEYS.PRINT_RECEIPT_VAS_TYPE, PrintActivity.VasType.NOT_INCLUDED)
@@ -717,23 +723,4 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
         }
     }
 
-
-    private fun printVasReceipt() {
-        FuncActivity.appState.printVasReceipt++
-        try {
-            PrinterHelper.getInstance().printVasReceipt(FuncActivity.appState, 1)
-            val alertDialog = AlertDialog.Builder(this)
-            alertDialog.setMessage("Print Merchant copy")
-            alertDialog.setPositiveButton("OK") { dialogInterface, i ->
-                try {
-                    PrinterHelper.getInstance().printVasReceipt(FuncActivity.appState, 0)
-                } catch (e: PrinterException) {
-                    e.printStackTrace()
-                }
-            }
-            alertDialog.show()
-        } catch (e: PrinterException) {
-        }
-
-    }
 }

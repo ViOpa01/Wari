@@ -17,8 +17,8 @@ public class TransferServices {
         val logging = HttpLoggingInterceptor()
         logging.level = HttpLoggingInterceptor.Level.BODY
 
-        clientBuilder.connectTimeout(20, TimeUnit.SECONDS)
-        clientBuilder.readTimeout(30, TimeUnit.SECONDS)
+        clientBuilder.connectTimeout(30, TimeUnit.SECONDS)
+        clientBuilder.readTimeout(60, TimeUnit.SECONDS)
         clientBuilder.writeTimeout(30, TimeUnit.SECONDS)
 
         //   clientBuilder.addInterceptor(logging)

@@ -2601,6 +2601,18 @@ com/wizarpos/emvsample/activity/TransResultActivity$3.class
 com/wizarpos/emvsample/activity/TransResultActivity$4.class
 com/wizarpos/emvsample/activity/TransResultActivity$ClickListener.class
 com/wizarpos/emvsample/activity/TransResultActivity.class
+com/wizarpos/emvsample/activity/WalletBalance$getBalance$1$1$1.class
+com/wizarpos/emvsample/activity/WalletBalance$getBalance$1$1.class
+com/wizarpos/emvsample/activity/WalletBalance$getBalance$1.class
+com/wizarpos/emvsample/activity/WalletBalance$getBalance$2$1$1.class
+com/wizarpos/emvsample/activity/WalletBalance$getBalance$2$1.class
+com/wizarpos/emvsample/activity/WalletBalance$getBalance$2.class
+com/wizarpos/emvsample/activity/WalletBalance$onCreate$1.class
+com/wizarpos/emvsample/activity/WalletBalance$onCreate$2.class
+com/wizarpos/emvsample/activity/WalletBalance$onCreate$3$1$1.class
+com/wizarpos/emvsample/activity/WalletBalance$onCreate$3$1.class
+com/wizarpos/emvsample/activity/WalletBalance$onCreate$3.class
+com/wizarpos/emvsample/activity/WalletBalance.class
 com/wizarpos/emvsample/activity/auth/EodMenu$1.class
 com/wizarpos/emvsample/activity/auth/EodMenu$2.class
 com/wizarpos/emvsample/activity/auth/EodMenu$3.class
@@ -2693,6 +2705,7 @@ com/wizarpos/emvsample/keys/KeyInjector.class
 com/wizarpos/emvsample/keys/PINPadException.class
 com/wizarpos/emvsample/keys/PinBlockEncryptionUtil.class
 com/wizarpos/emvsample/keys/TrippleDes.class
+com/wizarpos/emvsample/models/BalanceModel.class
 com/wizarpos/emvsample/models/Journal.class
 com/wizarpos/emvsample/models/LoginResponseModel$1.class
 com/wizarpos/emvsample/models/LoginResponseModel.class
@@ -2774,6 +2787,7 @@ com/wizarpos/emvsample/payments_menu/transfer/TransferAmountEntry$TRANSACTION_TY
 com/wizarpos/emvsample/payments_menu/transfer/TransferAmountEntry$WhenMappings.class
 com/wizarpos/emvsample/payments_menu/transfer/TransferAmountEntry$creditWallet$1$1$1$1.class
 com/wizarpos/emvsample/payments_menu/transfer/TransferAmountEntry$creditWallet$1$1$1.class
+com/wizarpos/emvsample/payments_menu/transfer/TransferAmountEntry$creditWallet$1$1$2$1$1.class
 com/wizarpos/emvsample/payments_menu/transfer/TransferAmountEntry$creditWallet$1$1$2$1.class
 com/wizarpos/emvsample/payments_menu/transfer/TransferAmountEntry$creditWallet$1$1$2.class
 com/wizarpos/emvsample/payments_menu/transfer/TransferAmountEntry$creditWallet$1$1.class
@@ -2791,7 +2805,6 @@ com/wizarpos/emvsample/payments_menu/transfer/TransferAmountEntry$creditWallet$1
 com/wizarpos/emvsample/payments_menu/transfer/TransferAmountEntry$creditWallet$1.class
 com/wizarpos/emvsample/payments_menu/transfer/TransferAmountEntry$debitWallet$1$1$1$onResponse$1$1.class
 com/wizarpos/emvsample/payments_menu/transfer/TransferAmountEntry$debitWallet$1$1$1$onResponse$1.class
-com/wizarpos/emvsample/payments_menu/transfer/TransferAmountEntry$debitWallet$1$1$1$onResponse$2$1$1.class
 com/wizarpos/emvsample/payments_menu/transfer/TransferAmountEntry$debitWallet$1$1$1$onResponse$2$1.class
 com/wizarpos/emvsample/payments_menu/transfer/TransferAmountEntry$debitWallet$1$1$1$onResponse$2.class
 com/wizarpos/emvsample/payments_menu/transfer/TransferAmountEntry$debitWallet$1$1$1.class
@@ -2810,7 +2823,6 @@ com/wizarpos/emvsample/payments_menu/transfer/TransferAmountEntry$onActivityResu
 com/wizarpos/emvsample/payments_menu/transfer/TransferAmountEntry$onActivityResult$2$1.class
 com/wizarpos/emvsample/payments_menu/transfer/TransferAmountEntry$onActivityResult$2.class
 com/wizarpos/emvsample/payments_menu/transfer/TransferAmountEntry$payWithCard$1.class
-com/wizarpos/emvsample/payments_menu/transfer/TransferAmountEntry$printVasReceipt$1.class
 com/wizarpos/emvsample/payments_menu/transfer/TransferAmountEntry$verifyTransferAccountDetails$1$onResponse$1$1.class
 com/wizarpos/emvsample/payments_menu/transfer/TransferAmountEntry$verifyTransferAccountDetails$1$onResponse$1.class
 com/wizarpos/emvsample/payments_menu/transfer/TransferAmountEntry$verifyTransferAccountDetails$1$onResponse$2$1.class

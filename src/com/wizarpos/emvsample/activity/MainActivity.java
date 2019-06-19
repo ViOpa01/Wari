@@ -158,7 +158,7 @@ public class MainActivity extends Activity {
                     printerDevice.printlnText(format2, "TVR: "+transactionModel.getTVR());
                     printerDevice.printlnText(format2, "AID: "+transactionModel.getAID());
                     printerDevice.printlnText(format2, "TSI: "+transactionModel.getTSI());
-                    printerDevice.printlnText(format2, "CARD TYPE"+transactionModel.getCardType());
+                    printerDevice.printlnText(format2, "CARD TYPE: "+transactionModel.getCardType());
                     printerDevice.printlnText(format2, "AIP: "+transactionModel.getAIP());
                 }
 

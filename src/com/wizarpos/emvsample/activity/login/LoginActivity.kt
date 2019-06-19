@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.Window
 import android.view.WindowManager
 import android.widget.Button
+import android.widget.Toast
 import com.wizarpos.util.SharedPreferenceUtils
 import com.wizarpos.emvsample.R
 import com.wizarpos.emvsample.activity.FuncMenuActivity
@@ -15,6 +16,8 @@ import org.jetbrains.anko.alert
 import org.jetbrains.anko.indeterminateProgressDialog
 import org.jetbrains.anko.okButton
 import org.jetbrains.anko.toast
+import com.wizarpos.emvsample.activity.IdleActivity
+
 
 class LoginActivity : AppCompatActivity(), LoginView {
     override fun showProgress() {
@@ -136,6 +139,8 @@ class LoginActivity : AppCompatActivity(), LoginView {
         } else {
 
             sign_in_button.setOnClickListener {
+
+                toast("Logging in").duration = Toast.LENGTH_LONG
                 wallet_username = username.text.toString()
                 wallet_password = password.text.toString()
 
@@ -159,7 +164,10 @@ class LoginActivity : AppCompatActivity(), LoginView {
     }
 
     override fun onBackPressed() {
-        finish()
+        val intent = Intent(applicationContext, IdleActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        intent.putExtra("EXIT", true)
+        startActivity(intent)
         super.onBackPressed()
     }
 }

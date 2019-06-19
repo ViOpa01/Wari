@@ -45,7 +45,7 @@
 //        //  Log.d("credit amount", txtAmount.text.toString().toFloat().toString())
 //        // Log.d("credit amount to debit",  amount.toString())
 //
-//        GlobalScope.launch(Dispatchers.Default) {
+//       c
 //            try {
 //
 //                val trans : TransferAmountEntry

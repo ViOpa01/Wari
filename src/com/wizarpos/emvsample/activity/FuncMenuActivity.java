@@ -186,9 +186,7 @@ public class FuncMenuActivity extends FuncActivity
 				break;
 
 			case R.id.bFunc_Trans:
-				appState.needCard = true;
-				appState.balanceEnc = true;
-				sale();
+				startActivity(new Intent(FuncMenuActivity.this, WalletBalance.class));
 				break;
 
 			case R.id.bFunc_Airtime:

@@ -19,9 +19,9 @@ class AirtimeServices {
             logging.level = HttpLoggingInterceptor.Level.BODY
 
             val clientBuilder = OkHttpClient.Builder()
-            clientBuilder.connectTimeout(20, TimeUnit.SECONDS)
-            clientBuilder.readTimeout(30, TimeUnit.SECONDS)
-            clientBuilder.writeTimeout(30, TimeUnit.SECONDS)
+            clientBuilder.connectTimeout(30, TimeUnit.SECONDS)
+            clientBuilder.readTimeout(60, TimeUnit.SECONDS)
+            clientBuilder.writeTimeout(60, TimeUnit.SECONDS)
             clientBuilder.addInterceptor(logging)
 
             val client = clientBuilder.build()

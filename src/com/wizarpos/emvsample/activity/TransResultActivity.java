@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.wizarpos.emvsample.activity.login.Helper;
 import com.wizarpos.emvsample.generators.PfmStateGenerator;
 import com.wizarpos.emvsample.models.WithdrawalWalletResponse.WithdrawalWalletCreditModel;
 import com.iisysgroup.poslib.commons.emv.EmvCard;
@@ -218,6 +219,7 @@ public class TransResultActivity extends FuncActivity
 		final String airtime_amount = SecureStorage.retrieve("amountrecharge", "");;
 		final String wallet = SecureStorage.retrieve("wallet", "");
 		String password = SecureStorage.retrieve("password", "");
+		final String terminalID = SecureStorage.retrieve(Helper.TERMINAL_ID, "");
 		final String merchantID = appState.nibssData.getConfigData().getConfigData("03015").toString();
 		final String merchantName = appState.nibssData.getConfigData().getConfigData("52040").toString();
 		final String username = SecureStorage.retrieve("username", "");
@@ -230,32 +232,34 @@ public class TransResultActivity extends FuncActivity
 			@Override
 			public void onResponse(Call<Object> call, Response<Object> response) {
 				TransactionModel transactionModel = null;
-				if (airtimetype.equalsIgnoreCase("wallet")){
-					transactionModel = new TransactionModel(wallet, "",  "", "", airtime_amount, "", "airtime", "00", "Approved", "" , merchantID , merchantName, "", "", "", "", "", "", "", "", "", "", phone_number);
+				String date = new PfmStateGenerator(getBaseContext()).getCurrentTime();
+
+				String bankLogoName = "";
+				try {
+					bankLogoName = "bank" + terminalID.substring(0, 4);
+				} catch (Exception e) {
+
 				}
-				else if (airtimetype.equalsIgnoreCase("card")){
-					transactionModel = new TransactionModel(wallet, "",  "", "", airtime_amount, "", "airtime", "00", "Approved", "" , merchantID , merchantName, "", "", "", "", "", "", "", "", "", "", phone_number);
+
+				String status = "Declined";
+				if (response.isSuccessful()){
+					status = "Approved";
 				}
 
+					if (airtimetype.equalsIgnoreCase("wallet")){
+						transactionModel = new TransactionModel(terminalID, "",  "", "", airtime_amount, "", "airtime", "", status, "" , merchantID , merchantName, "", "", "", "", "", "", date, "", "", bankLogoName, phone_number);
+					}
+					else if (airtimetype.equalsIgnoreCase("card")){
+						transactionModel = new TransactionModel(wallet, "",  "", "", airtime_amount, "", "airtime", "", status, "" , merchantID , merchantName, "", "", "", "", "", "", date, "", "", bankLogoName, phone_number);
+					}
 
-				Intent intent = new Intent(getBaseContext(), MainActivity.class);
 
-				intent.putExtra("transactionModel", transactionModel);
-				intent.putExtra("copy", "** CUSTOMER COPY **");
-				startActivity(intent);
-//				AlertDialog.Builder alertDialog = new AlertDialog.Builder(getBaseContext());
-//				alertDialog.setMessage("Print Merchant copy");
-//				final TransactionModel finalTransactionModel = transactionModel;
-//				alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-//					@Override
-//					public void onClick(DialogInterface dialogInterface, int i) {
-//						Intent intent = new Intent(getBaseContext(), MainActivity.class);
-//						intent.putExtra("transactionModel", finalTransactionModel);
-//						intent.putExtra("copy", "*** MERCHANT COPY ***");
-//						startActivity(intent);
-//					}
-//				});
-//				alertDialog.show();
+					Intent intent = new Intent(getBaseContext(), MainActivity.class);
+
+					intent.putExtra("transactionModel", transactionModel);
+					intent.putExtra("copy", "** CUSTOMER COPY **");
+					startActivity(intent);
+
 			}
 
 			@Override

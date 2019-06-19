@@ -38,6 +38,7 @@ import org.jetbrains.anko.*
 import org.jetbrains.anko.custom.async
 import java.net.ConnectException
 import java.net.SocketTimeoutException
+import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -96,7 +97,7 @@ class AirtimeActivity : AirTimeBaseActivity(), AirtimeProcessor.onAirtimeTransac
                     val merchantID = FuncActivity.appState.nibssData.configData.getConfigData("03015").toString()
                     val merchantName = FuncActivity.appState.nibssData.configData.getConfigData("52040").toString()
                   try{
-                      val date = PfmStateGenerator(baseContext).getCurrentTime()
+                      val date = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().time)
                       var bankLogoName = ""
                       try {
                           bankLogoName = "bank" + terminalID.substring(0, 4)
@@ -199,7 +200,7 @@ class AirtimeActivity : AirTimeBaseActivity(), AirtimeProcessor.onAirtimeTransac
                     } catch (e: Exception) {
 
                     }
-                    val date = PfmStateGenerator(baseContext).getCurrentTime()
+                    val date = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().time)
                     transactionModel = TransactionModel(terminalID, "", "", "", airtime_amount, "", "airtime", "", "Declined", "", merchantID, merchantName, "", "", "", "", "", "", date, "", "", bankLogoName, phone_number);
 
                     val intent = Intent(baseContext, MainActivity::class.java)

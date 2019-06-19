@@ -592,6 +592,10 @@
         "source": "C:\\Users\\Agbede\\AndroidStudioProjects\\NewNibss\\NIBSS\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v21\\ic_cancel_black_24dp.xml"
     },
     {
+        "merged": "C:\\Users\\Agbede\\AndroidStudioProjects\\NewNibss\\NIBSS\\build\\intermediates\\res\\merged\\debug\\layout_activity_wallet_balance.xml.flat",
+        "source": "C:\\Users\\Agbede\\AndroidStudioProjects\\NewNibss\\NIBSS\\res\\layout\\activity_wallet_balance.xml"
+    },
+    {
         "merged": "C:\\Users\\Agbede\\AndroidStudioProjects\\NewNibss\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_ab_share_pack_mtrl_alpha.9.png.flat",
         "source": "C:\\Users\\Agbede\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\5386c80366bd668530aa242d9fda8c4a\\res\\drawable-xhdpi-v4\\abc_ab_share_pack_mtrl_alpha.9.png"
     },

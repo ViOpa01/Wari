@@ -146,6 +146,7 @@
              <activity android:name=".activity.UpCashSaleNew" />
              <activity android:name=".activity.UpCashBalance" />-->
         <activity android:name=".activity.QueryCardRecord" />
+        <activity android:name=".activity.WalletBalance"     android:parentActivityName=".activity.FuncMenuActivity" />
         <activity android:name=".activity.GetMasterKey" android:screenOrientation="portrait"/>
         <activity android:name=".activity.auth.PinInterFace"/>
         <activity android:name=".activity.auth.EodMenu" android:screenOrientation="portrait"/>

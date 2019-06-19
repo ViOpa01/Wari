@@ -229,16 +229,16 @@ public class PrinterHelper extends Activity {
 			   /* printerWrite(("APPLAB:" + appState.trans.getAppLabel()).getBytes());
 			    printerWrite(PrinterCommand.linefeed());*/
 
-					printerWrite(("Card Type:" + appState.trans.getAppName()).getBytes());
+					printerWrite(("Card Type: " + appState.trans.getAppName()).getBytes());
 					printerWrite(PrinterCommand.linefeed());
 
-					printerWrite(("AIP:" + appState.trans.getAIP()).getBytes());
+					printerWrite(("AIP: " + appState.trans.getAIP()).getBytes());
 					printerWrite(PrinterCommand.linefeed());
 
 					if (appState.trans.isPurchasewithCash()) {
-						printerWrite(("TRANS AMOUNT: NGN" + AppUtil.formatAmount(appState.trans.getTransAmount())).getBytes());
+						printerWrite(("TRANS AMOUNT: NGN " + AppUtil.formatAmount(appState.trans.getTransAmount())).getBytes());
 						printerWrite(PrinterCommand.linefeed());
-						printerWrite(("CASHBACK AMount: NGN" + AppUtil.formatAmount(appState.trans.getOthersAmount())).getBytes());
+						printerWrite(("CASHBACK AMount: NGN " + AppUtil.formatAmount(appState.trans.getOthersAmount())).getBytes());
 						printerWrite(PrinterCommand.linefeed());
 					}
 			    
@@ -427,7 +427,7 @@ public class PrinterHelper extends Activity {
 			   /* printerWrite(("APPLAB:" + appState.trans.getAppLabel()).getBytes());
 			    printerWrite(PrinterCommand.linefeed());*/
 
-						printerWrite(("Card Type:" + appState.trans.getAppName()).getBytes());
+						printerWrite(("Card Type: " + appState.trans.getAppName()).getBytes());
 						printerWrite(PrinterCommand.linefeed());
 
 						printerWrite(("AIP:" + appState.trans.getAIP()).getBytes());

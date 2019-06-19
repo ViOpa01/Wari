@@ -40,6 +40,15 @@ public class IdleActivity extends FuncActivity implements Constants
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_idle);
+
+        try {
+			if (getIntent().getBooleanExtra("EXIT", false)) {
+				finish();
+			}
+		}catch (Exception e){
+
+	}
+
         initToolbar();
         textTitle = (TextView)findViewById(R.id.tAppTitle);
 		textTitle.setText("WARI");
