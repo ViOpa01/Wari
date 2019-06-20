@@ -23,7 +23,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
-
+//PASSWORD for release is android, ALIAS is androiddebugkey, JKS file is waripos.jks
 kotlin { experimental { coroutines 'enable' } }
 ext.anko_version = '0.10.4'
 configurations.all {exclude group: 'com.android.support', module: 'support-v4'}

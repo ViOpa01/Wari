@@ -87,7 +87,11 @@ class AirtimeActivity : AirTimeBaseActivity(), AirtimeProcessor.onAirtimeTransac
 
     override fun onResponse(model: AirtimeSuccessResponse) {
 
-       val terminalID =  SecureStorage.retrieve(Helper.TERMINAL_ID, "")
+       val terminalID =  SecureStorage.retrieve(Helper.TERMINAL, "")
+        var status = "Declined"
+        if (!model.error){
+            status = "Approved"
+        }
         if (isBeneficiary) {
             alert {
                 title = "Response"
@@ -105,7 +109,7 @@ class AirtimeActivity : AirTimeBaseActivity(), AirtimeProcessor.onAirtimeTransac
 
                       }
 
-                      transactionModel = TransactionModel(terminalID, "", "", "", airtime_amount, "", "airtime", "", "Approved", "", merchantID, merchantName, "", "", "", "", "", "", date, "", "", bankLogoName, phone_number);
+                      transactionModel = TransactionModel(terminalID, "", "", "", airtime_amount, "", "airtime", "", status, "", merchantID, merchantName, "", "", "", "", "", "", date, "", "", bankLogoName, phone_number);
 
                       val intent = Intent(baseContext, MainActivity::class.java)
 
@@ -147,14 +151,14 @@ class AirtimeActivity : AirTimeBaseActivity(), AirtimeProcessor.onAirtimeTransac
             val merchantID = FuncActivity.appState.nibssData.configData.getConfigData("03015").toString()
             val merchantName = FuncActivity.appState.nibssData.configData.getConfigData("52040").toString()
             try {
-                val date = PfmStateGenerator(this).getCurrentTime()
+                val date = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().time)
                 var bankLogoName = ""
                 try {
                     bankLogoName = "bank" + terminalID.substring(0, 4)
                 } catch (e: Exception) {
 
                 }
-                transactionModel = TransactionModel(terminalID, ref, "", "", airtime_amount, "", "airtime", "00", "Approved", "", merchantID, merchantName, "", "", "", "", "", "", date, "", "", bankLogoName, phone_number);
+                transactionModel = TransactionModel(terminalID, ref, "", "", airtime_amount, "", "airtime", "", status, "", merchantID, merchantName, "", "", "", "", "", "", date, "", "", bankLogoName, phone_number);
 
                 val intent = Intent(baseContext, MainActivity::class.java)
 
@@ -181,7 +185,7 @@ class AirtimeActivity : AirTimeBaseActivity(), AirtimeProcessor.onAirtimeTransac
     }
 
     override fun onError(errorMessage: String, isCard: Boolean) {
-        val terminalID =  SecureStorage.retrieve(Helper.TERMINAL_ID, "")
+        val terminalID =  SecureStorage.retrieve(Helper.TERMINAL, "")
         if (isCard) {
             hostInteractor.rollBackTransaction()
         }

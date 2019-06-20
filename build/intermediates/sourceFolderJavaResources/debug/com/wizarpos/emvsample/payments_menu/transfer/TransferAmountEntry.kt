@@ -502,7 +502,7 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
                                         title = "Response"
                                         message = response.body()!!.message + "\n"+ response.body()!!.reason
                                         okButton {
-                                            val terminalID = SecureStorage.retrieve(Helper.TERMINAL_ID, "")
+                                            val terminalID = SecureStorage.retrieve(Helper.TERMINAL, "")
                                             var bankLogoName = ""
                                             try {
                                                 bankLogoName = "bank" + terminalID.substring(0, 4)
@@ -528,7 +528,7 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
                                         message = "${response.body()!!.message}. Your wallet has been debitted \n " +
                                                 "\n#${response.body()!!.amountDebited/100} \nBeneficiary : ${response.body()!!.beneficiaryName}"
                                         positiveButton(buttonText = "Print") {
-                                            val terminalID = SecureStorage.retrieve(Helper.TERMINAL_ID, "")
+                                            val terminalID = SecureStorage.retrieve(Helper.TERMINAL, "")
                                             var bankLogoName = ""
                                             try {
                                                 bankLogoName = "bank" + terminalID.substring(0, 4)

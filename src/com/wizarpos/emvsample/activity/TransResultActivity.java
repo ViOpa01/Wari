@@ -219,7 +219,7 @@ public class TransResultActivity extends FuncActivity
 		final String airtime_amount = SecureStorage.retrieve("amountrecharge", "");;
 		final String wallet = SecureStorage.retrieve("wallet", "");
 		String password = SecureStorage.retrieve("password", "");
-		final String terminalID = SecureStorage.retrieve(Helper.TERMINAL_ID, "");
+		final String terminalID = SecureStorage.retrieve(Helper.TERMINAL, "");
 		final String merchantID = appState.nibssData.getConfigData().getConfigData("03015").toString();
 		final String merchantName = appState.nibssData.getConfigData().getConfigData("52040").toString();
 		final String username = SecureStorage.retrieve("username", "");

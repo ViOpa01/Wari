@@ -130,7 +130,7 @@ public class Nibss {
                                        public void onSuccess(ConfigData configData) {
                                            Toast.makeText(context, "Successfully Configured", Toast.LENGTH_SHORT).show();
                                            Log.i("okh", "Config data ready");
-                                           SecureStorage.store(Helper.TERMINAL_ID, connectionData.getTerminalID());
+                                           SecureStorage.store(Helper.TERMINAL, connectionData.getTerminalID());
                                            Log.i("okh", configData.toString());
                                             NIbbsData nIbbsData = new NIbbsData(keyHolder, configData,connectionData);
                                             t.complete(nIbbsData);
@@ -184,7 +184,7 @@ public class Nibss {
         }
     }
 
-    public  void configureTerminal (String terminalID, final Nibs<NIbbsData> t){
+    public  void configureTerminal (final String terminalID, final Nibs<NIbbsData> t){
         Log.i("okh", "preping terminal");
 
         getVasKeys();
@@ -242,7 +242,8 @@ public class Nibss {
                                     public void onSuccess(ConfigData configData) {
                                         Toast.makeText(context, "Successfully Configured", Toast.LENGTH_SHORT).show();
                                         Log.i("okh", "Config data ready");
-                                        Log.i("okh", configData.toString());
+                                        SecureStorage.store(Helper.TERMINAL, terminalID);
+                                        String ter = SecureStorage.retrieve(Helper.TERMINAL, "");
                                         NIbbsData nIbbsData = new NIbbsData(keyHolder, configData,connectionData);
                                         t.complete(nIbbsData);
                                     }

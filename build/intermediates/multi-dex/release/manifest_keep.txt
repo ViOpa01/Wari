@@ -1,0 +1,3 @@
+# Referenced at C:\Users\Agbede\AndroidStudioProjects\NewNibss\NIBSS\build\intermediates\manifests\full\release\AndroidManifest.xml:34
+-keep class com.wizarpos.emvsample.MainApp { <init>(...); }
+

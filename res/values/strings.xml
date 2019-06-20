@@ -73,5 +73,6 @@
     <string name="printBarCode">Barcode</string>
     <string name="printEsc">Esc</string>
     <string name="print_merchant_s_copy">Print Merchant\'s Copy</string>
+    <string name="airtime_and_data">Airtime &amp; Data</string>
 
 </resources>

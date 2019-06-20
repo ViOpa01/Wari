@@ -1,6 +1,7 @@
 package com.wizarpos.emvsample.activity
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -17,7 +18,9 @@ import com.wizarpos.emvsample.activity.login.securestorage.SecureStorage
 import com.wizarpos.emvsample.activity.login.securestorage.SecureStorageUtils
 import com.wizarpos.util.PinAlertUtils
 import com.wizarpos.util.SharedPreferenceUtils
+import com.wizarpos.util.TransactionModel
 import kotlinx.android.synthetic.main.activity_data_phone_entry.*
+import kotlinx.android.synthetic.main.single_transaction.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -27,6 +30,8 @@ import org.jetbrains.anko.okButton
 import org.jetbrains.anko.toast
 import java.net.ConnectException
 import java.net.SocketTimeoutException
+import java.text.SimpleDateFormat
+import java.util.*
 
 class DataPhoneEntry : AppCompatActivity(), View.OnClickListener {
     private val isBeneficiary by lazy {
@@ -95,11 +100,45 @@ class DataPhoneEntry : AppCompatActivity(), View.OnClickListener {
 
                         GlobalScope.launch(Dispatchers.Main) {
                             mAirtimeProcessDialog.dismiss()
+                            val terminalID = SecureStorage.retrieve(Helper.TERMINAL, "")
+                            val amount = formattedResponse.amount
+                            val ref = formattedResponse.ref
                             alert {
                                 title = "Response"
                                 message = formattedResponse.message
                                 positiveButton(buttonText = "Print") {
-                                    //printWalletTransaction(formattedResponse, null, formattedResponse.message)
+                                    var transactionModel: TransactionModel? = null
+                                    val merchantID = FuncActivity.appState.nibssData.configData.getConfigData("03015").toString()
+                                    val merchantName = FuncActivity.appState.nibssData.configData.getConfigData("52040").toString()
+                                    try {
+                                        val date = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().time)
+                                        var bankLogoName = ""
+                                        try {
+                                            bankLogoName = "bank" + terminalID.substring(0, 4)
+                                        } catch (e: Exception) {
+
+                                        }
+
+                                        transactionModel = TransactionModel(terminalID, ref, "", "", amount, "", "data", "", "Approved", "", merchantID, merchantName, "", "", "", "", "", "", date, "", "", bankLogoName, mPhoneNumber);
+
+                                        val intent = Intent(baseContext, MainActivity::class.java)
+
+                                        intent.putExtra("transactionModel", transactionModel)
+                                        intent.putExtra("copy", "** CUSTOMER COPY **")
+                                        startActivity(intent)
+                                        val alertDialog = AlertDialog.Builder(baseContext)
+                                        alertDialog.setMessage("Print Merchant copy")
+                                        val finalTransactionModel = transactionModel
+                                        alertDialog.setPositiveButton("OK") { dialogInterface, i ->
+                                            val intent = Intent(baseContext, MainActivity::class.java)
+                                            intent.putExtra("transactionModel", finalTransactionModel)
+                                            intent.putExtra("copy", "*** MERCHANT COPY ***")
+                                            startActivity(intent)
+                                        }
+                                        alertDialog.show()
+                                        // PrinterHelper.getInstance().airtimeReceipt(FuncActivity.appState, 1,  model)
+                                    } catch (e: Exception) {
+                                    }
                                 }
                             }.show()
                         }
@@ -110,9 +149,45 @@ class DataPhoneEntry : AppCompatActivity(), View.OnClickListener {
                         //todo handle a rollback
                         GlobalScope.launch(Dispatchers.Main) {
                             mAirtimeProcessDialog.dismiss()
+                            val terminalID = SecureStorage.retrieve(Helper.TERMINAL, "")
+                            val ref = formattedResponse.ref
                             alert {
                                 title = "Response"
                                 message = formattedResponse.message
+                                positiveButton(buttonText = "Print") {
+                                    var transactionModel: TransactionModel? = null
+                                    val merchantID = FuncActivity.appState.nibssData.configData.getConfigData("03015").toString()
+                                    val merchantName = FuncActivity.appState.nibssData.configData.getConfigData("52040").toString()
+                                    try {
+                                        val date = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().time)
+                                        var bankLogoName = ""
+                                        try {
+                                            bankLogoName = "bank" + terminalID.substring(0, 4)
+                                        } catch (e: Exception) {
+
+                                        }
+
+                                        transactionModel = TransactionModel(terminalID, ref, "", "", dataItem.amount, "", "data", "", "Declined", "", merchantID, merchantName, "", "", "", "", "", "", date, "", "", bankLogoName, mPhoneNumber);
+
+                                        val intent = Intent(baseContext, MainActivity::class.java)
+
+                                        intent.putExtra("transactionModel", transactionModel)
+                                        intent.putExtra("copy", "** CUSTOMER COPY **")
+                                        startActivity(intent)
+                                        val alertDialog = AlertDialog.Builder(baseContext)
+                                        alertDialog.setMessage("Print Merchant copy")
+                                        val finalTransactionModel = transactionModel
+                                        alertDialog.setPositiveButton("OK") { dialogInterface, i ->
+                                            val intent = Intent(baseContext, MainActivity::class.java)
+                                            intent.putExtra("transactionModel", finalTransactionModel)
+                                            intent.putExtra("copy", "*** MERCHANT COPY ***")
+                                            startActivity(intent)
+                                        }
+                                        alertDialog.show()
+                                        // PrinterHelper.getInstance().airtimeReceipt(FuncActivity.appState, 1,  model)
+                                    } catch (e: Exception) {
+                                    }
+                                }
                             }.show()
                         }
                     }
@@ -306,11 +381,45 @@ class DataPhoneEntry : AppCompatActivity(), View.OnClickListener {
 
                                                     GlobalScope.launch(Dispatchers.Main){
                                                         mAirtimeProcessDialog.dismiss()
+                                                        val terminalID = SecureStorage.retrieve(Helper.TERMINAL, "")
+                                                        val amount = formattedResponse.amount
+                                                        val ref = formattedResponse.ref
                                                         alert {
                                                             title = "Response"
                                                             message = formattedResponse.message
                                                             positiveButton(buttonText = "Print") {
-                                                                //printWalletTransaction(formattedResponse, transactionResult, transactionResult.transactionStatus)
+                                                                var transactionModel: TransactionModel? = null
+                                                                val merchantID = FuncActivity.appState.nibssData.configData.getConfigData("03015").toString()
+                                                                val merchantName = FuncActivity.appState.nibssData.configData.getConfigData("52040").toString()
+                                                                try {
+                                                                    val date = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().time)
+                                                                    var bankLogoName = ""
+                                                                    try {
+                                                                        bankLogoName = "bank" + terminalID.substring(0, 4)
+                                                                    } catch (e: Exception) {
+
+                                                                    }
+
+                                                                    transactionModel = TransactionModel(terminalID, ref, "", "", amount, "", "data", "", "Approved", "", merchantID, merchantName, "", "", "", "", "", "", date, "", "", bankLogoName, mPhoneNumber);
+
+                                                                    val intent = Intent(baseContext, MainActivity::class.java)
+
+                                                                    intent.putExtra("transactionModel", transactionModel)
+                                                                    intent.putExtra("copy", "** CUSTOMER COPY **")
+                                                                    startActivity(intent)
+                                                                    val alertDialog = AlertDialog.Builder(baseContext)
+                                                                    alertDialog.setMessage("Print Merchant copy")
+                                                                    val finalTransactionModel = transactionModel
+                                                                    alertDialog.setPositiveButton("OK") { dialogInterface, i ->
+                                                                        val intent = Intent(baseContext, MainActivity::class.java)
+                                                                        intent.putExtra("transactionModel", finalTransactionModel)
+                                                                        intent.putExtra("copy", "*** MERCHANT COPY ***")
+                                                                        startActivity(intent)
+                                                                    }
+                                                                    alertDialog.show()
+                                                                    // PrinterHelper.getInstance().airtimeReceipt(FuncActivity.appState, 1,  model)
+                                                                } catch (e: Exception) {
+                                                                }
                                                             }
                                                         }.show()
                                                     }
@@ -332,9 +441,45 @@ class DataPhoneEntry : AppCompatActivity(), View.OnClickListener {
                                                             }*/
                                                     GlobalScope.launch(Dispatchers.Main){
                                                         mAirtimeProcessDialog.dismiss()
+                                                        val terminalID = SecureStorage.retrieve(Helper.TERMINAL, "")
+                                                        val ref = formattedResponse.ref
                                                         alert {
                                                             title = "Response"
                                                             message = formattedResponse.message
+                                                            positiveButton(buttonText = "Print") {
+                                                                var transactionModel: TransactionModel? = null
+                                                                val merchantID = FuncActivity.appState.nibssData.configData.getConfigData("03015").toString()
+                                                                val merchantName = FuncActivity.appState.nibssData.configData.getConfigData("52040").toString()
+                                                                try {
+                                                                    val date = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().time)
+                                                                    var bankLogoName = ""
+                                                                    try {
+                                                                        bankLogoName = "bank" + terminalID.substring(0, 4)
+                                                                    } catch (e: Exception) {
+
+                                                                    }
+
+                                                                    transactionModel = TransactionModel(terminalID, ref, "", "", dataItem.amount, "", "data", "", "Declined", "", merchantID, merchantName, "", "", "", "", "", "", date, "", "", bankLogoName, mPhoneNumber);
+
+                                                                    val intent = Intent(baseContext, MainActivity::class.java)
+
+                                                                    intent.putExtra("transactionModel", transactionModel)
+                                                                    intent.putExtra("copy", "** CUSTOMER COPY **")
+                                                                    startActivity(intent)
+                                                                    val alertDialog = AlertDialog.Builder(baseContext)
+                                                                    alertDialog.setMessage("Print Merchant copy")
+                                                                    val finalTransactionModel = transactionModel
+                                                                    alertDialog.setPositiveButton("OK") { dialogInterface, i ->
+                                                                        val intent = Intent(baseContext, MainActivity::class.java)
+                                                                        intent.putExtra("transactionModel", finalTransactionModel)
+                                                                        intent.putExtra("copy", "*** MERCHANT COPY ***")
+                                                                        startActivity(intent)
+                                                                    }
+                                                                    alertDialog.show()
+                                                                    // PrinterHelper.getInstance().airtimeReceipt(FuncActivity.appState, 1,  model)
+                                                                } catch (e: Exception) {
+                                                                }
+                                                            }
                                                         }.show()
                                                     }
                                                 }

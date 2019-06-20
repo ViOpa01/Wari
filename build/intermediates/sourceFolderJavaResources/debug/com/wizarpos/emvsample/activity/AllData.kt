@@ -51,8 +51,6 @@ class AllData : AppCompatActivity(), DataAdapter.DataClickListener {
     override fun onDataItemClick(data: ArrayList<DataModel.DataResponseElements>, position: Int) {
         val dataSelected = data[position]
 
-
-
         val intent = Intent(this@AllData, DataPhoneEntry::class.java)
 
         intent.putExtra(KEYS.DATA_VALUE, dataSelected)

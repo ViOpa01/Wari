@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.wizarpos.emvsample.R;
 import com.wizarpos.emvsample.transaction.TransDefine;
@@ -171,6 +172,7 @@ public class ProcessEMVCardActivity extends FuncActivity
 						appState.trans.setExpiry(StringUtil.toHexString(tagData, 0, 3, false).substring(0, 4));
 					}
 					//confirmCard();
+					Toast.makeText(this, "Please Enter Pin", Toast.LENGTH_SHORT).show();
 					mEMVProcessNextThread = new EMVProcessNextThread();
 					mEMVProcessNextThread.start();
 
@@ -188,6 +190,8 @@ public class ProcessEMVCardActivity extends FuncActivity
 					{
 						appState.promptOfflineDataAuthSucc = true;
 					}
+
+					Toast.makeText(this, "Please Enter Pin", Toast.LENGTH_SHORT).show();
 					mEMVProcessNextThread = new EMVProcessNextThread();
 					mEMVProcessNextThread.start();
 					break;

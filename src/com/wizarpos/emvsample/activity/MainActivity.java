@@ -22,6 +22,8 @@ import com.cloudpos.printer.PrinterDevice;
 import com.google.gson.Gson;
 import com.wizarpos.emvsample.MainApp;
 import com.wizarpos.emvsample.R;
+import com.wizarpos.emvsample.activity.login.Helper;
+import com.wizarpos.emvsample.activity.login.securestorage.SecureStorage;
 import com.wizarpos.emvsample.constant.Constants;
 import com.wizarpos.emvsample.parameter.BalanceResponse;
 import com.wizarpos.emvsample.printer.PrinterCommand;
@@ -43,6 +45,7 @@ public class MainActivity extends Activity {
     private Format format2;
     private TextView txt;
     private String str;
+    private String walletID;
     private Context context = MainActivity.this;
     private RelativeLayout printLayout;
 
@@ -51,6 +54,7 @@ public class MainActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        walletID = SecureStorage.retrieve(Helper.TERMINAL_ID, "");
         printerDevice = (PrinterDevice) POSTerminal.getInstance(getApplicationContext()).getDevice(
                 "cloudpos.device.printer");
         Intent intent = getIntent();
@@ -113,7 +117,7 @@ public class MainActivity extends Activity {
                 format.setParameter("bold", "true");
 
                 format2.setParameter("align", "left");
-                format2.setParameter("bold", "false");
+                format2.setParameter("bold", "true");
 
                 try {
                     String bankLogoName = transactionModel.getBankLogoName();
@@ -132,24 +136,28 @@ public class MainActivity extends Activity {
                 }
 
                 printerDevice.printlnText("\n");
-                printerDevice.printText(format, copy);
-                printerDevice.printText(format, transactionModel.getTransactionStatus());
+                printerDevice.printlnText(format, copy);
+                printerDevice.printlnText(format, transactionModel.getTransactionStatus());
                 printerDevice.printlnText("\n");
-                printerDevice.printText(format, transactionModel.getTransactionStatusReason());
-                printerDevice.printlnText("\n");
+                if (!transactionModel.getTransactionStatusReason().isEmpty()) {
+                    printerDevice.printText(format, transactionModel.getTransactionStatusReason());
+                    printerDevice.printlnText("\n");
+                }
+                printerDevice.printlnText(format, transactionModel.getTransactionType().toUpperCase());
                 printerDevice.printText(format2, "--------------------------------");
                 printerDevice.printlnText(format2,  "TID: "+transactionModel.getTerminalID());
+                printerDevice.printlnText(format2,  "WID: "+walletID);
                 printerDevice.printlnText(format2, "MID: "+transactionModel.getMerchantId());
                 printerDevice.printlnText(format2, "TRANSACTION TYPE: "+transactionModel.getTransactionType().toUpperCase());
                 printerDevice.printlnText(format2, "CUSTOMER: "+transactionModel.getCardholderName());
                 printerDevice.printlnText(format2, "DATE: "+transactionModel.getISODateTime());
                 printerDevice.printlnText(format2, "RRN: "+transactionModel.getRrn());
 
-                if (transactionModel.getTransactionType().equalsIgnoreCase("airtime")){
+                if (transactionModel.getTransactionType().equalsIgnoreCase("airtime") || transactionModel.getTransactionType().equalsIgnoreCase("data")){
                     printerDevice.printlnText(format2, "PHONE: "+transactionModel.getPhoneNumber());
                 }
 
-                if (!transactionModel.getTransactionType().equalsIgnoreCase("transfer") && !transactionModel.getTransactionType().equalsIgnoreCase("airtime")){
+                if (!transactionModel.getTransactionType().equalsIgnoreCase("transfer") && !transactionModel.getTransactionType().equalsIgnoreCase("airtime") && !transactionModel.getTransactionType().equalsIgnoreCase("data")){
                     printerDevice.printlnText(format2, "MERCHANT: "+transactionModel.getMerchantName());
                     printerDevice.printlnText(format2, "PAN: "+transactionModel.getPan());
                     printerDevice.printlnText(format2, "TICKET: "+transactionModel.getTicket());
@@ -172,6 +180,8 @@ public class MainActivity extends Activity {
                 printerDevice.printlnText(format, "WARI");
                 printerDevice.printlnText(format, "www.iisysgroup.com");
                 printerDevice.printlnText(format, "0700-2255-4839");
+                printerDevice.printlnText("\n");
+
                 printerDevice.close();
 
             }
