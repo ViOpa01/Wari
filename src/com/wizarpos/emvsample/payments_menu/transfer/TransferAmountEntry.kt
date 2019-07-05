@@ -178,7 +178,7 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
             val clientReferenceKey : ClientReferenceKey
             FuncActivity.appState.needCard = true
             FuncActivity.appState.withdrawal = true
-//            val withdrawaldetails = WithdrawalDetails(wallet = mWalletId, username = mWalletUsername, password = mPlainPassword, pin = mEncryptedPin, type = "default", amount = amountToDebit, vendorBankCode = mBankCode, channel = "ANDROIDPOS", phone = "", paymentMethod = "card", productCode = mProductCode, reference = clientReferenceKey.generateReference(getBaseContext()), pfm = clientReferenceKey.generatePFM(transactionResult, getBaseContext()))
+//            val withdrawaldetails = WithdrawalDetails(wallet = mWalletId, userName = mWalletUsername, password = mPlainPassword, pin = mEncryptedPin, type = "default", amount = amountToDebit, vendorBankCode = mBankCode, channel = "ANDROIDPOS", phone = "", paymentMethod = "card", productCode = mProductCode, reference = clientReferenceKey.generateReference(getBaseContext()), pfm = clientReferenceKey.generatePFM(transactionResult, getBaseContext()))
             Log.d("okh", "$amountToDebit init amount");
             //  intent.putExtra("withdrawaldetails", withdrawaldetails);
             SecureStorage.store("amount", 2.0)
@@ -190,7 +190,7 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
             SecureStorage.store("type", "default")
             SecureStorage.store("vendorBankCode", mBankCode)
             SecureStorage.store("wallet", mWalletId)
-            SecureStorage.store("username", mWalletUsername)
+            SecureStorage.store("userName", mWalletUsername)
             SecureStorage.store("phone", "")
             val vendorBankCode = SecureStorage.retrieve("vendorBankCode", "")
             Log.d("okh", "saved "+ vendorBankCode)
@@ -602,7 +602,7 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
                 }
 
 //clientReference = clientReference,
-//                    transferDetails = WithdrawalDetails(wallet = mWalletId, username = mWalletUsername, password = mPlainPassword, pin = mEncryptedPin, type = "default", amount = amountToDebit, vendorBankCode = mBankCode, channel = "ANDROIDPOS", phone = "", paymentMethod = "card", productCode = mProductCode)
+//                    transferDetails = WithdrawalDetails(wallet = mWalletId, userName = mWalletUsername, password = mPlainPassword, pin = mEncryptedPin, type = "default", amount = amountToDebit, vendorBankCode = mBankCode, channel = "ANDROIDPOS", phone = "", paymentMethod = "card", productCode = mProductCode)
 
 //                    val clientReference = getClientRef(this@TransferAmountEntry, "")
                 val clientReference = getClientRef(context, "")

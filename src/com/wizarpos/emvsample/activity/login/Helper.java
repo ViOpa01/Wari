@@ -1,6 +1,7 @@
 package com.wizarpos.emvsample.activity.login;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -62,7 +63,7 @@ public class Helper {
     public static String PIN = "pin_";
     public static String USER_ID = "user_id";
     public static String USER_EMAIL = "user_email";
-    public static String USERNAME = "username";
+    public static String USERNAME = "userName";
     public static String USER_PHONE = "phone_number";
     public static String LOGGED_IN = "is_logged_in";
     public static String STAY_LOGGED_IN = "stay_logged_in";
@@ -76,6 +77,7 @@ public class Helper {
     public static String DOWNLOAD_BALANCE = "dbll";
     public static String REFERRAL_CODE = "referral_code";
     public static String TIME_OUT_TIME = "time_out_time";
+    public static String PASSWORD = "password";
 
     public static String HISTORY_SERIAL = "history_serial";
     public static String COMMISSION_KEY = "commission key";
@@ -87,6 +89,10 @@ public class Helper {
 
     public static String KEY_SESSION_EXPIRY_TIME = "session_expiry_time";
     public static String KEY_SHOULD_AUTO_LOG_OUT = "auto_log_user_out";
+    public static String WALLET = "wallet";
+    public static String CHANNEL = "channel";
+
+
 
     static Handler handler = new Handler();
     static SharedPreferences prefs;
@@ -351,6 +357,10 @@ public class Helper {
         String password = SecureStorage.retrieve(Helper.STORED_PASSWORD, "");
         return SecureStorageUtils.hashIt(clrPin, password);
     }
+
+
+
+
 
     public static void clearData() {
   //      SecureStorage.delete(STORED_PASSWORD);

@@ -5,9 +5,13 @@ import android.preference.PreferenceManager
 import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.iisysgroup.poslib.commons.emv.EmvCard
+import com.itex.richard.payviceconnect.model.AirtimeModel
 import com.wizarpos.emvsample.R
 import com.wizarpos.emvsample.activity.login.Helper
 import com.wizarpos.emvsample.activity.login.securestorage.SecureStorage
+import com.wizarpos.emvsample.generators.PfmStateGenerator
+import com.wizarpos.emvsample.models.PfmJournalGenerator
 import com.wizarpos.util.SharedPreferenceUtils
 import retrofit2.Call
 import retrofit2.Callback
@@ -15,7 +19,7 @@ import retrofit2.Response
 import java.net.ConnectException
 import java.net.SocketTimeoutException
 
-class AirtimeProcessor(val context : Context, listener : onAirtimeTransactionResultListener, airtimeProvider : String, phoneNumber : String, airtimeAmount : String, isCard : Boolean = false) :  Callback<Any> {
+class AirtimeProcessor(val context : Context, listener : onAirtimeTransactionResultListener, airtimeProvider : String, phoneNumber : String, airtimeAmount : String, isCard : Boolean = false) :  Callback<AirtimeModel.AirtimePinResponse> {
 
     private val mPayvicePin by lazy {
         PreferenceManager.getDefaultSharedPreferences(context).getString(context.getString(R.string.key_payvice_wallet_pin),"")
@@ -49,13 +53,20 @@ class AirtimeProcessor(val context : Context, listener : onAirtimeTransactionRes
     fun performTransaction(isCard: Boolean = false, pin : String){
         this.isCard = isCard
 
+        val pinInfo = EmvCard.PinInfo(FuncActivity.appState.trans.getPinBlock(), null, null)
+		val emvCard = EmvCard(FuncActivity.appState.trans.getCardHolderName(), FuncActivity.appState.trans.getTrack2Data(), FuncActivity.appState.trans.getICCData(), pinInfo)
+
+		val pfm:com.itex.richard.payviceconnect.model.Pfm = com.itex.richard.payviceconnect.model.Pfm(PfmStateGenerator(context).generateState(), PfmJournalGenerator(FuncActivity.appState.trans.getTransactionResult(), FuncActivity.appState.nibssData.getConfigData(), false, airtimeAmount, emvCard, "Airtime", airtimeProvider, "").generateJournal())
+
+
+
         if (isCard){
-            val details = AirtimeRequestDetails(amount = airtimeAmount, phone = phoneNumber, service = airtimeProvider, terminal_id = wallet_id, user_id = wallet_username, password = wallet_clear_password, pin = pin)
+            val details = AirtimeRequestDetails(amount = airtimeAmount, phone = phoneNumber, service = airtimeProvider, terminal_id = wallet_id, user_id = wallet_username, password = wallet_clear_password, pin = pin, pfm = pfm)
             AirtimeService.create().airtimeCardPurchase(details).enqueue(this)
             return
         }
 
-        val details = AirtimeRequestDetails(amount = airtimeAmount, phone = phoneNumber, service = airtimeProvider, terminal_id = wallet_id, user_id = wallet_username, password = wallet_clear_password, pin = pin)
+        val details = AirtimeRequestDetails(amount = airtimeAmount, phone = phoneNumber, service = airtimeProvider, terminal_id = wallet_id, user_id = wallet_username, password = wallet_clear_password, pin = pin, pfm = pfm)
         AirtimeService.create().airtimePurchase(details).enqueue(this)
 
     }
@@ -65,7 +76,7 @@ class AirtimeProcessor(val context : Context, listener : onAirtimeTransactionRes
         fun onError(errorMessage : String, isCard : Boolean)
     }
 
-    override fun onFailure(call: Call<Any>?, t: Throwable?) {
+    override fun onFailure(call: Call<AirtimeModel.AirtimePinResponse>?, t: Throwable?) {
         t?.let {
             Log.d("Special error", "Some error2")
             Log.d("Special error", it.toString())
@@ -90,7 +101,7 @@ class AirtimeProcessor(val context : Context, listener : onAirtimeTransactionRes
 
     }
 
-    override fun onResponse(call: Call<Any>?, response: Response<Any>?) {
+    override fun onResponse(call: Call<AirtimeModel.AirtimePinResponse>?, response: Response<AirtimeModel.AirtimePinResponse>?) {
         response?.body()?.let {
             val jsonResponse = Gson().toJsonTree(it)
             val gson = GsonBuilder().excludeFieldsWithoutExposeAnnotation().create()

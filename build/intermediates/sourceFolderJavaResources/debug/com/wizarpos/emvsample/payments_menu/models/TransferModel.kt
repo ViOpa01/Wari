@@ -21,4 +21,4 @@ data class TransferDetail(val wallet : String, val username : String, val passwo
 
 data class TransferDetails(val wallet : String, val username : String, val password : String, val pin : String, val type : String, val amount : Float, val phone : String, val beneficiary : String, val vendorBankCode : String, val channel : String, val paymentMethod : String, val productCode: String)
 
-data class WithdrawalDetails(val wallet : String, val username : String, val password : String, val pin : String, val type : String, val amount : Double, val phone : String, val vendorBankCode : String, val channel : String, val paymentMethod : String, val productCode: String, val pfm : Pfm) : Serializable
+data class WithdrawalDetails(val wallet : String, val username : String, val password : String, val pin : String, val type : String, val amount : Double, val phone : String, val vendorBankCode : String, val channel : String, val paymentMethod : String, val productCode: String, val pfm : com.itex.richard.payviceconnect.model.Pfm) : Serializable

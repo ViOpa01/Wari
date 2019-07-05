@@ -8,6 +8,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -32,6 +33,7 @@ import com.wizarpos.jni.PrinterInterface;
 import com.wizarpos.util.AppUtil;
 import com.wizarpos.util.StringUtil;
 import com.wizarpos.util.TransactionModel;
+import com.wizarpos.util.VasServices;
 
 import java.io.ByteArrayOutputStream;
 import java.io.UnsupportedEncodingException;
@@ -118,17 +120,62 @@ public class MainActivity extends Activity {
 
                 format2.setParameter("align", "left");
                 format2.setParameter("bold", "true");
+                boolean isElectricityPurchase =false;
+                boolean isPrepaidPurchase =false;
 
+
+                String  transactionName=transactionModel.getTransactionType();
                 try {
-                    String bankLogoName = transactionModel.getBankLogoName();
-                    int resourceId = getResources().getIdentifier(bankLogoName, "drawable",
-                            getPackageName());
 
-                    Drawable drawable = getResources().getDrawable(resourceId);
-                    Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
-                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                    String bankLogoName = "";
+                    int resourceId  = 0;
 
+
+                    switch(transactionName){
+
+                        case VasServices.ABUJA_ELECTRIC : {
+                            resourceId=VasServices.SERVICES.get(transactionName).icon;
+                        }
+                                    break;
+                        case VasServices.EKO_ELECTRIC :{
+                            resourceId=VasServices.SERVICES.get(transactionName).icon;
+
+                        }
+
+                        case VasServices.ENUGU_ELECTRIC : {
+                            resourceId=VasServices.SERVICES.get(transactionName).icon;
+                        }
+                        break;
+                        case VasServices.IBADAN_ELECTRIC :{
+                            resourceId=VasServices.SERVICES.get(transactionName).icon;
+
+                        }
+
+                        case VasServices.IKEJA_ELECTRIC : {
+                            resourceId=VasServices.SERVICES.get(transactionName).icon;
+                        }
+                        break;
+                        case VasServices.PORTHARCOURT_ELECTRIC :{
+                            resourceId=VasServices.SERVICES.get(transactionName).icon;
+
+                        }
+                        break;
+                            default:{
+//                                bankLogoName = transactionModel.getBankLogoName();
+//                                 resourceId  = getResources().getIdentifier(bankLogoName, "drawable",
+//                                        getPackageName());
+
+
+                                resourceId =R.drawable.wari_small;
+                            }
+
+                    }
+
+                        Log.d("Yeah >>>", String.valueOf(resourceId));
+                        Drawable drawable = getResources().getDrawable(resourceId);
+                        Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
+                        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
 
                     printerDevice.printBitmap(format, bitmap);
                 }catch (Exception e){
@@ -143,10 +190,14 @@ public class MainActivity extends Activity {
                     printerDevice.printText(format, transactionModel.getTransactionStatusReason());
                     printerDevice.printlnText("\n");
                 }
+                printerDevice.printlnText(format2, "MY LOCATION ");
+
+                printerDevice.printlnText(format2, transactionModel.getMerchantId() +  "     " +transactionModel.getTerminalID());
+
                 printerDevice.printlnText(format, transactionModel.getTransactionType().toUpperCase());
                 printerDevice.printText(format2, "--------------------------------");
-                printerDevice.printlnText(format2,  "TID: "+transactionModel.getTerminalID());
-                printerDevice.printlnText(format2,  "WID: "+walletID);
+                printerDevice.printlnText(format2, "TID: "+transactionModel.getTerminalID());
+                printerDevice.printlnText(format2, "WID: "+walletID);
                 printerDevice.printlnText(format2, "MID: "+transactionModel.getMerchantId());
                 printerDevice.printlnText(format2, "TRANSACTION TYPE: "+transactionModel.getTransactionType().toUpperCase());
                 printerDevice.printlnText(format2, "CUSTOMER: "+transactionModel.getCardholderName());
@@ -156,6 +207,8 @@ public class MainActivity extends Activity {
                 if (transactionModel.getTransactionType().equalsIgnoreCase("airtime") || transactionModel.getTransactionType().equalsIgnoreCase("data")){
                     printerDevice.printlnText(format2, "PHONE: "+transactionModel.getPhoneNumber());
                 }
+
+
 
                 if (!transactionModel.getTransactionType().equalsIgnoreCase("transfer") && !transactionModel.getTransactionType().equalsIgnoreCase("airtime") && !transactionModel.getTransactionType().equalsIgnoreCase("data")){
                     printerDevice.printlnText(format2, "MERCHANT: "+transactionModel.getMerchantName());
@@ -176,7 +229,10 @@ public class MainActivity extends Activity {
                 printerDevice.printlnText(format, "NGN" + transactionModel.getAmount());
                 printerDevice.printlnText(format, "***********************");
                 printerDevice.printlnText("\n");
+                printerDevice.printlnText(format, transactionModel.getTransactionStatus());
+                printerDevice.printlnText("\n");
 
+                printerDevice.printlnText(format, "-----------------------");
                 printerDevice.printlnText(format, "WARI");
                 printerDevice.printlnText(format, "www.iisysgroup.com");
                 printerDevice.printlnText(format, "0700-2255-4839");

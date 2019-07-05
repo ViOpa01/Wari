@@ -74,5 +74,7 @@
     <string name="printEsc">Esc</string>
     <string name="print_merchant_s_copy">Print Merchant\'s Copy</string>
     <string name="airtime_and_data">Airtime &amp; Data</string>
+    <string name="cable_tv">Cable Tv</string>
+    <string name="electricty">Electricty</string>
 
 </resources>

@@ -58,7 +58,7 @@
 ////                }
 //
 ////clientReference = clientReference,
-//                transferDetails = WithdrawalDetails(wallet = mWalletId, username = mWalletUsername, password = mPlainPassword, pin = mEncryptedPin, type = "default", amount = amountToDebit, vendorBankCode = mBankCode, channel = "ANDROIDPOS", phone = "", paymentMethod = "card", productCode = mProductCode)
+//                transferDetails = WithdrawalDetails(wallet = mWalletId, userName = mWalletUsername, password = mPlainPassword, pin = mEncryptedPin, type = "default", amount = amountToDebit, vendorBankCode = mBankCode, channel = "ANDROIDPOS", phone = "", paymentMethod = "card", productCode = mProductCode)
 //
 ////                    val clientReference = getClientRef(this@TransferAmountEntry, "")
 //                val clientReference = StringUtil.getClientRef(context, "")

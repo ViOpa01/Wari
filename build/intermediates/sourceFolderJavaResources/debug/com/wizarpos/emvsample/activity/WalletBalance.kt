@@ -91,7 +91,7 @@ class WalletBalance : AppCompatActivity() {
         val client = OkHttpClient()
 
         val mediaType = MediaType.parse("application/json")
-        val body = RequestBody.create(mediaType, "{\"username\": \""+email+"\",\"password\": \""+password+"\"}")
+        val body = RequestBody.create(mediaType, "{\"userName\": \""+email+"\",\"password\": \""+password+"\"}")
         val request = Request.Builder()
                 .url("https://www.payvice.com/api/account")
                 .post(body)

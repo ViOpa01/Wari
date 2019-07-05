@@ -1,6 +1,7 @@
 package com.wizarpos.emvsample.activity
 
 import com.google.gson.GsonBuilder
+import com.itex.richard.payviceconnect.model.AirtimeModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
@@ -17,14 +18,16 @@ interface AirtimeService {
 
     @Headers("Authorization:IISYSGROUP c1e750cf89b05b0fc56eecf6fc25cce85e2bb8e0c46d7bfed463f6c6c89d4b8e","sysid:ee2dadd1e684032929a2cea40d1b9a2453435da4f588c1ee88b1e76abb566c31", "Content-Type:application/json")
     @POST("vas/vtu/purchase")
-    fun airtimePurchase(@Body request : AirtimeRequestDetails) : Call<Any>
+    fun airtimePurchase(@Body request : AirtimeRequestDetails) : Call<AirtimeModel.AirtimePinResponse>
 
     @Headers("Authorization:IISYSGROUP c1e750cf89b05b0fc56eecf6fc25cce85e2bb8e0c46d7bfed463f6c6c89d4b8e","sysid:ee2dadd1e684032929a2cea40d1b9a2453435da4f588c1ee88b1e76abb566c31", "Content-Type:application/json")
     @POST("vas/card/vtu/purchase")
-    fun airtimeCardPurchase(@Body request : AirtimeRequestDetails) : Call<Any>
+    fun airtimeCardPurchase(@Body request : AirtimeRequestDetails) : Call<AirtimeModel.AirtimePinResponse>
 
     companion object Factory {
-        val BASE_URL = "http://197.253.19.75:8090/"
+//        val BASE_URL = "http://197.253.19.75:8090/"
+
+        val BASE_URL = "http://vas.itexapp.com/"
         fun create(): AirtimeService {
             val logging = HttpLoggingInterceptor()
             logging.level = HttpLoggingInterceptor.Level.BODY

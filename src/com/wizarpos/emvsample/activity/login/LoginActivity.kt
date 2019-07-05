@@ -43,7 +43,7 @@ class LoginActivity : AppCompatActivity(), LoginView {
         }catch (e : Exception){
 
         }
-        toast("Your username is invalid")
+        toast("Your userName is invalid")
     }
 
     override fun setInvalidPassword() {
@@ -145,7 +145,7 @@ class LoginActivity : AppCompatActivity(), LoginView {
                 wallet_password = password.text.toString()
 
                 if (wallet_username.isEmpty()) {
-                    username.error = "Please enter a valid username"
+                    username.error = "Please enter a valid userName"
                 } else if (wallet_password.isEmpty()) {
                     password.error = "Please enter a vaid password"
                 }

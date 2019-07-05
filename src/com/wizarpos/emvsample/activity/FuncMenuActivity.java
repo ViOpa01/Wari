@@ -27,6 +27,7 @@ import com.wizarpos.emvsample.payments_menu.transfer.TransferAmountEntry;
 import com.wizarpos.emvsample.payments_menu.transfer.TransferBankSelection;
 import com.wizarpos.emvsample.R;
 import com.wizarpos.emvsample.activity.auth.PinInterFace;
+import com.wizarpos.emvsample.services.discos.activities.DiscosActivity;
 import com.wizarpos.emvsample.transaction.Nibss;
 import com.wizarpos.jni.PinPadInterface;
 import com.wizarpos.util.StringUtil;
@@ -46,6 +47,9 @@ public class FuncMenuActivity extends FuncActivity
 	private ImageView ImageViewtransfer = null;
 	private ImageView ImageViewwithdrawal = null;
 	private ImageView ImageViewAirtime = null;
+
+    private ImageView ImageViewElectricity= null;
+    private ImageView ImageViewCableTv= null;
 	private ImageView purchaseCashBack;
 	private AlertDialog alertDialog;
 	private ImageView ImageViewEod;
@@ -96,6 +100,12 @@ public class FuncMenuActivity extends FuncActivity
 
 		ImageViewsignOut = findViewById(R.id.signOut);
 		ImageViewsignOut.setOnClickListener(new ClickListener());
+
+        ImageViewElectricity = findViewById(R.id.imgVwElectricity);
+        ImageViewElectricity.setOnClickListener(new ClickListener());
+
+        ImageViewCableTv= findViewById(R.id.imgVwCableTv);
+        ImageViewCableTv.setOnClickListener(new ClickListener());
 	}
 
 	private void initToolbar() {
@@ -190,9 +200,19 @@ public class FuncMenuActivity extends FuncActivity
 				break;
 
 			case R.id.bFunc_Airtime:
-				startActivity(new Intent(FuncMenuActivity.this, SelectionActivity.class));
+				startActivity(new Intent(FuncMenuActivity.this, AirtimeDataActivity.class));
 				//finish();
 					break;
+
+                case R.id.imgVwElectricity:
+                    startActivity(new Intent(FuncMenuActivity.this, DiscosActivity.class));
+                    //finish();
+                    break;
+
+                case R.id.imgVwCableTv:
+                    startActivity(new Intent(FuncMenuActivity.this, AirtimeDataActivity.class));
+                    //finish();
+                    break;
 
 			case R.id.bFunc_Settle:
 				AlertDialog.Builder alert = new AlertDialog.Builder(FuncMenuActivity.this, R.style.AlertDialogCustom);

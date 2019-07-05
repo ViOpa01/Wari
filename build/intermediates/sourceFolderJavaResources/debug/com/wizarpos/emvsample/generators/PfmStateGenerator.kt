@@ -15,8 +15,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 import android.content.pm.PackageManager
 import android.support.v4.content.ContextCompat
+import com.iisysgroup.poslib.deviceinterface.printer.PrinterState
 import com.wizarpos.emvsample.R
-import com.wizarpos.emvsample.models.State
 
 
 //todo check this out to be sure it is not negative
@@ -32,8 +32,8 @@ class PfmStateGenerator(val context : Context) {
         WIFI, GPRS, OTHERS
     }
 
-    fun generateState() : State {
-        return State(getSerialNumber(), getCurrentTime(), getBatteryLevel(), getChargingStatus().toString() , getTerminalId(),getCommMethod().toString(),"", getLocation(), getSignalStrength(), getTerminalModelName(), getTerminalManufacturer(), hasBattery().toString(), getSoftwareNumber(), getLastTransactionTime(), getPads())
+    fun generateState() : com.itex.richard.payviceconnect.model.State {
+        return com.itex.richard.payviceconnect.model.State(getSerialNumber(), getCurrentTime(), getBatteryLevel(), getChargingStatus().toString() , getTerminalId(),getCommMethod().toString(),"", getLocation(), getSignalStrength(), getTerminalModelName(), getTerminalManufacturer(), hasBattery().toString(), getSoftwareNumber(), getLastTransactionTime(), getPads())
 
     }
 

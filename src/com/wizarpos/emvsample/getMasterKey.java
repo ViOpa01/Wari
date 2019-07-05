@@ -16,7 +16,7 @@ public class getMasterKey extends PosvasKeyProcessor {
     }
 
     public static String getMasterKey(String eMasterKey, boolean isTestPlatform) {
-        return isTestPlatform ? TripleDES.threeDesDecrypt("5D25072F04832A2329D93E4F91BA23A2", "86CBCDE3B0A22354853E04521686863D", eMasterKey) : TripleDES.threeDesDecrypt(CLR_KEY_1_LIVE, CLR_KEY_2_LIVE, eMasterKey);
+        return isTestPlatform ? TripleDES.threeDesDecrypt(CLR_KEY_1_TEST, CLR_KEY_2_TEST, eMasterKey) : TripleDES.threeDesDecrypt(CLR_KEY_1_LIVE, CLR_KEY_2_LIVE, eMasterKey);
     }
 
     static String sanitize(String str) {

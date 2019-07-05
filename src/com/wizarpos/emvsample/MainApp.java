@@ -45,7 +45,9 @@ import com.wizarpos.emvsample.parameter.BatchInfo;
 import com.wizarpos.emvsample.parameter.TerminalConfig;
 import com.wizarpos.emvsample.printer.PrinterException;
 import com.wizarpos.emvsample.printer.PrinterHelper;
+import com.wizarpos.emvsample.services.helper.activity.util.GeneralElectricityDetails;
 import com.wizarpos.emvsample.transaction.Nibss;
+import com.wizarpos.util.TransactionModel;
 
 import java.lang.reflect.Method;
 import java.util.Calendar;
@@ -67,6 +69,7 @@ public class MainApp extends Application implements Constants
 	Handler callHomeHandler = new Handler();
 
 	public  EodModel currEod = null;
+	public static TransactionModel transactionModel;
 
 
 	//Room DB
@@ -152,16 +155,24 @@ public class MainApp extends Application implements Constants
 	// 密码键盘
 	public boolean pinpadOpened = false;
 	public boolean needClearPinpad = false;
+
+//	 Services
 	public boolean refund = false;
 	public IsoRefundProcessData isoRefundProcessData = null;
 	public IsoReversalProcessData iisoReverSal = null;
-   public  int refundAmount = 0;
+    public  int refundAmount = 0;
 	public boolean purchaseWithCashBack = true;
 	public boolean revarsal = false;
 	public boolean transfer = false;
 	public boolean withdrawal = false;
 	public boolean airtime = false;
 	public int reversalAmout;
+	public boolean electricityBills;
+	public GeneralElectricityDetails generalElectricityDetails;
+	public boolean cableTv;
+
+
+
 	public HostInteractor hostInteractor;
 	public PosLibDatabase poslibdb = null;
 
@@ -188,7 +199,7 @@ public class MainApp extends Application implements Constants
 		}
 		SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-
+         transactionModel = null;
 		String hostKey = getString(R.string.key_host_type);
 		Host host;
 		if (sharedPreferences.getString(hostKey, "").equalsIgnoreCase("TAMS")){

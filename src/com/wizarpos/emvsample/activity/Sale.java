@@ -3,6 +3,7 @@ package com.wizarpos.emvsample.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.wizarpos.emvsample.R;
 import com.wizarpos.util.StringUtil;
@@ -69,6 +70,9 @@ public class Sale extends FuncActivity
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
+
+		Log.d("requestCode >>>>>>", String.valueOf(requestCode).toString());
+
 		if(   requestCode != STATE_TRANS_END
 		   && appState.getErrorCode() > 0
 		  )
@@ -118,7 +122,7 @@ public class Sale extends FuncActivity
 			if(!appState.goneOnline){
 				processOnline();
 			}else{
-				showTransResult();
+                showTransResult();
 			}
 
 			break;

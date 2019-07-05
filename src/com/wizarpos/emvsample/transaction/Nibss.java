@@ -59,14 +59,22 @@ public class Nibss {
     String port;
     boolean sslStatus;
 
+    private static final String TAG = "Nibss";
+
     public Nibss(Context context){
         this.context = context;
         hostInteractor = HostInteractor.getInstance(new GtmsHost(context));
         mainApp = MainApp.getInstance();
         SharedPreferences sharedPreferences = context.getSharedPreferences(Constants.netWork_pref, Context.MODE_PRIVATE);
+//        ip = sharedPreferences.getString("ip","196.6.103.73");
+//        port = sharedPreferences.getString("port", "5043");
+
         ip = sharedPreferences.getString("ip","196.6.103.73");
         port = sharedPreferences.getString("port", "5043");
+
         sslStatus = sharedPreferences.getBoolean("ssl", true);
+        //        final ConnectionData connectionData = new ConnectionData("2033GP23", "196.6.103.73", 5043, true);
+
     }
 
     public static PosLibDatabase poslibdb = MainApp.getInstance().poslibdb;
@@ -78,8 +86,10 @@ public class Nibss {
 
 
         Log.i("okh", "preping terminal");
+        Log.d(TAG, "prepare() called with: terminalID = [" + terminalID + "]");
         final ConnectionData connectionData = new ConnectionData( terminalID,ip,Integer.parseInt(port),sslStatus);
-        Log.d("okh", terminalID+ "" + ip + " " + port + " " + sslStatus);
+        Log.d("okh", terminalID+ "  " + ip + "  " + port + " " + sslStatus);
+        Log.d(TAG, "ConnectionData() called with: ip  = [" + ip  + "], port = [" + port + "], sslStatus= = [" + sslStatus + "]");
           hostInteractor.getKeyHolder(connectionData)
                   .subscribeOn(Schedulers.io())
                   .observeOn(AndroidSchedulers.mainThread())
@@ -191,9 +201,13 @@ public class Nibss {
 
         final ConnectionData connectionData = new ConnectionData(terminalID,ip,Integer.parseInt(port),sslStatus);
 //        final ConnectionData connectionData = new ConnectionData("2033GP23", "196.6.103.73", 5043, true);
+        Log.d("okh", connectionData.getIpAddress() + connectionData.getTerminalID() + connectionData.getIpPort() + connectionData.isSSL());
         Single<KeyHolder> liveKeyHolder = hostInteractor.getKeyHolder(connectionData);
 
         Log.d("okh", terminalID+ "" + ip + " " + port + " " + sslStatus);
+
+        Log.d(TAG, "ConnectionData() called with: ip  = [" + ip  + "], port = [" + port + "], sslStatus= = [" + sslStatus + "]");
+
         liveKeyHolder
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -215,19 +229,19 @@ public class Nibss {
                     @Override
                     public void onSuccess(final KeyHolder keyHolder) {
                         Log.i("okh", "KeyHolder Ready");
-//                        Log.i("okh", "Master key "  + keyHolder.getMasterKey());
-//                        Log.i("okh", "pin key "  + keyHolder.getPinKey());
-//                        Log.i("okh", "session key "  + keyHolder.getSessionKey());
-//                        Log.i("okh", "preping to fetch config data");
+                        Log.i("okh", "Master key "  + keyHolder.getMasterKey());
+                        Log.i("okh", "pin key "  + keyHolder.getPinKey());
+                        Log.i("okh", "session key "  + keyHolder.getSessionKey());
+                        Log.i("okh", "preping to fetch config data");
 
                           if(mainApp.nibssData != null){
                               mainApp.nibssData.setKeyHolder(keyHolder);
                               t.complete(mainApp.nibssData);
                           }
 //
-//                          Log.d("okh", connectionData.getIpAddress() + " " + connectionData.getTerminalID() + " " + connectionData.getIpPort() + " " + connectionData.isSSL());
+                          Log.d("okh", connectionData.getIpAddress() + " " + connectionData.getTerminalID() + " " + connectionData.getIpPort() + " " + connectionData.isSSL());
 //
-//                          Log.d("okh", keyHolder.getPinKey() + " " + keyHolder.getSessionKey() + " " + keyHolder.getMasterKey());
+                          Log.d("okh", keyHolder.getPinKey() + " " + keyHolder.getSessionKey() + " " + keyHolder.getMasterKey());
 
                         hostInteractor.getConfigData(connectionData,keyHolder)
                                 .subscribeOn(Schedulers.io())

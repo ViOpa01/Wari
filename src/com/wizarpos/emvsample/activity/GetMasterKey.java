@@ -76,7 +76,7 @@ public class GetMasterKey extends FuncActivity {
     private String decrypt(){
         String clearMaster = "";
         try {
-            clearMaster = getMasterKey(appState.nibssData.getKeyHolder().getMasterKey(), true);
+            clearMaster = getMasterKey(appState.nibssData.getKeyHolder().getMasterKey(), false);
             Log.i("okh", clearMaster);
         }catch (Exception e ){
 

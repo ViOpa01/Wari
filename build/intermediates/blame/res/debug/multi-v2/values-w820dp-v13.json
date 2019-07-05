@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\Agbede\\AndroidStudioProjects\\NewNibss\\NIBSS\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-w820dp-v13\\values-w820dp-v13.xml",
+            "outputFile": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-w820dp-v13\\values-w820dp-v13.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Agbede\\.gradle\\caches\\transforms-1\\files-1.1\\poslib-device-debug.aar\\5d8997b15259a25624af9faeddfce178\\res\\values-w820dp-v13\\values-w820dp-v13.xml",
+                    "source": "C:\\Users\\Favour\\.gradle\\caches\\transforms-1\\files-1.1\\poslib-device-debug.aar\\4406fb617fc7ef7ab3d03bef93286246\\res\\values-w820dp-v13\\values-w820dp-v13.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
