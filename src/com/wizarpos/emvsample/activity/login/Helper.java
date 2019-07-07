@@ -56,6 +56,10 @@ public class Helper {
     public static String TOKEN = "token";
     public static String TERMINAL_ID = "terminal_id";
     public static String TERMINAL = "terminal";
+    public static String VAS_TERMINAL_ID = "vas_terminalId";
+    public static String VAS_MERCHANT_NAME = "vas_merchant_name";
+    public static String TERMINAL_ENTERED_BY_USER = "terminal__id";
+    public static String MID = "merchant_id";
     public static String NIBSS_IP = "nibss_ip";
     public static String NIBSS_PORT = "nibss_port";
     public static String IS_SSL = "is_ssl";
@@ -514,6 +518,8 @@ public class Helper {
             thread.start();
         }
     }
+
+
 
 
 }

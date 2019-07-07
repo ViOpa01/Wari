@@ -27,6 +27,7 @@ import com.wizarpos.emvsample.payments_menu.transfer.TransferAmountEntry;
 import com.wizarpos.emvsample.payments_menu.transfer.TransferBankSelection;
 import com.wizarpos.emvsample.R;
 import com.wizarpos.emvsample.activity.auth.PinInterFace;
+import com.wizarpos.emvsample.services.cable_tv.CableTvActivity;
 import com.wizarpos.emvsample.services.discos.activities.DiscosActivity;
 import com.wizarpos.emvsample.transaction.Nibss;
 import com.wizarpos.jni.PinPadInterface;
@@ -210,7 +211,7 @@ public class FuncMenuActivity extends FuncActivity
                     break;
 
                 case R.id.imgVwCableTv:
-                    startActivity(new Intent(FuncMenuActivity.this, AirtimeDataActivity.class));
+                    startActivity(new Intent(FuncMenuActivity.this, CableTvActivity.class));
                     //finish();
                     break;
 

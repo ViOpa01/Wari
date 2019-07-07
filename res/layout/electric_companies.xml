@@ -41,15 +41,14 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="ABUJA ELECTRIC"
+                android:text="EEDC"
                 android:gravity="center_vertical"
+                android:paddingStart="30dp"
                 android:textSize="24dp"
-                android:scaleX="0.5"
-                android:scaleY="0.8"
                 android:textColor="#299A8E"
-                android:drawablePadding="50dp"
                 android:paddingEnd="30dp"
-                android:drawableLeft="@drawable/aedc" />
+                android:drawableLeft="@drawable/aedc"
+                android:drawablePadding="10dp" />
         </LinearLayout>
         <LinearLayout
             android:id="@+id/eedc"
@@ -130,15 +129,14 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="PORTHACOURTH ELECTRIC"
+                android:text="EEDC"
                 android:gravity="center_vertical"
+                android:paddingStart="30dp"
                 android:textSize="24dp"
-                android:scaleX="0.2"
-                android:scaleY="0.3"
                 android:textColor="#299A8E"
-                android:drawablePadding="10dp"
+                android:paddingEnd="30dp"
                 android:drawableLeft="@drawable/phdc"
-                android:paddingEnd="30dp" />
+                android:drawablePadding="10dp" />
         </LinearLayout>
 
 

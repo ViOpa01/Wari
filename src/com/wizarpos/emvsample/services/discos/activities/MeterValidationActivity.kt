@@ -5,6 +5,7 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
+import android.location.Address
 import android.os.Bundle
 import android.support.design.widget.BottomSheetDialog
 import android.support.v7.app.AppCompatActivity
@@ -34,6 +35,9 @@ class MeterValidationActivity:AppCompatActivity(),View.OnClickListener{
     lateinit var productCode: String
     lateinit var meterNumber: String
     lateinit var  meterName: String
+    lateinit var  address: String
+
+
 
 
     lateinit var password:String
@@ -86,6 +90,7 @@ class MeterValidationActivity:AppCompatActivity(),View.OnClickListener{
 
         mMeterValidationViewModel!!.lLookRes.observe(this, Observer {
 //            if(it != null && mMeterValidationViewModel!!.mIsOnline ){
+            Log.i("electricMeterType merer validation", electricMeterType)
             var message:String=""
             var error:Boolean =false
             when (electricMeterType){
@@ -95,8 +100,13 @@ class MeterValidationActivity:AppCompatActivity(),View.OnClickListener{
                     meterName = response!!.name!!
                     meterNumber =response!!.customerMeterNo!!
                     productCode =response!!.productCode!!
-                    requestType = response.requestType!!
-                    meterType=response.meterType!!
+                    address=""
+                    requestType = "0"
+                    meterType ="2"
+                    if(ABUJA_ELECTRICITY_PREPAID ==electricMeterType){
+                        meterType ="0"
+                    }
+
                     message=response.message!!
                     error=response.error
 //                    displayResponse(_message =response!!.message!!,error = response!!.error,_meterName = meterName,_meterNumber =meterNumber ,_productCode =productCode,requestType = requestType,meterType = meterType,clientReference =clientReference,terminalId = terminalID,electricMeterType = electricMeterType )
@@ -108,6 +118,7 @@ class MeterValidationActivity:AppCompatActivity(),View.OnClickListener{
                     meterName = response!!.name!!
                     meterNumber =response!!.account!!
                     productCode =response!!.productCode!!
+                    address=""
                     requestType = ""
                     meterType=response.type
                     message=response.message!!
@@ -127,6 +138,7 @@ class MeterValidationActivity:AppCompatActivity(),View.OnClickListener{
                     meterNumber =response!!.meterNumber!!
                     productCode =""
                     requestType =""
+                    address=response.address!!
                     meterType=response.account_type!!
                     message=response.message!!
                     error=response.error
@@ -144,6 +156,7 @@ class MeterValidationActivity:AppCompatActivity(),View.OnClickListener{
                     requestType = ""
                     meterType=response.type!!
                     message=response.message!!
+                    address=""
                     error=response.error
 
 //                    displayResponse(_message =response!!.message!!,error = response!!.error,_meterName = meterName,_meterNumber =meterNumber ,_productCode =meterNumber,requestType = requestType,meterType = meterType,clientReference =clientReference,terminalId = terminalID,electricMeterType = electricMeterType  )
@@ -157,6 +170,7 @@ class MeterValidationActivity:AppCompatActivity(),View.OnClickListener{
                     productCode =""
                     requestType =""
                     meterType=meterType
+                    address=response.address!!
                     meterNumber =meterNumber
                     message=response.message!!
                     error=response.error
@@ -176,6 +190,7 @@ class MeterValidationActivity:AppCompatActivity(),View.OnClickListener{
                     requestType = ""
                     meterType=response.type!!
                     message=response.message!!
+                    address=response.address!!
                     error=response.error
 
 //                    displayResponse(_message =response!!.message!!,error = response!!.error,_meterName = meterName,_meterNumber =meterNumber ,_productCode =meterNumber,requestType = requestType,meterType = meterType,clientReference =clientReference,terminalId = terminalID,electricMeterType = electricMeterType  )
@@ -205,11 +220,14 @@ class MeterValidationActivity:AppCompatActivity(),View.OnClickListener{
                     okButton { }
                 }else {
 
-                    title = _message
+                    title =  _message ?:  "Validation Successful"
                     message = "\n Customer Name - ${_meterName}" +
                             "\n \nMeter Number - ${_meterNumber}"
 
                     okButton {
+                        Log.i("electricMeterType merer validation about sending >>", electricMeterType)
+                        Log.d("requestType >>",requestType)
+
                         var intent =Intent(this@MeterValidationActivity, ElectricityPaymentActivity::class.java)
                         intent.putExtra(Helper.PASSWORD,password)
                         intent.putExtra(Helper.USERNAME,username)
@@ -219,10 +237,12 @@ class MeterValidationActivity:AppCompatActivity(),View.OnClickListener{
                         intent.putExtra(METER_NUMBER,_meterNumber)
                         intent.putExtra(METER_TYPE,meterType)
                         intent.putExtra(PRODUCT_CODE,_productCode)
+
                         intent.putExtra(REQUEST_TYPE,requestType)
                         intent.putExtra(CLIENT_REFERENCE,clientReference)
                         intent.putExtra(TERMINAL_ID,terminalID)
                         intent.putExtra(ELECTRIC_METER_TYPE,electricMeterType)
+                        intent.putExtra(ADDRESS,address)
 //                        intent.putExtra(ADDRESS,electricMeterType)
 
 

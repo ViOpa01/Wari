@@ -1,6 +1,7 @@
 package com.wizarpos.emvsample.activity.login
 
 import android.util.Log
+import com.google.gson.Gson
 import com.wizarpos.emvsample.activity.login.securestorage.SecureStorage
 import com.wizarpos.emvsample.activity.login.securestorage.SecureStorageUtils
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -48,7 +49,7 @@ class LoginPresenterImpl(private val interactor: LoginInteractor,
         val serverKey = temp[0] + "|" + temp[1]
 
         SecureStorage.store(Helper.USER_KEY, serverKey)
-
+Log.i("result", Gson().toJson(result))
 
         /*if (temp.size >= 3) {
             val returnedDeviceID = temp[2]

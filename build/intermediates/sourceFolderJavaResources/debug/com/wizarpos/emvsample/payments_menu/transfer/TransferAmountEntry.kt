@@ -34,11 +34,10 @@ import com.wizarpos.emvsample.generators.PfmStateGenerator
 import com.wizarpos.emvsample.payments_menu.models.*
 import com.wizarpos.emvsample.printer.PrinterException
 import com.wizarpos.emvsample.printer.PrinterHelper
-import com.wizarpos.util.ClientReferenceKey
-import com.wizarpos.util.PinAlertUtils
-import com.wizarpos.util.SharedPreferenceUtils
+import com.wizarpos.emvsample.services.discos.activities.ElectricityPaymentActivity
+import com.wizarpos.emvsample.services.helper.activity.util.Models
+import com.wizarpos.util.*
 import com.wizarpos.util.StringUtil.getClientRef
-import com.wizarpos.util.TransactionModel
 import kotlinx.android.synthetic.main.activity_transfer_amount_entry.*
 import kotlinx.coroutines.*
 import org.jetbrains.anko.*
@@ -168,7 +167,7 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
     }
 
     private fun payWithCard(response: WithdrawalLookupSuccessModel) {
-
+       appState!!.isTransfer=true;
         val view = View.inflate(this, R.layout.activity_enter_pin, null)
         val encryptedPassword = SecureStorage.retrieve(Helper.STORED_PASSWORD, "")
 
@@ -319,6 +318,7 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
                             title = "${response.body()!!.message}"
                             message = "${response.body()!!.beneficiaryName}\nAmount - N$amount\nConvenience fee - N${response.body()!!.convenienceFee.toFloat() / 100}"
                             positiveButton("Continue") {
+                                appState!!.isWallet=false;
                                 payWithCard(response.body()!!)
                             }
                         }.show()
@@ -511,14 +511,60 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
                                             }
                                             val userId = SecureStorage.retrieve(Helper.USER_ID, "")
                                             val emailid = SecureStorage.retrieve(Helper.USER_EMAIL, "")
+//                                            val date = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().time)
+//                                            val transactionModel = TransactionModel(userId, response.body()!!.transactionID.toString(), "", "", amount, "", "transfer", "", "Declined", response.body()!!.message, userId, emailid, "", "", "", "", "", "", date, "", "", bankLogoName, "")
+//
+//                                            val intent = Intent(baseContext, MainActivity::class.java)
+//
+//                                            intent.putExtra("transactionModel", transactionModel)
+//                                            intent.putExtra("copy", "** CUSTOMER COPY **")
+//                                            startActivity(intent)
+
+
+
+
+
+                                            val smartCardNumber = ""
+                                            val meterNumber = ""
+                                            val beneficiaryName = ""
+                                            val beneficiaryAddress = ""
+                                            val responsemessage :String = response.body()!!.message
+                                            val amount = response.body()!!.message
+                                            val token = ""
+                                            val wallet = SecureStorage.retrieve(Helper.TERMINAL_ID, "")
+                                            val product = action
+                                            val transactionRef = ""
+                                            val logo =0
+                                            val cref  = ""
+                                            val error = true
+                                            val transferModel = Models.TransferModel(accountName =mAccountName ,error =true,recepiant = mAccountNumber,recivingBank = mBankName )
+
+                                            val isCardTransaction = true
+                                            val transactionTID = ""
+                                            val merchantID = FuncActivity.appState.nibssData.configData.getConfigData("03015").toString()
+                                            val merchantName = FuncActivity.appState.nibssData.configData.getConfigData("52040").toString()
+                                            val merchantTerminalId = SecureStorage.retrieve(Helper.TERMINAL, "")
+//			                          	String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
+                                            val vasmerchantID = SecureStorage.retrieve(Helper.VAS_TERMINAL_ID, "")
+                                            val vasmerchantName = SecureStorage.retrieve(Helper.VAS_MERCHANT_NAME, "")
+//				                        String vasTerminalId = SecureStorage.retrieve(Helper.,"");
                                             val date = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().time)
-                                            val transactionModel = TransactionModel(userId, response.body()!!.transactionID.toString(), "", "", amount, "", "transfer", "", "Declined", response.body()!!.message, userId, emailid, "", "", "", "", "", "", date, "", "", bankLogoName, "")
 
-                                            val intent = Intent(baseContext, MainActivity::class.java)
 
-                                            intent.putExtra("transactionModel", transactionModel)
-                                            intent.putExtra("copy", "** CUSTOMER COPY **")
-                                            startActivity(intent)
+                                            var vasDetails: Models.VasDetails? = null
+
+
+//                                        if (airtimetype.equals("wallet", ignoreCase = true)) {
+                                            vasDetails = Models.VasDetails(cref,amount, wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product, responsemessage, vasmerchantID, transactionRef, VasServices.CARD, logo, date, error, action, transferModel)
+//                                        } else if (airtimetype.equals("card", ignoreCase = true)) {
+//                                            vasDetails = Models.VasDetails(amount, wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product, responsemessage, vasmerchantID, transactionRef, VasServices.CARD, logo, date, error, Models.AIRTIME, airtimeModel)
+//                                        }
+
+                                            ElectricityPaymentActivity.print(this@TransferAmountEntry,vasDetails!!)
+
+
+
+
 
                                         }
                                     }.show()
@@ -552,16 +598,56 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
 //                                                appState!!.transfer = true;
 //                                                appState!!.trans.transactionType = "transfer"
 
-                                            val userId = SecureStorage.retrieve(Helper.USER_ID, "")
-                                            val emailid = SecureStorage.retrieve(Helper.USER_EMAIL, "")
+//                                            val userId = SecureStorage.retrieve(Helper.USER_ID, "")
+//                                            val emailid = SecureStorage.retrieve(Helper.USER_EMAIL, "")
+//                                            val date = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().time)
+//                                            val transactionModel = TransactionModel(terminalID, ref, "", "", (response.body()!!.amountDebited/100).toString(), "", "transfer", "", "Approved", "", userId, emailid, "", "", "", "", "", "", formattedDate, "", "", bankLogoName, "")
+//
+//                                            val intent = Intent(baseContext, MainActivity::class.java)
+//
+//                                            intent.putExtra("transactionModel", transactionModel)
+//                                            intent.putExtra("copy", "** CUSTOMER COPY **")
+//                                            startActivity(intent)
+
+
+
+                                            val smartCardNumber = ""
+                                            val meterNumber = ""
+                                            val beneficiaryName = ""
+                                            val beneficiaryAddress = ""
+                                            val responsemessage :String = response.body()!!.message
+                                            val amount = response.body()!!.message
+                                            val token = ""
+                                            val wallet = SecureStorage.retrieve(Helper.TERMINAL_ID, "")
+                                            val product = action
+                                            val transactionRef = ""
+                                            val logo = 0
+                                            val cref  = ""
+                                            val error = false
+                                            val transferModel = Models.TransferModel(accountName =mAccountName ,error =error,recepiant = mAccountNumber,recivingBank = mBankName )
+
+                                            val isCardTransaction = true
+                                            val transactionTID = ""
+                                            val merchantID = FuncActivity.appState.nibssData.configData.getConfigData("03015").toString()
+                                            val merchantName = FuncActivity.appState.nibssData.configData.getConfigData("52040").toString()
+                                            val merchantTerminalId = SecureStorage.retrieve(Helper.TERMINAL, "")
+//			                          	String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
+                                            val vasmerchantID = SecureStorage.retrieve(Helper.VAS_TERMINAL_ID, "")
+                                            val vasmerchantName = SecureStorage.retrieve(Helper.VAS_MERCHANT_NAME, "")
+//				                        String vasTerminalId = SecureStorage.retrieve(Helper.,"");
                                             val date = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().time)
-                                            val transactionModel = TransactionModel(terminalID, ref, "", "", (response.body()!!.amountDebited/100).toString(), "", "transfer", "", "Approved", "", userId, emailid, "", "", "", "", "", "", formattedDate, "", "", bankLogoName, "")
 
-                                            val intent = Intent(baseContext, MainActivity::class.java)
 
-                                            intent.putExtra("transactionModel", transactionModel)
-                                            intent.putExtra("copy", "** CUSTOMER COPY **")
-                                            startActivity(intent)
+                                            var vasDetails: Models.VasDetails? = null
+
+
+//                                        if (airtimetype.equals("wallet", ignoreCase = true)) {
+                                            vasDetails = Models.VasDetails(cref, amount, wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product, responsemessage, vasmerchantID, transactionRef, VasServices.CARD, logo, date, error, action, transferModel)
+//                                        } else if (airtimetype.equals("card", ignoreCase = true)) {
+//                                            vasDetails = Models.VasDetails(amount, wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product, responsemessage, vasmerchantID, transactionRef, VasServices.CARD, logo, date, error, Models.AIRTIME, airtimeModel)
+//                                        }
+
+                                            ElectricityPaymentActivity.print(this@TransferAmountEntry,vasDetails!!)
 
                                         }
                                     }.show()
@@ -651,28 +737,68 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
                                     Log.d("debit print amountSet",  transferResponse.amountSettled.toString())
                                     Log.d("debit print fee",  transferResponse.convenienceFee.toString())
                                     val walletId = SecureStorage.retrieve("wallet", "")
-                                    val date = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().time)
-                                    val transactionModel = TransactionModel(walletId, "", "", transferResponse.beneficiaryName, transferResponse.amountSettled.toString(), "", "transfer", "", "Approved", "", "", "", mBankName, "", "", "", "", "", date, "", "", "", "")
+//                                    var  date:String = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().time)
 
-                                    val intent = Intent(baseContext, MainActivity::class.java)
 
-                                    intent.putExtra("transactionModel", transactionModel)
-                                    intent.putExtra("copy", "** CUSTOMER COPY **")
-                                    startActivity(intent)
-                                    val alertDialog = AlertDialog.Builder(baseContext)
-                                    alertDialog.setMessage("Print Merchant copy")
-                                    alertDialog.setPositiveButton("OK") { dialogInterface, i ->
-                                        val intent = Intent(baseContext, MainActivity::class.java)
-                                        intent.putExtra("transactionModel", transactionModel)
-                                        intent.putExtra("copy", "*** MERCHANT COPY ***")
-                                        startActivity(intent)
-                                    }
-                                    alertDialog.show()
+
+
+//                                    val transactionModel = TransactionModel(walletId, "", "", transferResponse.beneficiaryName, transferResponse.amountSettled.toString(), "", "transfer", "", "Approved", "", "", "", mBankName, "", "", "", "", "", date, "", "", "", "")
+//
+//                                    val intent = Intent(baseContext, MainActivity::class.java)
+//
+//                                    intent.putExtra("transactionModel", transactionModel)
+//                                    intent.putExtra("copy", "** CUSTOMER COPY **")
+//                                    startActivity(intent)
+//                                    val alertDialog = AlertDialog.Builder(baseContext)
+//                                    alertDialog.setMessage("Print Merchant copy")
+//                                    alertDialog.setPositiveButton("OK") { dialogInterface, i ->
+//                                        val intent = Intent(baseContext, MainActivity::class.java)
+//                                        intent.putExtra("transactionModel", transactionModel)
+//                                        intent.putExtra("copy", "*** MERCHANT COPY ***")
+//                                        startActivity(intent)
+//                                    }
+//                                    alertDialog.show()
 //                                        val intent = Intent(this@TransferAmountEntry, PrintActivity::class.java)
 //                                        intent.putExtra(PrintActivity.KEYS.PRINT_RECEIPT_MODEL_KEY, receiptModel)
 //                                        intent.putExtra(PrintActivity.KEYS.PRINT_RECEIPT_VAS_TYPE, PrintActivity.VasType.NOT_INCLUDED)
 //                                        //finish()
 //                                        startActivity(intent)
+
+
+
+                                    val smartCardNumber = ""
+                                    val meterNumber = ""
+                                    val beneficiaryName = ""
+                                    val beneficiaryAddress = ""
+                                    val responsemessage :String =transferResponse.message
+                                    val amount = transferResponse.amountSettled
+                                    val token = ""
+                                    val wallet = SecureStorage.retrieve(Helper.TERMINAL_ID, "")
+                                    val product = action
+                                    val transactionRef = ""
+                                    val logo = 0
+                                    val cref  = transferResponse.reference
+                                    val error = false
+                                    val transferModel = Models.TransferModel(accountName =mAccountName ,error =error,recepiant = mAccountNumber,recivingBank = mBankName )
+
+                                    val isCardTransaction = true
+                                    val transactionTID = ""
+                                    val merchantID = FuncActivity.appState.nibssData.configData.getConfigData("03015").toString()
+                                    val merchantName = FuncActivity.appState.nibssData.configData.getConfigData("52040").toString()
+                                    val merchantTerminalId = SecureStorage.retrieve(Helper.TERMINAL, "")
+//			                          	String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
+                                    val vasmerchantID = SecureStorage.retrieve(Helper.VAS_TERMINAL_ID, "")
+                                    val vasmerchantName = SecureStorage.retrieve(Helper.VAS_MERCHANT_NAME, "")
+//				                        String vasTerminalId = SecureStorage.retrieve(Helper.,"");
+                                    val date = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().time)
+
+
+                                    var vasDetails: Models.VasDetails? = null
+
+
+//                                        if (airtimetype.equals("wallet", ignoreCase = true)) {
+                                    vasDetails = Models.VasDetails(cref,transferResponse.amountSettled.toString(), wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product, responsemessage, vasmerchantID, transactionRef, VasServices.CARD, logo, date, error, action, transferModel)
+
 
                                 }
                             }

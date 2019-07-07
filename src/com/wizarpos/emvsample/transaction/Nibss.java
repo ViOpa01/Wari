@@ -2,10 +2,7 @@ package com.wizarpos.emvsample.transaction;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.os.AsyncTask;
-import android.provider.Settings;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -34,14 +31,10 @@ import com.wizarpos.emvsample.activity.login.securestorage.SecureStorage;
 import com.wizarpos.emvsample.constant.Constants;
 import com.wizarpos.emvsample.db.TransDetailService;
 import com.wizarpos.emvsample.db.TransactionResultService;
-import com.wizarpos.emvsample.pfmState.PfmStateBuilder;
 import com.wizarpos.util.AppUtil;
-import com.wizarpos.util.SharedPreferenceUtils;
 
 
 import java.io.Serializable;
-import java.net.URL;
-import java.util.Arrays;
 
 import io.reactivex.Single;
 import io.reactivex.SingleObserver;
@@ -140,7 +133,7 @@ public class Nibss {
                                        public void onSuccess(ConfigData configData) {
                                            Toast.makeText(context, "Successfully Configured", Toast.LENGTH_SHORT).show();
                                            Log.i("okh", "Config data ready");
-                                           SecureStorage.store(Helper.TERMINAL, connectionData.getTerminalID());
+//                                           SecureStorage.store(Helper.TERMINAL, connectionData.getTerminalID());
                                            Log.i("okh", configData.toString());
                                             NIbbsData nIbbsData = new NIbbsData(keyHolder, configData,connectionData);
                                             t.complete(nIbbsData);
@@ -177,6 +170,7 @@ public class Nibss {
         }
     }
 
+    //koko habbned
     private static class saveVasKeyHolder extends AsyncTask<VasTerminalData, Integer, Void> {
         protected Void doInBackground(VasTerminalData...vasTerminalData) {
             poslibdb.getVasTerminalDataDao().save(vasTerminalData[0]);
@@ -184,6 +178,12 @@ public class Nibss {
             Log.d("sbd","dfddd");
             Log.d("OkH", "vasname "+poslibdb.getVasTerminalDataDao().get().getMerchantName());
             Log.d("OkH", "vasterminal "+poslibdb.getVasTerminalDataDao().get().getTid());
+            Log.d("OkH", "vasmid "+poslibdb.getVasTerminalDataDao().get().getMid());
+            SecureStorage.store(Helper.MID,  poslibdb.getVasTerminalDataDao().get().getMid());
+            SecureStorage.store(Helper.VAS_TERMINAL_ID,  poslibdb.getVasTerminalDataDao().get().getTid());
+            SecureStorage.store(Helper.VAS_MERCHANT_NAME,  poslibdb.getVasTerminalDataDao().get().getMerchantName());
+
+
             //   SharedPreferenceUtils.setIsTerminalPrepped(this, true);
 
             return null;
@@ -238,8 +238,11 @@ public class Nibss {
                               mainApp.nibssData.setKeyHolder(keyHolder);
                               t.complete(mainApp.nibssData);
                           }
+
+                        SecureStorage.store(Helper.TERMINAL_ENTERED_BY_USER, connectionData.getTerminalID());
+
 //
-                          Log.d("okh", connectionData.getIpAddress() + " " + connectionData.getTerminalID() + " " + connectionData.getIpPort() + " " + connectionData.isSSL());
+                          Log.d("okh", connectionData.getIpAddress() + " " + connectionData.getTerminalID() + " " + connectionData.getIpPort() + " " + connectionData.isSSL()+" " +connectionData.getId());
 //
                           Log.d("okh", keyHolder.getPinKey() + " " + keyHolder.getSessionKey() + " " + keyHolder.getMasterKey());
 
@@ -475,6 +478,11 @@ public class Nibss {
                                public void onSuccess(VasTerminalData vasTerminalData) {
                                    Log.d("okh", "itex vas "+ vasTerminalData.getMerchantName());
                                    Log.d("okh", "itex vas "+ vasTerminalData.getTid());
+
+                                   SecureStorage.store(Helper.VAS_TERMINAL_ID,vasTerminalData.getTid());
+
+                                   SecureStorage.store(Helper.VAS_MERCHANT_NAME,vasTerminalData.getMerchantName());
+
                                     new saveVasKeyHolder().execute(vasTerminalData);
 //                                   launch {
 //                                       (application as App).db.vasTerminalDataDao.save(it)

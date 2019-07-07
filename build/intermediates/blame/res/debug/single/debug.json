@@ -4,6 +4,10 @@
         "source": "C:\\Users\\Favour\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-27.1.1.aar\\e5515b1fd2ea2ce8875c654083aa05b6\\res\\drawable\\notification_bg.xml"
     },
     {
+        "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\layout_activity_cable_tv.xml.flat",
+        "source": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\res\\layout\\activity_cable_tv.xml"
+    },
+    {
         "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_scrubber_control_to_pressed_mtrl_005.png.flat",
         "source": "C:\\Users\\Favour\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\84c0c5be61e0faef3d73533d267dfc8c\\res\\drawable-xhdpi-v4\\abc_scrubber_control_to_pressed_mtrl_005.png"
     },
@@ -240,12 +244,20 @@
         "source": "C:\\Users\\Favour\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\84c0c5be61e0faef3d73533d267dfc8c\\res\\layout\\abc_popup_menu_item_layout.xml"
     },
     {
+        "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\layout_activity_startimes.xml.flat",
+        "source": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\res\\layout\\activity_startimes.xml"
+    },
+    {
         "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_ic_check_circle_black_24dp.png.flat",
         "source": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\generated\\res\\pngs\\debug\\drawable-xhdpi\\ic_check_circle_black_24dp.png"
     },
     {
         "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\layout_network_settings.xml.flat",
         "source": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\res\\layout\\network_settings.xml"
+    },
+    {
+        "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_cable_tv.png.flat",
+        "source": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\generated\\res\\pngs\\debug\\drawable-xhdpi\\cable_tv.png"
     },
     {
         "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_ic_commit_search_api_mtrl_alpha.png.flat",
@@ -276,12 +288,20 @@
         "source": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\generated\\res\\pngs\\debug\\drawable-hdpi\\ic_phone_android_black_24dp.png"
     },
     {
+        "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\layout_content_multichoice.xml.flat",
+        "source": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\res\\layout\\content_multichoice.xml"
+    },
+    {
         "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\layout_notification_action.xml.flat",
         "source": "C:\\Users\\Favour\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-27.1.1.aar\\e5515b1fd2ea2ce8875c654083aa05b6\\res\\layout\\notification_action.xml"
     },
     {
         "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable_navigation_empty_icon.xml.flat",
         "source": "C:\\Users\\Favour\\.gradle\\caches\\transforms-1\\files-1.1\\design-27.1.1.aar\\547df2a6bb26657b1e852c4441f7e954\\res\\drawable\\navigation_empty_icon.xml"
+    },
+    {
+        "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_electricity.png.flat",
+        "source": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\generated\\res\\pngs\\debug\\drawable-mdpi\\electricity.png"
     },
     {
         "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi_bg_main.png.flat",
@@ -326,6 +346,10 @@
     {
         "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\font_lato.xml.flat",
         "source": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\res\\font\\lato.xml"
+    },
+    {
+        "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_cable_tv.png.flat",
+        "source": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\generated\\res\\pngs\\debug\\drawable-xxxhdpi\\cable_tv.png"
     },
     {
         "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4_abc_text_select_handle_right_mtrl_dark.png.flat",
@@ -892,6 +916,10 @@
         "source": "C:\\Users\\Favour\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\84c0c5be61e0faef3d73533d267dfc8c\\res\\drawable-xxhdpi-v4\\abc_ic_menu_selectall_mtrl_alpha.png"
     },
     {
+        "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21_cable_tv.xml.flat",
+        "source": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v21\\cable_tv.xml"
+    },
+    {
         "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_abc_btn_check_to_on_mtrl_015.png.flat",
         "source": "C:\\Users\\Favour\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\84c0c5be61e0faef3d73533d267dfc8c\\res\\drawable-hdpi-v4\\abc_btn_check_to_on_mtrl_015.png"
     },
@@ -1332,6 +1360,10 @@
         "source": "C:\\Users\\Favour\\.gradle\\caches\\transforms-1\\files-1.1\\poslib-device-debug.aar\\4406fb617fc7ef7ab3d03bef93286246\\res\\layout\\bluetooth_selector_item.xml"
     },
     {
+        "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\layout_activity_multichoice.xml.flat",
+        "source": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\res\\layout\\activity_multichoice.xml"
+    },
+    {
         "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\layout_activity_getmasterkey.xml.flat",
         "source": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\res\\layout\\activity_getmasterkey.xml"
     },
@@ -1346,6 +1378,10 @@
     {
         "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\color_abc_tint_default.xml.flat",
         "source": "C:\\Users\\Favour\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\84c0c5be61e0faef3d73533d267dfc8c\\res\\color\\abc_tint_default.xml"
+    },
+    {
+        "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_cable_tv.png.flat",
+        "source": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\generated\\res\\pngs\\debug\\drawable-xxhdpi\\cable_tv.png"
     },
     {
         "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_notify_panel_notification_icon_bg.png.flat",
@@ -1398,6 +1434,10 @@
     {
         "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\font_lato_light.xml.flat",
         "source": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\res\\font\\lato_light.xml"
+    },
+    {
+        "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\layout_fragment_plan_list_dialog.xml.flat",
+        "source": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\res\\layout\\fragment_plan_list_dialog.xml"
     },
     {
         "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable_selector_digit_02.xml.flat",
@@ -1636,6 +1676,10 @@
         "source": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\res\\drawable-ldpi\\btn_digit_00.png"
     },
     {
+        "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_electricity.png.flat",
+        "source": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\generated\\res\\pngs\\debug\\drawable-xxxhdpi\\electricity.png"
+    },
+    {
         "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_gotv.png.flat",
         "source": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\res\\drawable-xhdpi\\gotv.png"
     },
@@ -1752,6 +1796,10 @@
         "source": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\res\\layout\\activity_wallet_balance.xml"
     },
     {
+        "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi_electricity.png.flat",
+        "source": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\generated\\res\\pngs\\debug\\drawable-ldpi\\electricity.png"
+    },
+    {
         "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable-ldrtl-hdpi-v17_abc_ic_menu_cut_mtrl_alpha.png.flat",
         "source": "C:\\Users\\Favour\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\84c0c5be61e0faef3d73533d267dfc8c\\res\\drawable-ldrtl-hdpi-v17\\abc_ic_menu_cut_mtrl_alpha.png"
     },
@@ -1802,6 +1850,10 @@
     {
         "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\layout_activity_enter_pin.xml.flat",
         "source": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\res\\layout\\activity_enter_pin.xml"
+    },
+    {
+        "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_cable_tv.png.flat",
+        "source": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\generated\\res\\pngs\\debug\\drawable-hdpi\\cable_tv.png"
     },
     {
         "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi_btn_digit_02.png.flat",
@@ -1996,6 +2048,10 @@
         "source": "C:\\Users\\Favour\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\84c0c5be61e0faef3d73533d267dfc8c\\res\\drawable-ldrtl-xxhdpi-v17\\abc_ic_menu_copy_mtrl_am_alpha.png"
     },
     {
+        "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_electricity.png.flat",
+        "source": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\generated\\res\\pngs\\debug\\drawable-hdpi\\electricity.png"
+    },
+    {
         "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_abc_ic_menu_share_mtrl_alpha.png.flat",
         "source": "C:\\Users\\Favour\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\84c0c5be61e0faef3d73533d267dfc8c\\res\\drawable-mdpi-v4\\abc_ic_menu_share_mtrl_alpha.png"
     },
@@ -2100,8 +2156,16 @@
         "source": "C:\\Users\\Favour\\.gradle\\caches\\transforms-1\\files-1.1\\pinlockview-2.1.0.aar\\090ce7685a72132be7f314f587663509\\res\\layout\\layout_number_item.xml"
     },
     {
+        "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\layout_fragment_plan_list_dialog_item.xml.flat",
+        "source": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\res\\layout\\fragment_plan_list_dialog_item.xml"
+    },
+    {
         "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_abc_ic_menu_paste_mtrl_am_alpha.png.flat",
         "source": "C:\\Users\\Favour\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\84c0c5be61e0faef3d73533d267dfc8c\\res\\drawable-mdpi-v4\\abc_ic_menu_paste_mtrl_am_alpha.png"
+    },
+    {
+        "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21_electricity.xml.flat",
+        "source": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v21\\electricity.xml"
     },
     {
         "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable_abc_btn_default_mtrl_shape.xml.flat",
@@ -2192,6 +2256,10 @@
         "source": "C:\\Users\\Favour\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\84c0c5be61e0faef3d73533d267dfc8c\\res\\drawable\\abc_vector_test.xml"
     },
     {
+        "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_electricity.png.flat",
+        "source": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\generated\\res\\pngs\\debug\\drawable-xhdpi\\electricity.png"
+    },
+    {
         "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_ic_menu_share_mtrl_alpha.png.flat",
         "source": "C:\\Users\\Favour\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\84c0c5be61e0faef3d73533d267dfc8c\\res\\drawable-xhdpi-v4\\abc_ic_menu_share_mtrl_alpha.png"
     },
@@ -2214,6 +2282,10 @@
     {
         "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\layout_view_wallet_enter.xml.flat",
         "source": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\res\\layout\\view_wallet_enter.xml"
+    },
+    {
+        "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_electricity.png.flat",
+        "source": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\generated\\res\\pngs\\debug\\drawable-xxhdpi\\electricity.png"
     },
     {
         "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_ekedc.png.flat",
@@ -2532,6 +2604,10 @@
         "source": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\generated\\res\\pngs\\debug\\drawable-xxhdpi\\ic_call_received_black_24dp.png"
     },
     {
+        "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi_cable_tv.png.flat",
+        "source": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\generated\\res\\pngs\\debug\\drawable-ldpi\\cable_tv.png"
+    },
+    {
         "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_startime.png.flat",
         "source": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\res\\drawable-xhdpi\\startime.png"
     },
@@ -2700,12 +2776,20 @@
         "source": "C:\\Users\\Favour\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\84c0c5be61e0faef3d73533d267dfc8c\\res\\drawable\\abc_tab_indicator_material.xml"
     },
     {
+        "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\layout_content_startimes.xml.flat",
+        "source": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\res\\layout\\content_startimes.xml"
+    },
+    {
         "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_ic_settings_black_24dp.png.flat",
         "source": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\generated\\res\\pngs\\debug\\drawable-xhdpi\\ic_settings_black_24dp.png"
     },
     {
         "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_abc_ic_star_black_36dp.png.flat",
         "source": "C:\\Users\\Favour\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\84c0c5be61e0faef3d73533d267dfc8c\\res\\drawable-mdpi-v4\\abc_ic_star_black_36dp.png"
+    },
+    {
+        "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_cable_tv.png.flat",
+        "source": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\generated\\res\\pngs\\debug\\drawable-mdpi\\cable_tv.png"
     },
     {
         "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi_btn_digit_01_.png.flat",

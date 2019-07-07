@@ -1,1 +1,1 @@
-include ':poslib-host-debug', ':poslib-commons-debug', ':poslib-device-debug', ':cloudpossdk', ':payviceconnect-debug', ':payviceconnect-release', ':payviceconnect-pfm', ':payviceconnect'
+include ':poslib-host-debug', ':poslib-commons-debug', ':poslib-device-debug', ':cloudpossdk', ':payviceconnect-debug', ':payviceconnect-pfm', ':payviceconnect_'

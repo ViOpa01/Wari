@@ -7,4 +7,6 @@
     <dimen name="btn_font_size">25sp</dimen>
     <dimen name="actionBarSize">56dp</dimen>
     <dimen name="medium_padding">10dp</dimen>
+    <dimen name="list_item_spacing">16dp</dimen>
+    <dimen name="list_item_spacing_half">8dp</dimen>
 </resources>

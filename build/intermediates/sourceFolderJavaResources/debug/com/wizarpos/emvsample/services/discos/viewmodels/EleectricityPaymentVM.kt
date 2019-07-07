@@ -8,6 +8,7 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.util.Log
+import android.widget.Toast
 import com.google.gson.Gson
 import com.itex.richard.payviceconnect.model.*
 import com.itex.richard.payviceconnect.wrapper.PayviceServices
@@ -96,6 +97,8 @@ class EleectricityPaymentVM(application: Application): AndroidViewModel(applicat
         fun payElectricBill(activity: Activity, amount: String, wallet: String, userName: String, requestType: String, meterType: String, meterNumber: String, channel: String, phone: String, productCode: String, pin: String, paymentMetod: String, electricMeterType: String, password: String, customerName: String, clientReference: String, terminalId: String,pfm:Pfm) {
             isValidation= false
 
+            Log.i("electricMeterType  >>>",electricMeterType)
+
             dialog =  loginProgressDialog("Making Payments ....",true,activity)
             dialog.setCanceledOnTouchOutside(false)
             dialog.show()
@@ -109,12 +112,12 @@ class EleectricityPaymentVM(application: Application): AndroidViewModel(applicat
             val type ="getcus"
             val service_type = "vend"
 
-
+            Log.i("electricMeterType  >>>",electricMeterType)
             when (electricMeterType){
 
 
                 VasServices.ABUJA_ELECTRICITY_POSTPAID, VasServices.ABUJA_ELECTRICITY_PREPAID ->{
-
+                    Log.i("electricMeterType >>>","electricMeterType >>>>  ${ electricMeterType} Abuja ")
                     details= AbujaModel.PurchaseDetails(amount = (amount.toInt() * 100).toString(),wallet = wallet,username = userName,requestType = requestType,meterType = meterType,meterNo = meterNumber,channel = channel,phone = phone,productCode = productCode,pin = pin,paymentMethod = paymentMetod,pfm = pfm)
                     payviceServices.abujaPayBill(details)
                             .subscribeOn(Schedulers.io())

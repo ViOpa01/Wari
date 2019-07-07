@@ -17,7 +17,7 @@ public class VasServices {
     public static final String AIRTEL = "Airtel";
     public static final String ETISALAT = "9mobile";
     public static final String LEKKI_LCC = "Lekki Lcc Toll";
-    public static final String STARTIMES = "Star Times";
+    public static final String STARTIMES = "StarTimes";
     public static final String EKO_ELECTRIC = "Eko Electricity DC";
     public static final String IKEJA_ELECTRIC = "Ikeja Electric";
     public static final String IBADAN_ELECTRIC = "Ibadan Electricity";
@@ -140,7 +140,7 @@ public class VasServices {
         //ENUGU ELECTRIC DC OPTIONS
         SERVICES.put(ENUGU_ELECTRIC, new Service(ENUGU_ELECTRIC,R.drawable.eedc,new Service.Product[]{
                 new Service.Product(ENUGU_ELECTRICITY_PREPAID,ENUGU_PREPAID,null ),
-                new Service.Product(ENUGU_ELECTRICITY_PREPAID,ENUGU_PREPAID,null )
+                new Service.Product(ENUGU_ELECTRICITY_POSTPAID,ENUGU_POSTPAID,null )
         }));
 
         //ABUJA ELECTRIC DC OPTIONS

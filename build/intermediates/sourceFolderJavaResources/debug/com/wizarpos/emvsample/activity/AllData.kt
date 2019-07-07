@@ -41,10 +41,22 @@ class AllData : AppCompatActivity(), DataAdapter.DataClickListener {
     private val serviceType by lazy {
         val typeOfData = intent.getSerializableExtra(KEYS.TYPE_OF_DATA_KEY) as KEYS.DATA_TYPE
         when (typeOfData){
-            KEYS.DATA_TYPE.ETISALAT -> "ETISALATDATA"
-            KEYS.DATA_TYPE.GLO -> "GLODATA"
-            KEYS.DATA_TYPE.MTN -> "MTNDATA"
-            KEYS.DATA_TYPE.AIRTEL -> "AIRTELDATA"
+            KEYS.DATA_TYPE.ETISALAT -> {
+
+                "ETISALATDATA"
+            }
+            KEYS.DATA_TYPE.GLO -> {
+                "GLODATA"
+
+            }
+            KEYS.DATA_TYPE.MTN ->{
+                "MTNDATA"
+
+            }
+            KEYS.DATA_TYPE.AIRTEL -> {
+                "AIRTELDATA"
+
+            }
         }
     }
 
@@ -81,12 +93,18 @@ class AllData : AppCompatActivity(), DataAdapter.DataClickListener {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         if (serviceType == "ETISALATDATA"){
+            FuncActivity.appState.logo =R.id.nine_mobile
+
             supportActionBar?.title = "Etisalat Data plans"
         } else if (serviceType == "GLODATA"){
+            FuncActivity.appState.logo=R.id.glo
             supportActionBar?.title = "Glo Data plans"
         } else if (serviceType == "AIRTELDATA"){
+            FuncActivity.appState.logo =R.id.airtel
             supportActionBar?.title = "Airtel Data plans"
         } else if (serviceType == "MTNDATA"){
+            FuncActivity.appState.logo=R.id.mtn
+
             supportActionBar?.title = "Mtn Data plans"
         }
         mProgressDialog.show()

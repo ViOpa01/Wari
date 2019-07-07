@@ -216,8 +216,7 @@
                          android:id="@+id/imgVwElectricity"
                          android:layout_width="70dp"
                          android:layout_height="70dp"
-                         android:contentDescription="@string/balance"
-                         android:src="@drawable/ic_call_made_black_24dp"/>
+                         android:src="@drawable/electricity"/>
 
                      <TextView
                          android:layout_width="wrap_content"
@@ -239,8 +238,7 @@
                          android:id="@+id/imgVwCableTv"
                          android:layout_width="70dp"
                          android:layout_height="70dp"
-                         android:contentDescription="@string/refund"
-                         android:src="@drawable/ic_call_received_black_24dp"/>
+                         android:src="@drawable/cable_tv"/>
 
                      <TextView
                          android:layout_width="wrap_content"

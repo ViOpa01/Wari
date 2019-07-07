@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".services.cable_tv.multichoice.activities.MultichoiceActivity">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/subTitleText"
+                style="@style/subtitle_layout"
+                android:fontFamily="@font/titillium_web_boldmedium"
+                tools:text="Airtime Top-up" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bordered_all"
+                android:descendantFocusability="beforeDescendants"
+                android:focusableInTouchMode="true"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <RelativeLayout
+                    android:id="@+id/selectProductBtn"
+                    style="@style/selectable_layout_style">
+
+                    <TextView
+                        android:id="@+id/productText"
+                        style="@style/selectable_layout_text"
+                        android:layout_alignBottom="@+id/serviceImage"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_toLeftOf="@+id/serviceImage"
+                        android:layout_toStartOf="@+id/serviceImage"
+                        android:drawableLeft="@drawable/ic_smartphone"
+                        android:drawablePadding="12dp"
+                        android:fontFamily="@font/titillium_web_regular"
+                        android:gravity="center_vertical"
+                        android:text="Select Service" />
+
+                    <ImageButton
+                        android:id="@+id/serviceImage"
+                        style="@style/selectable_layout_image"
+                        android:scaleType="fitCenter"
+                        app:srcCompat="@drawable/ic_track_changes" />
+
+                    <View
+                        style="@style/selectable_layout_line"
+                        android:layout_alignRight="@id/serviceImage" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/pinLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginBottom="4dp"
+                        android:layout_marginTop="4dp"
+                        android:orientation="horizontal">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/recipientTIL"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <EditText
+                                android:id="@+id/beneficiaryEdit"
+                                style="@style/airtime_input_style"
+                                android:drawableLeft="@drawable/ic_person"
+                                android:fontFamily="@font/titillium_web_regular"
+                                android:inputType="number|text" />
+                        </android.support.design.widget.TextInputLayout>
+
+
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/selectAmountLayout"
+                        style="@style/selectable_layout_style"
+                        android:layout_marginTop="8dp">
+
+
+                        <TextView
+                            style="@style/naira_drawable_style"
+                            android:fontFamily="@font/titillium_web_bolder"
+                            android:text="\u20A6" />
+
+
+                        <TextView
+                            android:id="@+id/selectableAmountText"
+                            style="@style/selectable_layout_text"
+                            android:layout_marginLeft="38dp"
+                            android:fontFamily="@font/titillium_web_regular"
+                            android:text="Select Plan" />
+
+
+                        <View style="@style/selectable_layout_line" />
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/proceedBtn"
+                style="@style/default_button_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:clickable="true"
+                android:text="Proceed" />
+
+
+            <LinearLayout
+                android:id="@+id/historyLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:visibility="visible">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="0dp"
+                    android:fontFamily="@font/titillium_web_boldmedium"
+                    android:padding="10dp"
+                    android:text="Recent Recharge"
+                    android:textSize="14sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/grey_font" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@android:id/list"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:minHeight="28dp"
+                    app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </android.support.v4.widget.NestedScrollView>
+
+</FrameLayout>

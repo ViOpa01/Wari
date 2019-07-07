@@ -14,12 +14,17 @@ import com.iisysgroup.poslib.deviceinterface.DeviceState
 import com.iisysgroup.poslib.host.entities.TransactionResult
 import com.wizarpos.emvsample.MainApp
 import com.wizarpos.emvsample.R
+import com.wizarpos.emvsample.activity.FuncActivity.appState
 import com.wizarpos.emvsample.activity.login.Helper
 import com.wizarpos.emvsample.activity.login.securestorage.SecureStorage
 import com.wizarpos.emvsample.activity.login.securestorage.SecureStorageUtils
+import com.wizarpos.emvsample.generators.PfmStateGenerator
+import com.wizarpos.emvsample.services.discos.activities.ElectricityPaymentActivity
+import com.wizarpos.emvsample.services.helper.activity.util.Models
 import com.wizarpos.util.PinAlertUtils
 import com.wizarpos.util.SharedPreferenceUtils
 import com.wizarpos.util.TransactionModel
+import com.wizarpos.util.VasServices
 import kotlinx.android.synthetic.main.airtime_provider_select.*
 import kotlinx.android.synthetic.main.enter_amount.*
 import kotlinx.coroutines.Dispatchers
@@ -97,18 +102,61 @@ class AirtimeVasActivity : BaseVasActivity(), AirtimeProcessor.onAirtimeTransact
                           bankLogoName = "bank" + terminalID.substring(0, 4)
                       } catch (e: Exception) {
 
+
                       }
+
+
+
+                      val smartCardNumber = ""
+                      val meterNumber = ""
+                      val beneficiaryName = ""
+                      val beneficiaryAddress = ""
+                      val responsemessage =model.message
+                      val amount = airtime_amount
+                      val token = ""
+                      val wallet = SecureStorage.retrieve(Helper.TERMINAL_ID, "")
+                      val product = "Airtime"
+                      val transactionRef = model.ref
+                      val logo = appState.logo
+                      val error = model.error
+                      val airtimeModel = Models.AirtimeModel(error, phone_number)
+                      val cref= ""
+
+                      val isCardTransaction = true
+                      val transactionTID = ""
+                      val merchantID = FuncActivity.appState.nibssData.configData.getConfigData("03015").toString()
+                      val merchantName = FuncActivity.appState.nibssData.configData.getConfigData("52040").toString()
+                      val merchantTerminalId = SecureStorage.retrieve(Helper.TERMINAL, "")
+//				String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
+                      val vasmerchantID = SecureStorage.retrieve(Helper.VAS_TERMINAL_ID, "")
+                      val vasmerchantName = SecureStorage.retrieve(Helper.VAS_MERCHANT_NAME, "")
+//				String vasTerminalId = SecureStorage.retrieve(Helper.,"");
+
+
+                      var vasDetails: Models.VasDetails? = null
+
+//                val date: String  =  PfmStateGenerator(getBaseContext()).getCurrentTime()
+//                    if (airtimetype.equals("wallet", ignoreCase = true)) {
+                      vasDetails = Models.VasDetails(cref,amount, wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product, responsemessage, vasmerchantID, transactionRef, VasServices.CASH, logo, date, error, Models.AIRTIME, airtimeModel)
+//                    } else if (airtimetype.equals("card", ignoreCase = true)) {
+//                        vasDetails = Models.VasDetails(amount, wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product, responsemessage, vasmerchantID, transactionRef, VasServices.CARD, logo, date, error, Models.AIRTIME, airtimeModel)
+//                    }
+
+                      ElectricityPaymentActivity.print(this@AirtimeVasActivity,vasDetails!!)
+
+
+
 //                      MainApp.getInstance().transfer=TransResultActivity.transactionModel
-                      transactionModel = MainApp.transactionModel
-
-                      Log.i("With bebeficiary  >>>",transactionModel.toString())
-//                      transactionModel = TransactionModel(terminalID, "", "", "", airtime_amount, "", "airtime", "", status, "", merchantID, merchantName, "", "", "", "", "", "", date, "", "", bankLogoName, phone_number);
-
-                      val intent = Intent(baseContext, MainActivity::class.java)
-
-                      intent.putExtra("transactionModel", transactionModel)
-                      intent.putExtra("copy", "** CUSTOMER COPY **")
-                      startActivity(intent)
+//                      transactionModel = MainApp.transactionModel
+//
+//                      Log.i("With bebeficiary  >>>",transactionModel.toString())
+////                      transactionModel = TransactionModel(terminalID, "", "", "", airtime_amount, "", "airtime", "", status, "", merchantID, merchantName, "", "", "", "", "", "", date, "", "", bankLogoName, phone_number);
+//
+//                      val intent = Intent(baseContext, MainActivity::class.java)
+//
+//                      intent.putExtra("transactionModel", transactionModel)
+//                      intent.putExtra("copy", "** CUSTOMER COPY **")
+//                      startActivity(intent)
 //                      val alertDialog = AlertDialog.Builder(baseContext)
 //                      alertDialog.setMessage("Print Merchant copy")
 //                      val finalTransactionModel = transactionModel
@@ -152,20 +200,59 @@ class AirtimeVasActivity : BaseVasActivity(), AirtimeProcessor.onAirtimeTransact
 
                 }
 
-                Log.i("MainApp.transactionModel  >>>", MainApp.transactionModel.toString())
 
-                transactionModel=MainApp.transactionModel;
+                val smartCardNumber = ""
+                val meterNumber = ""
+                val beneficiaryName = ""
+                val beneficiaryAddress = ""
+                val responsemessage =model.message
+                val amount = airtime_amount
+                val token = ""
+                val wallet = SecureStorage.retrieve(Helper.TERMINAL_ID, "")
+                val product = "Airtime"
+                val transactionRef = model.ref
+                val error = model.error
+                val airtimeModel = Models.AirtimeModel(error, phone_number)
+                val cref= ""
+                val logo = appState.logo
+
+                val isCardTransaction = true
+                val transactionTID = ""
+                val merchantID = FuncActivity.appState.nibssData.configData.getConfigData("03015").toString()
+                val merchantName = FuncActivity.appState.nibssData.configData.getConfigData("52040").toString()
+                val merchantTerminalId = SecureStorage.retrieve(Helper.TERMINAL, "")
+//				String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
+                val vasmerchantID = SecureStorage.retrieve(Helper.VAS_TERMINAL_ID, "")
+                val vasmerchantName = SecureStorage.retrieve(Helper.VAS_MERCHANT_NAME, "")
+//				String vasTerminalId = SecureStorage.retrieve(Helper.,"");
+
+
+                var vasDetails: Models.VasDetails? = null
+
+//                val date: String  =  PfmStateGenerator(getBaseContext()).getCurrentTime()
+//                    if (airtimetype.equals("wallet", ignoreCase = true)) {
+                vasDetails = Models.VasDetails(cref,amount, wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product, responsemessage, vasmerchantID, transactionRef, VasServices.CASH, logo, date, error, Models.AIRTIME, airtimeModel)
+//                    } else if (airtimetype.equals("card", ignoreCase = true)) {
+//                        vasDetails = Models.VasDetails(amount, wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product, responsemessage, vasmerchantID, transactionRef, VasServices.CARD, logo, date, error, Models.AIRTIME, airtimeModel)
+//                    }
+
+                ElectricityPaymentActivity.print(this@AirtimeVasActivity,vasDetails!!)
+
+
+//                Log.i("MainApp.transactionModel  >>>", MainApp.transactionModel.toString())
+
+//                transactionModel=MainApp.transactionModel;
 
 
 
-                Log.i("Yeah >>> Show up", transactionModel.toString())
-//                transactionModel = TransactionModel(terminalID, ref, "", "", airtime_amount, "", "airtime", "", status, "", merchantID, merchantName, "", "", "", "", "", "", date, "", "", bankLogoName, phone_number);
-
-                val intent = Intent(baseContext, MainActivity::class.java)
-
-                intent.putExtra("transactionModel", transactionModel)
-                intent.putExtra("copy", "** CUSTOMER COPY **")
-                startActivity(intent)
+//                Log.i("Yeah >>> Show up", transactionModel.toString())
+////                transactionModel = TransactionModel(terminalID, ref, "", "", airtime_amount, "", "airtime", "", status, "", merchantID, merchantName, "", "", "", "", "", "", date, "", "", bankLogoName, phone_number);
+//
+//                val intent = Intent(baseContext, MainActivity::class.java)
+//
+//                intent.putExtra("transactionModel", transactionModel)
+//                intent.putExtra("copy", "** CUSTOMER COPY **")
+//                startActivity(intent)
 //                val alertDialog = AlertDialog.Builder(baseContext)
 //                alertDialog.setMessage("Print Merchant copy")
 //                val finalTransactionModel = transactionModel
@@ -195,35 +282,75 @@ class AirtimeVasActivity : BaseVasActivity(), AirtimeProcessor.onAirtimeTransact
             message = errorMessage
             okButton {
                 //finish()
-                var transactionModel: TransactionModel? = null
-                val merchantID = FuncActivity.appState.nibssData.configData.getConfigData("03015").toString()
-                val merchantName = FuncActivity.appState.nibssData.configData.getConfigData("52040").toString()
+//                var transactionModel: TransactionModel? = null
+//                val merchantID = FuncActivity.appState.nibssData.configData.getConfigData("03015").toString()
+//                val merchantName = FuncActivity.appState.nibssData.configData.getConfigData("52040").toString()
                 try{
-                    var bankLogoName = ""
-                    try {
-                        bankLogoName = "bank" + terminalID.substring(0, 4)
-                    } catch (e: Exception) {
-
-                    }
-                    val date = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().time)
-                    transactionModel = TransactionModel(terminalID, "", "", "", airtime_amount, "", "airtime", "", "Declined", "", merchantID, merchantName, "", "", "", "", "", "", date, "", "", bankLogoName, phone_number);
-
-                    val intent = Intent(baseContext, MainActivity::class.java)
-
-                    intent.putExtra("transactionModel", transactionModel)
-                    intent.putExtra("copy", "** CUSTOMER COPY **")
-                    startActivity(intent)
-                    val alertDialog = AlertDialog.Builder(baseContext)
-                    alertDialog.setMessage("Print Merchant copy")
-                    val finalTransactionModel = transactionModel
-                    alertDialog.setPositiveButton("OK") { dialogInterface, i ->
-                        val intent = Intent(baseContext, MainActivity::class.java)
-                        intent.putExtra("transactionModel", finalTransactionModel)
-                        intent.putExtra("copy", "*** MERCHANT COPY ***")
-                        startActivity(intent)
-                    }
-                    alertDialog.show()
+//                    var bankLogoName = ""
+//                    try {
+//                        bankLogoName = "bank" + terminalID.substring(0, 4)
+//                    } catch (e: Exception) {
+//
+//                    }
+//                    val date = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().time)
+//                    transactionModel = TransactionModel(terminalID, "", "", "", airtime_amount, "", "airtime", "", "Declined", "", merchantID, merchantName, "", "", "", "", "", "", date, "", "", bankLogoName, phone_number);
+//
+//                    val intent = Intent(baseContext, MainActivity::class.java)
+//
+//                    intent.putExtra("transactionModel", transactionModel)
+//                    intent.putExtra("copy", "** CUSTOMER COPY **")
+//                    startActivity(intent)
+//                    val alertDialog = AlertDialog.Builder(baseContext)
+//                    alertDialog.setMessage("Print Merchant copy")
+//                    val finalTransactionModel = transactionModel
+//                    alertDialog.setPositiveButton("OK") { dialogInterface, i ->
+//                        val intent = Intent(baseContext, MainActivity::class.java)
+//                        intent.putExtra("transactionModel", finalTransactionModel)
+//                        intent.putExtra("copy", "*** MERCHANT COPY ***")
+//                        startActivity(intent)
+//                    }
+//                    alertDialog.show()
                     // PrinterHelper.getInstance().airtimeReceipt(FuncActivity.appState, 1,  model)
+
+
+                    val smartCardNumber = ""
+                    val meterNumber = ""
+                    val beneficiaryName = ""
+                    val beneficiaryAddress = ""
+                    val responsemessage =errorMessage
+                    val amount = airtime_amount
+                    val token = ""
+                    val wallet = SecureStorage.retrieve(Helper.TERMINAL_ID, "")
+                    val product = "Airtime"
+                    val transactionRef = ""
+                    val logo = 0
+                    val error = true
+                    val airtimeModel = Models.AirtimeModel(true, phone_number)
+                    val cref= ""
+
+                    val isCardTransaction = true
+                    val transactionTID = ""
+                    val merchantID = FuncActivity.appState.nibssData.configData.getConfigData("03015").toString()
+                    val merchantName = FuncActivity.appState.nibssData.configData.getConfigData("52040").toString()
+                    val merchantTerminalId = SecureStorage.retrieve(Helper.TERMINAL, "")
+//				String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
+                    val vasmerchantID = SecureStorage.retrieve(Helper.VAS_TERMINAL_ID, "")
+                    val vasmerchantName = SecureStorage.retrieve(Helper.VAS_MERCHANT_NAME, "")
+//				String vasTerminalId = SecureStorage.retrieve(Helper.,"");
+
+
+                    var vasDetails: Models.VasDetails? = null
+
+                    val date: String  =  PfmStateGenerator(getBaseContext()).getCurrentTime()
+//                    if (airtimetype.equals("wallet", ignoreCase = true)) {
+                        vasDetails = Models.VasDetails(cref,amount, wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product, responsemessage, vasmerchantID, transactionRef, VasServices.CASH, logo, date, error, Models.AIRTIME, airtimeModel)
+//                    } else if (airtimetype.equals("card", ignoreCase = true)) {
+//                        vasDetails = Models.VasDetails(amount, wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product, responsemessage, vasmerchantID, transactionRef, VasServices.CARD, logo, date, error, Models.AIRTIME, airtimeModel)
+//                    }
+
+                    ElectricityPaymentActivity.print(this@AirtimeVasActivity,vasDetails)
+
+
                 }catch (e : Exception){
 
                 }
@@ -274,21 +401,26 @@ class AirtimeVasActivity : BaseVasActivity(), AirtimeProcessor.onAirtimeTransact
         cancel.setOnClickListener { moveToPreviousPage() }
 
         mtn.setOnClickListener {
+            FuncActivity.appState.logo =R.id.mtn
             resetAirtimeValues()
             showPhoneNumberScreen()
             airtime_provider = "MTNVTU"
+
         }
         glo.setOnClickListener {
+            FuncActivity.appState.logo =R.id.glo
             resetAirtimeValues()
             showPhoneNumberScreen()
             airtime_provider = "GLOVTU"
         }
         nine_mobile.setOnClickListener {
+            FuncActivity.appState.logo =R.id.nine_mobile
             resetAirtimeValues()
             showPhoneNumberScreen()
             airtime_provider = "ETISALATVTU"
         }
         airtel.setOnClickListener {
+            FuncActivity.appState.logo =R.id.airtel
             resetAirtimeValues()
             showPhoneNumberScreen()
             airtime_provider = "AIRTELVTU"
@@ -390,8 +522,12 @@ class AirtimeVasActivity : BaseVasActivity(), AirtimeProcessor.onAirtimeTransact
         alert {
             title = "Transaction Type"
             message = "Select the type of transaction you want to make"
-            positiveButton(buttonText = "Card") { _ -> payWithCard(phone_number, airtimeProvider) }
-            negativeButton(buttonText = "Wallet") { _ -> payWithWallet(phone_number, airtimeProvider) }
+            positiveButton(buttonText = "Card") { _ ->
+                appState.isWallet=false;
+                payWithCard(phone_number, airtimeProvider) }
+            negativeButton(buttonText = "Wallet") { _ ->
+                appState.isWallet=true;
+                payWithWallet(phone_number, airtimeProvider) }
         }.show()
 
 
@@ -496,7 +632,7 @@ class AirtimeVasActivity : BaseVasActivity(), AirtimeProcessor.onAirtimeTransact
                                 DeviceState.APPROVED -> {
                                     (application as MainApp).poslibdb.transactionResultDao.get(rrn).observe({ lifecycle }) {
                                         transactionResult = it!!
-                                        Log.i("requestCode here in AIRTIME_REQUEST_CODE >>>", requestCode.toString())
+//                                        Log.i("requestCode here in AIRTIME_REQUEST_CODE >>>", requestCode.toString())
                                         processCardTransaction()
                                     }
                                 }

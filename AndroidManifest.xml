@@ -29,8 +29,14 @@
         android:icon="@drawable/wari"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
-        <activity android:name=".services.discos.activities.ElectricityPaymentActivity"></activity>
+        <activity android:name=".services.cable_tv.multichoice.activities.MultichoiceActivity"></activity>
+        <activity android:name=".services.cable_tv.CableTvActivity" />
+        <activity android:name=".services.discos.activities.ElectricityPaymentActivity" />
         <activity android:name=".services.discos.activities.DiscosActivity" />
+        <activity android:name="com.iisysgroup.payvice.startimes.activites.StartimesActivity" />
+        <activity android:name=".services.helper.activity.BaseActivity" /> <!-- android:label="@string/title_activity_time_out" -->
+        <!-- android:screenOrientation="portrait" -->
+        <!-- android:theme="" -->
         <activity android:name=".services.discos.activities.MeterValidationActivity" /> <!-- MENU Start -->
         <activity
             android:name=".activity.IdleActivity"

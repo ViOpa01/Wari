@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Wed Jun 26 16:42:39 WAT 2019
+#Sat Jul 06 00:38:34 WAT 2019
 60.set=NATIVE_RESOURCE
 52.set=ASSET
 53.base=C\:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\transforms\\stripDebugSymbol\\debug\\0

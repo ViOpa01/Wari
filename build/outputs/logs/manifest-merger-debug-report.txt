@@ -1,10 +1,13 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:2:1-205:12
-INJECTED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:2:1-205:12
-INJECTED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:2:1-205:12
+ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:2:1-211:12
+INJECTED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:2:1-211:12
+INJECTED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:2:1-211:12
 MERGED from [com.android.support:multidex:1.0.3] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\multidex-1.0.3.aar\51eb3f952b6d438c060acd9bf9638de8\AndroidManifest.xml:17:1-22:12
 MERGED from [:poslib-commons-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-commons-debug.aar\001a1d15237abe33a422214c115be09a\AndroidManifest.xml:2:1-16:12
+MERGED from [com.jakewharton.rxbinding2:rxbinding-design:2.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\rxbinding-design-2.1.1.aar\25aad969f023f5c7ab3668d6b344d9dd\AndroidManifest.xml:2:1-8:12
+MERGED from [com.jakewharton.rxbinding2:rxbinding-kotlin:2.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\rxbinding-kotlin-2.1.1.aar\9268a2c77c312152b3fb67a2276f1d74\AndroidManifest.xml:2:1-8:12
+MERGED from [com.jakewharton.rxbinding2:rxbinding:2.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\rxbinding-2.1.1.aar\4fb46b5d509c94bff3e20721ccba8326\AndroidManifest.xml:2:1-8:12
 MERGED from [io.reactivex.rxjava2:rxandroid:2.1.0] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\rxandroid-2.1.0.aar\938f17bf552ab7b959d82687595d8375\AndroidManifest.xml:15:1-20:12
 MERGED from [:poslib-host-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-host-debug.aar\f45646ddfc3078037e54f22fea8fee30\AndroidManifest.xml:2:1-16:12
 MERGED from [:poslib-device-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-device-debug.aar\4406fb617fc7ef7ab3d03bef93286246\AndroidManifest.xml:2:1-18:12
@@ -22,10 +25,10 @@ MERGED from [com.android.support:support-fragment:27.1.1] C:\Users\Favour\.gradl
 MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.1.aar\dc9d91921080647f1be078de1233061b\AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.lifecycle:livedata:1.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\livedata-1.1.1.aar\bc247de7893e2762667bca4f9bd1a173\AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.persistence.room:runtime:1.1.0] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\4048bb14ae631a7c64cb900e97998730\AndroidManifest.xml:17:1-22:12
-MERGED from [:payviceconnect] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\279143575883e26af904c5dfd88a96be\AndroidManifest.xml:2:1-23:12
-MERGED from [com.android.support:transition:27.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\transition-27.1.1.aar\1bdd2c4465536f11f117e2f9409a00f6\AndroidManifest.xml:17:1-22:12
+MERGED from [:payviceconnect_] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\2ca428f9eb4d38b76fdb93da0185497f\AndroidManifest.xml:2:1-23:12
 MERGED from [com.android.support:animated-vector-drawable:27.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-27.1.1.aar\eec0d224a9dce83339f6fd1a00ef5c45\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:support-vector-drawable:27.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-27.1.1.aar\df21f7551d5a14cfda443d59cb072dad\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:transition:27.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\transition-27.1.1.aar\1bdd2c4465536f11f117e2f9409a00f6\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:support-core-ui:27.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\support-core-ui-27.1.1.aar\b6e9f6491b15d69efadb3723a57b3138\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:support-core-utils:27.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\support-core-utils-27.1.1.aar\b28326c47c297eab74cd753dba190693\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:support-compat:27.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\support-compat-27.1.1.aar\e5515b1fd2ea2ce8875c654083aa05b6\AndroidManifest.xml:17:1-22:12
@@ -34,8 +37,8 @@ MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\Favour\.gradle
 MERGED from [android.arch.core:runtime:1.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\b31944bef7cdbd0b9b0860a4888dfce0\AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.persistence:db-framework:1.1.0] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\db-framework-1.1.0.aar\8be77296b160252f672aaf560483ad7d\AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.persistence:db:1.1.0] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\db-1.1.0.aar\6d13f78c22ec2bfaef6506aa877e04dc\AndroidManifest.xml:17:1-22:12
-INJECTED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:2:1-205:12
-INJECTED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:2:1-205:12
+INJECTED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:2:1-211:12
+INJECTED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:2:1-211:12
 	package
 		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:3:5-37
 	android:versionName
@@ -56,6 +59,12 @@ MERGED from [com.android.support:multidex:1.0.3] C:\Users\Favour\.gradle\caches\
 MERGED from [com.android.support:multidex:1.0.3] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\multidex-1.0.3.aar\51eb3f952b6d438c060acd9bf9638de8\AndroidManifest.xml:20:5-43
 MERGED from [:poslib-commons-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-commons-debug.aar\001a1d15237abe33a422214c115be09a\AndroidManifest.xml:7:5-9:41
 MERGED from [:poslib-commons-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-commons-debug.aar\001a1d15237abe33a422214c115be09a\AndroidManifest.xml:7:5-9:41
+MERGED from [com.jakewharton.rxbinding2:rxbinding-design:2.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\rxbinding-design-2.1.1.aar\25aad969f023f5c7ab3668d6b344d9dd\AndroidManifest.xml:6:5-44
+MERGED from [com.jakewharton.rxbinding2:rxbinding-design:2.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\rxbinding-design-2.1.1.aar\25aad969f023f5c7ab3668d6b344d9dd\AndroidManifest.xml:6:5-44
+MERGED from [com.jakewharton.rxbinding2:rxbinding-kotlin:2.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\rxbinding-kotlin-2.1.1.aar\9268a2c77c312152b3fb67a2276f1d74\AndroidManifest.xml:6:5-44
+MERGED from [com.jakewharton.rxbinding2:rxbinding-kotlin:2.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\rxbinding-kotlin-2.1.1.aar\9268a2c77c312152b3fb67a2276f1d74\AndroidManifest.xml:6:5-44
+MERGED from [com.jakewharton.rxbinding2:rxbinding:2.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\rxbinding-2.1.1.aar\4fb46b5d509c94bff3e20721ccba8326\AndroidManifest.xml:6:5-44
+MERGED from [com.jakewharton.rxbinding2:rxbinding:2.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\rxbinding-2.1.1.aar\4fb46b5d509c94bff3e20721ccba8326\AndroidManifest.xml:6:5-44
 MERGED from [io.reactivex.rxjava2:rxandroid:2.1.0] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\rxandroid-2.1.0.aar\938f17bf552ab7b959d82687595d8375\AndroidManifest.xml:18:5-43
 MERGED from [io.reactivex.rxjava2:rxandroid:2.1.0] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\rxandroid-2.1.0.aar\938f17bf552ab7b959d82687595d8375\AndroidManifest.xml:18:5-43
 MERGED from [:poslib-host-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-host-debug.aar\f45646ddfc3078037e54f22fea8fee30\AndroidManifest.xml:7:5-9:41
@@ -90,14 +99,14 @@ MERGED from [android.arch.lifecycle:livedata:1.1.1] C:\Users\Favour\.gradle\cach
 MERGED from [android.arch.lifecycle:livedata:1.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\livedata-1.1.1.aar\bc247de7893e2762667bca4f9bd1a173\AndroidManifest.xml:20:5-44
 MERGED from [android.arch.persistence.room:runtime:1.1.0] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\4048bb14ae631a7c64cb900e97998730\AndroidManifest.xml:20:5-44
 MERGED from [android.arch.persistence.room:runtime:1.1.0] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\4048bb14ae631a7c64cb900e97998730\AndroidManifest.xml:20:5-44
-MERGED from [:payviceconnect] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\279143575883e26af904c5dfd88a96be\AndroidManifest.xml:7:5-9:41
-MERGED from [:payviceconnect] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\279143575883e26af904c5dfd88a96be\AndroidManifest.xml:7:5-9:41
-MERGED from [com.android.support:transition:27.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\transition-27.1.1.aar\1bdd2c4465536f11f117e2f9409a00f6\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:transition:27.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\transition-27.1.1.aar\1bdd2c4465536f11f117e2f9409a00f6\AndroidManifest.xml:20:5-44
+MERGED from [:payviceconnect_] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\2ca428f9eb4d38b76fdb93da0185497f\AndroidManifest.xml:7:5-9:41
+MERGED from [:payviceconnect_] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\2ca428f9eb4d38b76fdb93da0185497f\AndroidManifest.xml:7:5-9:41
 MERGED from [com.android.support:animated-vector-drawable:27.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-27.1.1.aar\eec0d224a9dce83339f6fd1a00ef5c45\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:animated-vector-drawable:27.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-27.1.1.aar\eec0d224a9dce83339f6fd1a00ef5c45\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-vector-drawable:27.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-27.1.1.aar\df21f7551d5a14cfda443d59cb072dad\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-vector-drawable:27.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-27.1.1.aar\df21f7551d5a14cfda443d59cb072dad\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:transition:27.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\transition-27.1.1.aar\1bdd2c4465536f11f117e2f9409a00f6\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:transition:27.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\transition-27.1.1.aar\1bdd2c4465536f11f117e2f9409a00f6\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-core-ui:27.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\support-core-ui-27.1.1.aar\b6e9f6491b15d69efadb3723a57b3138\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-core-ui:27.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\support-core-ui-27.1.1.aar\b6e9f6491b15d69efadb3723a57b3138\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-core-utils:27.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\support-core-utils-27.1.1.aar\b28326c47c297eab74cd753dba190693\AndroidManifest.xml:20:5-44
@@ -189,7 +198,7 @@ ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:25:5-
 	android:name
 		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:25:22-78
 application
-ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:27:5-203:19
+ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:27:5-209:19
 MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\6da21d2132f8dec4de7f3b454971783f\AndroidManifest.xml:9:5-20
 MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\6da21d2132f8dec4de7f3b454971783f\AndroidManifest.xml:9:5-20
 MERGED from [android.arch.lifecycle:extensions:1.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\extensions-1.1.1.aar\f8485407071611cdf81269f7367663b4\AndroidManifest.xml:22:5-28:19
@@ -198,8 +207,8 @@ MERGED from [com.github.danielgindi:httprequest:1.2.0] C:\Users\Favour\.gradle\c
 MERGED from [com.github.danielgindi:httprequest:1.2.0] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\httprequest-1.2.0.aar\31721f04280b396f0d03e8ac599a1a11\AndroidManifest.xml:10:5-20
 MERGED from [com.andrognito.pinlockview:pinlockview:2.1.0] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\pinlockview-2.1.0.aar\090ce7685a72132be7f314f587663509\AndroidManifest.xml:11:5-53
 MERGED from [com.andrognito.pinlockview:pinlockview:2.1.0] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\pinlockview-2.1.0.aar\090ce7685a72132be7f314f587663509\AndroidManifest.xml:11:5-53
-MERGED from [:payviceconnect] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\279143575883e26af904c5dfd88a96be\AndroidManifest.xml:16:5-21:19
-MERGED from [:payviceconnect] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\279143575883e26af904c5dfd88a96be\AndroidManifest.xml:16:5-21:19
+MERGED from [:payviceconnect_] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\2ca428f9eb4d38b76fdb93da0185497f\AndroidManifest.xml:16:5-21:19
+MERGED from [:payviceconnect_] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\2ca428f9eb4d38b76fdb93da0185497f\AndroidManifest.xml:16:5-21:19
 	android:label
 		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:30:9-41
 	android:icon
@@ -208,274 +217,290 @@ MERGED from [:payviceconnect] C:\Users\Favour\.gradle\caches\transforms-1\files-
 		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:31:9-40
 	android:name
 		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:28:9-32
+activity#com.wizarpos.emvsample.services.cable_tv.multichoice.activities.MultichoiceActivity
+ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:32:9-107
+	android:name
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:32:19-95
+activity#com.wizarpos.emvsample.services.cable_tv.CableTvActivity
+ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:33:9-71
+	android:name
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:33:19-68
 activity#com.wizarpos.emvsample.services.discos.activities.ElectricityPaymentActivity
-ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:32:9-100
+ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:34:9-91
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:32:19-88
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:34:19-88
 activity#com.wizarpos.emvsample.services.discos.activities.DiscosActivity
-ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:33:9-79
+ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:35:9-79
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:33:19-76
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:35:19-76
+activity#com.iisysgroup.payvice.startimes.activites.StartimesActivity
+ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:36:9-97
+	android:name
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:36:19-94
+activity#com.wizarpos.emvsample.services.helper.activity.BaseActivity
+ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:37:9-75
+	android:name
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:37:19-72
 activity#com.wizarpos.emvsample.services.discos.activities.MeterValidationActivity
-ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:34:9-88
+ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:40:9-88
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:34:19-85
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:40:19-85
 activity#com.wizarpos.emvsample.activity.IdleActivity
-ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:35:9-44:20
+ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:41:9-50:20
 	android:screenOrientation
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:37:13-49
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:43:13-49
 	android:theme
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:38:13-44
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:44:13-44
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:36:13-50
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:42:13-50
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:39:13-43:29
+ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:45:13-49:29
 action#android.intent.action.MAIN
-ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:40:17-69
+ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:46:17-69
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:40:25-66
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:46:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:42:17-77
+ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:48:17-77
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:42:27-74
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:48:27-74
 activity#com.wizarpos.emvsample.activity.FuncMenuActivity
-ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:53:9-55:52
-	android:screenOrientation
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:55:13-49
-	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:54:13-54
-activity#com.wizarpos.emvsample.payments_menu.transfer.TransferBankSelection
-ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:56:9-58:52
-	android:screenOrientation
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:58:13-49
-	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:57:13-73
-activity#com.wizarpos.emvsample.payments_menu.transfer.TransferAmountEntry
 ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:59:9-61:52
 	android:screenOrientation
 		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:61:13-49
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:60:13-71
-activity#com.wizarpos.emvsample.VasPurchaseProcessor
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:60:13-54
+activity#com.wizarpos.emvsample.payments_menu.transfer.TransferBankSelection
 ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:62:9-64:52
 	android:screenOrientation
 		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:64:13-49
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:63:13-49
-activity#com.wizarpos.emvsample.activity.FuncActivity
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:63:13-73
+activity#com.wizarpos.emvsample.payments_menu.transfer.TransferAmountEntry
 ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:65:9-67:52
 	android:screenOrientation
 		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:67:13-49
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:66:13-50
-activity#com.wizarpos.emvsample.activity.AirtimeVasActivity
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:66:13-71
+activity#com.wizarpos.emvsample.VasPurchaseProcessor
 ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:68:9-70:52
 	android:screenOrientation
 		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:70:13-49
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:69:13-56
-activity#com.wizarpos.emvsample.activity.DataActivity
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:69:13-49
+activity#com.wizarpos.emvsample.activity.FuncActivity
 ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:71:9-73:52
 	android:screenOrientation
 		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:73:13-49
 	android:name
 		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:72:13-50
-activity#com.wizarpos.emvsample.activity.DataPhoneEntry
+activity#com.wizarpos.emvsample.activity.AirtimeVasActivity
 ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:74:9-76:52
 	android:screenOrientation
 		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:76:13-49
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:75:13-52
-activity#com.wizarpos.emvsample.activity.AllData
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:75:13-56
+activity#com.wizarpos.emvsample.activity.DataActivity
 ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:77:9-79:52
 	android:screenOrientation
 		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:79:13-49
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:78:13-45
-activity#com.wizarpos.emvsample.activity.AirtimeDataActivity
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:78:13-50
+activity#com.wizarpos.emvsample.activity.DataPhoneEntry
 ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:80:9-82:52
 	android:screenOrientation
 		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:82:13-49
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:81:13-57
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:81:13-52
+activity#com.wizarpos.emvsample.activity.AllData
+ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:83:9-85:52
+	android:screenOrientation
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:85:13-49
+	android:name
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:84:13-45
+activity#com.wizarpos.emvsample.activity.AirtimeDataActivity
+ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:86:9-88:52
+	android:screenOrientation
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:88:13-49
+	android:name
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:87:13-57
 activity#com.wizarpos.emvsample.activity.MainActivity
-ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:83:9-85:64
+ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:89:9-91:64
 	android:theme
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:85:13-61
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:91:13-61
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:84:13-50
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:90:13-50
 activity#com.wizarpos.emvsample.activity.RequestCardActivity
-ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:107:9-109:52
-	android:screenOrientation
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:109:13-49
-	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:108:13-57
-activity#com.wizarpos.emvsample.activity.login.LoginActivity
-ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:110:9-112:52
-	android:screenOrientation
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:112:13-49
-	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:111:13-57
-activity#com.wizarpos.emvsample.activity.RemoveCardActivity
 ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:113:9-115:52
 	android:screenOrientation
 		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:115:13-49
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:114:13-56
-activity#com.wizarpos.emvsample.activity.ConfirmBypassPinActivity
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:114:13-57
+activity#com.wizarpos.emvsample.activity.login.LoginActivity
 ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:116:9-118:52
 	android:screenOrientation
 		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:118:13-49
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:117:13-62
-activity#com.wizarpos.emvsample.activity.ConfirmCardActivity
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:117:13-57
+activity#com.wizarpos.emvsample.activity.RemoveCardActivity
 ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:119:9-121:52
 	android:screenOrientation
 		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:121:13-49
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:120:13-57
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:120:13-56
+activity#com.wizarpos.emvsample.activity.ConfirmBypassPinActivity
+ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:122:9-124:52
+	android:screenOrientation
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:124:13-49
+	android:name
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:123:13-62
+activity#com.wizarpos.emvsample.activity.ConfirmCardActivity
+ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:125:9-127:52
+	android:screenOrientation
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:127:13-49
+	android:name
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:126:13-57
 activity#com.wizarpos.emvsample.activity.DataClearActivity
-ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:126:9-128:52
-	android:screenOrientation
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:128:13-49
-	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:127:13-55
-activity#com.wizarpos.emvsample.activity.EnquireTransActivity
-ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:129:9-131:52
-	android:screenOrientation
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:131:13-49
-	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:130:13-58
-activity#com.wizarpos.emvsample.activity.ErrorActivity
 ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:132:9-134:52
 	android:screenOrientation
 		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:134:13-49
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:133:13-51
-activity#com.wizarpos.emvsample.activity.InputAmountActivity
-ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:135:9-138:47
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:133:13-55
+activity#com.wizarpos.emvsample.activity.EnquireTransActivity
+ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:135:9-137:52
 	android:screenOrientation
 		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:137:13-49
-	android:theme
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:138:13-44
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:136:13-57
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:136:13-58
+activity#com.wizarpos.emvsample.activity.ErrorActivity
+ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:138:9-140:52
+	android:screenOrientation
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:140:13-49
+	android:name
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:139:13-51
+activity#com.wizarpos.emvsample.activity.InputAmountActivity
+ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:141:9-144:47
+	android:screenOrientation
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:143:13-49
+	android:theme
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:144:13-44
+	android:name
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:142:13-57
 activity#com.wizarpos.emvsample.activity.InputPINActivity
-ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:139:9-141:52
+ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:145:9-147:52
 	android:screenOrientation
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:141:13-49
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:147:13-49
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:140:13-54
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:146:13-54
 activity#com.wizarpos.emvsample.activity.ProcessEMVCardActivity
-ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:147:9-149:52
+ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:153:9-155:52
 	android:screenOrientation
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:149:13-49
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:155:13-49
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:148:13-60
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:154:13-60
 activity#com.wizarpos.emvsample.activity.ProcessOnlineActivity
-ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:150:9-153:46
+ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:156:9-159:46
 	android:screenOrientation
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:152:13-49
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:158:13-49
 	android:theme
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:153:13-43
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:159:13-43
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:151:13-59
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:157:13-59
 activity#com.wizarpos.emvsample.activity.SelectEMVAppListActivity
-ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:154:9-156:52
-	android:screenOrientation
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:156:13-49
-	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:155:13-62
-activity#com.wizarpos.emvsample.activity.ShowPBOCCardRecordActivity
-ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:157:9-159:52
-	android:screenOrientation
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:159:13-49
-	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:158:13-64
-activity#com.wizarpos.emvsample.activity.ShowLastPBOCActivity
 ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:160:9-162:52
 	android:screenOrientation
 		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:162:13-49
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:161:13-58
-activity#com.wizarpos.emvsample.activity.ShowTransInfoActivity
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:161:13-62
+activity#com.wizarpos.emvsample.activity.ShowPBOCCardRecordActivity
 ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:163:9-165:52
 	android:screenOrientation
 		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:165:13-49
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:164:13-59
-activity#com.wizarpos.emvsample.activity.TransResultActivity
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:164:13-64
+activity#com.wizarpos.emvsample.activity.ShowLastPBOCActivity
 ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:166:9-168:52
 	android:screenOrientation
 		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:168:13-49
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:167:13-57
-activity#com.wizarpos.emvsample.activity.Sale
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:167:13-58
+activity#com.wizarpos.emvsample.activity.ShowTransInfoActivity
 ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:169:9-171:52
 	android:screenOrientation
 		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:171:13-49
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:170:13-42
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:170:13-59
+activity#com.wizarpos.emvsample.activity.TransResultActivity
+ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:172:9-174:52
+	android:screenOrientation
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:174:13-49
+	android:name
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:173:13-57
+activity#com.wizarpos.emvsample.activity.Sale
+ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:175:9-177:52
+	android:screenOrientation
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:177:13-49
+	android:name
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:176:13-42
 activity#com.wizarpos.emvsample.activity.Settle
-ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:176:9-53
+ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:182:9-53
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:176:19-50
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:182:19-50
 activity#com.wizarpos.emvsample.activity.QueryCardRecord
-ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:182:9-62
+ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:188:9-62
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:182:19-59
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:188:19-59
 activity#com.wizarpos.emvsample.activity.WalletBalance
-ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:183:9-185:71
+ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:189:9-191:71
 	android:parentActivityName
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:185:13-68
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:191:13-68
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:184:13-51
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:190:13-51
 activity#com.wizarpos.emvsample.activity.GetMasterKey
-ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:186:9-188:52
+ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:192:9-194:52
 	android:screenOrientation
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:188:13-49
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:194:13-49
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:187:13-50
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:193:13-50
 activity#com.wizarpos.emvsample.activity.auth.PinInterFace
-ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:189:9-64
+ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:195:9-64
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:189:19-61
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:195:19-61
 activity#com.wizarpos.emvsample.activity.auth.EodMenu
-ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:190:9-192:52
-	android:screenOrientation
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:192:13-49
-	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:191:13-50
-activity#com.wizarpos.emvsample.activity.auth.NetworkSettings
-ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:193:9-195:52
-	android:screenOrientation
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:195:13-49
-	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:194:13-58
-activity#com.wizarpos.emvsample.activity.RefundActivity
-ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:196:9-199:46
+ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:196:9-198:52
 	android:screenOrientation
 		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:198:13-49
+	android:name
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:197:13-50
+activity#com.wizarpos.emvsample.activity.auth.NetworkSettings
+ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:199:9-201:52
+	android:screenOrientation
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:201:13-49
+	android:name
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:200:13-58
+activity#com.wizarpos.emvsample.activity.RefundActivity
+ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:202:9-205:46
+	android:screenOrientation
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:204:13-49
 	android:theme
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:199:13-43
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:205:13-43
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:197:13-52
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:203:13-52
 activity#com.wizarpos.emvsample.activity.InputExtraAmountActivity
-ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:200:9-71
+ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:206:9-71
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:200:19-68
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:206:19-68
 service#com.wizarpos.emvsample.service.CallHomeService
-ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:202:9-60
+ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:208:9-60
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:202:18-57
+		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:208:18-57
 uses-permission#android.permission.READ_PHONE_STATE
 ADDED from [:poslib-commons-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-commons-debug.aar\001a1d15237abe33a422214c115be09a\AndroidManifest.xml:12:5-75
 MERGED from [:poslib-host-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-host-debug.aar\f45646ddfc3078037e54f22fea8fee30\AndroidManifest.xml:12:5-75
 MERGED from [:poslib-host-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-host-debug.aar\f45646ddfc3078037e54f22fea8fee30\AndroidManifest.xml:12:5-75
 MERGED from [:poslib-device-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-device-debug.aar\4406fb617fc7ef7ab3d03bef93286246\AndroidManifest.xml:11:5-75
 MERGED from [:poslib-device-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-device-debug.aar\4406fb617fc7ef7ab3d03bef93286246\AndroidManifest.xml:11:5-75
-MERGED from [:payviceconnect] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\279143575883e26af904c5dfd88a96be\AndroidManifest.xml:14:5-75
-MERGED from [:payviceconnect] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\279143575883e26af904c5dfd88a96be\AndroidManifest.xml:14:5-75
+MERGED from [:payviceconnect_] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\2ca428f9eb4d38b76fdb93da0185497f\AndroidManifest.xml:14:5-75
+MERGED from [:payviceconnect_] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\2ca428f9eb4d38b76fdb93da0185497f\AndroidManifest.xml:14:5-75
 	android:name
 		ADDED from [:poslib-commons-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-commons-debug.aar\001a1d15237abe33a422214c115be09a\AndroidManifest.xml:12:22-72
 uses-permission#ANDROID.PERMISSION.CHANGE_NETWORK_STATE
@@ -492,8 +517,8 @@ MERGED from [:poslib-host-debug] C:\Users\Favour\.gradle\caches\transforms-1\fil
 MERGED from [:poslib-host-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-host-debug.aar\f45646ddfc3078037e54f22fea8fee30\AndroidManifest.xml:14:5-79
 MERGED from [:poslib-device-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-device-debug.aar\4406fb617fc7ef7ab3d03bef93286246\AndroidManifest.xml:13:5-79
 MERGED from [:poslib-device-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-device-debug.aar\4406fb617fc7ef7ab3d03bef93286246\AndroidManifest.xml:13:5-79
-MERGED from [:payviceconnect] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\279143575883e26af904c5dfd88a96be\AndroidManifest.xml:13:5-79
-MERGED from [:payviceconnect] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\279143575883e26af904c5dfd88a96be\AndroidManifest.xml:13:5-79
+MERGED from [:payviceconnect_] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\2ca428f9eb4d38b76fdb93da0185497f\AndroidManifest.xml:13:5-79
+MERGED from [:payviceconnect_] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\2ca428f9eb4d38b76fdb93da0185497f\AndroidManifest.xml:13:5-79
 	android:name
 		ADDED from [:poslib-commons-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-commons-debug.aar\001a1d15237abe33a422214c115be09a\AndroidManifest.xml:14:22-76
 uses-permission#android.permission.BLUETOOTH
@@ -506,8 +531,8 @@ ADDED from [:poslib-device-debug] C:\Users\Favour\.gradle\caches\transforms-1\fi
 		ADDED from [:poslib-device-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-device-debug.aar\4406fb617fc7ef7ab3d03bef93286246\AndroidManifest.xml:15:22-71
 uses-permission#android.permission.ACCESS_COARSE_LOCATION
 ADDED from [:poslib-device-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-device-debug.aar\4406fb617fc7ef7ab3d03bef93286246\AndroidManifest.xml:16:5-81
-MERGED from [:payviceconnect] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\279143575883e26af904c5dfd88a96be\AndroidManifest.xml:11:5-81
-MERGED from [:payviceconnect] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\279143575883e26af904c5dfd88a96be\AndroidManifest.xml:11:5-81
+MERGED from [:payviceconnect_] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\2ca428f9eb4d38b76fdb93da0185497f\AndroidManifest.xml:11:5-81
+MERGED from [:payviceconnect_] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\2ca428f9eb4d38b76fdb93da0185497f\AndroidManifest.xml:11:5-81
 	android:name
 		ADDED from [:poslib-device-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-device-debug.aar\4406fb617fc7ef7ab3d03bef93286246\AndroidManifest.xml:16:22-78
 provider#android.arch.lifecycle.ProcessLifecycleOwnerInitializer
@@ -521,14 +546,14 @@ ADDED from [android.arch.lifecycle:extensions:1.1.1] C:\Users\Favour\.gradle\cac
 	android:name
 		ADDED from [android.arch.lifecycle:extensions:1.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\extensions-1.1.1.aar\f8485407071611cdf81269f7367663b4\AndroidManifest.xml:24:13-83
 uses-permission#android.permission.ACCESS_FINE_LOCATION
-ADDED from [:payviceconnect] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\279143575883e26af904c5dfd88a96be\AndroidManifest.xml:12:5-79
+ADDED from [:payviceconnect_] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\2ca428f9eb4d38b76fdb93da0185497f\AndroidManifest.xml:12:5-79
 	android:name
-		ADDED from [:payviceconnect] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\279143575883e26af904c5dfd88a96be\AndroidManifest.xml:12:22-76
+		ADDED from [:payviceconnect_] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\2ca428f9eb4d38b76fdb93da0185497f\AndroidManifest.xml:12:22-76
 service#com.itex.richard.payviceconnect.utils.MyLocationService
-ADDED from [:payviceconnect] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\279143575883e26af904c5dfd88a96be\AndroidManifest.xml:17:9-20:39
+ADDED from [:payviceconnect_] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\2ca428f9eb4d38b76fdb93da0185497f\AndroidManifest.xml:17:9-20:39
 	android:enabled
-		ADDED from [:payviceconnect] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\279143575883e26af904c5dfd88a96be\AndroidManifest.xml:19:13-35
+		ADDED from [:payviceconnect_] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\2ca428f9eb4d38b76fdb93da0185497f\AndroidManifest.xml:19:13-35
 	android:exported
-		ADDED from [:payviceconnect] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\279143575883e26af904c5dfd88a96be\AndroidManifest.xml:20:13-36
+		ADDED from [:payviceconnect_] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\2ca428f9eb4d38b76fdb93da0185497f\AndroidManifest.xml:20:13-36
 	android:name
-		ADDED from [:payviceconnect] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\279143575883e26af904c5dfd88a96be\AndroidManifest.xml:18:13-83
+		ADDED from [:payviceconnect_] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\2ca428f9eb4d38b76fdb93da0185497f\AndroidManifest.xml:18:13-83

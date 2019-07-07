@@ -1,5 +1,6 @@
 package com.wizarpos.emvsample.models
 
+import android.util.Log
 import com.iisysgroup.poslib.ISO.common.IsoConfigData
 import com.iisysgroup.poslib.commons.emv.EmvCard
 import com.iisysgroup.poslib.host.Host
@@ -8,7 +9,7 @@ import com.iisysgroup.poslib.host.entities.TransactionResult
 
 //class PfmJournalGenerator(private val transactionResult: TransactionResult, private  val configData : ConfigData, private val printer : Printer, private val isReceiptPrinted: Boolean, private val vasCategory : String = "", private val vasProduct : String = "", private val cardData : EmvCard) {
 
-class PfmJournalGenerator(private val transactionResult: TransactionResult, private  val configData : ConfigData, private val isReceiptPrinted: Boolean, private val amount : String, private val cardData : EmvCard?,private  val vasProduct:String,private val vasCategory:String,private val customField:String) {
+class PfmJournalGenerator(private val transactionResult: TransactionResult?, private  val configData : ConfigData?, private val isReceiptPrinted: Boolean, private val amount : String, private val cardData : EmvCard?,private  val vasProduct:String,private val vasCategory:String,private val customField:String) {
 
     fun generateJournal(): com.itex.richard.payviceconnect.model.Journal {
 
@@ -21,21 +22,38 @@ class PfmJournalGenerator(private val transactionResult: TransactionResult, priv
     }*/
 
     private fun getOacode(): String {
-        return transactionResult.authID
+        return if(transactionResult != null){
+            transactionResult.authID
+        }else{
+            ""
+        }
     }
 
     private fun getOrrn(): String {
-        return transactionResult.RRN
+        return if(transactionResult != null){
+            transactionResult.RRN
+    }else{
+        ""
+       }
     }
 
     private fun getOstan(): String {
-        return transactionResult.STAN
+        return if(transactionResult !=null){
+            transactionResult.STAN
+    }else{
+        ""
+       }
     }
-
+    var status ="cash"
     private fun getTransMethod(): String {
-        return if (transactionResult.PAN.isNotEmpty()){
-            "card"
-        } else {"cash"}
+
+        if(transactionResult != null){
+            if (transactionResult.PAN.isNotEmpty()){
+                status = "card"
+            }
+        }
+
+        return status
     }
 
     private fun getVasCategory(): String {
@@ -55,17 +73,24 @@ class PfmJournalGenerator(private val transactionResult: TransactionResult, priv
         var vm=""
      try {
 
+         if(status !="cash"){
 
-                 if(cardData!!.pinInfo == null){
-                 vm="offlinePin"
+                 if(cardData!!.pinInfo == null || cardData == null){
+                 vm=""
         }else {
             vm = if (cardData!!.pinInfo.pinBlock.isEmpty() || cardData.pinInfo.pinBlock == null) {
                 "offlinePin"
             } else {
                 "onlinePin"
             }
-        }
+        }}else{
+             "others"
+         }
      }catch (e:Throwable){
+         Log.i("Was a throwable full details ",e.toString())
+
+         Log.i("Was a throwable","")
+
          vm ="offlinePin"
      }
         return vm
@@ -77,16 +102,33 @@ class PfmJournalGenerator(private val transactionResult: TransactionResult, priv
 
     //Response code from the upstream entity usually field 39 of ISO8583
     private fun getResp(): String {
-        return transactionResult.responseCode
+
+        return if(transactionResult != null){
+            transactionResult.responseCode
+        }else{
+            ""
+
+        }
     }
 
 
     private fun getTap(): Boolean {
-        return transactionResult.isApproved
+
+        return if(transactionResult != null){
+            transactionResult.isApproved
+        }else{
+           false
+
+        }
     }
 
     private fun getMcc(): String {
-        return configData.getConfigData(IsoConfigData.TAG_LEN_MERCHANT_CATEGORY_CODE) as String
+        return if(configData != null){
+             configData.getConfigData(IsoConfigData.TAG_LEN_MERCHANT_CATEGORY_CODE) as String
+        }else{
+            ""
+
+        }
     }
 
 
@@ -96,39 +138,81 @@ class PfmJournalGenerator(private val transactionResult: TransactionResult, priv
 
     //todo handle mti
     private fun getmti(): String {
-        val mti = if (transactionResult.transactionType == Host.TransactionType.REVERSAL)
-            440
-        else 200
-        return mti.toString()
+
+
+        var mti =""
+         if(transactionResult != null){
+            if (transactionResult.transactionType == Host.TransactionType.REVERSAL) {
+                mti = 440.toString()
+            }else {
+                mti= 200.toString() }
+
+        }
+        return mti
     }
 
     private fun getTimeStamp(): String {
-        return transactionResult.longDateTime.toString()
+        return if(transactionResult != null){
+            transactionResult.longDateTime.toString()
+        }else{
+            ""
+
+        }
     }
 
     private fun getAmount(): Long {
-        return transactionResult.amount
+        return if(transactionResult != null){
+            transactionResult.amount
+        }else{
+            0L
+
+        }
     }
 
     //todo handle acode
     private fun getAcode(): String {
-        return transactionResult.authID
+        return if(transactionResult != null){
+            transactionResult.authID
+        }else{
+            ""
+
+        }
     }
 
     private fun getRrn(): String {
-        return transactionResult.RRN
+        return if(transactionResult != null){
+            transactionResult.RRN
+        }else{
+            ""
+
+        }
     }
 
     private fun getmPan(): String {
-        return transactionResult.PAN
+        return if(transactionResult != null){
+            transactionResult.PAN
+        }else{
+            ""
+
+        }
     }
 
     private fun getstan(): String {
-        return transactionResult.STAN
+        return if(transactionResult != null){
+            transactionResult.STAN
+        }else{
+            ""
+
+        }
     }
 
     private fun getMid(): String {
-        return transactionResult.merchantID
+        return if(transactionResult != null){
+            transactionResult.merchantID
+        }else{
+            ""
+
+        }
     }
 
 

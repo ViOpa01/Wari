@@ -4,9 +4,11 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.constraint.ConstraintLayout
+import android.support.v4.content.ContextCompat.startActivity
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -25,6 +27,7 @@ import com.wizarpos.emvsample.activity.login.securestorage.SecureStorage
 import com.wizarpos.emvsample.activity.login.securestorage.SecureStorageUtils
 import com.wizarpos.emvsample.generators.PfmStateGenerator
 import com.wizarpos.emvsample.models.PfmJournalGenerator
+import com.wizarpos.emvsample.services.discos.activities.MeterValidationActivity.Companion.ADDRESS
 import com.wizarpos.emvsample.services.discos.activities.MeterValidationActivity.Companion.CLIENT_REFERENCE
 import com.wizarpos.emvsample.services.discos.activities.MeterValidationActivity.Companion.ELECTRIC_METER_TYPE
 import com.wizarpos.emvsample.services.discos.activities.MeterValidationActivity.Companion.METER_NAME
@@ -33,7 +36,7 @@ import com.wizarpos.emvsample.services.discos.activities.MeterValidationActivity
 import com.wizarpos.emvsample.services.discos.activities.MeterValidationActivity.Companion.PRODUCT_CODE
 import com.wizarpos.emvsample.services.discos.activities.MeterValidationActivity.Companion.REQUEST_TYPE
 import com.wizarpos.emvsample.services.discos.viewmodels.EleectricityPaymentVM
-import com.wizarpos.emvsample.services.helper.activity.util.GeneralElectricityDetails
+import com.wizarpos.emvsample.services.helper.activity.util.Models
 import com.wizarpos.util.PinAlertUtils
 import com.wizarpos.util.TransactionModel
 import com.wizarpos.util.VasServices
@@ -89,6 +92,12 @@ open class ElectricityPaymentActivity : BaseVasActivity() {
 
     }
 
+    val address by lazy {
+        intent.getStringExtra(ADDRESS)
+
+    }
+
+
     val requestType by lazy {
         intent.getStringExtra(REQUEST_TYPE)
 
@@ -134,6 +143,7 @@ open class ElectricityPaymentActivity : BaseVasActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         setContentView(R.layout.activity_amount_phone__no)
         super.onCreate(savedInstanceState)
+//        Log.i("electricMeterType Electric payment intent  >>", electricMeterType)
 
 
         enter = findViewById(R.id.btnenter)
@@ -157,117 +167,197 @@ open class ElectricityPaymentActivity : BaseVasActivity() {
 
         showPhoneNumberScreen()
 
+        mEleectricityPaymentVM!!.lPaymentRes.observe(this, object : Observer<Any> {
+            override fun onChanged(paymentResponse: Any?) {
 
+                Log.d("yellow >>>", "Now")
 
+//                					boolean  error=transactionResult.isApproved ?:true
+//                					String vasTid =transactionResult.terminalID?:" "
+//                					String cardExpiary =transactionResult.cardExpiry?:" "
+//                					String cardHolderName=transactionResult.cardHolderName?:" "
+                val vasTerminalId=SecureStorage.retrieve(Helper.VAS_TERMINAL_ID,"")
+                val vasMerchantName=SecureStorage.retrieve(Helper.VAS_MERCHANT_NAME,"")
+                var meterType:String  = ""
+                var meterNumber: String? = ""
+                var beneficiaryName: String? = ""
+                var beneficiaryAddress: String? = ""
+                var responsemessage: String? = ""
+                var amount: String? = ""
+                var token: String? = ""
+                val wallet = SecureStorage.retrieve(Helper.TERMINAL_ID, "")
+                var product: String? = ""
+                var transactionRef: String? = ""
+                var logo = 0
+                var cref  =""
+                var error = true
+                var discosModel: Models.DiscosModel? = null
 
+                val isCardTransaction = true
+                val transactionTID = ""
 
+//                Log.i("FuncActivity.appState.generalElectricityDetails.electricMeterType  >>", FuncActivity.appState.generalElectricityDetails.electricMeterType)
 
-    }
+                when (appState.generalElectricityDetails.electricMeterType) {
 
+                    VasServices.ABUJA_ELECTRICITY_POSTPAID, VasServices.ABUJA_ELECTRICITY_PREPAID -> {
+                        val response = paymentResponse as AbujaModel.PurchaseResponse?
 
+                        Log.d("appState.generalElectricityDetails.amount >>>", appState.generalElectricityDetails.amount)
+                        meterNumber = if(response!!.account.isNullOrEmpty() ) appState.generalElectricityDetails.meterNumber!! else response.account
+                        beneficiaryName = if(response.name.isNullOrEmpty() ) appState.generalElectricityDetails.meterName!! else response.name
+                        beneficiaryAddress = appState.generalElectricityDetails.address
+                        amount =  appState.generalElectricityDetails.amount
+                        product = VasServices.ABUJA_ELECTRIC
+                        meterType =if (appState.generalElectricityDetails.meterType =="0") VasServices.PREPAID else VasServices.POSTPAID
+                        responsemessage = response.message
+                        token = if (response.token.isEmpty()) "" else response.token
+                        transactionRef = response.reference
+                        logo = R.drawable.aedc
+                        cref=response.reference
+                        error = response.error
+                        discosModel = Models.DiscosModel(error, beneficiaryName, meterType, response.transactionID, "", response.unit_value, response.vat, meterNumber, token, beneficiaryAddress, "", "")
 
-    private fun print(amount: String, error: Boolean, responsemessage: String, transactionTID: String, isCardTransaction: Boolean, vasTid: String, cardExpiary: String, smartCardNumber: String, meterNumber: String, beneficiaryName: String, beneficiaryAddress: String,cardHolderName:String){
-        val terminalID =  SecureStorage.retrieve(Helper.TERMINAL, "")
-        var status = "Declined"
-//        if (!response!!.error)
-        if (!error)
+                        //                    responseModel = ResponseModel(response!!.amount.toString(),response.error,response.message)
 
-        {
-            status = "Approved"
-        }
+                    }
+                    VasServices.ENUGU_ELECTRICITY_POSTPAID, VasServices.ENUGU_ELECTRICITY_PREPAID -> {
 
-        Log.i("Here","Here from wallet")
-        if (isBeneficiary) {
-            alert {
-                title = "Response"
-                message =responsemessage
-                positiveButton(buttonText = "Print") {
-                    var transactionModel: TransactionModel? = null
-                    val merchantID = FuncActivity.appState.nibssData.configData.getConfigData("03015").toString()
-                    val merchantName = FuncActivity.appState.nibssData.configData.getConfigData("52040").toString()
-
-                    try{
-                        val date = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().time)
-                        var bankLogoName = ""
-                        try {
-                            bankLogoName = "bank" + terminalID.substring(0, 4)
-                            Log.d("bank  >>> ",bankLogoName)
-                        } catch (e: Exception) {
-
-                        }
-
-//                        transactionModel = TransactionModel(terminalID, "", "", "", amount,"", "airtime", "", status, "", merchantID, merchantName, "", "", "", "", "", "", date, "", "", bankLogoName, "Pkdnudhd",isCardTransaction,vasTid,cardExpiary,beneficiaryName,beneficiaryAddress,meterNumber,smartCardNumber);
-                        transactionModel = TransactionModel(terminalID, "", "", "", amount,"", "airtime", "", status, "", merchantID, merchantName, "", "", "", "", "", "", date, "", "", bankLogoName, "Pkdnudhd");
-
-                        val intent = Intent(baseContext, MainActivity::class.java)
-
-                        intent.putExtra("transactionModel", transactionModel)
-                        intent.putExtra("copy", "** CUSTOMER COPY **")
-                        startActivity(intent)
-//                        val alertDialog = AlertDialog.Builder(baseContext)
-//                        alertDialog.setMessage("Print Merchant copy")
-//                        val finalTransactionModel = transactionModel
-//                        alertDialog.setPositiveButton("OK") { dialogInterface, i ->
-//                            val intent = Intent(baseContext, MainActivity::class.java)
-//                            intent.putExtra("transactionModel", finalTransactionModel)
-//                            intent.putExtra("copy", "*** MERCHANT COPY ***")
-//                            startActivity(intent)
-//                        }
-//                        alertDialog.show()
-                        // PrinterHelper.getInstance().airtimeReceipt(FuncActivity.appState, 1,  model)
-                    }catch (e : Exception){
+                        Log.d("yellow >>>", "Now")
+                        val response = paymentResponse as EnuguModel.PayResponse?
+                        meterNumber = response!!.account
+                        beneficiaryName = response.name
+                        beneficiaryAddress = response.address
+                        responsemessage = response.message
+                        amount = response.value
+                        product = response.type
+                        token = if (response.token!!.isEmpty()) "" else response.token
+                        transactionRef = response.reference
+                        logo = R.drawable.eedc
+                        cref=response.reference!!
+                        error = response.error!!
+                        discosModel = Models.DiscosModel(error, beneficiaryName!!, product!!, response.transactionID!!, "", response.unit_value!!, response.vat!!, meterNumber!!, token!!, beneficiaryAddress!!, response.arrears!!, response.tariff!!)
+                        //                    responseModel = ResponseModel(response!!.value.toString(),response!!.error!!,response!!.message!!)
 
                     }
 
-                }
-            }.show()
-        } else {
-            alert {
-                title = "Beneficiary"
-                message = "${responsemessage}. This number is not currently saved. Would you want to save this number for future transactions"
-//                        ref = abujaPurchaseResponse.ref
-                yesButton {
-                    //addBeneficiary(model)
-                }
-                negativeButton(buttonText = "No") {
-                    //                                                 generateReceipt(model)
+                    VasServices.EKO_ELECTRICITY_POSTPAID, VasServices.EKO_ELECTRICITY_PREPAID -> {
+
+
+                        val response = paymentResponse as EkoModel.EkoPayResponse?
+
+                        meterNumber = response!!.customerMeterNumber
+                        beneficiaryName = response.payer
+                        beneficiaryAddress = response.address
+                        responsemessage = response.message
+                        amount = response.amount
+                        product = response.account_type
+                        token = if (response.token.isEmpty()) "" else response.token
+                        transactionRef = response.ref
+                        logo = R.drawable.ekedc
+                        error = response.error
+                        cref=response.ref!!
+                        discosModel = Models.DiscosModel(error, beneficiaryName, product, response.transactionID, "", "", meterNumber, token, beneficiaryAddress, "", "", "")
+
+
+                        //                    responseModel = ResponseModel(response!!.amount.toString(),response!!.error!!,response!!.message!!)
+
+                    }
+                    VasServices.IBADAN_ELECTRICITY_POSTPAID, VasServices.IBADAN_ELECTRICITY_PREPAID -> {
+                        run {
+                            val response = paymentResponse as IbadanModel.IbPayResponse?
+
+                            meterNumber = response!!.account
+                            beneficiaryName = response!!.name
+                            beneficiaryAddress = ""
+                            responsemessage = response!!.message
+                            amount = response!!.amount.toString()
+                            token = if (response!!.token.isEmpty()) "" else response.token
+                            product = response!!.type
+                            transactionRef = response!!.reference
+                            logo = R.drawable.ibedc
+                            error = response!!.error
+                            discosModel = Models.DiscosModel(error, beneficiaryName!!, product!!, response.transactionID, "", response.unit_value, response.vat, meterNumber!!, token!!, beneficiaryAddress!!, "", "")
+
+                            //                    responseModel = ResponseModel(response!!.amount.toString(),response!!.error!!,response!!.message!!)
+                        }
+                    }
+
+                    VasServices.IKEJA_ELECTRICITY_POSTPAID, VasServices.IKEJA_ELECTRICITY_PREPAID -> {
+                        run {
+                            val response = paymentResponse as IkejaModel.IkejaPayResponse?
+
+                            meterNumber = ""
+                            beneficiaryName = response!!.payer
+                            beneficiaryAddress = response.address
+                            responsemessage = response.message
+                            amount = response.amount.toString()
+                            product = "Ikeja Electric "
+                            token = if (response.token!!.isEmpty()) "" else response.token
+                            transactionRef = response.ref
+                            logo = R.drawable.ikedc
+                            error = response.error
+
+                            discosModel = Models.DiscosModel(error, beneficiaryName!!, product!!, response.transactionID!!, response.unit!!, response.unit_value!!, response.vat!!, meterNumber!!, token!!, beneficiaryAddress!!, "", "")
+
+                        }
+
+                    }
+
+                    VasServices.PORTHARCOURT_ELECTRICITY_POSTPAID, VasServices.PORTHARCOURT_ELECTRICITY_PREPAID -> run {
+
+                        val response = paymentResponse as PortharcourtModel.purchaseResponse?
+
+                        meterNumber = response!!.meterNumber
+                        beneficiaryName = response.name
+                        beneficiaryAddress = response.address
+                        responsemessage = response.message
+                        amount = response.amount
+                        product = response.type
+                        token = if (response.token.isEmpty()) "" else response.token
+                        transactionRef = response.receiptNumber
+                        logo = R.drawable.phdc
+                        error = response.error
+                         cref  = response.externalReference
+                        discosModel = Models.DiscosModel(error, beneficiaryName!!, product!!, response.transactionID, "", "", "", meterNumber!!, token!!, beneficiaryAddress!!, response.arrears, response.tariff)
+
+                    }
                 }
 
-            }.show()
+                //              if(isCardTransaction){
 
-            var transactionModel: TransactionModel? = null
-            val merchantID = FuncActivity.appState.nibssData.configData.getConfigData("03015").toString()
-            val merchantName = FuncActivity.appState.nibssData.configData.getConfigData("52040").toString()
-            try {
+
+                val merchantID = FuncActivity.appState.nibssData.configData.getConfigData("03015").toString()
+                val merchantName = FuncActivity.appState.nibssData.configData.getConfigData("52040").toString()
+                val merchantTerminalId = SecureStorage.retrieve(Helper.TERMINAL, "")
                 val date = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().time)
-                var bankLogoName = ""
-                try {
-                    bankLogoName = "bank" + terminalID.substring(0, 4)
-                } catch (e: Exception) {
+                val vasmerchantID = SecureStorage.retrieve(Helper.VAS_TERMINAL_ID, "")
+                val vasmerchantName = SecureStorage.retrieve(Helper.VAS_MERCHANT_NAME, "")
+//				String vasTerminalId = SecureStorage.retrieve(Helper.,"");
 
-                }
-                transactionModel = TransactionModel(terminalID, ref, "", "", amount, "", "airtime", "", status, "", merchantID, merchantName, "", "", "", "", "", "", date, "", "", bankLogoName, "yrryrry");
 
-                val intent = Intent(baseContext, MainActivity::class.java)
+                val vasDetails = Models.VasDetails(cref,amount!!, wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product!!, responsemessage!!, vasmerchantID, transactionRef!!, VasServices.CASH, logo, date, error, Models.DISCO, discosModel!!)
+                print(this@ElectricityPaymentActivity,vasDetails)
 
-                intent.putExtra("transactionModel", transactionModel)
-                intent.putExtra("copy", "** CUSTOMER COPY **")
-                startActivity(intent)
-//                val alertDialog = AlertDialog.Builder(baseContext)
-//                alertDialog.setMessage("Print Merchant copy")
-//                val finalTransactionModel = transactionModel
-//                alertDialog.setPositiveButton("OK") { dialogInterface, i ->
-//                    val intent = Intent(baseContext, MainActivity::class.java)
-//                    intent.putExtra("transactionModel", finalTransactionModel)
-//                    intent.putExtra("copy", "*** MERCHANT COPY ***")
-//                    startActivity(intent)
-//                }
-//                alertDialog.show()
-            }catch (e : Exception){
+
+                //              print(responseModel!!.amount,responseModel.error,responseModel!!.response,transactionTID)
+                //              }else{
+                //                  print(responseModel!!.amount,responseModel.error,responseModel!!.response,)
+
+                //                  transactionResult.
+                //              }
+
 
             }
         }
+        )
+
+
+
+
     }
+
+
 
 
     override fun getTextLayoutId(): Int {
@@ -369,12 +459,17 @@ open class ElectricityPaymentActivity : BaseVasActivity() {
             title = "Transaction Type"
             message = "Select the type of transaction you want to make"
             airtime_amount =airtime_amount
+            appState.generalElectricityDetails = Models.GeneralElectricityDetails(amount = airtime_amount, wallet = wallet, userName = userName, requestType = requestType, meterType = meterType.toLowerCase(), meterNumber = meterNumber, channel = channel, phone_number = phone_number, productCode = productCode, paymentMetod = VasServices.CARD, clientReference = clientReference, terminalId = terminalId, electricMeterType = electricMeterType, password = password, meterName = meterName,address =address )
+
             positiveButton(buttonText = "Card") {
                 //You can use hashmaps
                 _-> payWithCard(phone_number, "")
+                appState.isWallet=false;
+                Log.d("requestType>>>",requestType)
             }
 
             negativeButton(buttonText = "Wallet") { _ ->
+                appState.isWallet=true;
                 payWithWallet(activity = this@ElectricityPaymentActivity,amount = airtime_amount,wallet = wallet,userName = userName,requestType = requestType,meterType =meterType ,meterNumber = meterNumber,channel = channel,phone_number = phone_number,productCode = productCode,paymentMetod = VasServices.CASH) }
         }.show()
 
@@ -394,12 +489,12 @@ open class ElectricityPaymentActivity : BaseVasActivity() {
     private fun payWithWallet(phone_number: String, activity: Activity, amount: String, wallet: String, userName: String, requestType: String, meterType: String, meterNumber: String, channel: String, productCode: String, paymentMetod: String) {
 //        isCard = false
 //        SecureStorage.store("airtimeType", "wallet")
-
+        appState.isWallet=true;
         val pinInfo = EmvCard.PinInfo(FuncActivity.appState.trans.pinBlock, null, null)
 
         val emvCard = EmvCard(appState.trans.cardHolderName, appState.trans.track2Data, appState.trans.iccData, pinInfo)
 
-        val pfm = com.itex.richard.payviceconnect.model.Pfm(PfmStateGenerator(this).generateState(), PfmJournalGenerator(appState.trans.transactionResult, appState.nibssData.configData, false, airtime_amount, emvCard, electricMeterType, electricMeterType, "").generateJournal())
+        val pfm = Pfm(PfmStateGenerator(this).generateState(), PfmJournalGenerator(appState.trans.transactionResult, appState.nibssData.configData, false, airtime_amount, emvCard, electricMeterType, electricMeterType, "").generateJournal())
 
 
         val pinView = LayoutInflater.from(this).inflate(R.layout.activity_enter_pin, null, false)
@@ -426,15 +521,16 @@ open class ElectricityPaymentActivity : BaseVasActivity() {
            val password = SecureStorage.retrieve(Helper.STORED_PASSWORD, "")
            val mPin = SecureStorageUtils.hashIt(it, password)!!
 
-            appState.generalElectricityDetails = GeneralElectricityDetails(amount = airtime_amount, wallet = wallet, userName = userName, requestType = requestType, meterType = meterType.toLowerCase(), meterNumber = meterNumber, channel = channel, phone_number = phone_number, productCode = productCode, paymentMetod = VasServices.CARD, clientReference = clientReference, terminalId = terminalId, electricMeterType = electricMeterType, password = password, meterName = meterName)
+
 
             SecureStorage.store("phonerecharge", phone_number)
             SecureStorage.store("airtimeprovider", airtimeProvider)
             SecureStorage.store(USER_PIN, mPin)
             FuncActivity.appState.electricityBills = true
-
+            FuncActivity.appState.needCard = true
             val intent = Intent(this, Sale::class.java)
-            startActivityForResult(intent, AIRTIME_REQUEST_CODE_CARD)
+            startActivityForResult(intent, ELECTRICITY_REQUEST_CODE_CARD)
+
 
 
         }
@@ -442,11 +538,52 @@ open class ElectricityPaymentActivity : BaseVasActivity() {
 
     }
 
+
+
+
+
     companion object{
           const val  USER_PIN: String ="pin"
-          const val AIRTIME_REQUEST_CODE_CARD = 3424
+          const val ELECTRICITY_REQUEST_CODE_CARD = 3424
 //          const val  USER_PASSWORD: String ="password"
 //        const val  USER_PASSWORD: String ="password"
+
+
+
+         fun print(context:Context,vasDetails:Models.VasDetails ) {
+            val terminalID = SecureStorage.retrieve(Helper.TERMINAL, "")
+            var status = ""
+//        if (!response!!.error)
+            if (!vasDetails.error) {
+                status = "Approved"
+            }else{
+                "Declined"
+            }
+
+            Log.i("Here", "Here from wallet")
+
+                var transactionModel: TransactionModel? = TransactionModel(cardDetails = Models.CardDetails(),VasDetails = vasDetails)
+
+                try {
+                    var bankLogoName = ""
+                    try {
+                        bankLogoName = "bank" + terminalID.substring(0, 4)
+                    } catch (e: Exception) {
+
+                    }
+
+                    val intent = Intent(context, MainActivity::class.java)
+
+                    intent.putExtra("transactionModel", transactionModel)
+                    intent.putExtra("copy", "** CUSTOMER COPY **")
+                    context.startActivity(intent)
+
+                } catch (e: Exception) {
+
+                }
+//          context.applicationContext.
+        }
+
     }
 
   override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -495,6 +632,11 @@ open class ElectricityPaymentActivity : BaseVasActivity() {
         }
 
     }
+
+
+
+
+
 
 }
 

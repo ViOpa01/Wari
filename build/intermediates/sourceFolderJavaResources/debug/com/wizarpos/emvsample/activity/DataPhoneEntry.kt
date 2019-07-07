@@ -13,12 +13,16 @@ import com.iisysgroup.poslib.deviceinterface.DeviceState
 import com.iisysgroup.poslib.host.entities.TransactionResult
 import com.wizarpos.emvsample.MainApp
 import com.wizarpos.emvsample.R
+import com.wizarpos.emvsample.activity.FuncActivity.appState
 import com.wizarpos.emvsample.activity.login.Helper
 import com.wizarpos.emvsample.activity.login.securestorage.SecureStorage
 import com.wizarpos.emvsample.activity.login.securestorage.SecureStorageUtils
+import com.wizarpos.emvsample.services.discos.activities.ElectricityPaymentActivity
+import com.wizarpos.emvsample.services.helper.activity.util.Models
 import com.wizarpos.util.PinAlertUtils
 import com.wizarpos.util.SharedPreferenceUtils
 import com.wizarpos.util.TransactionModel
+import com.wizarpos.util.VasServices
 import kotlinx.android.synthetic.main.activity_data_phone_entry.*
 import kotlinx.android.synthetic.main.single_transaction.*
 import kotlinx.coroutines.Dispatchers
@@ -119,24 +123,61 @@ class DataPhoneEntry : AppCompatActivity(), View.OnClickListener {
 
                                         }
 
-                                        transactionModel = TransactionModel(terminalID, ref, "", "", amount, "", "data", "", "Approved", "", merchantID, merchantName, "", "", "", "", "", "", date, "", "", bankLogoName, mPhoneNumber);
+//                                        transactionModel = TransactionModel(terminalID, ref, "", "", amount, "", "data", "", "Approved", "", merchantID, merchantName, "", "", "", "", "", "", date, "", "", bankLogoName, mPhoneNumber);
+//
+//                                        val intent = Intent(baseContext, MainActivity::class.java)
+//
+//                                        intent.putExtra("transactionModel", transactionModel)
+//                                        intent.putExtra("copy", "** CUSTOMER COPY **")
+//                                        startActivity(intent)
+//                                        val alertDialog = AlertDialog.Builder(baseContext)
+//                                        alertDialog.setMessage("Print Merchant copy")
+//                                        val finalTransactionModel = transactionModel
+//                                        alertDialog.setPositiveButton("OK") { dialogInterface, i ->
+//                                            val intent = Intent(baseContext, MainActivity::class.java)
+//                                            intent.putExtra("transactionModel", finalTransactionModel)
+//                                            intent.putExtra("copy", "*** MERCHANT COPY ***")
+//                                            startActivity(intent)
+//                                        }
+//                                        alertDialog.show()
 
-                                        val intent = Intent(baseContext, MainActivity::class.java)
 
-                                        intent.putExtra("transactionModel", transactionModel)
-                                        intent.putExtra("copy", "** CUSTOMER COPY **")
-                                        startActivity(intent)
-                                        val alertDialog = AlertDialog.Builder(baseContext)
-                                        alertDialog.setMessage("Print Merchant copy")
-                                        val finalTransactionModel = transactionModel
-                                        alertDialog.setPositiveButton("OK") { dialogInterface, i ->
-                                            val intent = Intent(baseContext, MainActivity::class.java)
-                                            intent.putExtra("transactionModel", finalTransactionModel)
-                                            intent.putExtra("copy", "*** MERCHANT COPY ***")
-                                            startActivity(intent)
-                                        }
-                                        alertDialog.show()
-                                        // PrinterHelper.getInstance().airtimeReceipt(FuncActivity.appState, 1,  model)
+                                        val smartCardNumber = ""
+                                        val meterNumber = ""
+                                        val beneficiaryName = ""
+                                        val beneficiaryAddress = ""
+                                        val responsemessage = formattedResponse.message
+                                        val amount = formattedResponse.amount
+                                        val token = ""
+                                        val wallet = SecureStorage.retrieve(Helper.TERMINAL_ID, "")
+                                        val product = "Data"
+                                        val transactionRef = ""
+                                        val cref= formattedResponse.ref
+                                        val logo = FuncActivity.appState.logo
+                                        val error = false
+                                        val airtimeModel = Models.AirtimeModel(error, mPhoneNumber)
+
+                                        val isCardTransaction = true
+                                        val transactionTID = ""
+                                        val merchantID = FuncActivity.appState.nibssData.configData.getConfigData("03015").toString()
+                                        val merchantName = FuncActivity.appState.nibssData.configData.getConfigData("52040").toString()
+                                        val merchantTerminalId = SecureStorage.retrieve(Helper.TERMINAL, "")
+//			                          	String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
+                                        val vasmerchantID = SecureStorage.retrieve(Helper.VAS_TERMINAL_ID, "")
+                                        val vasmerchantName = SecureStorage.retrieve(Helper.VAS_MERCHANT_NAME, "")
+//				                        String vasTerminalId = SecureStorage.retrieve(Helper.,"");
+
+
+                                        var vasDetails: Models.VasDetails? = null
+
+
+//                                        if (airtimetype.equals("wallet", ignoreCase = true)) {
+                                            vasDetails = Models.VasDetails(cref,amount, wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product, responsemessage, vasmerchantID, transactionRef, VasServices.CASH, logo, date, error, Models.AIRTIME, airtimeModel)
+//                                        } else if (airtimetype.equals("card", ignoreCase = true)) {
+//                                            vasDetails = Models.VasDetails(amount, wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product, responsemessage, vasmerchantID, transactionRef, VasServices.CARD, logo, date, error, Models.AIRTIME, airtimeModel)
+//                                        }
+
+                                        ElectricityPaymentActivity.print(this@DataPhoneEntry,vasDetails)
                                     } catch (e: Exception) {
                                     }
                                 }
@@ -167,23 +208,60 @@ class DataPhoneEntry : AppCompatActivity(), View.OnClickListener {
 
                                         }
 
-                                        transactionModel = TransactionModel(terminalID, ref, "", "", dataItem.amount, "", "data", "", "Declined", "", merchantID, merchantName, "", "", "", "", "", "", date, "", "", bankLogoName, mPhoneNumber);
+//                                        transactionModel = TransactionModel(terminalID, ref, "", "", dataItem.amount, "", "data", "", "Declined", "", merchantID, merchantName, "", "", "", "", "", "", date, "", "", bankLogoName, mPhoneNumber);
+//
+//                                        val intent = Intent(baseContext, MainActivity::class.java)
+//
+//                                        intent.putExtra("transactionModel", transactionModel)
+//                                        intent.putExtra("copy", "** CUSTOMER COPY **")
+//                                        startActivity(intent)
+//                                        val alertDialog = AlertDialog.Builder(baseContext)
+//                                        alertDialog.setMessage("Print Merchant copy")
+//                                        val finalTransactionModel = transactionModel
+//                                        alertDialog.setPositiveButton("OK") { dialogInterface, i ->
+//                                            val intent = Intent(baseContext, MainActivity::class.java)
+//                                            intent.putExtra("transactionModel", finalTransactionModel)
+//                                            intent.putExtra("copy", "*** MERCHANT COPY ***")
+//                                            startActivity(intent)
+//                                        }
+//                                        alertDialog.show()
 
-                                        val intent = Intent(baseContext, MainActivity::class.java)
+                                        val smartCardNumber = ""
+                                        val meterNumber = ""
+                                        val beneficiaryName = ""
+                                        val beneficiaryAddress = ""
+                                        val responsemessage = formattedResponse.message
+                                        val amount = dataItem.amount
+                                        val token = ""
+                                        val wallet = SecureStorage.retrieve(Helper.TERMINAL_ID, "")
+                                        val product = "Data"
+                                        val transactionRef = ""
+                                        val logo = FuncActivity.appState.logo
+                                        val cref  = ""
+                                        val error = false
+                                        val airtimeModel = Models.AirtimeModel(error, mPhoneNumber)
 
-                                        intent.putExtra("transactionModel", transactionModel)
-                                        intent.putExtra("copy", "** CUSTOMER COPY **")
-                                        startActivity(intent)
-                                        val alertDialog = AlertDialog.Builder(baseContext)
-                                        alertDialog.setMessage("Print Merchant copy")
-                                        val finalTransactionModel = transactionModel
-                                        alertDialog.setPositiveButton("OK") { dialogInterface, i ->
-                                            val intent = Intent(baseContext, MainActivity::class.java)
-                                            intent.putExtra("transactionModel", finalTransactionModel)
-                                            intent.putExtra("copy", "*** MERCHANT COPY ***")
-                                            startActivity(intent)
-                                        }
-                                        alertDialog.show()
+                                        val isCardTransaction = true
+                                        val transactionTID = ""
+                                        val merchantID = FuncActivity.appState.nibssData.configData.getConfigData("03015").toString()
+                                        val merchantName = FuncActivity.appState.nibssData.configData.getConfigData("52040").toString()
+                                        val merchantTerminalId = SecureStorage.retrieve(Helper.TERMINAL, "")
+//			                          	String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
+                                        val vasmerchantID = SecureStorage.retrieve(Helper.VAS_TERMINAL_ID, "")
+                                        val vasmerchantName = SecureStorage.retrieve(Helper.VAS_MERCHANT_NAME, "")
+//				                        String vasTerminalId = SecureStorage.retrieve(Helper.,"");
+
+
+//                                     null
+
+
+//                                        if (airtimetype.equals("wallet", ignoreCase = true)) {
+                                        var vasDetails: Models.VasDetails? =Models.VasDetails(cref,amount, wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product, responsemessage, vasmerchantID, transactionRef, VasServices.CASH, logo, date, error, Models.DATA, airtimeModel)
+//                                        } else if (airtimetype.equals("card", ignoreCase = true)) {
+//                                            vasDetails = Models.VasDetails(amount, wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product, responsemessage, vasmerchantID, transactionRef, VasServices.CARD, logo, date, error, Models.AIRTIME, airtimeModel)
+//                                        }
+
+                                        ElectricityPaymentActivity.print(this@DataPhoneEntry,vasDetails!!)
                                         // PrinterHelper.getInstance().airtimeReceipt(FuncActivity.appState, 1,  model)
                                     } catch (e: Exception) {
                                     }
@@ -229,6 +307,7 @@ class DataPhoneEntry : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun payWithCard() {
+
         val view = View.inflate(this, R.layout.activity_enter_pin, null)
         PinAlertUtils.getPin(this, view){
             mPayvicePin = SecureStorageUtils.hashIt(it!!, mWalletPassword)!!
@@ -295,8 +374,13 @@ class DataPhoneEntry : AppCompatActivity(), View.OnClickListener {
         alert {
             title = "Transaction Type"
             message = "Select the type of transaction you want to make"
-            positiveButton(buttonText = "Card") { _ -> payWithCard() }
-            negativeButton(buttonText = "Wallet") { _ -> payWithWallet() }
+            positiveButton(buttonText = "Card") { _ ->
+               appState.isWallet=false
+                payWithCard()
+            }
+            negativeButton(buttonText = "Wallet") { _ ->
+                appState.isWallet=true
+                payWithWallet() }
         }.show()
 
     }
@@ -351,6 +435,7 @@ class DataPhoneEntry : AppCompatActivity(), View.OnClickListener {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when (requestCode) {
+
             KEYS.KEY_INTENT_RESULT_CODE -> when (resultCode) {
                 Activity.RESULT_OK -> {
                     val state = data?.getSerializableExtra("state") as DeviceState
@@ -399,24 +484,63 @@ class DataPhoneEntry : AppCompatActivity(), View.OnClickListener {
                                                                     } catch (e: Exception) {
 
                                                                     }
+//
+//                                                                    transactionModel = TransactionModel(terminalID, ref, "", "", amount, "", "data", "", "Approved", "", merchantID, merchantName, "", "", "", "", "", "", date, "", "", bankLogoName, mPhoneNumber);
+//
+//                                                                    val intent = Intent(baseContext, MainActivity::class.java)
+//
+//                                                                    intent.putExtra("transactionModel", transactionModel)
+//                                                                    intent.putExtra("copy", "** CUSTOMER COPY **")
+//                                                                    startActivity(intent)
+//                                                                    val alertDialog = AlertDialog.Builder(baseContext)
+//                                                                    alertDialog.setMessage("Print Merchant copy")
+//                                                                    val finalTransactionModel = transactionModel
+//                                                                    alertDialog.setPositiveButton("OK") { dialogInterface, i ->
+//                                                                        val intent = Intent(baseContext, MainActivity::class.java)
+//                                                                        intent.putExtra("transactionModel", finalTransactionModel)
+//                                                                        intent.putExtra("copy", "*** MERCHANT COPY ***")
+//                                                                        startActivity(intent)
+//                                                                    }
+//                                                                    alertDialog.show()
 
-                                                                    transactionModel = TransactionModel(terminalID, ref, "", "", amount, "", "data", "", "Approved", "", merchantID, merchantName, "", "", "", "", "", "", date, "", "", bankLogoName, mPhoneNumber);
 
-                                                                    val intent = Intent(baseContext, MainActivity::class.java)
 
-                                                                    intent.putExtra("transactionModel", transactionModel)
-                                                                    intent.putExtra("copy", "** CUSTOMER COPY **")
-                                                                    startActivity(intent)
-                                                                    val alertDialog = AlertDialog.Builder(baseContext)
-                                                                    alertDialog.setMessage("Print Merchant copy")
-                                                                    val finalTransactionModel = transactionModel
-                                                                    alertDialog.setPositiveButton("OK") { dialogInterface, i ->
-                                                                        val intent = Intent(baseContext, MainActivity::class.java)
-                                                                        intent.putExtra("transactionModel", finalTransactionModel)
-                                                                        intent.putExtra("copy", "*** MERCHANT COPY ***")
-                                                                        startActivity(intent)
-                                                                    }
-                                                                    alertDialog.show()
+                                                                    val smartCardNumber = ""
+                                                                    val meterNumber = ""
+                                                                    val beneficiaryName = ""
+                                                                    val beneficiaryAddress = ""
+                                                                    val responsemessage = formattedResponse.message
+                                                                    val amount = formattedResponse.amount
+                                                                    val token = ""
+                                                                    val wallet = SecureStorage.retrieve(Helper.TERMINAL_ID, "")
+                                                                    val product = "Data"
+                                                                    val transactionRef = ""
+                                                                    val logo = FuncActivity.appState.logo
+                                                                    val cref  = ""
+                                                                    val error = false
+                                                                    val airtimeModel = Models.AirtimeModel(error, mPhoneNumber)
+
+                                                                    val isCardTransaction = false
+                                                                    val transactionTID = ""
+                                                                    val merchantID = FuncActivity.appState.nibssData.configData.getConfigData("03015").toString()
+                                                                    val merchantName = FuncActivity.appState.nibssData.configData.getConfigData("52040").toString()
+                                                                    val merchantTerminalId = SecureStorage.retrieve(Helper.TERMINAL, "")
+//			                          	String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
+                                                                    val vasmerchantID = SecureStorage.retrieve(Helper.VAS_TERMINAL_ID, "")
+                                                                    val vasmerchantName = SecureStorage.retrieve(Helper.VAS_MERCHANT_NAME, "")
+//				                        String vasTerminalId = SecureStorage.retrieve(Helper.,"");
+
+
+                                                                    var vasDetails: Models.VasDetails? = null
+
+
+//                                        if (airtimetype.equals("wallet", ignoreCase = true)) {
+                                                                    vasDetails = Models.VasDetails(cref,amount, wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product, responsemessage, vasmerchantID, transactionRef, VasServices.CARD, logo, date, error, Models.DATA, airtimeModel)
+//                                        } else if (airtimetype.equals("card", ignoreCase = true)) {
+//                                            vasDetails = Models.VasDetails(amount, wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product, responsemessage, vasmerchantID, transactionRef, VasServices.CARD, logo, date, error, Models.AIRTIME, airtimeModel)
+//                                        }
+
+                                                                    ElectricityPaymentActivity.print(this@DataPhoneEntry,vasDetails)
                                                                     // PrinterHelper.getInstance().airtimeReceipt(FuncActivity.appState, 1,  model)
                                                                 } catch (e: Exception) {
                                                                 }
@@ -458,25 +582,65 @@ class DataPhoneEntry : AppCompatActivity(), View.OnClickListener {
                                                                     } catch (e: Exception) {
 
                                                                     }
-
-                                                                    transactionModel = TransactionModel(terminalID, ref, "", "", dataItem.amount, "", "data", "", "Declined", "", merchantID, merchantName, "", "", "", "", "", "", date, "", "", bankLogoName, mPhoneNumber);
-
-                                                                    val intent = Intent(baseContext, MainActivity::class.java)
-
-                                                                    intent.putExtra("transactionModel", transactionModel)
-                                                                    intent.putExtra("copy", "** CUSTOMER COPY **")
-                                                                    startActivity(intent)
-                                                                    val alertDialog = AlertDialog.Builder(baseContext)
-                                                                    alertDialog.setMessage("Print Merchant copy")
-                                                                    val finalTransactionModel = transactionModel
-                                                                    alertDialog.setPositiveButton("OK") { dialogInterface, i ->
-                                                                        val intent = Intent(baseContext, MainActivity::class.java)
-                                                                        intent.putExtra("transactionModel", finalTransactionModel)
-                                                                        intent.putExtra("copy", "*** MERCHANT COPY ***")
-                                                                        startActivity(intent)
-                                                                    }
-                                                                    alertDialog.show()
+//
+//                                                                    transactionModel = TransactionModel(terminalID, ref, "", "", dataItem.amount, "", "data", "", "Declined", "", merchantID, merchantName, "", "", "", "", "", "", date, "", "", bankLogoName, mPhoneNumber);
+//
+//                                                                    val intent = Intent(baseContext, MainActivity::class.java)
+//
+//                                                                    intent.putExtra("transactionModel", transactionModel)
+//                                                                    intent.putExtra("copy", "** CUSTOMER COPY **")
+//                                                                    startActivity(intent)
+//                                                                    val alertDialog = AlertDialog.Builder(baseContext)
+//                                                                    alertDialog.setMessage("Print Merchant copy")
+//                                                                    val finalTransactionModel = transactionModel
+//                                                                    alertDialog.setPositiveButton("OK") { dialogInterface, i ->
+//                                                                        val intent = Intent(baseContext, MainActivity::class.java)
+//                                                                        intent.putExtra("transactionModel", finalTransactionModel)
+//                                                                        intent.putExtra("copy", "*** MERCHANT COPY ***")
+//                                                                        startActivity(intent)
+//                                                                    }
+//                                                                    alertDialog.show()
                                                                     // PrinterHelper.getInstance().airtimeReceipt(FuncActivity.appState, 1,  model)
+
+
+
+                                                                    val smartCardNumber = ""
+                                                                    val meterNumber = ""
+                                                                    val beneficiaryName = ""
+                                                                    val beneficiaryAddress = ""
+                                                                    val responsemessage = formattedResponse.message
+                                                                    val amount = dataItem.amount
+                                                                    val token = ""
+                                                                    val wallet = SecureStorage.retrieve(Helper.TERMINAL_ID, "")
+                                                                    val product = "Data"
+                                                                    val transactionRef = ""
+                                                                    val logo = FuncActivity.appState.logo
+                                                                    val cref  = ""
+                                                                    val error = false
+                                                                    val airtimeModel = Models.AirtimeModel(error, mPhoneNumber)
+
+                                                                    val isCardTransaction = true
+                                                                    val transactionTID = ""
+                                                                    val merchantID = FuncActivity.appState.nibssData.configData.getConfigData("03015").toString()
+                                                                    val merchantName = FuncActivity.appState.nibssData.configData.getConfigData("52040").toString()
+                                                                    val merchantTerminalId = SecureStorage.retrieve(Helper.TERMINAL, "")
+//			                          	String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
+                                                                    val vasmerchantID = SecureStorage.retrieve(Helper.VAS_TERMINAL_ID, "")
+                                                                    val vasmerchantName = SecureStorage.retrieve(Helper.VAS_MERCHANT_NAME, "")
+//				                        String vasTerminalId = SecureStorage.retrieve(Helper.,"");
+
+
+                                                                    var vasDetails: Models.VasDetails? = null
+
+
+//                                        if (airtimetype.equals("wallet", ignoreCase = true)) {
+                                                                    vasDetails = Models.VasDetails(cref,amount, wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product, responsemessage, vasmerchantID, transactionRef, VasServices.CARD, logo, date, error, Models.DATA, airtimeModel)
+//                                        } else if (airtimetype.equals("card", ignoreCase = true)) {
+//                                            vasDetails = Models.VasDetails(amount, wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product, responsemessage, vasmerchantID, transactionRef, VasServices.CARD, logo, date, error, Models.AIRTIME, airtimeModel)
+//                                        }
+
+                                                                    ElectricityPaymentActivity.print(this@DataPhoneEntry,vasDetails!!)
+
                                                                 } catch (e: Exception) {
                                                                 }
                                                             }

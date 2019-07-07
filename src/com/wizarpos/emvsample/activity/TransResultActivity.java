@@ -20,14 +20,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.iisysgroup.payvice.baseimpl.viewmodel.MultichoiceViewModel;
+import com.iisysgroup.payvice.startimes.viewmodel.StartimesViewModel;
 import com.itex.richard.payviceconnect.model.AbujaModel;
 import com.itex.richard.payviceconnect.model.AirtimeModel;
+import com.itex.richard.payviceconnect.model.DstvModel;
 import com.itex.richard.payviceconnect.model.EkoModel;
 import com.itex.richard.payviceconnect.model.EnuguModel;
 import com.itex.richard.payviceconnect.model.IbadanModel;
 import com.itex.richard.payviceconnect.model.IkejaModel;
 import com.itex.richard.payviceconnect.model.Journal;
 import com.itex.richard.payviceconnect.model.PortharcourtModel;
+import com.itex.richard.payviceconnect.model.StartimesModel;
 import com.wizarpos.emvsample.MainApp;
 import com.wizarpos.emvsample.activity.login.Helper;
 import com.wizarpos.emvsample.generators.PfmStateGenerator;
@@ -39,8 +43,10 @@ import com.wizarpos.emvsample.models.PfmJournalGenerator;
 import com.wizarpos.emvsample.models.Pfm;
 import com.wizarpos.emvsample.payments_menu.Services.TransferServices;
 import com.wizarpos.emvsample.payments_menu.models.WithdrawalDetails;
+import com.wizarpos.emvsample.services.discos.activities.ElectricityPaymentActivity;
 import com.wizarpos.emvsample.services.discos.viewmodels.EleectricityPaymentVM;
-import com.wizarpos.emvsample.services.helper.activity.util.GeneralElectricityDetails;
+import com.wizarpos.emvsample.services.helper.activity.util.Models.GeneralElectricityDetails;
+import com.wizarpos.emvsample.services.helper.activity.util.Models;
 import com.wizarpos.emvsample.transaction.TransDefine;
 import com.wizarpos.jni.PinPadInterface;
 import com.wizarpos.util.SharedPreferenceUtils;
@@ -50,7 +56,9 @@ import com.wizarpos.util.VasServices;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -87,6 +95,8 @@ public class TransResultActivity extends FuncActivity
 
 	private EleectricityPaymentVM mEleectricityPaymentVM=null;
 
+
+
 	@Override
 	public void handleMessageSafe(Message msg)
 	{
@@ -103,6 +113,10 @@ public class TransResultActivity extends FuncActivity
 		}
 	}
 
+	StartimesViewModel startimesViewModel =   null;
+
+	MultichoiceViewModel multichoiceViewModel =   null;
+
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
@@ -111,6 +125,10 @@ public class TransResultActivity extends FuncActivity
         setContentView(R.layout.activity_trans_result);
         initToolbar();
 
+
+		startimesViewModel= new StartimesViewModel(getApplication());
+
+		multichoiceViewModel = new MultichoiceViewModel(getApplication());
 
         // title
         textTitle = (TextView)findViewById(R.id.tAppTitle);
@@ -180,7 +198,7 @@ public class TransResultActivity extends FuncActivity
 		        			textLine2.setText("PRINTING...");
 		        			appState.printReceipt = 0;
 		        			appState.printVasReceipt = 0;
-		        			printReceipt();
+		        			printReceipt(new Models.VasDetails());
 						}
 	        		}
 	        		else{
@@ -196,7 +214,7 @@ public class TransResultActivity extends FuncActivity
 		        	{
 						if(appState.trans.getEMVRetCode() == APPROVE_ONLINE)
 						{
-							textLine1.setText("Approved");
+							textLine1.setText("Approved \n Purchase successful!");
 							if (appState.withdrawal){
 								appState.withdrawal = true;
 								Log.d("okh", "result withdrawal credit now");
@@ -207,9 +225,29 @@ public class TransResultActivity extends FuncActivity
 //								appState.airtime = true;
 								Log.d("okh", "result airtime credit now");
 								creditAirtime();
+								appState.airtime =false;
+							}
+							if(appState.cableTv ) {
+
+								if(appState.startimes){
+								StartimesModel.payRequest requestDetails = FuncActivity.appState.startimesPayRequest;
+								startimesViewModel.subscribe(requestDetails.getPin(), requestDetails.getPassword(), requestDetails.getCustomerName(), requestDetails.getPhone(), requestDetails.getProductCode(), requestDetails.getBouquet(), requestDetails.getPaymentMethod(), requestDetails.getSmartCardCode(), requestDetails.getAmount());
+									appState.startimes=false;
+								}
+
+								else if(appState.gotv || appState.dstv){
+									DstvModel.PayDetails payDetails =appState.dstvPayRequest;
+									multichoiceViewModel.subscribe(payDetails.getIuc(),payDetails.getPin());
+									appState.gotv=false;
+									appState.dstv=false;
+
+								}
+
 							}
                             if(appState.electricityBills) {
-								processPayment(appState.generalElectricityDetails)	;						}
+//                            	Log.d("appState.electricityBills",String.valueOf(appState.electricityBills));
+								processPayment(appState.generalElectricityDetails);
+                            }
 							transactionStatus.setImageResource(R.drawable.ic_check_circle_black_24dp);
 						}
 						else{
@@ -220,7 +258,7 @@ public class TransResultActivity extends FuncActivity
 		        			textLine2.setText("PRINTING...");
 		        			appState.printReceipt = 0;
 		        			appState.printVasReceipt = 0;
-		        			printReceipt();
+//		        			printReceipt(new Models.VasDetails());
 						}
 		    		}
 					else
@@ -237,7 +275,7 @@ public class TransResultActivity extends FuncActivity
 							appState.printReceipt = 0;
 							appState.printVasReceipt = 0;
 							transactionStatus.setImageResource(R.drawable.ic_cancel_black_24dp);
-							printReceipt();
+							printReceipt(new Models.VasDetails());
 						}
 					}
         			textLine3.setText("TVR: " + appState.trans.getTVR());
@@ -269,6 +307,13 @@ public class TransResultActivity extends FuncActivity
 					String responsemessage ="";
 					String amount="";
 					String token ="";
+					String wallet =SecureStorage.retrieve(Helper.TERMINAL_ID,"");
+					String product ="";
+			     	String transactionRef ="";
+			     	int logo =0;
+			     	boolean error =true;
+			     	Models.DiscosModel discosModel =null;
+			     	String cRef="";
 
 					boolean isCardTransaction=true;
 					String transactionTID ="";
@@ -286,7 +331,14 @@ public class TransResultActivity extends FuncActivity
 						beneficiaryAddress ="";
 						responsemessage =response.getMessage();
 						amount =String.valueOf(response.getAmount());
+						product =response.getType();
 						token=response.getToken().isEmpty()? "" : response.getToken();
+						transactionRef = response.getReference();
+						logo =R.drawable.aedc;
+						error =response.getError();
+						cRef= response.getExternalReference();
+
+						discosModel =  new Models.DiscosModel(error,beneficiaryName,product,response.getTransactionID(),"",response.getUnit_value(),response.getVat(),meterNumber,token,beneficiaryAddress,"","");
 //                    responseModel = ResponseModel(response!!.amount.toString(),response.error,response.message)
 
 					}
@@ -299,7 +351,14 @@ public class TransResultActivity extends FuncActivity
 								beneficiaryAddress =response.getAddress();
 								responsemessage =response.getMessage();
 								amount =response.getValue();
+								product =response.getType();
 								token=response.getToken().isEmpty()? "" : response.getToken();
+						        transactionRef = response.getReference();
+						       cRef= response.getExternalReference();
+						      logo =R.drawable.eedc;
+						error =response.getError();
+						discosModel =  new Models.DiscosModel(error,beneficiaryName,product,response.getTransactionID(),"",response.getUnit_value(),response.getVat(),meterNumber,token,beneficiaryAddress,response.getArrears(),response.getTariff());
+
 //                    responseModel = ResponseModel(response!!.value.toString(),response!!.error!!,response!!.message!!)
 
 					}
@@ -315,7 +374,14 @@ public class TransResultActivity extends FuncActivity
 						beneficiaryAddress =response.getAddress();
 						responsemessage =response.getMessage();
 						amount =response.getAmount();
+						product =response.getAccount_type();
 						token=response.getToken().isEmpty()? "" : response.getToken();
+						transactionRef = response.getRef();
+						logo =R.drawable.ekedc;
+						error =response.getError();
+						cRef= "";
+						discosModel =  new Models.DiscosModel(error,beneficiaryName,product,response.getTransactionID(),"","",meterNumber,token,beneficiaryAddress,"","","");
+
 
 //                    responseModel = ResponseModel(response!!.amount.toString(),response!!.error!!,response!!.message!!)
 
@@ -331,6 +397,13 @@ public class TransResultActivity extends FuncActivity
 						responsemessage =response.getMessage();
 						amount =String.valueOf(response.getAmount());
 						token=response.getToken().isEmpty()? "" : response.getToken();
+						product =response.getType();
+						transactionRef = response.getReference();
+						logo =R.drawable.ibedc;
+						error =response.getError();
+						cRef= response.getExternalReference();
+						discosModel =  new Models.DiscosModel(error,beneficiaryName,product,response.getTransactionID(),"",response.getUnit_value(),response.getVat(),meterNumber,token,beneficiaryAddress,"","");
+
 //                    responseModel = ResponseModel(response!!.amount.toString(),response!!.error!!,response!!.message!!)
 					}
 
@@ -343,7 +416,15 @@ public class TransResultActivity extends FuncActivity
 								beneficiaryAddress =response.getAddress();
 						responsemessage =response.getMessage();
 						amount =String.valueOf(response.getAmount());
+						product ="Ikeja Electric ";
 						token=response.getToken().isEmpty()? "" : response.getToken();
+						transactionRef = response.getRef();
+						logo =R.drawable.ikedc;
+						error =response.getError();
+						cRef= "";
+
+						discosModel =  new Models.DiscosModel(error,beneficiaryName,product,response.getTransactionID(),response.getUnit(),response.getUnit_value(),response.getVat(),meterNumber,token,beneficiaryAddress,"","");
+
 
 //                    responseModel = ResponseModel(response!!.amount.toString(),response!!.error!!,response!!.message!!)
 
@@ -359,7 +440,14 @@ public class TransResultActivity extends FuncActivity
 						beneficiaryAddress =response.getAddress();
 						responsemessage =response.getMessage();
 						amount =String.valueOf(response.getAmount());
+						product =response.getType();
 						token=response.getToken().isEmpty()? "" : response.getToken();
+						transactionRef = response.getReceiptNumber();
+						logo =R.drawable.phdc;
+						error =response.getError();
+						cRef= response.getExternalReference();
+						discosModel =  new Models.DiscosModel(error,beneficiaryName,product,response.getTransactionID(),"","","",meterNumber,token,beneficiaryAddress,response.getArrears(),response.getTariff());
+
 
 //                    responseModel = ResponseModel(response!!.amount.toString(),response!!.error!!,response!!.message!!)
 
@@ -370,7 +458,19 @@ public class TransResultActivity extends FuncActivity
 				}
 
 //              if(isCardTransaction){
-				printReceipt();
+
+				String merchantID = FuncActivity.appState.nibssData.getConfigData().getConfigData("03015").toString();
+				String merchantName = FuncActivity.appState.nibssData.getConfigData().getConfigData("52040").toString();
+				String merchantTerminalId = SecureStorage.retrieve(Helper.TERMINAL_ENTERED_BY_USER,"");
+				String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
+				String vasmerchantID = SecureStorage.retrieve(Helper.VAS_TERMINAL_ID,"");
+				String vasmerchantName = SecureStorage.retrieve(Helper.VAS_MERCHANT_NAME,"");
+//				String vasTerminalId = SecureStorage.retrieve(Helper.,"");
+
+
+				Models.VasDetails vasDetails = new Models.VasDetails(cRef,amount,wallet,vasmerchantName,merchantID,merchantName,merchantTerminalId,product,responsemessage,vasmerchantID,transactionRef,VasServices.CARD,logo,date,error,Models.DISCO,discosModel);
+				Log.d("Trans result", "onChanged() called with: paymentResponse, vasDetails= [" + vasDetails + "]");
+				printReceipt(vasDetails);
 
 
 //					print(amount,error,responsemessage,transactionTID,isCardTransaction,vasTid,cardExpiary,smartCardNumber,meterNumber,beneficiaryName,beneficiaryAddress,cardHolderName)
@@ -391,27 +491,98 @@ public class TransResultActivity extends FuncActivity
 
 
 
+
+
+
 		//End the request
 
 
+   startimesViewModel.getPaymentResponseLiveData().observe(this, new Observer<StartimesModel.payResponse>() {
+	   @Override
+	   public void onChanged(@Nullable StartimesModel.payResponse payResponse) {
+
+		   String smartCardNumber =payResponse.getSmartCardCode();
+		   String meterNumber="";
+		   String beneficiaryName ="";
+		   String beneficiaryAddress="";
+		   String responsemessage =payResponse.getMessage();
+		   String amount=payResponse.getMessage();
+		   String token ="";
+		   String cRef="";
+		   String wallet =SecureStorage.retrieve(Helper.TERMINAL_ID,"");
+		   String product =VasServices.STARTIMES;
+		   String transactionRef =payResponse.getReference();
+		   int logo =R.drawable.startime;
+		   boolean error =true;
+		   Models.DiscosModel discosModel =null;
+
+		   boolean isCardTransaction=true;
+		   String transactionTID ="";
+           String merchantID = FuncActivity.appState.nibssData.getConfigData().getConfigData("03015").toString();
+           String merchantName = FuncActivity.appState.nibssData.getConfigData().getConfigData("52040").toString();
+           String merchantTerminalId = SecureStorage.retrieve(Helper.TERMINAL_ENTERED_BY_USER,"");
+           String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
+           String vasmerchantID = SecureStorage.retrieve(Helper.VAS_TERMINAL_ID,"");
+           String vasmerchantName = SecureStorage.retrieve(Helper.VAS_MERCHANT_NAME,"");
+//				String vasTerminalId = SecureStorage.retrieve(Helper.,"");
 
 
+		   Models.VasDetails vasDetails = new Models.VasDetails(cRef,amount,wallet,vasmerchantName,merchantID,merchantName,merchantTerminalId,product,responsemessage,vasmerchantID,transactionRef,VasServices.CARD,logo,date,error,Models.CABLE_TV,discosModel);
+		   printReceipt(vasDetails);
 
+
+	   }
+   });
+
+      multichoiceViewModel.getPaymentResponseLiveData().observe(this,new Observer<DstvModel.PayResponse>(){
+
+		  @Override
+		  public void onChanged(@Nullable DstvModel.PayResponse payDetails) {
+			  String smartCardNumber ="";
+			  String meterNumber="";
+			  String beneficiaryName ="";
+			  String beneficiaryAddress="";
+			  String responsemessage = payDetails.getMessage();
+			  String amount="";
+			  String token ="";
+			  String wallet =SecureStorage.retrieve(Helper.TERMINAL_ID,"");
+			  String product ="MultiChoice";
+			  String transactionRef =payDetails.getRef();
+			  int logo =appState.logo;
+			  String cRef ="";
+			  boolean error =true;
+			  Models.DiscosModel discosModel =null;
+
+			  boolean isCardTransaction=true;
+			  String transactionTID ="";
+              String merchantID = FuncActivity.appState.nibssData.getConfigData().getConfigData("03015").toString();
+              String merchantName = FuncActivity.appState.nibssData.getConfigData().getConfigData("52040").toString();
+              String merchantTerminalId = SecureStorage.retrieve(Helper.TERMINAL_ENTERED_BY_USER,"");
+              String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
+              String vasmerchantID = SecureStorage.retrieve(Helper.VAS_TERMINAL_ID,"");
+              String vasmerchantName = SecureStorage.retrieve(Helper.VAS_MERCHANT_NAME,"");
+//				String vasTerminalId = SecureStorage.retrieve(Helper.,"");
+
+
+			  Models.VasDetails vasDetails = new Models.VasDetails(cRef,amount,wallet,vasmerchantName,merchantID,merchantName,merchantTerminalId,product,responsemessage,vasmerchantID,transactionRef,VasServices.CARD,logo,date,error,Models.CABLE_TV,discosModel);
+			  printReceipt(vasDetails);
+		  }
+	  });
 
 
     }
 
 
-	private void  processPayment(GeneralElectricityDetails generalElectricityDetails) {
+	private void  processPayment(Models.GeneralElectricityDetails generalElectricityDetails) {
         String  pin = SecureStorage.retrieve(USER_PIN, "");
 		EmvCard.PinInfo pinInfo = new EmvCard.PinInfo(appState.trans.getPinBlock(), null, null);
 
 		EmvCard emvCard = new EmvCard(appState.trans.getCardHolderName(), appState.trans.getTrack2Data(), appState.trans.getICCData(), pinInfo);
 
-		com.itex.richard.payviceconnect.model.Pfm pfm = new com.itex.richard.payviceconnect.model.Pfm(new PfmStateGenerator(this).generateState(), new PfmJournalGenerator(appState.trans.getTransactionResult(), appState.nibssData.getConfigData(), false,  generalElectricityDetails.getAmount(), emvCard,"Airtime",generalElectricityDetails.getElectricMeterType(),"").generateJournal());
+		com.itex.richard.payviceconnect.model.Pfm pfm = new com.itex.richard.payviceconnect.model.Pfm(new PfmStateGenerator(this).generateState(), new PfmJournalGenerator(appState.trans.getTransactionResult(), appState.nibssData.getConfigData(), false,  generalElectricityDetails.getAmount(), emvCard,generalElectricityDetails.getElectricMeterType(),generalElectricityDetails.getElectricMeterType(),"").generateJournal());
 
 
-		mEleectricityPaymentVM.payElectricBill(this ,generalElectricityDetails.getAmount(), generalElectricityDetails.getWallet(), generalElectricityDetails.getUserName(), generalElectricityDetails.getRequestType(),generalElectricityDetails.getMeterType().toLowerCase(),generalElectricityDetails.getMeterName(),generalElectricityDetails.getChannel(), generalElectricityDetails.getPhone_number(), generalElectricityDetails.getProductCode(),pin , VasServices.CARD,generalElectricityDetails.getClientReference(),generalElectricityDetails.getTerminalId(),generalElectricityDetails.getElectricMeterType(),generalElectricityDetails.getPassword(),generalElectricityDetails.getMeterName(),pfm);
+		mEleectricityPaymentVM.payElectricBill(this ,generalElectricityDetails.getAmount(), generalElectricityDetails.getWallet(), generalElectricityDetails.getUserName(), generalElectricityDetails.getRequestType(),generalElectricityDetails.getMeterType().toLowerCase(),generalElectricityDetails.getMeterNumber(),generalElectricityDetails.getChannel(), generalElectricityDetails.getPhone_number(), generalElectricityDetails.getProductCode(),pin ,generalElectricityDetails.getPaymentMetod(),generalElectricityDetails.getElectricMeterType(),generalElectricityDetails.getPassword(),generalElectricityDetails.getMeterName(),generalElectricityDetails.getClientReference(),generalElectricityDetails.getTerminalId(),pfm);
         SecureStorage.store("pinentered", "");
     }
 
@@ -423,7 +594,7 @@ public class TransResultActivity extends FuncActivity
 		final String airtime_amount = SecureStorage.retrieve("amountrecharge", "");;
 		final String wallet = SecureStorage.retrieve("wallet", "");
 		String password = SecureStorage.retrieve("password", "");
-		 String terminalID = SecureStorage.retrieve(Helper.TERMINAL, "");
+		 String terminalID = SecureStorage.retrieve(Helper.TERMINAL_ENTERED_BY_USER, "");
 		final String merchantID = appState.nibssData.getConfigData().getConfigData("03015").toString();
 		final String merchantName = appState.nibssData.getConfigData().getConfigData("52040").toString();
 		 String username = SecureStorage.retrieve("userName", "");
@@ -481,21 +652,53 @@ public class TransResultActivity extends FuncActivity
 				if (!response.body().getError()){
 					status = "Approved";
 					textLine1.setText("APPROVED");
-					transactionStatus.setImageResource(R.drawable.ic_cancel_black_24dp);
+					transactionStatus.setImageResource(R.drawable.ic_check_circle_black_24dp);
 				}else{
 					textLine1.setText("DECLINED");
-					transactionStatus.setImageResource(R.drawable.ic_check_circle_black_24dp);
+					transactionStatus.setImageResource(R.drawable.ic_cancel_black_24dp);
+
 				}
 
-					if (airtimetype.equalsIgnoreCase("wallet")){
-						transactionModel = new TransactionModel(finalTerminalID, "",  "", "", airtime_amount, "", "airtime", "", status, "" , merchantID , merchantName, "", "", "", "", "", "", date, "", "", bankLogoName, phone_number);
-					}
-					else if (airtimetype.equalsIgnoreCase("card")){
-						transactionModel = new TransactionModel(wallet, "",  "", "", airtime_amount, "", "airtime", "", status, "" , merchantID , merchantName, "", "", "", "", "", "", date, "", "", bankLogoName, phone_number);
-					}
+
+				String smartCardNumber ="";
+				String meterNumber="";
+				String beneficiaryName ="";
+				String beneficiaryAddress="";
+				String responsemessage = response.body().getMessage();
+				String amount=response.body().getAmount();
+				String token ="";
+				String wallet =SecureStorage.retrieve(Helper.TERMINAL_ID,"");
+				String product ="Airtime";
+				String transactionRef =response.body().getRef();
+				int logo =appState.logo;
+				boolean error =true;
+				String cRef ="";
+				Models.AirtimeModel airtimeModel =new Models.AirtimeModel(response.body().getError(),phone_number);
+
+				boolean isCardTransaction=true;
+				String transactionTID ="";
+				String merchantID = FuncActivity.appState.nibssData.getConfigData().getConfigData("03015").toString();
+				String merchantName = FuncActivity.appState.nibssData.getConfigData().getConfigData("52040").toString();
+				String merchantTerminalId = SecureStorage.retrieve(Helper.TERMINAL_ENTERED_BY_USER,"");
+//				String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
+				String vasmerchantID = SecureStorage.retrieve(Helper.VAS_TERMINAL_ID,"");
+				String vasmerchantName = SecureStorage.retrieve(Helper.VAS_MERCHANT_NAME,"");
+//				String vasTerminalId = SecureStorage.retrieve(Helper.,"");
 
 
-				    printReceipt();
+				Models.VasDetails vasDetails = null;
+
+
+//					if (airtimetype.equalsIgnoreCase("wallet")){
+//						vasDetails =  new Models.VasDetails(amount,wallet,vasmerchantName,merchantID,merchantName,merchantTerminalId,product,responsemessage,vasmerchantID,transactionRef,VasServices.CASH,logo,date,error,Models.AIRTIME,airtimeModel);
+//					}
+//					else if (airtimetype.equalsIgnoreCase("card")){
+
+						vasDetails = new Models.VasDetails(cRef,amount,wallet,vasmerchantName,merchantID,merchantName,merchantTerminalId,product,responsemessage,vasmerchantID,transactionRef,VasServices.CARD,logo,date,error,Models.AIRTIME,airtimeModel);
+//					}
+
+				printReceipt(vasDetails);
+//				    printReceipt();
 
 //					Intent intent = new Intent(getBaseContext(), MainActivity.class);
 //
@@ -709,12 +912,11 @@ public class TransResultActivity extends FuncActivity
     private void continuePrintReceipt()
     {
     	appState.printReceipt++;
-    	printReceipt();
+//    	printReceipt();
     }
 
 
-	private void printReceipt()
-    {
+	private void printReceipt(Models.VasDetails vasDetails) {
 
         String[] nameArr = appState.terminalConfig.getMerchantName1().split(" ");
         nameArr = Arrays.copyOf(nameArr, nameArr.length - 2);
@@ -747,28 +949,41 @@ public class TransResultActivity extends FuncActivity
         String cardType = appState.trans.getAppName();
         String AIP = appState.trans.getAIP();
         String amount = (appState.trans.getTransAmount()/100)+"";
+		String Expiary = appState.trans.getExpiry();
         String othersAmount = appState.trans.getOthersAmount().toString();
+
 		String bankLogoName = "";
         try{
 			bankLogoName = "bank" + terminalID.substring(0, 4);
 		}catch (Exception e){
 
 		}
+		Models.CardDetails cardDetails =new Models.CardDetails(terminalID,rrn,cardholderName, pan, amount, othersAmount, transactionType, responseCode, transactionstatus, transactionstatusReason,merchantID, merchantName, ticket, UNPR, AC, TVR, AID, TSI, date, cardType, Expiary, bankLogoName);
 
-       MainApp.transactionModel = new TransactionModel(terminalID,rrn,cardholderName, pan, amount, othersAmount, transactionType, responseCode, transactionstatus, transactionstatusReason,merchantID, merchantName, ticket, UNPR, AC, TVR, AID, TSI, date, cardType, AIP, bankLogoName, "");
-      final  TransactionModel transactionModel = MainApp.transactionModel;
 
-        Log.i("Yeah TransactionResult >>>", transactionModel.toString());
+//		MainApp.transactionModel = new TransactionModel(cardDetails,vasDetails);
+//		final  TransactionModel transactionModel = MainApp.transactionModel;
+
+//		MainApp.transactionModel = new TransactionModel(cardDetails,vasDetails);
+		final  TransactionModel transactionModel =  new TransactionModel(cardDetails,vasDetails);
+
+//        Log.i("Yeah TransactionResult >>>", transactionModel.toString());
 
 		Log.i("appState.airtime >>>", String.valueOf(appState.airtime));
 
 		Log.i("!appState.airtime >>>", String.valueOf((!appState.airtime)));
 
+		Log.d("Print", "printReceipt() called with: cardDetails = [" + cardDetails + "]");
+
+		Log.d("Print", "printReceipt() called with: vasDetails = [" + vasDetails + "]");
+
+		Log.d("Print", "printReceipt() called with: transactionModel = [" + transactionModel + "]");
+
 
 		//try {
-		if(!appState.airtime) {
+//		if(!appState.airtime) {
 
-			Log.i("!appState.airtime  here >>>", String.valueOf((!appState.airtime)));
+//			Log.i("!appState.airtime  here >>>", String.valueOf((!appState.airtime)));
 			Intent intent = new Intent(this, MainActivity.class);
 			intent.putExtra("transactionModel", transactionModel);
 			intent.putExtra("copy", "** CUSTOMER COPY **");
@@ -786,10 +1001,10 @@ public class TransResultActivity extends FuncActivity
 //				}
 //			});
 //			alertDialog.show();
-		}else{
-			Log.i("!appState.airtime  else here >>>", String.valueOf((!appState.airtime)));
-			appState.airtime = false;
-		}
+//		}else{
+////			Log.i("!appState.airtime  else here >>>", String.valueOf((!appState.airtime)));
+//			appState.airtime = false;
+//		}
 //		} catch (PrinterException e) {
 //		} successful is 1
 

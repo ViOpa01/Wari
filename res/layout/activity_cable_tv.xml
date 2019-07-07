@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/reportActivityTopBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            app:layout_collapseMode="pin"
+            app:title="Electricity Payment" />
+
+    </android.support.design.widget.AppBarLayout>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/dstv"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="DSTV"
+                    android:gravity="center_vertical"
+                    android:textSize="24dp"
+                    android:paddingStart="30dp"
+                    android:textColor="#299A8E"
+                    android:drawablePadding="10dp"
+                    android:paddingEnd="30dp"
+                    android:drawableLeft="@drawable/dstv" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/gotv"
+                android:layout_width="match_parent"
+                android:layout_height="80dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="GO TV "
+                    android:gravity="center_vertical"
+                    android:paddingStart="30dp"
+                    android:textSize="24dp"
+                    android:textColor="#299A8E"
+                    android:paddingEnd="30dp"
+                    android:drawableLeft="@drawable/gotv"
+                    android:drawablePadding="10dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/startimes"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="STAR..."
+                    android:gravity="center_vertical"
+                    android:paddingStart="30dp"
+                    android:textSize="24dp"
+                    android:textColor="#299A8E"
+                    android:paddingEnd="30dp"
+                    android:drawableLeft="@drawable/startime"
+                    android:drawablePadding="10dp"
+                    />
+            </LinearLayout>
+
+            <!--<LinearLayout-->
+
+                <!--android:id="@+id/ibedc"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="80dp"-->
+                <!--&gt;-->
+                <!--<TextView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:text="IBEDC"-->
+                    <!--android:gravity="center_vertical"-->
+                    <!--android:paddingStart="30dp"-->
+                    <!--android:textSize="24dp"-->
+                    <!--android:textColor="#299A8E"-->
+                    <!--android:drawablePadding="10dp"-->
+                    <!--android:drawableLeft="@drawable/ibedc"-->
+                    <!--android:paddingEnd="30dp" />-->
+            <!--</LinearLayout>-->
+            <!--<LinearLayout-->
+                <!--android:id="@+id/iedc"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="80dp"-->
+                <!--&gt;-->
+                <!--<TextView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:text="IKEJA ELECTRIC"-->
+                    <!--android:gravity="center_vertical"-->
+                    <!--android:paddingStart="30dp"-->
+                    <!--android:textSize="24dp"-->
+                    <!--android:textColor="#299A8E"-->
+                    <!--android:drawablePadding="10dp"-->
+                    <!--android:drawableLeft="@drawable/ikedc"-->
+                    <!--android:paddingEnd="30dp" />-->
+            <!--</LinearLayout>-->
+
+            <!--<LinearLayout-->
+                <!--android:id="@+id/phdc"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="80dp"-->
+                <!--&gt;-->
+                <!--<TextView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:text="PORTHACOURTH ELECTRIC"-->
+                    <!--android:gravity="center_vertical"-->
+                    <!--android:textSize="24dp"-->
+                    <!--android:scaleX="0.2"-->
+                    <!--android:scaleY="0.3"-->
+                    <!--android:textColor="#299A8E"-->
+                    <!--android:drawablePadding="10dp"-->
+                    <!--android:drawableLeft="@drawable/phdc"-->
+                    <!--android:paddingEnd="30dp" />-->
+            <!--</LinearLayout>-->
+
+
+
+
+            <!--<LinearLayout-->
+                <!--android:id="@+id/beneficiaries"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="80dp"-->
+                <!--&gt;-->
+                <!--<TextView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:text="Beneficiaries"-->
+                    <!--android:visibility="invisible"-->
+                    <!--android:gravity="center_vertical"-->
+                    <!--android:paddingStart="30dp"-->
+                    <!--android:textSize="24dp"-->
+                    <!--android:textColor="#299A8E"-->
+                    <!--android:drawablePadding="10dp"-->
+                    <!--android:paddingEnd="30dp"/>-->
+            <!--</LinearLayout>-->
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
+

@@ -26,6 +26,7 @@ apply plugin: 'kotlin-android-extensions'
 //PASSWORD for release is android, ALIAS is androiddebugkey, JKS file is waripos.jks
 kotlin { experimental { coroutines 'enable' } }
 ext.anko_version = '0.10.4'
+ext.rxbinding_version = '2.1.1'
 configurations.all { exclude group: 'com.android.support', module: 'support-v4' }
 dependencies {
     implementation project(':poslib-commons-debug')
@@ -72,6 +73,12 @@ dependencies {
     //implementation 'com.journeyapps:zxing-android-embedded:3.2.0@aar'
     implementation 'com.android.support:appcompat-v7:27.1.1'
 
+    //Acts as TextvieWatcher
+
+    implementation "com.jakewharton.rxbinding2:rxbinding:$rxbinding_version"
+    implementation "com.jakewharton.rxbinding2:rxbinding-design:$rxbinding_version"
+    implementation "com.jakewharton.rxbinding2:rxbinding-kotlin:$rxbinding_version"
+
     implementation 'android.arch.lifecycle:viewmodel:1.1.1'
     implementation 'android.arch.lifecycle:livedata:1.1.1'
     //implementation 'com.android.support:support-v4:27.1.1'
@@ -88,8 +95,7 @@ dependencies {
     // optional - RxJava support for Room
 //    implementation project(':payviceconnect-debug')
 
-    implementation project(':payviceconnect')
-//      implementation project(path: ':payviceconnect-pfm')
+          implementation project(':payviceconnect_')
 }
 
 android {

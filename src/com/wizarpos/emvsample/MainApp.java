@@ -24,6 +24,8 @@ import com.iisysgroup.poslib.host.Host;
 import com.iisysgroup.poslib.host.HostInteractor;
 import com.iisysgroup.poslib.host.dao.PosLibDatabase;
 import com.iisysgroup.poslib.host.dao.VasTerminalDataDao;
+import com.itex.richard.payviceconnect.model.DstvModel;
+import com.itex.richard.payviceconnect.model.StartimesModel;
 import com.wizarpos.emvsample.activity.login.securestorage.SecureStorage;
 import com.wizarpos.emvsample.card.SmartCardControl;
 import com.wizarpos.emvsample.constant.Constants;
@@ -45,7 +47,7 @@ import com.wizarpos.emvsample.parameter.BatchInfo;
 import com.wizarpos.emvsample.parameter.TerminalConfig;
 import com.wizarpos.emvsample.printer.PrinterException;
 import com.wizarpos.emvsample.printer.PrinterHelper;
-import com.wizarpos.emvsample.services.helper.activity.util.GeneralElectricityDetails;
+import com.wizarpos.emvsample.services.helper.activity.util.Models;
 import com.wizarpos.emvsample.transaction.Nibss;
 import com.wizarpos.util.TransactionModel;
 
@@ -100,6 +102,7 @@ public class MainApp extends Application implements Constants
 	public boolean msrError = false;
 	
 	public SmartCardControl contactUserCard;
+	public int logo =0;
 
 	public boolean acceptMSR = true;
 	public boolean acceptContactCard = true;
@@ -167,9 +170,18 @@ public class MainApp extends Application implements Constants
 	public boolean withdrawal = false;
 	public boolean airtime = false;
 	public int reversalAmout;
-	public boolean electricityBills;
-	public GeneralElectricityDetails generalElectricityDetails;
-	public boolean cableTv;
+	public boolean electricityBills=false;
+	public Models.GeneralElectricityDetails generalElectricityDetails;
+	public boolean cableTv=false;
+	public boolean startimes=false;
+	public boolean gotv=false;
+	public boolean dstv=false;
+	public String vasTransactionstatus ="DECLINED";
+	public boolean isWallet =false;
+	public boolean isTransfer =false;
+	public StartimesModel.payRequest startimesPayRequest;
+	public DstvModel.PayDetails dstvPayRequest;
+
 
 
 
