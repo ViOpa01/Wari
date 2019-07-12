@@ -115,12 +115,12 @@ class AirtimeVasActivity : BaseVasActivity(), AirtimeProcessor.onAirtimeTransact
                       val amount = airtime_amount
                       val token = ""
                       val wallet = SecureStorage.retrieve(Helper.TERMINAL_ID, "")
-                      val product = "Airtime"
+                      val product =   appState.product
                       val transactionRef = model.ref
                       val logo = appState.logo
                       val error = model.error
                       val airtimeModel = Models.AirtimeModel(error, phone_number)
-                      val cref= ""
+                      val stan=model.transactionID
 
                       val isCardTransaction = true
                       val transactionTID = ""
@@ -137,7 +137,7 @@ class AirtimeVasActivity : BaseVasActivity(), AirtimeProcessor.onAirtimeTransact
 
 //                val date: String  =  PfmStateGenerator(getBaseContext()).getCurrentTime()
 //                    if (airtimetype.equals("wallet", ignoreCase = true)) {
-                      vasDetails = Models.VasDetails(cref,amount, wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product, responsemessage, vasmerchantID, transactionRef, VasServices.CASH, logo, date, error, Models.AIRTIME, airtimeModel)
+                      vasDetails = Models.VasDetails(stan,amount, wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product, responsemessage, vasmerchantID, transactionRef, VasServices.CASH, logo, date, error, Models.AIRTIME, airtimeModel)
 //                    } else if (airtimetype.equals("card", ignoreCase = true)) {
 //                        vasDetails = Models.VasDetails(amount, wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product, responsemessage, vasmerchantID, transactionRef, VasServices.CARD, logo, date, error, Models.AIRTIME, airtimeModel)
 //                    }
@@ -209,11 +209,11 @@ class AirtimeVasActivity : BaseVasActivity(), AirtimeProcessor.onAirtimeTransact
                 val amount = airtime_amount
                 val token = ""
                 val wallet = SecureStorage.retrieve(Helper.TERMINAL_ID, "")
-                val product = "Airtime"
+                val product =   appState.product
                 val transactionRef = model.ref
                 val error = model.error
                 val airtimeModel = Models.AirtimeModel(error, phone_number)
-                val cref= ""
+                val stan= model.transactionID
                 val logo = appState.logo
 
                 val isCardTransaction = true
@@ -231,7 +231,7 @@ class AirtimeVasActivity : BaseVasActivity(), AirtimeProcessor.onAirtimeTransact
 
 //                val date: String  =  PfmStateGenerator(getBaseContext()).getCurrentTime()
 //                    if (airtimetype.equals("wallet", ignoreCase = true)) {
-                vasDetails = Models.VasDetails(cref,amount, wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product, responsemessage, vasmerchantID, transactionRef, VasServices.CASH, logo, date, error, Models.AIRTIME, airtimeModel)
+                vasDetails = Models.VasDetails(stan,amount, wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product, responsemessage, vasmerchantID, transactionRef, VasServices.CASH, logo, date, error, Models.AIRTIME, airtimeModel)
 //                    } else if (airtimetype.equals("card", ignoreCase = true)) {
 //                        vasDetails = Models.VasDetails(amount, wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product, responsemessage, vasmerchantID, transactionRef, VasServices.CARD, logo, date, error, Models.AIRTIME, airtimeModel)
 //                    }
@@ -326,7 +326,7 @@ class AirtimeVasActivity : BaseVasActivity(), AirtimeProcessor.onAirtimeTransact
                     val logo = 0
                     val error = true
                     val airtimeModel = Models.AirtimeModel(true, phone_number)
-                    val cref= ""
+                    val stan= ""
 
                     val isCardTransaction = true
                     val transactionTID = ""
@@ -343,7 +343,7 @@ class AirtimeVasActivity : BaseVasActivity(), AirtimeProcessor.onAirtimeTransact
 
                     val date: String  =  PfmStateGenerator(getBaseContext()).getCurrentTime()
 //                    if (airtimetype.equals("wallet", ignoreCase = true)) {
-                        vasDetails = Models.VasDetails(cref,amount, wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product, responsemessage, vasmerchantID, transactionRef, VasServices.CASH, logo, date, error, Models.AIRTIME, airtimeModel)
+                        vasDetails = Models.VasDetails(stan,amount, wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product, responsemessage, vasmerchantID, transactionRef, VasServices.CASH, logo, date, error, Models.AIRTIME, airtimeModel)
 //                    } else if (airtimetype.equals("card", ignoreCase = true)) {
 //                        vasDetails = Models.VasDetails(amount, wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product, responsemessage, vasmerchantID, transactionRef, VasServices.CARD, logo, date, error, Models.AIRTIME, airtimeModel)
 //                    }
@@ -401,29 +401,33 @@ class AirtimeVasActivity : BaseVasActivity(), AirtimeProcessor.onAirtimeTransact
         cancel.setOnClickListener { moveToPreviousPage() }
 
         mtn.setOnClickListener {
-            FuncActivity.appState.logo =R.id.mtn
+            FuncActivity.appState.logo =R.drawable.mtn_print
             resetAirtimeValues()
             showPhoneNumberScreen()
             airtime_provider = "MTNVTU"
+            appState.product=airtime_provider
 
         }
         glo.setOnClickListener {
-            FuncActivity.appState.logo =R.id.glo
+            FuncActivity.appState.logo =R.drawable.glo_print
             resetAirtimeValues()
             showPhoneNumberScreen()
             airtime_provider = "GLOVTU"
+            appState.product=airtime_provider
         }
         nine_mobile.setOnClickListener {
-            FuncActivity.appState.logo =R.id.nine_mobile
+            FuncActivity.appState.logo =R.drawable.ninemobile__print
             resetAirtimeValues()
             showPhoneNumberScreen()
             airtime_provider = "ETISALATVTU"
+            appState.product=airtime_provider
         }
         airtel.setOnClickListener {
-            FuncActivity.appState.logo =R.id.airtel
+            FuncActivity.appState.logo =R.drawable.airtel_print
             resetAirtimeValues()
             showPhoneNumberScreen()
             airtime_provider = "AIRTELVTU"
+            appState.product=airtime_provider
         }
 
 
@@ -522,11 +526,13 @@ class AirtimeVasActivity : BaseVasActivity(), AirtimeProcessor.onAirtimeTransact
         alert {
             title = "Transaction Type"
             message = "Select the type of transaction you want to make"
+            appState.isVas=true
+            appState.airtime=true
             positiveButton(buttonText = "Card") { _ ->
-                appState.isWallet=false;
+                appState.isWallet=false
                 payWithCard(phone_number, airtimeProvider) }
             negativeButton(buttonText = "Wallet") { _ ->
-                appState.isWallet=true;
+                appState.isWallet=true
                 payWithWallet(phone_number, airtimeProvider) }
         }.show()
 

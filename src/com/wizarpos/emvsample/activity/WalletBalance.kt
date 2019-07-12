@@ -29,6 +29,7 @@ import org.jetbrains.anko.indeterminateProgressDialog
 import okhttp3.RequestBody
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import okhttp3.logging.HttpLoggingInterceptor
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.okButton
 import org.jetbrains.anko.toast
@@ -88,17 +89,20 @@ class WalletBalance : AppCompatActivity() {
     }
 
     fun getBalance(email : String, password : String) {
-        val client = OkHttpClient()
-
+//        val client = OkHttpClient()
+        val logger =HttpLoggingInterceptor()
+        logger.setLevel(HttpLoggingInterceptor.Level.BODY)
+        var okHttpClient = OkHttpClient.Builder()
+        okHttpClient.addInterceptor(logger)
         val mediaType = MediaType.parse("application/json")
-        val body = RequestBody.create(mediaType, "{\"userName\": \""+email+"\",\"password\": \""+password+"\"}")
+        val body = RequestBody.create(mediaType, "{\"username\": \""+email+"\",\"password\": \""+password+"\"}")
         val request = Request.Builder()
                 .url("https://www.payvice.com/api/account")
                 .post(body)
                 .addHeader("content-type", "application/json")
                 .addHeader("cache-control", "no-cache")
                 .build()
-
+        var client = okHttpClient.build()
         val response = client.newCall(request).execute()
         if(response.isSuccessful){
          //   progress.dismiss()

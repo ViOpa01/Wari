@@ -73,9 +73,12 @@ class MeterValidationActivity:AppCompatActivity(),View.OnClickListener{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_electricity)
-        service=SERVICES[disco]!!
-        subTitleText.text = service.name
-        serviceImage.setImageResource(service.icon)
+        if(disco!=null){
+            service=SERVICES[disco]!!
+            subTitleText.text = service.name
+            serviceImage.setImageResource(service.icon)
+        }
+
 
         mMeterValidationViewModel = ViewModelProviders.of(this).get(MeterValidationViewModel::class.java)
 
@@ -116,11 +119,16 @@ class MeterValidationActivity:AppCompatActivity(),View.OnClickListener{
                    val  response =   it as EnuguModel.LookupResponse
 
                     meterName = response!!.name!!
-                    meterNumber =response!!.account!!
+//                    meterNumber =response!!.account!!
                     productCode =response!!.productCode!!
                     address=""
                     requestType = ""
-                    meterType=response.type
+                    meterType= POSTPAID
+                    if(ENUGU_ELECTRICITY_PREPAID ==electricMeterType){
+                        meterType = PREPAID
+                    }
+
+
                     message=response.message!!
                     error=response.error
 
@@ -135,11 +143,15 @@ class MeterValidationActivity:AppCompatActivity(),View.OnClickListener{
                     val response =   it as EkoModel.EkoLookUpResponse
 
                     meterName = response!!.name!!
-                    meterNumber =response!!.meterNumber!!
+//                    meterType=mMeterValidationViewModel!!.mProduct!!.requestCode
+//                    electricMeterType=mMeterValidationViewModel!!.mProduct!!.name
                     productCode =""
                     requestType =""
                     address=response.address!!
-                    meterType=response.account_type!!
+                    meterType= POSTPAID
+                    if(EKO_ELECTRICITY_PREPAID ==electricMeterType){
+                        meterType = PREPAID
+                    }
                     message=response.message!!
                     error=response.error
 
@@ -151,10 +163,14 @@ class MeterValidationActivity:AppCompatActivity(),View.OnClickListener{
                     val response =   it as IbadanModel.IbLookupResponse
 
                     meterName = response!!.name!!
-                    meterNumber =response!!.account
+//                    meterNumber =response!!.account
                     productCode =response!!.productCode!!
                     requestType = ""
-                    meterType=response.type!!
+//                    meterType=response.type!!
+                    meterType= POSTPAID
+                    if(IBADAN_ELECTRICITY_PREPAID ==electricMeterType){
+                        meterType = PREPAID
+                    }
                     message=response.message!!
                     address=""
                     error=response.error
@@ -169,9 +185,12 @@ class MeterValidationActivity:AppCompatActivity(),View.OnClickListener{
                     meterName = response!!.name!!
                     productCode =""
                     requestType =""
-                    meterType=meterType
+                    meterType= POSTPAID
+                    if(IKEJA_PREPAID ==electricMeterType){
+                        meterType = PREPAID
+                    }
                     address=response.address!!
-                    meterNumber =meterNumber
+//                    meterNumber =meterNumber
                     message=response.message!!
                     error=response.error
 
@@ -185,10 +204,13 @@ class MeterValidationActivity:AppCompatActivity(),View.OnClickListener{
                     val response =   it as PortharcourtModel.lookUpResponse
 
                     meterName = response!!.name!!
-                    meterNumber =response.meterNumber
+//                    meterNumber =response.meterNumber
                     productCode =response!!.productCode!!
                     requestType = ""
-                    meterType=response.type!!
+                    meterType= POSTPAID
+                    if(PORTHARCOURT_ELECTRICITY_PREPAID ==electricMeterType){
+                        meterType = PREPAID
+                    }
                     message=response.message!!
                     address=response.address!!
                     error=response.error
@@ -237,7 +259,6 @@ class MeterValidationActivity:AppCompatActivity(),View.OnClickListener{
                         intent.putExtra(METER_NUMBER,_meterNumber)
                         intent.putExtra(METER_TYPE,meterType)
                         intent.putExtra(PRODUCT_CODE,_productCode)
-
                         intent.putExtra(REQUEST_TYPE,requestType)
                         intent.putExtra(CLIENT_REFERENCE,clientReference)
                         intent.putExtra(TERMINAL_ID,terminalID)

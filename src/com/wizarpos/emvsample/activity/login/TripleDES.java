@@ -1163,6 +1163,10 @@ public class TripleDES {
 
         try {
             echoSocket = new Socket("196.6.103.10", 55531);
+
+//            echoSocket = new Socket("197.253.19.78", 5001);
+
+
             os = new DataOutputStream(echoSocket.getOutputStream());
             is = new DataInputStream(echoSocket.getInputStream());
         } catch (UnknownHostException e) {

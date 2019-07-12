@@ -34,12 +34,16 @@ import org.xml.sax.InputSource;
 import java.io.File;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
+import java.math.BigDecimal;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
 import java.util.regex.Pattern;
@@ -517,6 +521,23 @@ public class Helper {
             thread = new Thread(runnable);
             thread.start();
         }
+    }
+
+    public static String parseDoubleIntoNairaKoboString(String  tempAmount) {
+//        double amountNairaPart = tempAmount / 1.00D;
+//        NumberFormat numFormatter = NumberFormat.getInstance(Locale.US);
+//        numFormatter.setMinimumFractionDigits(2);
+//        String amountInN = numFormatter.format(amountNairaPart);
+//        amountInN =   amountInN;
+//        return amountInN;
+
+        BigDecimal de = new BigDecimal(tempAmount);
+        Long  amount = de.longValue();
+        DecimalFormat decimalFormat = new DecimalFormat("#.00");
+        decimalFormat.setGroupingUsed(true);
+        decimalFormat.setGroupingSize(3);
+
+        return  decimalFormat.format(amount);
     }
 
 

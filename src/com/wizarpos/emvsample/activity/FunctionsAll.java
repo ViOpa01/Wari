@@ -39,7 +39,7 @@ public class FunctionsAll implements Constants
 {
 	protected static WeakReferenceHandler mHandler = new WeakReferenceHandler(null);
     protected static Socket socket = null;
-    protected static FunctionsAll funcRef;
+    protected static FunctionsAll funstan;
     protected static MainApp appState = null;
     Activity context;
 

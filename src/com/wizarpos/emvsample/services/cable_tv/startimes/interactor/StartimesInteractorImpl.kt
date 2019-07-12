@@ -6,6 +6,7 @@ import com.itex.richard.payviceconnect.model.DstvModel
 import com.itex.richard.payviceconnect.model.StartimesModel
 import com.itex.richard.payviceconnect.wrapper.PayviceServices
 import com.wizarpos.emvsample.activity.FuncActivity
+import com.wizarpos.emvsample.activity.FuncActivity.appState
 import com.wizarpos.emvsample.activity.login.Helper
 import com.wizarpos.emvsample.activity.login.securestorage.SecureStorage
 import com.wizarpos.emvsample.generators.PfmStateGenerator
@@ -26,6 +27,7 @@ class StartimesInteractorImpl(val context: Context) : StartimesInteractor {
 
     var payviceServices = PayviceServices.getInstance(context)
     override fun subscribe(authPin: String, password: String, customerName: String, phone: String, productCode: String, bouquet: String, paymentMethod: String, smartCardCode: String, amount: Int): Single<StartimesModel.payResponse> {
+        FuncActivity.appState.startimes=true
 
         val clientReference = StringUtil.getClientRef(context, "")
         val pinInfo = EmvCard.PinInfo(FuncActivity.appState.trans.pinBlock, null, null)

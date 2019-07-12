@@ -156,6 +156,10 @@
         "source": "C:\\Users\\Favour\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\84c0c5be61e0faef3d73533d267dfc8c\\res\\drawable\\abc_ic_clear_material.xml"
     },
     {
+        "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable_airtel_print.png.flat",
+        "source": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\res\\drawable\\airtel_print.png"
+    },
+    {
         "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_abc_ic_menu_cut_mtrl_alpha.png.flat",
         "source": "C:\\Users\\Favour\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\84c0c5be61e0faef3d73533d267dfc8c\\res\\drawable-hdpi-v4\\abc_ic_menu_cut_mtrl_alpha.png"
     },
@@ -548,6 +552,10 @@
         "source": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\res\\layout-port\\activity_bypass_pin.xml"
     },
     {
+        "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable_ninemobile__print.png.flat",
+        "source": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\res\\drawable\\ninemobile__print.png"
+    },
+    {
         "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_abc_scrubber_control_to_pressed_mtrl_000.png.flat",
         "source": "C:\\Users\\Favour\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\84c0c5be61e0faef3d73533d267dfc8c\\res\\drawable-mdpi-v4\\abc_scrubber_control_to_pressed_mtrl_000.png"
     },
@@ -862,6 +870,10 @@
     {
         "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi_ic_cancel_black_24dp.png.flat",
         "source": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\generated\\res\\pngs\\debug\\drawable-ldpi\\ic_cancel_black_24dp.png"
+    },
+    {
+        "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable_mtn_print.png.flat",
+        "source": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\res\\drawable\\mtn_print.png"
     },
     {
         "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4_abc_scrubber_control_to_pressed_mtrl_000.png.flat",
@@ -1184,6 +1196,10 @@
         "source": "C:\\Users\\Favour\\.gradle\\caches\\transforms-1\\files-1.1\\design-27.1.1.aar\\547df2a6bb26657b1e852c4441f7e954\\res\\color-v23\\design_tint_password_toggle.xml"
     },
     {
+        "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable_glo_print.png.flat",
+        "source": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\res\\drawable\\glo_print.png"
+    },
+    {
         "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_ic_star_black_16dp.png.flat",
         "source": "C:\\Users\\Favour\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\84c0c5be61e0faef3d73533d267dfc8c\\res\\drawable-xhdpi-v4\\abc_ic_star_black_16dp.png"
     },
@@ -1198,6 +1214,10 @@
     {
         "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\color_abc_primary_text_material_dark.xml.flat",
         "source": "C:\\Users\\Favour\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\84c0c5be61e0faef3d73533d267dfc8c\\res\\color\\abc_primary_text_material_dark.xml"
+    },
+    {
+        "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable_startimes_print.png.flat",
+        "source": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\res\\drawable\\startimes_print.png"
     },
     {
         "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi_btn_digit_05.png.flat",
@@ -2160,12 +2180,12 @@
         "source": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\res\\layout\\fragment_plan_list_dialog_item.xml"
     },
     {
-        "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_abc_ic_menu_paste_mtrl_am_alpha.png.flat",
-        "source": "C:\\Users\\Favour\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\84c0c5be61e0faef3d73533d267dfc8c\\res\\drawable-mdpi-v4\\abc_ic_menu_paste_mtrl_am_alpha.png"
-    },
-    {
         "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21_electricity.xml.flat",
         "source": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v21\\electricity.xml"
+    },
+    {
+        "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_abc_ic_menu_paste_mtrl_am_alpha.png.flat",
+        "source": "C:\\Users\\Favour\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\84c0c5be61e0faef3d73533d267dfc8c\\res\\drawable-mdpi-v4\\abc_ic_menu_paste_mtrl_am_alpha.png"
     },
     {
         "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable_abc_btn_default_mtrl_shape.xml.flat",
@@ -2252,12 +2272,12 @@
         "source": "C:\\Users\\Favour\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\84c0c5be61e0faef3d73533d267dfc8c\\res\\color-v23\\abc_tint_default.xml"
     },
     {
-        "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable_abc_vector_test.xml.flat",
-        "source": "C:\\Users\\Favour\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\84c0c5be61e0faef3d73533d267dfc8c\\res\\drawable\\abc_vector_test.xml"
-    },
-    {
         "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_electricity.png.flat",
         "source": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\generated\\res\\pngs\\debug\\drawable-xhdpi\\electricity.png"
+    },
+    {
+        "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable_abc_vector_test.xml.flat",
+        "source": "C:\\Users\\Favour\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\84c0c5be61e0faef3d73533d267dfc8c\\res\\drawable\\abc_vector_test.xml"
     },
     {
         "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_ic_menu_share_mtrl_alpha.png.flat",
@@ -2280,12 +2300,12 @@
         "source": "C:\\Users\\Favour\\.gradle\\caches\\transforms-1\\files-1.1\\design-27.1.1.aar\\547df2a6bb26657b1e852c4441f7e954\\res\\layout\\design_bottom_sheet_dialog.xml"
     },
     {
-        "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\layout_view_wallet_enter.xml.flat",
-        "source": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\res\\layout\\view_wallet_enter.xml"
-    },
-    {
         "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_electricity.png.flat",
         "source": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\generated\\res\\pngs\\debug\\drawable-xxhdpi\\electricity.png"
+    },
+    {
+        "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\layout_view_wallet_enter.xml.flat",
+        "source": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\res\\layout\\view_wallet_enter.xml"
     },
     {
         "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_ekedc.png.flat",

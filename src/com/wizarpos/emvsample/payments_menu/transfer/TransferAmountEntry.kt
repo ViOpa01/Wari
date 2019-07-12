@@ -167,7 +167,9 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
     }
 
     private fun payWithCard(response: WithdrawalLookupSuccessModel) {
-       appState!!.isTransfer=true;
+//        FuncActivity.appState!!.isTransfer=true
+        FuncActivity.appState!!.isWallet=false
+        FuncActivity.appState!!.isVas=false
         val view = View.inflate(this, R.layout.activity_enter_pin, null)
         val encryptedPassword = SecureStorage.retrieve(Helper.STORED_PASSWORD, "")
 
@@ -287,6 +289,7 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
         progressDialog.setCancelable(false)
         progressDialog.setTitle("Verification")
         progressDialog.setMessage("Now looking for account details")
+        FuncActivity.appState!!.isWithdrawal=true
 //        progressDialog.show()
 
         mWalletId = SharedPreferenceUtils.getPayviceWalletId(this@TransferAmountEntry)
@@ -318,7 +321,7 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
                             title = "${response.body()!!.message}"
                             message = "${response.body()!!.beneficiaryName}\nAmount - N$amount\nConvenience fee - N${response.body()!!.convenienceFee.toFloat() / 100}"
                             positiveButton("Continue") {
-                                appState!!.isWallet=false;
+
                                 payWithCard(response.body()!!)
                             }
                         }.show()
@@ -388,7 +391,7 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
 
     private fun verifyTransferAccountDetails(){
         longToast("Verification \n \n Now looking for account details. ").duration = Toast.LENGTH_LONG
-
+        FuncActivity.appState!!.isTransfer=true
         lateinit var response : LookupSuccessModel
         mWalletId = SharedPreferenceUtils.getPayviceWalletId(this@TransferAmountEntry)
 
@@ -441,11 +444,11 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
     }
 
     public fun debitWallet(){
-//        val progressDialog = ProgressDialog(this)
-//        progressDialog.setCancelable(false)
-//        progressDialog.setTitle("Wallet")
-//        progressDialog.setMessage("Debitting wallet")
-//        progressDialog.show()
+        val progressDialog = ProgressDialog(this)
+        progressDialog.setCancelable(false)
+        progressDialog.setTitle("Wallet")
+        progressDialog.setMessage("Debitting wallet")
+        progressDialog.show()
 
         val clientReference = getClientRef(this@TransferAmountEntry, "")
         lateinit var transferResponse : TransferSuccessModel
@@ -453,7 +456,8 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
         val view = View.inflate(this, R.layout.activity_enter_pin, null)
         val encryptedPassword = SecureStorage.retrieve(Helper.STORED_PASSWORD, "")
         var amount =  txtAmount.text.toString().toFloat()
-
+        FuncActivity.appState!!.isWallet=true
+        FuncActivity.appState!!.isVas=true
         Log.d("debit amount", txtAmount.text.toString().toFloat().toString())
         //Log.d("debit mConvenienceFee",  (mConvenienceFee.toFloat() / 100).toString())
         Log.d("debit amount to debit",  amount.toString())
@@ -495,9 +499,12 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
 
                             override fun onResponse(call: Call<TransferSuccessModel>, response: retrofit2.Response<TransferSuccessModel>) {
                                 Log.d("okh", "result "+response.body()!!)
+                                progressDialog.dismiss()
                                 if (response.body()!!.status != 1) {
 //                                val failResponse = response as TransferFailureModel
 //                                Log.d("okh", failResponse.description + " result")
+
+
                                     alert {
                                         title = "Response"
                                         message = response.body()!!.message + "\n"+ response.body()!!.reason
@@ -520,7 +527,7 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
 //                                            intent.putExtra("copy", "** CUSTOMER COPY **")
 //                                            startActivity(intent)
 
-
+                                            FuncActivity.appState!!.product=action
 
 
 
@@ -529,15 +536,20 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
                                             val beneficiaryName = ""
                                             val beneficiaryAddress = ""
                                             val responsemessage :String = response.body()!!.message
-                                            val amount = response.body()!!.message
+                                            val amount =  txtAmount.text.toString();
                                             val token = ""
                                             val wallet = SecureStorage.retrieve(Helper.TERMINAL_ID, "")
-                                            val product = action
+                                            val product = FuncActivity.appState!!.product
                                             val transactionRef = ""
                                             val logo =0
-                                            val cref  = ""
-                                            val error = true
-                                            val transferModel = Models.TransferModel(accountName =mAccountName ,error =true,recepiant = mAccountNumber,recivingBank = mBankName )
+                                            val stan :String = response.body()!!.transactionID
+                                            val error = response.body()!!.error
+
+                                            FuncActivity.appState!!.accountName =mAccountName
+                                            FuncActivity.appState!!.accountNumber=mAccountNumber
+                                            FuncActivity.appState!!.recivingBank=mBankName
+
+                                            val transferModel = Models.TransferModel(accountName =mAccountName ,error =error,recepiant = mAccountNumber,recivingBank = mBankName )
 
                                             val isCardTransaction = true
                                             val transactionTID = ""
@@ -551,11 +563,11 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
                                             val date = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().time)
 
 
-                                            var vasDetails: Models.VasDetails? = null
+
 
 
 //                                        if (airtimetype.equals("wallet", ignoreCase = true)) {
-                                            vasDetails = Models.VasDetails(cref,amount, wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product, responsemessage, vasmerchantID, transactionRef, VasServices.CARD, logo, date, error, action, transferModel)
+                                            val vasDetails = Models.VasDetails(stan, amount, wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product, responsemessage, vasmerchantID, transactionRef, VasServices.CASH, logo, date, error, Models.TRANSFER, transferModel)
 //                                        } else if (airtimetype.equals("card", ignoreCase = true)) {
 //                                            vasDetails = Models.VasDetails(amount, wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product, responsemessage, vasmerchantID, transactionRef, VasServices.CARD, logo, date, error, Models.AIRTIME, airtimeModel)
 //                                        }
@@ -622,7 +634,7 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
                                             val product = action
                                             val transactionRef = ""
                                             val logo = 0
-                                            val cref  = ""
+                                            val stan  = ""
                                             val error = false
                                             val transferModel = Models.TransferModel(accountName =mAccountName ,error =error,recepiant = mAccountNumber,recivingBank = mBankName )
 
@@ -642,7 +654,7 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
 
 
 //                                        if (airtimetype.equals("wallet", ignoreCase = true)) {
-                                            vasDetails = Models.VasDetails(cref, amount, wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product, responsemessage, vasmerchantID, transactionRef, VasServices.CARD, logo, date, error, action, transferModel)
+                                            vasDetails = Models.VasDetails(stan, amount, wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product, responsemessage, vasmerchantID, transactionRef, VasServices.CARD, logo, date, error, action, transferModel)
 //                                        } else if (airtimetype.equals("card", ignoreCase = true)) {
 //                                            vasDetails = Models.VasDetails(amount, wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product, responsemessage, vasmerchantID, transactionRef, VasServices.CARD, logo, date, error, Models.AIRTIME, airtimeModel)
 //                                        }
@@ -669,6 +681,12 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
     var amountToDebit : Double = 0.0
 
     public fun creditWallet(context : Context){
+
+        val progressDialog = ProgressDialog(this)
+        progressDialog.setCancelable(false)
+        progressDialog.setTitle("Wallet")
+        progressDialog.setMessage("Debitting wallet")
+        progressDialog.show()
 
         val clientReference = getClientRef(context, "")
         lateinit var transferResponse : WithdrawalWalletCreditModel
@@ -707,7 +725,7 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
                 // val amount = txtAmount.text.toString()
                 try {
                     GlobalScope.launch(Dispatchers.Main) {
-                        //progressDialog.dismiss()
+                        progressDialog.dismiss()
 
                         if (transferResponse.status != 1) {
                             alert {
@@ -777,7 +795,7 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
                                     val product = action
                                     val transactionRef = ""
                                     val logo = 0
-                                    val cref  = transferResponse.reference
+                                    val stan  = transferResponse.reference
                                     val error = false
                                     val transferModel = Models.TransferModel(accountName =mAccountName ,error =error,recepiant = mAccountNumber,recivingBank = mBankName )
 
@@ -797,7 +815,7 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
 
 
 //                                        if (airtimetype.equals("wallet", ignoreCase = true)) {
-                                    vasDetails = Models.VasDetails(cref,transferResponse.amountSettled.toString(), wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product, responsemessage, vasmerchantID, transactionRef, VasServices.CARD, logo, date, error, action, transferModel)
+                                    vasDetails = Models.VasDetails(stan,transferResponse.amountSettled.toString(), wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product, responsemessage, vasmerchantID, transactionRef, VasServices.CARD, logo, date, error, action, transferModel)
 
 
                                 }

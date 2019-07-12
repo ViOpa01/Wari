@@ -48,9 +48,9 @@ class DataModel {
 
     data class DataSubscriptionDetails(@Expose val terminal_id: String, @Expose val user_id : String, @Expose val password : String, @Expose val pin : String, @Expose val phone : String, @Expose val service : String, @Expose val amount : String, @Expose val description : String = "pay", @Expose val code : String)
 
-    data class DataSubscriptionSuccessResponse(@Expose val error : String, @Expose val message : String, @Expose val amount : String, @Expose val ref : String, @Expose val date : String)
+    data class DataSubscriptionSuccessResponse(@Expose val error : Boolean, @Expose val message : String, @Expose val amount : String, @Expose val ref : String, @Expose val date : String,@Expose val transactionID:String)
 
 
-    data class DataSubscriptionFailedResponse(@Expose val error : String, @Expose val message : String, @Expose val date : String, @Expose val ref : String)
+    data class DataSubscriptionFailedResponse(@Expose val error : Boolean, @Expose val message : String, @Expose val date : String, @Expose val ref : String)
 
 }

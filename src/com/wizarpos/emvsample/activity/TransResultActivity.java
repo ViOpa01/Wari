@@ -247,6 +247,8 @@ public class TransResultActivity extends FuncActivity
                             if(appState.electricityBills) {
 //                            	Log.d("appState.electricityBills",String.valueOf(appState.electricityBills));
 								processPayment(appState.generalElectricityDetails);
+								appState.electricityBills=false;
+
                             }
 							transactionStatus.setImageResource(R.drawable.ic_check_circle_black_24dp);
 						}
@@ -258,7 +260,15 @@ public class TransResultActivity extends FuncActivity
 		        			textLine2.setText("PRINTING...");
 		        			appState.printReceipt = 0;
 		        			appState.printVasReceipt = 0;
-//		        			printReceipt(new Models.VasDetails());
+							Log.d("Tag", "appState.cableTv  = [" +appState.cableTv  + "]"+ "  appState.airtime   = [" +appState.airtime   + "] " + "appState.withdrawal   = [" +appState.withdrawal   + "]" + "appState.electricityBills  = [" +appState.electricityBills   + "]");
+
+							Log.d("Tag", "!appState.cableTv  = [" +!appState.cableTv  + "]"+ "  !appState.airtime   = [" +!appState.airtime   + "] " + "!appState.withdrawal   = [" +!appState.withdrawal   + "]" + "!appState.electricityBills  = [" +!appState.electricityBills   + "]");
+		        			if(!appState.cableTv && !appState.airtime && !appState.withdrawal && !appState.electricityBills) {
+                                appState.vasTransactionstatus ="APPROVED";
+		        			    printReceipt(new Models.VasDetails());
+
+
+							}
 						}
 		    		}
 					else
@@ -313,7 +323,8 @@ public class TransResultActivity extends FuncActivity
 			     	int logo =0;
 			     	boolean error =true;
 			     	Models.DiscosModel discosModel =null;
-			     	String cRef="";
+			     	String stan="";
+			     	String meterType ="";
 
 					boolean isCardTransaction=true;
 					String transactionTID ="";
@@ -326,19 +337,20 @@ public class TransResultActivity extends FuncActivity
 						AbujaModel.PurchaseResponse response =   (AbujaModel.PurchaseResponse) paymentResponse;
 
 						Log.d("yellow >>>","Now");
-						meterNumber =response.getAccount();
-						beneficiaryName =response.getName();
-						beneficiaryAddress ="";
-						responsemessage =response.getMessage();
-						amount =String.valueOf(response.getAmount());
-						product =response.getType();
-						token=response.getToken().isEmpty()? "" : response.getToken();
+						Log.d("appState.generalElectricityDetails.amount >>>", appState.generalElectricityDetails.getAmount());
+						meterNumber = response.getAccount().equals("") ? appState.generalElectricityDetails.getMeterNumber(): response.getAccount();
+						beneficiaryName = response.getName().equals("") ? appState.generalElectricityDetails.getMeterName():response.getName();
+								beneficiaryAddress = appState.generalElectricityDetails.getAddress();
+						amount =  appState.generalElectricityDetails.getAmount();
+						product = VasServices.ABUJA_ELECTRIC;
+						meterType = (appState.generalElectricityDetails.getMeterType().equals("0")) ? VasServices.PREPAID : VasServices.POSTPAID;
+						responsemessage = response.getMessage();
+						token =  (response.getToken().isEmpty()) ? "" : response.getToken();
 						transactionRef = response.getReference();
-						logo =R.drawable.aedc;
-						error =response.getError();
-						cRef= response.getExternalReference();
-
-						discosModel =  new Models.DiscosModel(error,beneficiaryName,product,response.getTransactionID(),"",response.getUnit_value(),response.getVat(),meterNumber,token,beneficiaryAddress,"","");
+						logo = R.drawable.aedc;
+						stan=response.getTransactionID();
+						error = response.getError();
+						discosModel = new Models.DiscosModel(error, beneficiaryName, meterType, stan, "", response.getUnit_value(), response.getVat(), meterNumber, token, beneficiaryAddress, "", "");
 //                    responseModel = ResponseModel(response!!.amount.toString(),response.error,response.message)
 
 					}
@@ -346,18 +358,21 @@ public class TransResultActivity extends FuncActivity
 					case VasServices.ENUGU_ELECTRICITY_POSTPAID:
 					case VasServices.ENUGU_ELECTRICITY_PREPAID:{
 						EnuguModel.PayResponse  response =   (EnuguModel.PayResponse) paymentResponse;
-								meterNumber =response.getAccount();
-								beneficiaryName =response.getName();
-								beneficiaryAddress =response.getAddress();
-								responsemessage =response.getMessage();
-								amount =response.getValue();
-								product =response.getType();
-								token=response.getToken().isEmpty()? "" : response.getToken();
-						        transactionRef = response.getReference();
-						       cRef= response.getExternalReference();
-						      logo =R.drawable.eedc;
-						error =response.getError();
-						discosModel =  new Models.DiscosModel(error,beneficiaryName,product,response.getTransactionID(),"",response.getUnit_value(),response.getVat(),meterNumber,token,beneficiaryAddress,response.getArrears(),response.getTariff());
+//						val response = paymentResponse as EnuguModel.PayResponse
+								meterNumber = appState.generalElectricityDetails.getMeterNumber();
+								beneficiaryName = appState.generalElectricityDetails.getMeterName();
+								beneficiaryAddress = appState.generalElectricityDetails.getAddress();
+						amount =  appState.generalElectricityDetails.getAmount();
+//                        meterType =if (appState.generalElectricityDetails.meterType.equals(ENUGU_ELECTRICITY_POSTPAID)) VasServices.POSTPAID else VasServices.PREPAID
+						meterType =meterType;
+						product = VasServices.ENUGU_ELECTRIC;
+						responsemessage = response.getMessage();
+						token = (response.getToken().isEmpty())? "" : response.getToken();
+								transactionRef =  response.getReference();
+								logo = R.drawable.eedc;
+						stan=response.getTransactionID();
+						error = response.getError();
+						discosModel = new Models.DiscosModel(error, beneficiaryName,meterType,stan, "",response.getUnit_value(), response.getVat(), meterNumber, token, beneficiaryAddress, response.getArrears(), response.getTariff());
 
 //                    responseModel = ResponseModel(response!!.value.toString(),response!!.error!!,response!!.message!!)
 
@@ -369,18 +384,20 @@ public class TransResultActivity extends FuncActivity
 
 						EkoModel.EkoPayResponse  response =   (EkoModel.EkoPayResponse )paymentResponse;
 
-						meterNumber =response.getCustomerMeterNumber();
-						beneficiaryName =response.getPayer();
-						beneficiaryAddress =response.getAddress();
-						responsemessage =response.getMessage();
-						amount =response.getAmount();
-						product =response.getAccount_type();
-						token=response.getToken().isEmpty()? "" : response.getToken();
+						meterNumber = (response.getCustomerMeterNumber().equals("") ) ? appState.generalElectricityDetails.getMeterNumber() : response.getCustomerMeterNumber();
+						beneficiaryName = appState.generalElectricityDetails.getMeterName();
+						beneficiaryAddress = appState.generalElectricityDetails.getAddress();
+						amount =  appState.generalElectricityDetails.getAddress();
+                        meterType =  appState.generalElectricityDetails.getMeterType()	;
+					    product = VasServices.EKO_ELECTRIC;
+						token = (response.getToken().equals("")) ? "" : response.getToken();
 						transactionRef = response.getRef();
-						logo =R.drawable.ekedc;
-						error =response.getError();
-						cRef= "";
-						discosModel =  new Models.DiscosModel(error,beneficiaryName,product,response.getTransactionID(),"","",meterNumber,token,beneficiaryAddress,"","","");
+						responsemessage = response.getMessage();
+						logo = R.drawable.ekedc;
+						error = response.getError();
+						stan=response.getTransactionID();
+
+						discosModel = new Models.DiscosModel(error, beneficiaryName,meterType,stan, "", "","", meterNumber, token, beneficiaryAddress, "", "");
 
 
 //                    responseModel = ResponseModel(response!!.amount.toString(),response!!.error!!,response!!.message!!)
@@ -391,18 +408,18 @@ public class TransResultActivity extends FuncActivity
 					case VasServices.IBADAN_ELECTRICITY_PREPAID:{
 						IbadanModel.IbPayResponse  response =   (IbadanModel.IbPayResponse ) paymentResponse;
 
-						meterNumber =response.getAccount();
-						beneficiaryName =response.getName();
-						beneficiaryAddress ="";
-						responsemessage =response.getMessage();
-						amount =String.valueOf(response.getAmount());
-						token=response.getToken().isEmpty()? "" : response.getToken();
-						product =response.getType();
-						transactionRef = response.getReference();
-						logo =R.drawable.ibedc;
-						error =response.getError();
-						cRef= response.getExternalReference();
-						discosModel =  new Models.DiscosModel(error,beneficiaryName,product,response.getTransactionID(),"",response.getUnit_value(),response.getVat(),meterNumber,token,beneficiaryAddress,"","");
+						meterNumber = (response.getAccount().equals("") ) ? appState.generalElectricityDetails.getMeterNumber(): response.getAccount();
+								beneficiaryName = appState.generalElectricityDetails.getMeterName();
+								beneficiaryAddress = appState.generalElectricityDetails.getAddress();
+						amount =  appState.generalElectricityDetails.getAmount();
+						meterType =  appState.generalElectricityDetails.getMeterType()	;
+						token =  (response.getToken().isEmpty()) ? "" : response.getToken();
+						transactionRef = response.getTransactionID();
+						responsemessage = response.getMessage();
+						product = VasServices.IBADAN_ELECTRIC;
+						logo = R.drawable.ibedc;
+						error = response.getError();
+						discosModel = new Models.DiscosModel(error, beneficiaryName,meterType,stan, "",response.getUnit_value(),response.getVat(), meterNumber, token, beneficiaryAddress, "","");
 
 //                    responseModel = ResponseModel(response!!.amount.toString(),response!!.error!!,response!!.message!!)
 					}
@@ -411,19 +428,19 @@ public class TransResultActivity extends FuncActivity
 					case VasServices.IKEJA_ELECTRICITY_PREPAID:{
 						IkejaModel.IkejaPayResponse  response =   (IkejaModel.IkejaPayResponse ) paymentResponse;
 
-						meterNumber ="";
-						beneficiaryName =response.getPayer();
-								beneficiaryAddress =response.getAddress();
-						responsemessage =response.getMessage();
-						amount =String.valueOf(response.getAmount());
-						product ="Ikeja Electric ";
-						token=response.getToken().isEmpty()? "" : response.getToken();
-						transactionRef = response.getRef();
-						logo =R.drawable.ikedc;
-						error =response.getError();
-						cRef= "";
+						meterNumber = appState.generalElectricityDetails.getMeterNumber();
+								beneficiaryName = appState.generalElectricityDetails.getMeterName();
+								beneficiaryAddress = appState.generalElectricityDetails.getAddress();
+						amount =  appState.generalElectricityDetails.getAmount();
+                           meterType =appState.generalElectricityDetails.getMeterType();
+                            stan=response.getTransactionID();
+								token = (response.getToken().equals(""))? "" : response.getToken();
+								transactionRef = response.getRef();
+						responsemessage = response.getMessage();
+						logo = R.drawable.ikedc;
+						error = response.getError();
 
-						discosModel =  new Models.DiscosModel(error,beneficiaryName,product,response.getTransactionID(),response.getUnit(),response.getUnit_value(),response.getVat(),meterNumber,token,beneficiaryAddress,"","");
+						discosModel = new Models.DiscosModel(error, beneficiaryName,meterType,stan,"", response.getUnit_value(), response.getVat(), meterNumber, token, beneficiaryAddress, "", "");
 
 
 //                    responseModel = ResponseModel(response!!.amount.toString(),response!!.error!!,response!!.message!!)
@@ -435,18 +452,17 @@ public class TransResultActivity extends FuncActivity
 
 						PortharcourtModel.purchaseResponse response =   (PortharcourtModel.purchaseResponse) paymentResponse;
 
-						meterNumber =response.getMeterNumber();
-						beneficiaryName =response.getName();
-						beneficiaryAddress =response.getAddress();
-						responsemessage =response.getMessage();
-						amount =String.valueOf(response.getAmount());
-						product =response.getType();
-						token=response.getToken().isEmpty()? "" : response.getToken();
-						transactionRef = response.getReceiptNumber();
-						logo =R.drawable.phdc;
-						error =response.getError();
-						cRef= response.getExternalReference();
-						discosModel =  new Models.DiscosModel(error,beneficiaryName,product,response.getTransactionID(),"","","",meterNumber,token,beneficiaryAddress,response.getArrears(),response.getTariff());
+						meterNumber = appState.generalElectricityDetails.getMeterNumber();
+								beneficiaryName = appState.generalElectricityDetails.getMeterName();
+								beneficiaryAddress = appState.generalElectricityDetails.getAddress();
+						amount =  appState.generalElectricityDetails.getAmount();
+                        meterType = appState.generalElectricityDetails.getMeterType();
+						stan=response.getTransactionID();
+								token =  (response.getToken().isEmpty()) ? "" : response.getToken();
+								transactionRef = response.getReceiptNumber();
+						logo = R.drawable.phdc;
+						error = response.getError();
+						discosModel = new Models.DiscosModel(error, beneficiaryName,meterType,stan, "", "","", meterNumber, token, beneficiaryAddress, "", "");
 
 
 //                    responseModel = ResponseModel(response!!.amount.toString(),response!!.error!!,response!!.message!!)
@@ -468,7 +484,7 @@ public class TransResultActivity extends FuncActivity
 //				String vasTerminalId = SecureStorage.retrieve(Helper.,"");
 
 
-				Models.VasDetails vasDetails = new Models.VasDetails(cRef,amount,wallet,vasmerchantName,merchantID,merchantName,merchantTerminalId,product,responsemessage,vasmerchantID,transactionRef,VasServices.CARD,logo,date,error,Models.DISCO,discosModel);
+				Models.VasDetails vasDetails = new Models.VasDetails(stan,amount,wallet,vasmerchantName,merchantID,merchantName,merchantTerminalId,product,responsemessage,vasmerchantID,transactionRef,VasServices.CARD,logo,date,error,Models.DISCO,discosModel);
 				Log.d("Trans result", "onChanged() called with: paymentResponse, vasDetails= [" + vasDetails + "]");
 				printReceipt(vasDetails);
 
@@ -506,15 +522,16 @@ public class TransResultActivity extends FuncActivity
 		   String beneficiaryName ="";
 		   String beneficiaryAddress="";
 		   String responsemessage =payResponse.getMessage();
-		   String amount=payResponse.getMessage();
+		   String amount=appState.starTimesAmount;
 		   String token ="";
-		   String cRef="";
+		   String stan=payResponse.getTransactionID();
 		   String wallet =SecureStorage.retrieve(Helper.TERMINAL_ID,"");
 		   String product =VasServices.STARTIMES;
 		   String transactionRef =payResponse.getReference();
-		   int logo =R.drawable.startime;
-		   boolean error =true;
-		   Models.DiscosModel discosModel =null;
+		   int logo =R.drawable.startimes_print;
+		   boolean error =payResponse.getError();
+		   Models.CableTvModel cabelTvModel = new Models.CableTvModel(error,smartCardNumber);
+
 
 		   boolean isCardTransaction=true;
 		   String transactionTID ="";
@@ -527,7 +544,8 @@ public class TransResultActivity extends FuncActivity
 //				String vasTerminalId = SecureStorage.retrieve(Helper.,"");
 
 
-		   Models.VasDetails vasDetails = new Models.VasDetails(cRef,amount,wallet,vasmerchantName,merchantID,merchantName,merchantTerminalId,product,responsemessage,vasmerchantID,transactionRef,VasServices.CARD,logo,date,error,Models.CABLE_TV,discosModel);
+		   Models.VasDetails vasDetails = new Models.VasDetails(stan,amount,wallet,vasmerchantName,merchantID,merchantName,merchantTerminalId,product,responsemessage,vasmerchantID,transactionRef,VasServices.CARD,logo,date,error,Models.CABLE_TV,cabelTvModel);
+		   Log.d("About to print", "onChanged() called with: VasDetails = [" + vasDetails + "]");
 		   printReceipt(vasDetails);
 
 
@@ -538,20 +556,20 @@ public class TransResultActivity extends FuncActivity
 
 		  @Override
 		  public void onChanged(@Nullable DstvModel.PayResponse payDetails) {
-			  String smartCardNumber ="";
+			  String smartCardNumber =appState.multichoiceAccount;
 			  String meterNumber="";
 			  String beneficiaryName ="";
 			  String beneficiaryAddress="";
 			  String responsemessage = payDetails.getMessage();
-			  String amount="";
+			  String amount=appState.multichoiceAmount;
 			  String token ="";
 			  String wallet =SecureStorage.retrieve(Helper.TERMINAL_ID,"");
-			  String product ="MultiChoice";
+			  String product =appState.product;
 			  String transactionRef =payDetails.getRef();
 			  int logo =appState.logo;
-			  String cRef ="";
-			  boolean error =true;
-			  Models.DiscosModel discosModel =null;
+			  String stan =payDetails.getTransactionID();
+			  boolean error =payDetails.getError();
+			  Models.CableTvModel cableTvModel =new Models.CableTvModel(error,smartCardNumber);
 
 			  boolean isCardTransaction=true;
 			  String transactionTID ="";
@@ -564,7 +582,7 @@ public class TransResultActivity extends FuncActivity
 //				String vasTerminalId = SecureStorage.retrieve(Helper.,"");
 
 
-			  Models.VasDetails vasDetails = new Models.VasDetails(cRef,amount,wallet,vasmerchantName,merchantID,merchantName,merchantTerminalId,product,responsemessage,vasmerchantID,transactionRef,VasServices.CARD,logo,date,error,Models.CABLE_TV,discosModel);
+			  Models.VasDetails vasDetails = new Models.VasDetails(stan,amount,wallet,vasmerchantName,merchantID,merchantName,merchantTerminalId,product,responsemessage,vasmerchantID,transactionRef,VasServices.CARD,logo,date,error,Models.CABLE_TV,cableTvModel);
 			  printReceipt(vasDetails);
 		  }
 	  });
@@ -668,12 +686,16 @@ public class TransResultActivity extends FuncActivity
 				String amount=response.body().getAmount();
 				String token ="";
 				String wallet =SecureStorage.retrieve(Helper.TERMINAL_ID,"");
-				String product ="Airtime";
+				String product =appState.product;
 				String transactionRef =response.body().getRef();
 				int logo =appState.logo;
-				boolean error =true;
-				String cRef ="";
-				Models.AirtimeModel airtimeModel =new Models.AirtimeModel(response.body().getError(),phone_number);
+				boolean error =response.body().getError();
+				String stan =response.body().getTransactionID();
+				Models.AirtimeModel airtimeModel =new Models.AirtimeModel(error,phone_number);
+
+				Log.d("appState.logo",String.valueOf(appState.logo));
+				Log.d("Mtn",String.valueOf(R.drawable.mtn_logo));
+
 
 				boolean isCardTransaction=true;
 				String transactionTID ="";
@@ -694,7 +716,7 @@ public class TransResultActivity extends FuncActivity
 //					}
 //					else if (airtimetype.equalsIgnoreCase("card")){
 
-						vasDetails = new Models.VasDetails(cRef,amount,wallet,vasmerchantName,merchantID,merchantName,merchantTerminalId,product,responsemessage,vasmerchantID,transactionRef,VasServices.CARD,logo,date,error,Models.AIRTIME,airtimeModel);
+						vasDetails = new Models.VasDetails(stan,amount,wallet,vasmerchantName,merchantID,merchantName,merchantTerminalId,product,responsemessage,vasmerchantID,transactionRef,VasServices.CARD,logo,date,error,Models.AIRTIME,airtimeModel);
 //					}
 
 				printReceipt(vasDetails);
@@ -772,8 +794,54 @@ public class TransResultActivity extends FuncActivity
 					Log.d("okh", "result " + response.body());
 					if (response.body().getStatus() != 1) {
 						Toast.makeText(getBaseContext(), response.body().getMessage() + "", Toast.LENGTH_LONG).show();
+
+
 					} else {
 						Toast.makeText(getBaseContext(), "Your wallet has been debitted \n " + response.body().getAmountSettled() / 100 + " \n " + "Beneficiary : " + response.body().getBeneficiaryName(), Toast.LENGTH_LONG).show();
+
+
+//						String smartCardNumber = ""
+//						String meterNumber = ""
+//						String beneficiaryName = ""
+//						String  beneficiaryAddress = "";
+						String responsemessage  = response.body().getMessage();
+						String amount = String.valueOf(response.body().getAmountSettled()/100);
+						String token = "";
+						String wallet = SecureStorage.retrieve(Helper.TERMINAL_ID, "");
+						String product = appState.product;
+						String transactionRef = "";
+						int  logo =0;
+						String stan = response.body().getTransactionID();
+						boolean  error = response.body().getError();
+						Models.TransferModel  transferModel = new Models.TransferModel(error,appState.accountNumber,appState.accountName,appState.recivingBank );
+
+//						String  isCardTransaction = true
+//						String  transactionTID = ""
+						String  merchantID = FuncActivity.appState.nibssData.getConfigData().getConfigData("03015").toString();
+						String  merchantName = FuncActivity.appState.nibssData.getConfigData().getConfigData("52040").toString();
+						String  merchantTerminalId = SecureStorage.retrieve(Helper.TERMINAL, "");
+//			                          	String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
+						String  vasmerchantID = SecureStorage.retrieve(Helper.VAS_TERMINAL_ID, "");
+						String  vasmerchantName = SecureStorage.retrieve(Helper.VAS_MERCHANT_NAME, "");
+//				                        String vasTerminalId = SecureStorage.retrieve(Helper.,"");
+						String  date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
+
+
+//						  Models.VasDetails vasDetails = null;
+
+
+//                                        if (airtimetype.equals("wallet", ignoreCase = true)) {
+                        Models.VasDetails vasDetails = new Models.VasDetails(stan,amount,wallet,vasmerchantName,merchantID,merchantName,merchantTerminalId,product,responsemessage,vasmerchantID,transactionRef,VasServices.CARD,logo,date,error,Models.TRANSFER,transferModel);
+
+//						vasDetails = new Models.VasDetails(stan,amount,wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product, responsemessage, vasmerchantID, transactionRef, VasServices.CARD, logo, date, error, product, transferModel);
+//                                        } else if (airtimetype.equals("card", ignoreCase = true)) {
+//                                            vasDetails = Models.VasDetails(amount, wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product, responsemessage, vasmerchantID, transactionRef, VasServices.CARD, logo, date, error, Models.AIRTIME, airtimeModel)
+//                                        }
+
+						printReceipt(vasDetails);
+
+
+
 					}
 
 
@@ -978,6 +1046,8 @@ public class TransResultActivity extends FuncActivity
 		Log.d("Print", "printReceipt() called with: vasDetails = [" + vasDetails + "]");
 
 		Log.d("Print", "printReceipt() called with: transactionModel = [" + transactionModel + "]");
+
+
 
 
 		//try {

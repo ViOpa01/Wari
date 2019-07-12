@@ -32,112 +32,109 @@
         android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:orientation="vertical">
+        <!--<LinearLayout-->
+            <!--android:id="@+id/aedc"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="80dp"-->
+            <!--android:layout_marginBottom="20dp"-->
 
-        <LinearLayout
-            android:id="@+id/aedc"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            >
-            <TextView
+            <!--&gt;-->
+
+            <ImageButton
+                android:id="@+id/aedc"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="EEDC"
-                android:gravity="center_vertical"
+                android:layout_height="80dp"
+                android:layout_marginBottom="20dp"
+                android:gravity="center_horizontal"
                 android:paddingStart="30dp"
                 android:textSize="24dp"
+                android:background="@color/white"
                 android:textColor="#299A8E"
                 android:paddingEnd="30dp"
-                android:drawableLeft="@drawable/aedc"
+                android:src="@drawable/aedc"
                 android:drawablePadding="10dp" />
-        </LinearLayout>
-        <LinearLayout
+        <!--</LinearLayout>-->
+        <!--android:text="EEDC"-->
+
+        <ImageButton
             android:id="@+id/eedc"
             android:layout_width="match_parent"
-            android:layout_height="80dp">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="EEDC"
+            android:layout_height="80dp"
+            android:layout_marginBottom="20dp"
+
                 android:gravity="center_vertical"
                 android:paddingStart="30dp"
                 android:textSize="24dp"
+                android:background="@color/white"
                 android:textColor="#299A8E"
                 android:paddingEnd="30dp"
-                android:drawableLeft="@drawable/eedc"
+                android:src="@drawable/eedc"
                 android:drawablePadding="10dp"/>
-        </LinearLayout>
-        <LinearLayout
+
+        <ImageButton
             android:id="@+id/ekedc"
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            >
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+            android:layout_marginBottom="20dp"
+
                 android:text="EKEDC"
                 android:gravity="center_vertical"
                 android:paddingStart="30dp"
                 android:textSize="24dp"
+                android:background="@color/white"
                 android:textColor="#299A8E"
-                android:drawableLeft="@drawable/ekedc"
+                android:src="@drawable/ekedc"
                 android:drawablePadding="10dp"
                 android:paddingEnd="30dp"
                 />
-        </LinearLayout>
 
-        <LinearLayout
+        <ImageButton
 
             android:id="@+id/ibedc"
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            >
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+            android:layout_marginBottom="20dp"
+
+
                 android:text="IBEDC"
                 android:gravity="center_vertical"
                 android:paddingStart="30dp"
                 android:textSize="24dp"
-                android:textColor="#299A8E"
+                android:background="@color/white"
                 android:drawablePadding="10dp"
-                android:drawableLeft="@drawable/ibedc"
+                android:src="@drawable/ibedc"
                 android:paddingEnd="30dp" />
-        </LinearLayout>
-        <LinearLayout
+
+        <ImageButton
             android:id="@+id/iedc"
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            >
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="IKEJA ELECTRIC"
+            android:layout_marginBottom="20dp"
+
+                android:text="IKDC"
                 android:gravity="center_vertical"
                 android:paddingStart="30dp"
                 android:textSize="24dp"
-                android:textColor="#299A8E"
+                android:background="@color/white"
                 android:drawablePadding="10dp"
-                android:drawableLeft="@drawable/ikedc"
+                android:src="@drawable/ikedc"
                 android:paddingEnd="30dp" />
-        </LinearLayout>
 
-        <LinearLayout
+
+        <ImageButton
             android:id="@+id/phdc"
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            >
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="EEDC"
+
+                android:text="PHDC"
                 android:gravity="center_vertical"
                 android:paddingStart="30dp"
                 android:textSize="24dp"
-                android:textColor="#299A8E"
+                android:background="@color/white"
                 android:paddingEnd="30dp"
-                android:drawableLeft="@drawable/phdc"
+                android:src="@drawable/phdc"
                 android:drawablePadding="10dp" />
-        </LinearLayout>
+
 
 
 

@@ -31,7 +31,8 @@
             android:id="@+id/ip"
             android:maxLines="1"
             android:textColor="@color/contents_text"
-            android:text="196.6.103.73"/>
+            android:text="196.6.103.73"
+            />
 
 
         <TextView

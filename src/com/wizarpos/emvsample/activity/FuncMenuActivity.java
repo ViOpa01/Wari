@@ -63,6 +63,8 @@ public class FuncMenuActivity extends FuncActivity
 		setContentView(R.layout.activity_func_menu);
 		initToolbar();
 
+		new FuncActivity();
+
 //		textTitle = (TextView)findViewById(R.id.tAppTitle);
 //		textTitle.setText("MAIN");
 //

@@ -11,7 +11,7 @@ import java.io.Serializable
   class Models {
     data class GeneralElectricityDetails(val amount: String, val wallet: String, val userName: String, val requestType: String, val meterType: String, val meterNumber: String, val channel: String, val phone_number: String, val productCode: String, val paymentMetod: String, val clientReference: String, val terminalId: String, val electricMeterType: String, val password: String, val meterName: String,val address:String):Serializable
 
-    data class DiscosModel(val error:Boolean,val recepiant_name: String,val meterType:String,val transactionId:String,val unit:String,val unit_value:String,val vat:String,val meterNumber:String,val token:String,val address:String,val arras:String,val tarrif:String):Serializable
+    data class DiscosModel(val error:Boolean,val recepiant_name: String,val meterType:String,val transactionId:String,val unit:String ="",val unit_value:String="",val vat:String="",val meterNumber:String="",val token:String="",val address:String="",val arras:String="",val tarrif:String=""):Serializable
 
 //    vasType ie transfer cable transfer disco
 //    Any: VasTypeModel
@@ -25,7 +25,7 @@ import java.io.Serializable
 
     data class CardDetails(val terminalID : String="", val rrn : String="", val cardholderName : String="", val pan : String="", val amount : String="", val additionalAmount : String="", val transactionType : String="", val responseCode : String="", val transactionStatus : String="", val transactionStatusReason : String="", val merchantId : String="", val merchantName : String="",  val ticket : String="", val UNRP : String="", val AC : String="", val TVR : String="", val AID : String="", val TSI : String="", val ISODateTime : String="", val cardType : String="", val Expiry : String="", val bankLogoName : String="") : Serializable
 
-    data class VasDetails( val cRef:String ="",val amount: String="0.00", val walletId: String="", val marchantAddress: String="", val marchantTid: String="", val marchantName:String="",  val merchantId:String="",val product: String="", val transactionStatusMessage: String="", val vasTid: String="", val transactionRef: String="", val paymentmethod: String="",val logo:Int=0,val dateTime:String="",val error:Boolean=true,val vasType:String="",val  VasTypeModel:Any=AirtimeModel(false,"")):Serializable
+    data class VasDetails( val stan:String ="",val amount: String="0.00", val walletId: String="", val marchantAddress: String="", val marchantTid: String="", val marchantName:String="",  val merchantId:String="",val product: String="", val transactionStatusMessage: String="", val vasTid: String="", val transactionRef: String="", val paymentmethod: String="cash",val logo:Int=0,val dateTime:String="",val error:Boolean=true,val vasType:String="",val  VasTypeModel:Any=AirtimeModel(false,"")):Serializable
 
 
     companion object{

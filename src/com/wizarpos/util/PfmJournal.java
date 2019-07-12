@@ -147,11 +147,11 @@ public class PfmJournal implements Serializable
         this.customField = customField;
     }
 
-    public String getStan() {
+    public String getstan() {
         return stan;
     }
 
-    public void setStan(String stan) {
+    public void setstan(String stan) {
         this.stan = stan;
     }
 

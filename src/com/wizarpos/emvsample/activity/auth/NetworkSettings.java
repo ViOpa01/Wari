@@ -59,6 +59,8 @@ public class NetworkSettings extends FuncActivity {
     public void getConfig(){
         String ipS = sharedPreferences.getString("ip", "196.6.103.73");
         String ports = sharedPreferences.getString("port", "5043");
+//        String ipS = sharedPreferences.getString("ip", "197.253.19.78");
+//        String ports = sharedPreferences.getString("port", "5001");
         Boolean sslStatus = sharedPreferences.getBoolean("ssl", true);
         ssl.setChecked(sslStatus);
         ip.setText(ipS);

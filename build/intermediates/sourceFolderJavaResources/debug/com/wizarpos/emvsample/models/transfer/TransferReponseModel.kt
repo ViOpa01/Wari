@@ -2,7 +2,7 @@ package com.wizarpos.emvsample.models.transfer
 
 
 
-data class TransferSuccessModel(val status : Int = 0, val error : String = "", val message : String = "", val reason : String = "", val reversal : String = "" , val description : description, val transactionID : Int, val convenienceFee : Int = 0, val amountSettled : Int = 0, val amountDebited : Int = 0, val beneficiaryName : String = "", val beneficiary : String = "", val reference : String = "")
+data class TransferSuccessModel(val status : Int = 0, val error : Boolean = false, val message : String = "", val reason : String = "", val reversal : String = "" , val description : description, val transactionID : String, val convenienceFee : Int = 0, val amountSettled : Int = 0, val amountDebited : Int = 0, val beneficiaryName : String = "", val beneficiary : String = "", val reference : String = "")
 
 data class TransferFailureModel(val status: Int, val error: String, val reversal : String, val message: String, val description: String, val transactionID: Int)
 

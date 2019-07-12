@@ -87,7 +87,8 @@ class DataPhoneEntry : AppCompatActivity(), View.OnClickListener {
                 val encryptedPin = SecureStorageUtils.hashIt(it!!, encryptedPassword)
 
                 mPayvicePin = encryptedPin!!
-
+                appState.product=dataItem.type
+                appState.dataAmount =dataItem.amount;
                 val payDetails = DataModel.DataSubscriptionDetails(phone = mPhoneNumber.replace(" ", ""), service = dataItem.type, amount = dataItem.amount, description = dataItem.description, code = dataItem.code, password = mWalletPassword, user_id = mWalletUsername, terminal_id = mWalletId, pin = encryptedPin)
 
                 try {
@@ -150,11 +151,11 @@ class DataPhoneEntry : AppCompatActivity(), View.OnClickListener {
                                         val amount = formattedResponse.amount
                                         val token = ""
                                         val wallet = SecureStorage.retrieve(Helper.TERMINAL_ID, "")
-                                        val product = "Data"
+                                        val product = appState.product
                                         val transactionRef = ""
-                                        val cref= formattedResponse.ref
+                                        val stan= formattedResponse.transactionID
                                         val logo = FuncActivity.appState.logo
-                                        val error = false
+                                        val error :Boolean= formattedResponse.error
                                         val airtimeModel = Models.AirtimeModel(error, mPhoneNumber)
 
                                         val isCardTransaction = true
@@ -172,7 +173,7 @@ class DataPhoneEntry : AppCompatActivity(), View.OnClickListener {
 
 
 //                                        if (airtimetype.equals("wallet", ignoreCase = true)) {
-                                            vasDetails = Models.VasDetails(cref,amount, wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product, responsemessage, vasmerchantID, transactionRef, VasServices.CASH, logo, date, error, Models.AIRTIME, airtimeModel)
+                                            vasDetails = Models.VasDetails(stan,amount, wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product, responsemessage, vasmerchantID, transactionRef, VasServices.CASH, logo, date, error, Models.AIRTIME, airtimeModel)
 //                                        } else if (airtimetype.equals("card", ignoreCase = true)) {
 //                                            vasDetails = Models.VasDetails(amount, wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product, responsemessage, vasmerchantID, transactionRef, VasServices.CARD, logo, date, error, Models.AIRTIME, airtimeModel)
 //                                        }
@@ -234,11 +235,11 @@ class DataPhoneEntry : AppCompatActivity(), View.OnClickListener {
                                         val amount = dataItem.amount
                                         val token = ""
                                         val wallet = SecureStorage.retrieve(Helper.TERMINAL_ID, "")
-                                        val product = "Data"
+                                        val product = appState.product
                                         val transactionRef = ""
                                         val logo = FuncActivity.appState.logo
-                                        val cref  = ""
-                                        val error = false
+                                        val stan  = "";
+                                        val error = formattedResponse.error
                                         val airtimeModel = Models.AirtimeModel(error, mPhoneNumber)
 
                                         val isCardTransaction = true
@@ -256,7 +257,7 @@ class DataPhoneEntry : AppCompatActivity(), View.OnClickListener {
 
 
 //                                        if (airtimetype.equals("wallet", ignoreCase = true)) {
-                                        var vasDetails: Models.VasDetails? =Models.VasDetails(cref,amount, wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product, responsemessage, vasmerchantID, transactionRef, VasServices.CASH, logo, date, error, Models.DATA, airtimeModel)
+                                        var vasDetails: Models.VasDetails? =Models.VasDetails(stan,amount, wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product, responsemessage, vasmerchantID, transactionRef, VasServices.CASH, logo, date, error, Models.DATA, airtimeModel)
 //                                        } else if (airtimetype.equals("card", ignoreCase = true)) {
 //                                            vasDetails = Models.VasDetails(amount, wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product, responsemessage, vasmerchantID, transactionRef, VasServices.CARD, logo, date, error, Models.AIRTIME, airtimeModel)
 //                                        }
@@ -371,6 +372,7 @@ class DataPhoneEntry : AppCompatActivity(), View.OnClickListener {
             return
         }
 
+        appState.isVas=true
         alert {
             title = "Transaction Type"
             message = "Select the type of transaction you want to make"
@@ -516,7 +518,7 @@ class DataPhoneEntry : AppCompatActivity(), View.OnClickListener {
                                                                     val product = "Data"
                                                                     val transactionRef = ""
                                                                     val logo = FuncActivity.appState.logo
-                                                                    val cref  = ""
+                                                                    val stan  = ""
                                                                     val error = false
                                                                     val airtimeModel = Models.AirtimeModel(error, mPhoneNumber)
 
@@ -535,7 +537,7 @@ class DataPhoneEntry : AppCompatActivity(), View.OnClickListener {
 
 
 //                                        if (airtimetype.equals("wallet", ignoreCase = true)) {
-                                                                    vasDetails = Models.VasDetails(cref,amount, wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product, responsemessage, vasmerchantID, transactionRef, VasServices.CARD, logo, date, error, Models.DATA, airtimeModel)
+                                                                    vasDetails = Models.VasDetails(stan,amount, wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product, responsemessage, vasmerchantID, transactionRef, VasServices.CARD, logo, date, error, Models.DATA, airtimeModel)
 //                                        } else if (airtimetype.equals("card", ignoreCase = true)) {
 //                                            vasDetails = Models.VasDetails(amount, wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product, responsemessage, vasmerchantID, transactionRef, VasServices.CARD, logo, date, error, Models.AIRTIME, airtimeModel)
 //                                        }
@@ -615,7 +617,7 @@ class DataPhoneEntry : AppCompatActivity(), View.OnClickListener {
                                                                     val product = "Data"
                                                                     val transactionRef = ""
                                                                     val logo = FuncActivity.appState.logo
-                                                                    val cref  = ""
+                                                                    val stan  = ""
                                                                     val error = false
                                                                     val airtimeModel = Models.AirtimeModel(error, mPhoneNumber)
 
@@ -634,7 +636,7 @@ class DataPhoneEntry : AppCompatActivity(), View.OnClickListener {
 
 
 //                                        if (airtimetype.equals("wallet", ignoreCase = true)) {
-                                                                    vasDetails = Models.VasDetails(cref,amount, wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product, responsemessage, vasmerchantID, transactionRef, VasServices.CARD, logo, date, error, Models.DATA, airtimeModel)
+                                                                    vasDetails = Models.VasDetails(stan,amount, wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product, responsemessage, vasmerchantID, transactionRef, VasServices.CARD, logo, date, error, Models.DATA, airtimeModel)
 //                                        } else if (airtimetype.equals("card", ignoreCase = true)) {
 //                                            vasDetails = Models.VasDetails(amount, wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product, responsemessage, vasmerchantID, transactionRef, VasServices.CARD, logo, date, error, Models.AIRTIME, airtimeModel)
 //                                        }

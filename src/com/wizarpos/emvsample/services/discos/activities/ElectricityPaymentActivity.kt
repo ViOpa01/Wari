@@ -40,6 +40,7 @@ import com.wizarpos.emvsample.services.helper.activity.util.Models
 import com.wizarpos.util.PinAlertUtils
 import com.wizarpos.util.TransactionModel
 import com.wizarpos.util.VasServices
+import com.wizarpos.util.VasServices.ENUGU_ELECTRICITY_POSTPAID
 import kotlinx.android.synthetic.main.enter_amount.*
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.longToast
@@ -178,7 +179,7 @@ open class ElectricityPaymentActivity : BaseVasActivity() {
 //                					String cardHolderName=transactionResult.cardHolderName?:" "
                 val vasTerminalId=SecureStorage.retrieve(Helper.VAS_TERMINAL_ID,"")
                 val vasMerchantName=SecureStorage.retrieve(Helper.VAS_MERCHANT_NAME,"")
-                var meterType:String  = ""
+                var meterType:String  = meterType
                 var meterNumber: String? = ""
                 var beneficiaryName: String? = ""
                 var beneficiaryAddress: String? = ""
@@ -189,7 +190,7 @@ open class ElectricityPaymentActivity : BaseVasActivity() {
                 var product: String? = ""
                 var transactionRef: String? = ""
                 var logo = 0
-                var cref  =""
+                var stan  =""
                 var error = true
                 var discosModel: Models.DiscosModel? = null
 
@@ -214,29 +215,31 @@ open class ElectricityPaymentActivity : BaseVasActivity() {
                         token = if (response.token.isEmpty()) "" else response.token
                         transactionRef = response.reference
                         logo = R.drawable.aedc
-                        cref=response.reference
+                        stan=response.transactionID
                         error = response.error
-                        discosModel = Models.DiscosModel(error, beneficiaryName, meterType, response.transactionID, "", response.unit_value, response.vat, meterNumber, token, beneficiaryAddress, "", "")
+                        discosModel = Models.DiscosModel(error, beneficiaryName, meterType, stan, "", response.unit_value, response.vat, meterNumber, token, beneficiaryAddress, "", "")
 
                         //                    responseModel = ResponseModel(response!!.amount.toString(),response.error,response.message)
 
                     }
-                    VasServices.ENUGU_ELECTRICITY_POSTPAID, VasServices.ENUGU_ELECTRICITY_PREPAID -> {
+                     ENUGU_ELECTRICITY_POSTPAID, VasServices.ENUGU_ELECTRICITY_PREPAID -> {
 
                         Log.d("yellow >>>", "Now")
-                        val response = paymentResponse as EnuguModel.PayResponse?
-                        meterNumber = response!!.account
-                        beneficiaryName = response.name
-                        beneficiaryAddress = response.address
+                        val response = paymentResponse as EnuguModel.PayResponse
+                        meterNumber = appState.generalElectricityDetails.meterNumber!!
+                        beneficiaryName = appState.generalElectricityDetails.meterName!!
+                        beneficiaryAddress = appState.generalElectricityDetails.address
+                        amount =  appState.generalElectricityDetails.amount
+//                        meterType =if (appState.generalElectricityDetails.meterType.equals(ENUGU_ELECTRICITY_POSTPAID)) VasServices.POSTPAID else VasServices.PREPAID
+                         meterType =meterType
+                        product = VasServices.ENUGU_ELECTRIC
                         responsemessage = response.message
-                        amount = response.value
-                        product = response.type
                         token = if (response.token!!.isEmpty()) "" else response.token
-                        transactionRef = response.reference
+                        transactionRef =  response.reference!!
                         logo = R.drawable.eedc
-                        cref=response.reference!!
+                        stan=response.transactionID!!
                         error = response.error!!
-                        discosModel = Models.DiscosModel(error, beneficiaryName!!, product!!, response.transactionID!!, "", response.unit_value!!, response.vat!!, meterNumber!!, token!!, beneficiaryAddress!!, response.arrears!!, response.tariff!!)
+                        discosModel = Models.DiscosModel(error, beneficiaryName!!,meterType,stan, "",response.unit_value!!, response.vat!!, meterNumber!!, token!!, beneficiaryAddress!!, response.arrears!!, response.tariff!!)
                         //                    responseModel = ResponseModel(response!!.value.toString(),response!!.error!!,response!!.message!!)
 
                     }
@@ -246,18 +249,19 @@ open class ElectricityPaymentActivity : BaseVasActivity() {
 
                         val response = paymentResponse as EkoModel.EkoPayResponse?
 
-                        meterNumber = response!!.customerMeterNumber
-                        beneficiaryName = response.payer
-                        beneficiaryAddress = response.address
-                        responsemessage = response.message
-                        amount = response.amount
-                        product = response.account_type
+                        meterNumber = if(response!!.customerMeterNumber.isNullOrEmpty() ) appState.generalElectricityDetails.meterNumber else response.customerMeterNumber
+                        beneficiaryName = appState.generalElectricityDetails.meterName
+                        beneficiaryAddress = appState.generalElectricityDetails.address
+                        amount =  appState.generalElectricityDetails.amount
+//                        meterType =  meterType if (appState.generalElectricityDetails.meterType.equals(ENUGU_ELECTRICITY_POSTPAID)) VasServices.POSTPAID else VasServices.PREPAID
+                        product = VasServices.EKO_ELECTRIC
                         token = if (response.token.isEmpty()) "" else response.token
                         transactionRef = response.ref
+                        responsemessage = response.message
                         logo = R.drawable.ekedc
                         error = response.error
-                        cref=response.ref!!
-                        discosModel = Models.DiscosModel(error, beneficiaryName, product, response.transactionID, "", "", meterNumber, token, beneficiaryAddress, "", "", "")
+                        stan=response.transactionID!!
+                        discosModel = Models.DiscosModel(error, beneficiaryName,meterType,stan, "", "","", meterNumber!!, token!!, beneficiaryAddress!!, "", "")
 
 
                         //                    responseModel = ResponseModel(response!!.amount.toString(),response!!.error!!,response!!.message!!)
@@ -267,17 +271,18 @@ open class ElectricityPaymentActivity : BaseVasActivity() {
                         run {
                             val response = paymentResponse as IbadanModel.IbPayResponse?
 
-                            meterNumber = response!!.account
-                            beneficiaryName = response!!.name
-                            beneficiaryAddress = ""
-                            responsemessage = response!!.message
-                            amount = response!!.amount.toString()
-                            token = if (response!!.token.isEmpty()) "" else response.token
-                            product = response!!.type
-                            transactionRef = response!!.reference
+                            meterNumber = if(response!!.account.isNullOrEmpty() ) appState.generalElectricityDetails.meterNumber!! else response.account
+                            beneficiaryName = appState.generalElectricityDetails.meterName!!
+                            beneficiaryAddress = appState.generalElectricityDetails.address
+                            amount =  appState.generalElectricityDetails.amount
+//                            meterType =if (appState.generalElectricityDetails.meterType.equals(ENUGU_ELECTRICITY_POSTPAID)) VasServices.POSTPAID else VasServices.PREPAID
+                            token = if (response.token.isEmpty()) "" else response.token
+                            transactionRef = response.reference
+                            responsemessage = response.message
+                            product = VasServices.IBADAN_ELECTRIC
                             logo = R.drawable.ibedc
                             error = response!!.error
-                            discosModel = Models.DiscosModel(error, beneficiaryName!!, product!!, response.transactionID, "", response.unit_value, response.vat, meterNumber!!, token!!, beneficiaryAddress!!, "", "")
+                            discosModel = Models.DiscosModel(error, beneficiaryName!!,meterType,stan, "",response.unit_value!!,response.vat!!, meterNumber!!, token!!, beneficiaryAddress!!, "","")
 
                             //                    responseModel = ResponseModel(response!!.amount.toString(),response!!.error!!,response!!.message!!)
                         }
@@ -287,18 +292,19 @@ open class ElectricityPaymentActivity : BaseVasActivity() {
                         run {
                             val response = paymentResponse as IkejaModel.IkejaPayResponse?
 
-                            meterNumber = ""
-                            beneficiaryName = response!!.payer
-                            beneficiaryAddress = response.address
-                            responsemessage = response.message
-                            amount = response.amount.toString()
-                            product = "Ikeja Electric "
-                            token = if (response.token!!.isEmpty()) "" else response.token
+                            meterNumber = appState.generalElectricityDetails.meterNumber!!
+                            beneficiaryName = appState.generalElectricityDetails.meterName!!
+                            beneficiaryAddress = appState.generalElectricityDetails.address
+                            amount =  appState.generalElectricityDetails.amount
+//                            meterType =if (appState.generalElectricityDetails.meterType.equals(ENUGU_ELECTRICITY_POSTPAID)) VasServices.POSTPAID else VasServices.PREPAID
+                            stan=response!!.transactionID!!
+                            token = if (response!!.token!!.isEmpty()) "" else response.token
                             transactionRef = response.ref
+                            responsemessage = response.message
                             logo = R.drawable.ikedc
                             error = response.error
 
-                            discosModel = Models.DiscosModel(error, beneficiaryName!!, product!!, response.transactionID!!, response.unit!!, response.unit_value!!, response.vat!!, meterNumber!!, token!!, beneficiaryAddress!!, "", "")
+                            discosModel = Models.DiscosModel(error, beneficiaryName!!,meterType,stan,"", response.unit_value!!, response.vat!!, meterNumber!!, token!!, beneficiaryAddress!!, "", "")
 
                         }
 
@@ -308,18 +314,17 @@ open class ElectricityPaymentActivity : BaseVasActivity() {
 
                         val response = paymentResponse as PortharcourtModel.purchaseResponse?
 
-                        meterNumber = response!!.meterNumber
-                        beneficiaryName = response.name
-                        beneficiaryAddress = response.address
-                        responsemessage = response.message
-                        amount = response.amount
-                        product = response.type
+                        meterNumber = appState.generalElectricityDetails.meterNumber!!
+                        beneficiaryName = appState.generalElectricityDetails.meterName!!
+                        beneficiaryAddress = appState.generalElectricityDetails.address
+                        amount =  appState.generalElectricityDetails.amount
+//                        meterType =if (appState.generalElectricityDetails.meterType.equals(ENUGU_ELECTRICITY_POSTPAID)) VasServices.POSTPAID else VasServices.PREPAID
+                        stan=response!!.transactionID!!
                         token = if (response.token.isEmpty()) "" else response.token
                         transactionRef = response.receiptNumber
                         logo = R.drawable.phdc
                         error = response.error
-                         cref  = response.externalReference
-                        discosModel = Models.DiscosModel(error, beneficiaryName!!, product!!, response.transactionID, "", "", "", meterNumber!!, token!!, beneficiaryAddress!!, response.arrears, response.tariff)
+                        discosModel = Models.DiscosModel(error, beneficiaryName!!,meterType,stan, "", "","", meterNumber!!, token!!, beneficiaryAddress!!, "", "")
 
                     }
                 }
@@ -336,7 +341,7 @@ open class ElectricityPaymentActivity : BaseVasActivity() {
 //				String vasTerminalId = SecureStorage.retrieve(Helper.,"");
 
 
-                val vasDetails = Models.VasDetails(cref,amount!!, wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product!!, responsemessage!!, vasmerchantID, transactionRef!!, VasServices.CASH, logo, date, error, Models.DISCO, discosModel!!)
+                val vasDetails = Models.VasDetails(stan,amount!!, wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product!!, responsemessage!!, vasmerchantID, transactionRef!!, VasServices.CASH, logo, date, error, Models.DISCO, discosModel!!)
                 print(this@ElectricityPaymentActivity,vasDetails)
 
 
@@ -395,7 +400,7 @@ open class ElectricityPaymentActivity : BaseVasActivity() {
         } else
             amount.text = ""
         dashboard_title.setText(R.string.amount)
-        constraintLayout.tag = 2
+        constraintLayout.tag = 1
     }
 
 
@@ -408,40 +413,46 @@ open class ElectricityPaymentActivity : BaseVasActivity() {
             amount.text = phone_number
         } else amount.text = ""
         dashboard_title.setText(R.string.phone_number)
-        constraintLayout.tag = 1
+        constraintLayout.tag = 0
     }
 
 
     private fun moveToNextPage() {
         Log.i("constraintLayout.tag",(constraintLayout.tag).toString())
         when (constraintLayout.tag as Int) {
-            1 -> {
+            0 -> {
                 showAmountScreen()
             }
-            2 -> {
-                if (amount.text.toString().isNotEmpty() || amount.text.toString().toInt() < 50) {
+            1 -> {
+                if (amount.text.isNotEmpty() ) {
+                    if(amount.text.toString().toInt() < 50){
                     airtime_amount = amount.text.toString().replace(" ", "")
                     SecureStorage.store("amountrecharge", airtime_amount.toString())
                     performTransaction()
+                    } else {
+                        toast("Enter valid amount - amount must not be less than 50 Naira")
+                    }
                 } else {
-                    toast("Enter valid amount - amount must not be less than 50 Naira")
+                    toast("amount cannot be Empty")
                 }
             }
         }
     }
 
     private fun moveToPreviousPage() {
+        Log.d("constraintLayout.tag as Int",(constraintLayout.tag as Int).toString())
         when (constraintLayout.tag as Int) {
+
             0 -> {
-                startActivity(Intent(this@ElectricityPaymentActivity, MeterValidationActivity::class.java))
+//                startActivity(Intent(this@ElectricityPaymentActivity, MeterValidationActivity::class.java))
                 finish()
             }
-            1 -> {
-                amount.text = phone_number
-//                showAirtimeProviderScreen()
-                showAmountScreen()
-            }
-            2 -> {
+//            1 -> {
+//                amount.text = phone_number
+////                showAirtimeProviderScreen()
+//                showAmountScreen()
+//            }
+            1-> {
                 amount.text = airtime_amount
                 showPhoneNumberScreen()
             }
@@ -454,22 +465,24 @@ open class ElectricityPaymentActivity : BaseVasActivity() {
             toast("Enter valid amount")
             return
         }
+        FuncActivity.appState.isVas=true
 
         alert {
             title = "Transaction Type"
             message = "Select the type of transaction you want to make"
             airtime_amount =airtime_amount
-            appState.generalElectricityDetails = Models.GeneralElectricityDetails(amount = airtime_amount, wallet = wallet, userName = userName, requestType = requestType, meterType = meterType.toLowerCase(), meterNumber = meterNumber, channel = channel, phone_number = phone_number, productCode = productCode, paymentMetod = VasServices.CARD, clientReference = clientReference, terminalId = terminalId, electricMeterType = electricMeterType, password = password, meterName = meterName,address =address )
+
+            FuncActivity.appState.generalElectricityDetails = Models.GeneralElectricityDetails(amount = airtime_amount, wallet = wallet, userName = userName, requestType = requestType, meterType = meterType.toLowerCase(), meterNumber = meterNumber, channel = channel, phone_number = phone_number, productCode = productCode, paymentMetod = VasServices.CARD, clientReference = clientReference, terminalId = terminalId, electricMeterType = electricMeterType, password = password, meterName = meterName,address =address )
 
             positiveButton(buttonText = "Card") {
                 //You can use hashmaps
                 _-> payWithCard(phone_number, "")
-                appState.isWallet=false;
+                appState.isWallet=false
                 Log.d("requestType>>>",requestType)
             }
 
             negativeButton(buttonText = "Wallet") { _ ->
-                appState.isWallet=true;
+                appState.isWallet=true
                 payWithWallet(activity = this@ElectricityPaymentActivity,amount = airtime_amount,wallet = wallet,userName = userName,requestType = requestType,meterType =meterType ,meterNumber = meterNumber,channel = channel,phone_number = phone_number,productCode = productCode,paymentMetod = VasServices.CASH) }
         }.show()
 
@@ -489,12 +502,12 @@ open class ElectricityPaymentActivity : BaseVasActivity() {
     private fun payWithWallet(phone_number: String, activity: Activity, amount: String, wallet: String, userName: String, requestType: String, meterType: String, meterNumber: String, channel: String, productCode: String, paymentMetod: String) {
 //        isCard = false
 //        SecureStorage.store("airtimeType", "wallet")
-        appState.isWallet=true;
+        appState.isWallet=true
         val pinInfo = EmvCard.PinInfo(FuncActivity.appState.trans.pinBlock, null, null)
 
         val emvCard = EmvCard(appState.trans.cardHolderName, appState.trans.track2Data, appState.trans.iccData, pinInfo)
 
-        val pfm = Pfm(PfmStateGenerator(this).generateState(), PfmJournalGenerator(appState.trans.transactionResult, appState.nibssData.configData, false, airtime_amount, emvCard, electricMeterType, electricMeterType, "").generateJournal())
+        val pfm = Pfm(PfmStateGenerator(this).generateState(), PfmJournalGenerator(FuncActivity.appState.trans.transactionResult, FuncActivity.appState.nibssData.configData, false, airtime_amount, emvCard, electricMeterType, electricMeterType, "").generateJournal())
 
 
         val pinView = LayoutInflater.from(this).inflate(R.layout.activity_enter_pin, null, false)
@@ -556,6 +569,7 @@ open class ElectricityPaymentActivity : BaseVasActivity() {
 //        if (!response!!.error)
             if (!vasDetails.error) {
                 status = "Approved"
+//                appState.
             }else{
                 "Declined"
             }
@@ -573,6 +587,7 @@ open class ElectricityPaymentActivity : BaseVasActivity() {
                     }
 
                     val intent = Intent(context, MainActivity::class.java)
+                    Log.d("About to print", "onChanged() called with: transactionModel = [$transactionModel]")
 
                     intent.putExtra("transactionModel", transactionModel)
                     intent.putExtra("copy", "** CUSTOMER COPY **")

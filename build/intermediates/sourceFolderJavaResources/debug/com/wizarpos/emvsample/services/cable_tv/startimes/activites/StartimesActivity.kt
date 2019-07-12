@@ -27,6 +27,7 @@ import com.jakewharton.rxbinding2.widget.textChanges
 import com.wizarpos.emvsample.R
 import com.wizarpos.emvsample.activity.FuncActivity
 import com.wizarpos.emvsample.activity.FuncActivity.appState
+import com.wizarpos.emvsample.activity.FuncActivity.funstan
 import com.wizarpos.emvsample.activity.Sale
 import com.wizarpos.emvsample.activity.login.Helper
 import com.wizarpos.emvsample.activity.login.Helper.WALLET
@@ -42,6 +43,7 @@ import com.wizarpos.util.PinAlertUtils
 import com.wizarpos.util.Service
 import com.wizarpos.util.StringUtil
 import com.wizarpos.util.VasServices
+import kotlinx.android.synthetic.main.activity_login.*
 
 import kotlinx.android.synthetic.main.content_startimes.*
 import org.jetbrains.anko.alert
@@ -84,7 +86,7 @@ class StartimesActivity : BaseServiceActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_startimes)
 
-
+        productText.text="Startimes"
 //        toolbar = findViewById(R.id.startimes_toolbar)
 //        setSupportActionBar(toolbar)
 
@@ -184,16 +186,15 @@ class StartimesActivity : BaseServiceActivity() {
             val beneficiaryName = ""
             val beneficiaryAddress = ""
             val responsemessage = payResponse!!.message
-            val amount = payResponse!!.message
+            val amount = appState.starTimesAmount
             val token = ""
             val wallet = SecureStorage.retrieve(Helper.TERMINAL_ID, "")
             val product = VasServices.STARTIMES
-            val transactionRef = ""
-            val logo =R.drawable.startime
-            val cref  = payResponse.reference
-            val error = true
-            val discosModel: Models.CableTvModel? = Models.CableTvModel(error=payResponse.error,iuc = payResponse.smartCardCode)
-
+            val transactionRef = payResponse.reference;
+            val logo =R.drawable.startimes_print
+            val stan  = payResponse.transactionID
+            val error = payResponse.error
+            val cabletvModel: Models.CableTvModel? = Models.CableTvModel(error=error,iuc =smartCardNumber)
             val isCardTransaction = true
             val transactionTID = ""
             val merchantID = FuncActivity.appState.nibssData.configData.getConfigData("03015").toString()
@@ -205,7 +206,9 @@ class StartimesActivity : BaseServiceActivity() {
 //				String vasTerminalId = SecureStorage.retrieve(Helper.,"");
 
 
-            val vasDetails = Models.VasDetails(cref,amount, wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product, responsemessage, vasmerchantID, transactionRef, VasServices.CARD, logo, date, error, Models.CABLE_TV, discosModel!!)
+            val vasDetails = Models.VasDetails(stan,amount, wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product, responsemessage, vasmerchantID, transactionRef, VasServices.CASH, logo, date, error, Models.CABLE_TV, cabletvModel!!)
+            Log.d("About to print", "onChanged() called with: VasDetails = [$vasDetails]")
+
             ElectricityPaymentActivity.print(this@StartimesActivity,vasDetails)
         })
 
@@ -270,7 +273,8 @@ class StartimesActivity : BaseServiceActivity() {
 
     private fun continuePayment(paymentOption: String, card: Card?, lookupResponse: StartimesModel.lookupResponse) {
 //        val smartCardNumber = smartcardnumber.text.toString()
-        val amount =txtAmount.text.toString().toInt()*100
+        appState.starTimesAmount=txtAmount.text.toString()
+        val amount =txtAmount.text.trim().toString().toInt()*100
         val password = SecureStorage.retrieve(Helper.STORED_PASSWORD,"")
         val customerName=lookupResponse.name
         val phone = EdtTxtBeneficiaryPhoneNo.text.toString()
@@ -287,15 +291,22 @@ class StartimesActivity : BaseServiceActivity() {
 
 
         val clientReference = StringUtil.getClientRef(this@StartimesActivity, "")
+
+        appState.isVas=true
+
         when (paymentOption) {
+
+
             VasServices.CASH -> {
+                appState.isWallet =true
                 viewModel.subscribe(amount =amount ,authPin = authPin,password = password,customerName = customerName,phone = phone,productCode = productCode,bouquet =bouquet,paymentMethod =paymentOption,smartCardCode = smartCardCode)
             }
 
             else -> {
+                Log.d("Here ","Going online")
                 FuncActivity.appState.cableTv = true
                 FuncActivity.appState.needCard = true
-                appState.startimes=true
+                appState.isWallet =false
                 FuncActivity.appState.startimesPayRequest = StartimesModel.payRequest(amount = amount, wallet = terminalId, username = userName, clientReference = clientReference, smartCardCode = smartCardCode.toLowerCase(), productCode = productCode,  password = password,paymentMethod = VasServices.CARD,type = "default",channel = "ANDROIDPOS",customerName =customerName ,phone =phone ,bouquet =bouquet ,pin =authPin ,pfm =pfm )
                 val intent = Intent(this, Sale::class.java)
                 startActivityForResult(intent, STARTIMES_REQUEST_CODE_CARD)

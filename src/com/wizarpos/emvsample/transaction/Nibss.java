@@ -59,11 +59,14 @@ public class Nibss {
         hostInteractor = HostInteractor.getInstance(new GtmsHost(context));
         mainApp = MainApp.getInstance();
         SharedPreferences sharedPreferences = context.getSharedPreferences(Constants.netWork_pref, Context.MODE_PRIVATE);
-//        ip = sharedPreferences.getString("ip","196.6.103.73");
-//        port = sharedPreferences.getString("port", "5043");
+//        ip = sharedPreferences.getString("ip","196.6.103.73");//
+//        port = sharedPreferences.getString("port", "5043");//
 
         ip = sharedPreferences.getString("ip","196.6.103.73");
         port = sharedPreferences.getString("port", "5043");
+
+//         ip = "197.253.19.78";
+//         port = "5001";
 
         sslStatus = sharedPreferences.getBoolean("ssl", true);
         //        final ConnectionData connectionData = new ConnectionData("2033GP23", "196.6.103.73", 5043, true);
@@ -78,9 +81,11 @@ public class Nibss {
         getVasKeys();
 
 
+
         Log.i("okh", "preping terminal");
         Log.d(TAG, "prepare() called with: terminalID = [" + terminalID + "]");
         final ConnectionData connectionData = new ConnectionData( terminalID,ip,Integer.parseInt(port),sslStatus);
+
         Log.d("okh", terminalID+ "  " + ip + "  " + port + " " + sslStatus);
         Log.d(TAG, "ConnectionData() called with: ip  = [" + ip  + "], port = [" + port + "], sslStatus= = [" + sslStatus + "]");
           hostInteractor.getKeyHolder(connectionData)
@@ -200,6 +205,8 @@ public class Nibss {
         getVasKeys();
 
         final ConnectionData connectionData = new ConnectionData(terminalID,ip,Integer.parseInt(port),sslStatus);
+
+
 //        final ConnectionData connectionData = new ConnectionData("2033GP23", "196.6.103.73", 5043, true);
         Log.d("okh", connectionData.getIpAddress() + connectionData.getTerminalID() + connectionData.getIpPort() + connectionData.isSSL());
         Single<KeyHolder> liveKeyHolder = hostInteractor.getKeyHolder(connectionData);

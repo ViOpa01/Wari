@@ -8,6 +8,7 @@ import android.view.MenuItem
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.wizarpos.emvsample.R
+import com.wizarpos.emvsample.activity.FuncActivity.appState
 import kotlinx.android.synthetic.main.activity_glo_data.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -93,20 +94,22 @@ class AllData : AppCompatActivity(), DataAdapter.DataClickListener {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         if (serviceType == "ETISALATDATA"){
-            FuncActivity.appState.logo =R.id.nine_mobile
+            FuncActivity.appState.logo =R.drawable.ninemobile_logo
 
             supportActionBar?.title = "Etisalat Data plans"
         } else if (serviceType == "GLODATA"){
-            FuncActivity.appState.logo=R.id.glo
+            FuncActivity.appState.logo=R.drawable.glo_logo
             supportActionBar?.title = "Glo Data plans"
         } else if (serviceType == "AIRTELDATA"){
-            FuncActivity.appState.logo =R.id.airtel
+            FuncActivity.appState.logo =R.drawable.airtel_logo
             supportActionBar?.title = "Airtel Data plans"
         } else if (serviceType == "MTNDATA"){
-            FuncActivity.appState.logo=R.id.mtn
+            FuncActivity.appState.logo=R.drawable.mtn_logo
 
             supportActionBar?.title = "Mtn Data plans"
         }
+
+        appState.product=serviceType
         mProgressDialog.show()
 
         GlobalScope.launch(Dispatchers.Default) {

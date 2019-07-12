@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
@@ -22,6 +23,7 @@ import com.itex.richard.payviceconnect.model.StartimesModel
 import com.jakewharton.rxbinding2.widget.textChanges
 import com.wizarpos.emvsample.R
 import com.wizarpos.emvsample.activity.FuncActivity
+import com.wizarpos.emvsample.activity.FuncActivity.appState
 import com.wizarpos.emvsample.activity.Sale
 import com.wizarpos.emvsample.activity.login.Helper
 import com.wizarpos.emvsample.activity.login.securestorage.SecureStorage
@@ -29,6 +31,8 @@ import com.wizarpos.emvsample.activity.login.securestorage.SecureStorageUtils
 import com.wizarpos.emvsample.generators.PfmStateGenerator
 import com.wizarpos.emvsample.models.PfmJournalGenerator
 import com.wizarpos.emvsample.services.discos.activities.DiscosActivity.Companion.SERVICE
+import com.wizarpos.emvsample.services.discos.activities.ElectricityPaymentActivity
+import com.wizarpos.emvsample.services.helper.activity.util.Models
 import com.wizarpos.util.PinAlertUtils
 import com.wizarpos.util.Service
 import com.wizarpos.util.StringUtil
@@ -45,6 +49,8 @@ import kotlinx.android.synthetic.main.content_multichoice.serviceImage
 import kotlinx.android.synthetic.main.content_multichoice.subTitleText
 import kotlinx.android.synthetic.main.content_startimes.*
 import org.jetbrains.anko.alert
+import java.text.SimpleDateFormat
+import java.util.*
 import java.util.concurrent.TimeUnit
 
 class MultichoiceActivity : BaseServiceActivity() {
@@ -53,6 +59,7 @@ class MultichoiceActivity : BaseServiceActivity() {
     private var planDialog: MultichoicePlanDialog? = null
     private var selectedPlan: DstvModel.Data? = null
     private var isValidated = false
+
 
     private val viewModel by lazy {
         MultichoiceViewModel(application)
@@ -163,8 +170,41 @@ class MultichoiceActivity : BaseServiceActivity() {
             }
         })
 
-        viewModel.paymentResponseLiveData.observe(this, Observer {
+        viewModel.paymentResponseLiveData.observe(this, Observer { payResponse ->
 //            it?.let(this::showResultScreen)
+            appState.product= service.name
+
+            val vasTerminalId=SecureStorage.retrieve(Helper.VAS_TERMINAL_ID,"")
+            val vasMerchantName=SecureStorage.retrieve(Helper.VAS_MERCHANT_NAME,"")
+            val smartCardNumber = FuncActivity.appState.multichoiceAccount
+            val meterNumber = ""
+            val beneficiaryName = ""
+            val beneficiaryAddress = ""
+            val responsemessage = payResponse!!.message
+            val amount =FuncActivity.appState.multichoiceAmount
+            val token = ""
+            val wallet = SecureStorage.retrieve(Helper.TERMINAL_ID, "")
+            val product = appState.product
+            val transactionRef = payResponse.ref;
+            val logo =   appState.logo
+            val stan  = payResponse.transactionID
+            val error = payResponse.error
+            val cabletvModel: Models.CableTvModel? = Models.CableTvModel(error=error,iuc =smartCardNumber)
+            val isCardTransaction = true
+            val transactionTID = ""
+            val merchantID = FuncActivity.appState.nibssData.configData.getConfigData("03015").toString()
+            val merchantName = FuncActivity.appState.nibssData.configData.getConfigData("52040").toString()
+            val merchantTerminalId = SecureStorage.retrieve(Helper.TERMINAL, "")
+            val date = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().time)
+            val vasmerchantID = SecureStorage.retrieve(Helper.VAS_TERMINAL_ID, "")
+            val vasmerchantName = SecureStorage.retrieve(Helper.VAS_MERCHANT_NAME, "")
+//				String vasTerminalId = SecureStorage.retrieve(Helper.,"");
+
+
+            val vasDetails = Models.VasDetails(stan,amount, wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product, responsemessage, vasmerchantID, transactionRef, VasServices.CASH, logo, date, error, Models.CABLE_TV, cabletvModel!!)
+            Log.d("About to print", "onChanged() called with: VasDetails = [$vasDetails]")
+
+            ElectricityPaymentActivity.print(this@MultichoiceActivity,vasDetails)
         })
 
         viewModel.productLiveData.observe(this, Observer {
@@ -227,9 +267,13 @@ class MultichoiceActivity : BaseServiceActivity() {
 
 
     private fun continuePayment(paymentOption: String, card: Card?,lookupResponse: DstvModel.DstvResponse) {
-        val iucNumber = beneficiaryEdit.text.toString()
 
-        val amount =viewModel.selectPlanLiveData.value?.amount?.toDouble()?.toInt() ?: 0
+        appState.multichoiceAccount  = beneficiaryEdit.text.toString()
+        appState.multichoiceAmount =(viewModel.selectPlanLiveData.value?.amount?.toDouble()?.toInt() ?: 0 ).toString()
+        val iucNumber = appState.multichoiceAccount
+
+        val amount = appState.multichoiceAmount
+        appState.isVas=true
         val password = SecureStorage.retrieve(Helper.STORED_PASSWORD,"")
 //        val customerName=lookupResponse.fullname
 //        val phone = EdtTxtBeneficiaryPhoneNo.text.toString()
@@ -248,6 +292,7 @@ class MultichoiceActivity : BaseServiceActivity() {
         val clientReference = StringUtil.getClientRef(this@MultichoiceActivity, "")
         when (paymentOption) {
             VasServices.CASH -> {
+                FuncActivity.appState.isWallet =true
                 viewModel.subscribe(iucNumber, encryptedUserPin)
             }
 
@@ -257,6 +302,7 @@ class MultichoiceActivity : BaseServiceActivity() {
 
                 FuncActivity.appState.cableTv = true
                 FuncActivity.appState.needCard = true
+                FuncActivity.appState.isWallet =false
                 FuncActivity.appState.dstvPayRequest = DstvModel.PayDetails(clientReference = clientReference,password = password,iuc = iucNumber,product_code = productCode,user_id = userId,terminal_id = terminalId,pin = authPin,unit =product.toString(),pfm = pfm )
                 val intent = Intent(this, Sale::class.java)
                 startActivityForResult(intent, StartimesActivity.STARTIMES_REQUEST_CODE_CARD)

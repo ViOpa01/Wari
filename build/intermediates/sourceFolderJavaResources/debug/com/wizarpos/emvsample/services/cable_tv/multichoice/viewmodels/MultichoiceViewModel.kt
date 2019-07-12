@@ -69,13 +69,13 @@ class MultichoiceViewModel(appContext: Application) : AndroidViewModel(appContex
 
             VasServices.DSTV -> {
                appState.dstv =true
-                appState.logo= R.drawable.dstv
+                appState.logo= service.icon
                 setProduct(MultichoiceInteractor.MultichoiceProduct.DSTV)
             }
             VasServices.GOTV -> {
 
                 appState.gotv=true
-                appState.logo= R.drawable.gotv
+                appState.logo= service.icon
                 setProduct(MultichoiceInteractor.MultichoiceProduct.GOTV)
             }
         }

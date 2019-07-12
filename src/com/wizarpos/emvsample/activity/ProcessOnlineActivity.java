@@ -366,6 +366,11 @@ public class ProcessOnlineActivity extends FuncActivity
 			Log.d("okh", vasTerminalDetails.getTid()+" tid");
 			ConfigData configData = new ConfigData();
 			String TID = vasTerminalDetails.getTid();
+
+
+
+//			ConnectionData connectionData = new ConnectionData(TID, "197.253.19.78", 5001, true);
+
 			ConnectionData connectionData = new ConnectionData(TID, "196.6.103.73", 5043, true);
 
 			KeyHolder keyHolder = new KeyHolder(vasTerminalDetails.getMasterKey(), vasTerminalDetails.getSessionKey(), vasTerminalDetails.getPinKey());

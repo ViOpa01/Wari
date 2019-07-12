@@ -25,7 +25,7 @@ MERGED from [com.android.support:support-fragment:27.1.1] C:\Users\Favour\.gradl
 MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.1.aar\dc9d91921080647f1be078de1233061b\AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.lifecycle:livedata:1.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\livedata-1.1.1.aar\bc247de7893e2762667bca4f9bd1a173\AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.persistence.room:runtime:1.1.0] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\4048bb14ae631a7c64cb900e97998730\AndroidManifest.xml:17:1-22:12
-MERGED from [:payviceconnect_] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\2ca428f9eb4d38b76fdb93da0185497f\AndroidManifest.xml:2:1-23:12
+MERGED from [:payviceconnect_] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\3da267f9a31bfe4d5c6f374c906739db\AndroidManifest.xml:2:1-23:12
 MERGED from [com.android.support:animated-vector-drawable:27.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-27.1.1.aar\eec0d224a9dce83339f6fd1a00ef5c45\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:support-vector-drawable:27.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-27.1.1.aar\df21f7551d5a14cfda443d59cb072dad\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:transition:27.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\transition-27.1.1.aar\1bdd2c4465536f11f117e2f9409a00f6\AndroidManifest.xml:17:1-22:12
@@ -99,8 +99,8 @@ MERGED from [android.arch.lifecycle:livedata:1.1.1] C:\Users\Favour\.gradle\cach
 MERGED from [android.arch.lifecycle:livedata:1.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\livedata-1.1.1.aar\bc247de7893e2762667bca4f9bd1a173\AndroidManifest.xml:20:5-44
 MERGED from [android.arch.persistence.room:runtime:1.1.0] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\4048bb14ae631a7c64cb900e97998730\AndroidManifest.xml:20:5-44
 MERGED from [android.arch.persistence.room:runtime:1.1.0] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\4048bb14ae631a7c64cb900e97998730\AndroidManifest.xml:20:5-44
-MERGED from [:payviceconnect_] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\2ca428f9eb4d38b76fdb93da0185497f\AndroidManifest.xml:7:5-9:41
-MERGED from [:payviceconnect_] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\2ca428f9eb4d38b76fdb93da0185497f\AndroidManifest.xml:7:5-9:41
+MERGED from [:payviceconnect_] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\3da267f9a31bfe4d5c6f374c906739db\AndroidManifest.xml:7:5-9:41
+MERGED from [:payviceconnect_] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\3da267f9a31bfe4d5c6f374c906739db\AndroidManifest.xml:7:5-9:41
 MERGED from [com.android.support:animated-vector-drawable:27.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-27.1.1.aar\eec0d224a9dce83339f6fd1a00ef5c45\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:animated-vector-drawable:27.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-27.1.1.aar\eec0d224a9dce83339f6fd1a00ef5c45\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-vector-drawable:27.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-27.1.1.aar\df21f7551d5a14cfda443d59cb072dad\AndroidManifest.xml:20:5-44
@@ -207,8 +207,8 @@ MERGED from [com.github.danielgindi:httprequest:1.2.0] C:\Users\Favour\.gradle\c
 MERGED from [com.github.danielgindi:httprequest:1.2.0] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\httprequest-1.2.0.aar\31721f04280b396f0d03e8ac599a1a11\AndroidManifest.xml:10:5-20
 MERGED from [com.andrognito.pinlockview:pinlockview:2.1.0] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\pinlockview-2.1.0.aar\090ce7685a72132be7f314f587663509\AndroidManifest.xml:11:5-53
 MERGED from [com.andrognito.pinlockview:pinlockview:2.1.0] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\pinlockview-2.1.0.aar\090ce7685a72132be7f314f587663509\AndroidManifest.xml:11:5-53
-MERGED from [:payviceconnect_] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\2ca428f9eb4d38b76fdb93da0185497f\AndroidManifest.xml:16:5-21:19
-MERGED from [:payviceconnect_] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\2ca428f9eb4d38b76fdb93da0185497f\AndroidManifest.xml:16:5-21:19
+MERGED from [:payviceconnect_] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\3da267f9a31bfe4d5c6f374c906739db\AndroidManifest.xml:16:5-21:19
+MERGED from [:payviceconnect_] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\3da267f9a31bfe4d5c6f374c906739db\AndroidManifest.xml:16:5-21:19
 	android:label
 		ADDED from C:\Users\Favour\AndroidStudioProjects\NIBSS\AndroidManifest.xml:30:9-41
 	android:icon
@@ -499,8 +499,8 @@ MERGED from [:poslib-host-debug] C:\Users\Favour\.gradle\caches\transforms-1\fil
 MERGED from [:poslib-host-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-host-debug.aar\f45646ddfc3078037e54f22fea8fee30\AndroidManifest.xml:12:5-75
 MERGED from [:poslib-device-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-device-debug.aar\4406fb617fc7ef7ab3d03bef93286246\AndroidManifest.xml:11:5-75
 MERGED from [:poslib-device-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-device-debug.aar\4406fb617fc7ef7ab3d03bef93286246\AndroidManifest.xml:11:5-75
-MERGED from [:payviceconnect_] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\2ca428f9eb4d38b76fdb93da0185497f\AndroidManifest.xml:14:5-75
-MERGED from [:payviceconnect_] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\2ca428f9eb4d38b76fdb93da0185497f\AndroidManifest.xml:14:5-75
+MERGED from [:payviceconnect_] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\3da267f9a31bfe4d5c6f374c906739db\AndroidManifest.xml:14:5-75
+MERGED from [:payviceconnect_] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\3da267f9a31bfe4d5c6f374c906739db\AndroidManifest.xml:14:5-75
 	android:name
 		ADDED from [:poslib-commons-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-commons-debug.aar\001a1d15237abe33a422214c115be09a\AndroidManifest.xml:12:22-72
 uses-permission#ANDROID.PERMISSION.CHANGE_NETWORK_STATE
@@ -517,8 +517,8 @@ MERGED from [:poslib-host-debug] C:\Users\Favour\.gradle\caches\transforms-1\fil
 MERGED from [:poslib-host-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-host-debug.aar\f45646ddfc3078037e54f22fea8fee30\AndroidManifest.xml:14:5-79
 MERGED from [:poslib-device-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-device-debug.aar\4406fb617fc7ef7ab3d03bef93286246\AndroidManifest.xml:13:5-79
 MERGED from [:poslib-device-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-device-debug.aar\4406fb617fc7ef7ab3d03bef93286246\AndroidManifest.xml:13:5-79
-MERGED from [:payviceconnect_] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\2ca428f9eb4d38b76fdb93da0185497f\AndroidManifest.xml:13:5-79
-MERGED from [:payviceconnect_] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\2ca428f9eb4d38b76fdb93da0185497f\AndroidManifest.xml:13:5-79
+MERGED from [:payviceconnect_] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\3da267f9a31bfe4d5c6f374c906739db\AndroidManifest.xml:13:5-79
+MERGED from [:payviceconnect_] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\3da267f9a31bfe4d5c6f374c906739db\AndroidManifest.xml:13:5-79
 	android:name
 		ADDED from [:poslib-commons-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-commons-debug.aar\001a1d15237abe33a422214c115be09a\AndroidManifest.xml:14:22-76
 uses-permission#android.permission.BLUETOOTH
@@ -531,8 +531,8 @@ ADDED from [:poslib-device-debug] C:\Users\Favour\.gradle\caches\transforms-1\fi
 		ADDED from [:poslib-device-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-device-debug.aar\4406fb617fc7ef7ab3d03bef93286246\AndroidManifest.xml:15:22-71
 uses-permission#android.permission.ACCESS_COARSE_LOCATION
 ADDED from [:poslib-device-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-device-debug.aar\4406fb617fc7ef7ab3d03bef93286246\AndroidManifest.xml:16:5-81
-MERGED from [:payviceconnect_] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\2ca428f9eb4d38b76fdb93da0185497f\AndroidManifest.xml:11:5-81
-MERGED from [:payviceconnect_] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\2ca428f9eb4d38b76fdb93da0185497f\AndroidManifest.xml:11:5-81
+MERGED from [:payviceconnect_] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\3da267f9a31bfe4d5c6f374c906739db\AndroidManifest.xml:11:5-81
+MERGED from [:payviceconnect_] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\3da267f9a31bfe4d5c6f374c906739db\AndroidManifest.xml:11:5-81
 	android:name
 		ADDED from [:poslib-device-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-device-debug.aar\4406fb617fc7ef7ab3d03bef93286246\AndroidManifest.xml:16:22-78
 provider#android.arch.lifecycle.ProcessLifecycleOwnerInitializer
@@ -546,14 +546,14 @@ ADDED from [android.arch.lifecycle:extensions:1.1.1] C:\Users\Favour\.gradle\cac
 	android:name
 		ADDED from [android.arch.lifecycle:extensions:1.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\extensions-1.1.1.aar\f8485407071611cdf81269f7367663b4\AndroidManifest.xml:24:13-83
 uses-permission#android.permission.ACCESS_FINE_LOCATION
-ADDED from [:payviceconnect_] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\2ca428f9eb4d38b76fdb93da0185497f\AndroidManifest.xml:12:5-79
+ADDED from [:payviceconnect_] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\3da267f9a31bfe4d5c6f374c906739db\AndroidManifest.xml:12:5-79
 	android:name
-		ADDED from [:payviceconnect_] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\2ca428f9eb4d38b76fdb93da0185497f\AndroidManifest.xml:12:22-76
+		ADDED from [:payviceconnect_] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\3da267f9a31bfe4d5c6f374c906739db\AndroidManifest.xml:12:22-76
 service#com.itex.richard.payviceconnect.utils.MyLocationService
-ADDED from [:payviceconnect_] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\2ca428f9eb4d38b76fdb93da0185497f\AndroidManifest.xml:17:9-20:39
+ADDED from [:payviceconnect_] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\3da267f9a31bfe4d5c6f374c906739db\AndroidManifest.xml:17:9-20:39
 	android:enabled
-		ADDED from [:payviceconnect_] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\2ca428f9eb4d38b76fdb93da0185497f\AndroidManifest.xml:19:13-35
+		ADDED from [:payviceconnect_] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\3da267f9a31bfe4d5c6f374c906739db\AndroidManifest.xml:19:13-35
 	android:exported
-		ADDED from [:payviceconnect_] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\2ca428f9eb4d38b76fdb93da0185497f\AndroidManifest.xml:20:13-36
+		ADDED from [:payviceconnect_] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\3da267f9a31bfe4d5c6f374c906739db\AndroidManifest.xml:20:13-36
 	android:name
-		ADDED from [:payviceconnect_] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\2ca428f9eb4d38b76fdb93da0185497f\AndroidManifest.xml:18:13-83
+		ADDED from [:payviceconnect_] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\3da267f9a31bfe4d5c6f374c906739db\AndroidManifest.xml:18:13-83

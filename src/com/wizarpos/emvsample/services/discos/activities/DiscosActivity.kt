@@ -4,6 +4,7 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageButton
 import com.wizarpos.emvsample.R
 import com.wizarpos.util.VasServices
 import kotlinx.android.synthetic.main.electric_companies.*
@@ -12,6 +13,8 @@ class DiscosActivity : AppCompatActivity(),View.OnClickListener {
     companion object{
         const  val SERVICE = "service"
     }
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

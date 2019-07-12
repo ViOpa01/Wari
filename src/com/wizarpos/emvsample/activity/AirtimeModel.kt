@@ -5,7 +5,7 @@ import com.itex.richard.payviceconnect.model.Pfm
 
 
 
-data class AirtimeSuccessResponse(@Expose val error : Boolean, @Expose val message: String, @Expose val amount: Boolean, @Expose val ref : String, @Expose val date : String)
+data class AirtimeSuccessResponse(@Expose val error : Boolean, @Expose val message: String, @Expose val amount: Boolean, @Expose val ref : String, @Expose val date : String,@Expose val transactionID:String)
 
 data class AirtimeFailedResponse(@Expose val error : Boolean, @Expose val message: String, @Expose val ref : String, @Expose val date : String)
 

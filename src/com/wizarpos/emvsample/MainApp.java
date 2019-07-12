@@ -103,6 +103,18 @@ public class MainApp extends Application implements Constants
 	
 	public SmartCardControl contactUserCard;
 	public int logo =0;
+	public String product ="";
+	public String dataAmount ="";
+
+
+	    public String accountName ;
+
+		public String accountNumber;
+		public String recivingBank ;
+	public boolean isWithdrawal = false;
+
+
+
 
 	public boolean acceptMSR = true;
 	public boolean acceptContactCard = true;
@@ -176,8 +188,12 @@ public class MainApp extends Application implements Constants
 	public boolean startimes=false;
 	public boolean gotv=false;
 	public boolean dstv=false;
+	public String starTimesAmount="";
+	public String multichoiceAmount="";
+	public String multichoiceAccount="";
 	public String vasTransactionstatus ="DECLINED";
 	public boolean isWallet =false;
+	public boolean isVas=false;
 	public boolean isTransfer =false;
 	public StartimesModel.payRequest startimesPayRequest;
 	public DstvModel.PayDetails dstvPayRequest;

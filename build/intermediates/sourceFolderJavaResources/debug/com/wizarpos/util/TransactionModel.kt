@@ -8,4 +8,4 @@ import java.io.Serializable
  * Created by Agbede on 2/28/2018.
  */
 
-data class TransactionModel(val cardDetails: Models.CardDetails,val VasDetails:Models.VasDetails ) : Serializable
+data class TransactionModel(val cardDetails: Models.CardDetails,val VasDetails:Models.VasDetails) : Serializable
