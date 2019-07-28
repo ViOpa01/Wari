@@ -81,9 +81,13 @@ public class InputPINActivity extends FuncActivity implements PinPadCallbackHand
 			amt.setText("Reversal NGN " + AppUtil.formatAmount(appState.trans.getTransAmount()));
 		}
 		else{
+
+
 			amt.setText("NGN "+AppUtil.formatAmount(appState.trans.getTransAmount()));
 			appState.trans.setBalanceTxn(false);
 			appState.trans.setRefundTxn(false);
+
+
 		}
 
 	    buttonBack = (Button)findViewById(R.id.btn_back);
@@ -99,6 +103,8 @@ public class InputPINActivity extends FuncActivity implements PinPadCallbackHand
 				switch (msg.what)
 				{ 
 				case PIN_SUCCESS_NOTIFIER:
+					Log.d("inputPIN() PIN_SUCCESS_NOTIFIER >>>>", " InputPinActivity  ");
+
 					setResult(Activity.RESULT_OK, getIntent());
 					break;
 				case PIN_ERROR_NOTIFIER:
@@ -144,7 +150,9 @@ public class InputPINActivity extends FuncActivity implements PinPadCallbackHand
     
     private void notifyPinSuccess()
     {
-    	Message msg = new Message();
+		Log.d("notifyPinSuccess() PIN_SUCCESS_NOTIFIER >>>>", " notifyPinSuccess () InputPinActivity  ");
+
+		Message msg = new Message();
     	msg.what = PIN_SUCCESS_NOTIFIER;
     	mHandler.sendMessage(msg);
     }

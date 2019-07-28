@@ -83,6 +83,7 @@ public class RequestCardActivity extends FuncActivity
 	@Override
 	public void handleMessageSafe(Message msg)
 	{
+		Log.d("handleMessageSafe", "Here again handleMessageSafe");
 		/*这里是处理信息的方法*/
 		switch (msg.what)
 		{
@@ -95,20 +96,24 @@ public class RequestCardActivity extends FuncActivity
 			{
 				if(appState.trans.getEmvCardError() == false)
 				{
+
+					Log.d("MSR_READ_DATA_NOTIFIER  appState.trans.getEmvCardError() == false >>>","Here");
 					startMSRThread();
 					appState.promptCardIC = true;
 					setPrompt();
 				}
 				else{
+
+					Log.d("! MSR_READ_DATA_NOTIFIER  appState.trans.getEmvCardError() == false >>>","Here");
+
 					cancelAllCard();
 					setResult(Activity.RESULT_OK, getIntent());
 					finish();
 				}
 			}
 			else{
-				if(   appState.trans.getServiceCode().length() > 0
-					&& appState.trans.getServiceCode().getBytes()[0] == '1'
-					)
+				if( appState.trans.getServiceCode().length() > 0
+						&& appState.trans.getServiceCode().getBytes()[0] == '1' )
 				{
 					appState.trans.setEmvCardError(false);
 					appState.trans.setPanViaMSR(true);
@@ -123,21 +128,25 @@ public class RequestCardActivity extends FuncActivity
 			}
 			break;
 		case MSR_OPEN_ERROR_NOTIFIER:
+				Log.d(" Open  MSR_OPEN_ERROR_NOTIFIER  >>>>","HERE ");
+
 			appState.msrError = true;
 			appState.acceptMSR = false;
 			txtPrompt.setText(appState.getString(R.string.insert_card));
 			break;
 		case MSR_READ_ERROR_NOTIFIER:
+			Log.d(" Read  MSR_READ_ERROR_NOTIFIER  >>>>","HERE ");
+
 			readAllCard();
 			break;
 		case CARD_INSERT_NOTIFIER:
 			Bundle bundle = msg.getData();
 			int nEventID = bundle.getInt("nEventID");
 			int nSlotIndex = bundle.getInt("nSlotIndex");
+			Log.d("Inserd card CARD_INSERT_NOTIFIER >>>","Here");
+
 			if(debug)Log.d(APP_TAG, "get CONTACT_CARD_EVENT_NOTIFIER,event[" + nEventID + "]slot[" + nSlotIndex + "]" );
-			if(   nSlotIndex == 0
-				&& nEventID == SMART_CARD_EVENT_INSERT_CARD
-				)
+			if(   nSlotIndex == 0  && nEventID == SMART_CARD_EVENT_INSERT_CARD )
 			{
 				appState.trans.setEmvCardError(false);
 				if(appState.acceptContactlessCard == true)
@@ -151,6 +160,7 @@ public class RequestCardActivity extends FuncActivity
 			break;
 		case CARD_TAPED_NOTIFIER:
 			bundle = msg.getData();
+
 			nEventID = bundle.getInt("nEventID");
 			if(nEventID == SMART_CARD_EVENT_INSERT_CARD)
 			{
@@ -163,7 +173,7 @@ public class RequestCardActivity extends FuncActivity
 			}
 			break;
 		case CONTACTLESS_HAVE_MORE_CARD_NOTIFIER:
-			if(debug)Log.d(APP_TAG, "error, have more card" );
+			if(debug)Log.d(APP_TAG, ">>> error, have more card" );
 			appState.setErrorCode(R.string.error_more_card);
 			setResult(Activity.RESULT_OK, getIntent());
 			exit();
@@ -228,6 +238,8 @@ public class RequestCardActivity extends FuncActivity
 		case STATE_REQUEST_CARD_ERROR:
 			if(resultCode == Activity.RESULT_OK)
 			{
+				Log.d("onActivityResult STATE_REQUEST_CARD_ERROR >>>","card error ");
+
 				setResult(Activity.RESULT_OK, getIntent());
 			}
 			else

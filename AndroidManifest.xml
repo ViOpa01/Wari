@@ -87,8 +87,8 @@
             android:name=".activity.AirtimeDataActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.MainActivity"
-            android:theme="@android:style/Theme.Translucent" /> <!-- <intent-filter> -->
+            android:name=".activity.MainActivity"/>
+               <!--android:theme="@android:style/Theme.Translucent"  &lt;!&ndash; <intent-filter> &ndash;&gt;&ndash;&gt;-->
         <!-- <action android:name="android.intent.action.MAIN" /> -->
         <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
         <!-- </intent-filter> -->
@@ -204,6 +204,10 @@
             android:screenOrientation="portrait"
             android:theme="@style/notitle" />
         <activity android:name=".activity.InputExtraAmountActivity" />
+
+        <!--<activity-->
+            <!--android:name=".PrintActivity"-->
+            <!--android:exported="true" />-->
 
         <service android:name=".service.CallHomeService" />
     </application>

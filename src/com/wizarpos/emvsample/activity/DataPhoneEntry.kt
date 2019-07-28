@@ -316,6 +316,12 @@ class DataPhoneEntry : AppCompatActivity(), View.OnClickListener {
 
             FuncActivity.appState.needCard = true
             FuncActivity.appState.withdrawal = true
+            FuncActivity.appState.data = true
+//            appState.dataAmount =dataItem.amount;
+
+            FuncActivity.appState.trans.transAmount = (Integer.parseInt(dataItem.amount) )* 100
+
+
             val intent = Intent(this, Sale::class.java)
             startActivity(intent)
 

@@ -19,6 +19,7 @@ import android.view.KeyEvent;
 import android.widget.TextView;
 
 import com.cloudpos.jniinterface.IFuntionListener;
+import com.google.gson.Gson;
 import com.wizarpos.emvsample.MainApp;
 import com.wizarpos.emvsample.R;
 import com.wizarpos.emvsample.constant.Constants;
@@ -36,6 +37,8 @@ import com.wizarpos.util.CommonUtils;
 import com.wizarpos.util.Logger;
 import com.wizarpos.util.NumberUtil;
 import com.wizarpos.util.StringUtil;
+
+import org.jpos.util.LogSource;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -96,6 +99,8 @@ public class FuncActivity extends AppCompatActivity implements Constants, IFunti
     private boolean mBoolInitialized=false;
 	private byte mTimerMode = 0;
     private int idleTimer = DEFAULT_IDLE_TIME_SECONDS;
+
+	private static final String TAG = "FuncActivity";
     
 	public void handleMessageSafe(Message msg){}
 
@@ -144,21 +149,28 @@ public class FuncActivity extends AppCompatActivity implements Constants, IFunti
     
 	public void cardEventOccured(int eventType)
 	{
+		Log.d(TAG, "cardEventOccured: >>>>>");
  		if(debug)Log.d(APP_TAG, "get cardEventOccured");
  		Message msg = new Message();
  		if(eventType == SMART_CARD_EVENT_INSERT_CARD)
  		{
+
  			appState.cardType = get_card_type();
- 			if(debug)Log.d(APP_TAG, "cardType = " + appState.cardType);
- 			
+ 			if(debug)Log.d(APP_TAG, "  >>>> cardType = " + appState.cardType);
+
  			if(appState.cardType == CARD_CONTACT)
  			{
- 				msg.what = CARD_INSERT_NOTIFIER;
+				Log.d(TAG, "cardEventOccured: >>>>>   appState.cardType == CARD_CONTACT    sent  CARD_INSERT_NOTIFIER");
+
+				msg.what = CARD_INSERT_NOTIFIER;
  				mHandler.sendMessage(msg);
  			}
  			else if(appState.cardType == CARD_CONTACTLESS)
  			{
- 				msg.what = CARD_TAPED_NOTIFIER;
+
+				Log.d(TAG, "cardEventOccured: >>>>>   appState.cardType == CARD_CONTACTLESS    sent  CARD_TAPED_NOTIFIER");
+
+				msg.what = CARD_TAPED_NOTIFIER;
  				mHandler.sendMessage(msg);
  			}
  			else{
@@ -167,18 +179,25 @@ public class FuncActivity extends AppCompatActivity implements Constants, IFunti
  		}
  		else if(eventType == SMART_CARD_EVENT_POWERON_ERROR)
  		{
- 			appState.cardType = -1;
+
+			Log.d(TAG, "cardEventOccured: >>>>>   eventType == SMART_CARD_EVENT_POWERON_ERROR    sent  CARD_ERROR_NOTIFIER");
+
+			appState.cardType = -1;
  			msg.what = CARD_ERROR_NOTIFIER;
 			mHandler.sendMessage(msg);
  		}
  		else if(eventType == SMART_CARD_EVENT_REMOVE_CARD)
  		{
  			appState.cardType = -1;
- 		}
+			Log.d(TAG, "cardEventOccured: >>>>>   eventType == SMART_CARD_EVENT_REMOVE_CARD    sent  appState.cardType = -1");
+
+		}
  		else if(eventType == SMART_CARD_EVENT_CONTALESS_HAVE_MORE_CARD)
  		{
  			appState.cardType = -1;
  			msg.what = CONTACTLESS_HAVE_MORE_CARD_NOTIFIER;
+			Log.d(TAG, "cardEventOccured: >>>>>   eventType == SMART_CARD_EVENT_CONTALESS_HAVE_MORE_CARD   sent  CONTACTLESS_HAVE_MORE_CARD_NOTIFIER;");
+
 			mHandler.sendMessage(msg);
  		}
 
@@ -424,6 +443,8 @@ public class FuncActivity extends AppCompatActivity implements Constants, IFunti
     {
         super.onCreate(savedInstanceState);
         appState = ((MainApp)getApplicationContext());
+        Log.d("Funcactivity   OnActivity result: >>>>>>", new Gson().toJson(appState.getState()));
+		Log.d(" Funcactivity    onCreate: >>>>>>", "Here ");
     }
 
     @Override
@@ -629,6 +650,7 @@ public class FuncActivity extends AppCompatActivity implements Constants, IFunti
 			&& appState.msrError == false
 			)
 		{
+			//This is doinc nothing clean up
 			while(msrThreadActived){
 
 			}
@@ -647,6 +669,8 @@ public class FuncActivity extends AppCompatActivity implements Constants, IFunti
 
 	protected void notifyMSR()
 	{
+		Log.d("notifyMSR() called >>>>","msg.what = MSR_READ_DATA_NOTIFIER; ");
+
 		Message msg = new Message();
 		msg.what = MSR_READ_DATA_NOTIFIER;
 		mHandler.sendMessage(msg);
@@ -844,6 +868,7 @@ public class FuncActivity extends AppCompatActivity implements Constants, IFunti
 	
     public void exit()
     {
+		Log.d("exit() called >>>>","Exiting ");
     	cancelIdleTimer();
     	finish();
     }
@@ -938,9 +963,12 @@ public class FuncActivity extends AppCompatActivity implements Constants, IFunti
 			appState.acceptMSR = acceptMSR;
 		}
 		else{
+
 			appState.acceptMSR = false;
 		}
-		appState.acceptContactCard = acceptContact;
+        Log.d("requestCard OnActivity result: >>>>>>", new Gson().toJson(appState.getState()));
+
+        appState.acceptContactCard = acceptContact;
 		appState.acceptContactlessCard = acceptContactless;
 		Intent intent = new Intent(this, RequestCardActivity.class);
 		startActivityForResult(intent, appState.getState());
@@ -1006,6 +1034,8 @@ public class FuncActivity extends AppCompatActivity implements Constants, IFunti
 	
 	public void inputPIN()
 	{
+		Log.d("inputPIN() PIN STATE_INPUT_AMOUNT >>>>", "inputPIN()  Funcactivity ");
+
 		cancelIdleTimer();
 		Intent intent = new Intent(this, InputPINActivity.class);
 		startActivityForResult(intent, STATE_INPUT_PIN);
@@ -1112,8 +1142,11 @@ public class FuncActivity extends AppCompatActivity implements Constants, IFunti
 		case KeyEvent.KEYCODE_ESCAPE:
 			onCancel();
 			break;
-		case KeyEvent.KEYCODE_DEL:
-			onDel();
+		case KeyEvent.KEYCODE_DEL: {
+			if (FuncActivity.appState.data && FuncActivity.appState.needCard) {
+				onDel();
+			}
+		}
 			break;
 		case KeyEvent.KEYCODE_ENTER:
 			onEnter();

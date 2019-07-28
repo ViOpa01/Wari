@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.wizarpos.emvsample"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="19"
+        android:targetSdkVersion="21" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CLOUDPOS_MSR" />
+    <uses-permission android:name="android.permission.CLOUDPOS_PRINTER" />
+    <uses-permission android:name="android.permission.CLOUDPOS_SMARTCARD" />
+    <uses-permission android:name="android.permission.CLOUDPOS_CONTACTLESS_CARD" />
+    <uses-permission android:name="android.permission.CLOUDPOS_PIN_GET_PIN_BLOCK" />
+    <uses-permission android:name="android.permission.CLOUDPOS_PIN_MAC" />
+    <uses-permission android:name="android.permission.CLOUDPOS_PIN_ENCRYPT_DATA" />
+    <uses-permission android:name="android.permission.CLOUDPOS_PIN_UPDATE_MASTER_KEY" />
+    <uses-permission android:name="android.permission.CLOUDPOS_PIN_UPDATE_USER_KEY" />
+    <uses-permission android:name="android.permission.CLOUDPOS_LED" />
+    <uses-permission android:name="android.permission.CLOUDPOS_SAFE_MODULE" />
+    <uses-permission android:name="android.permission.CLOUDPOS_HIDE_STATUS_BAR" />
+    <uses-permission android:name="android.permission.WIZARPOS_PIN_LOAD_KEY" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="ANDROID.PERMISSION.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <application
+        android:name="com.wizarpos.emvsample.MainApp"
+        android:debuggable="true"
+        android:icon="@drawable/wari"
+        android:label="@string/app_name"
+        android:testOnly="true"
+        android:theme="@style/AppTheme" >
+        <activity android:name="com.wizarpos.emvsample.services.cable_tv.multichoice.activities.MultichoiceActivity" />
+        <activity android:name="com.wizarpos.emvsample.services.cable_tv.CableTvActivity" />
+        <activity android:name="com.wizarpos.emvsample.services.discos.activities.ElectricityPaymentActivity" />
+        <activity android:name="com.wizarpos.emvsample.services.discos.activities.DiscosActivity" />
+        <activity android:name="com.iisysgroup.payvice.startimes.activites.StartimesActivity" />
+        <activity android:name="com.wizarpos.emvsample.services.helper.activity.BaseActivity" /> <!-- android:label="@string/title_activity_time_out" -->
+        <!-- android:screenOrientation="portrait" -->
+        <!-- android:theme="" -->
+        <activity android:name="com.wizarpos.emvsample.services.discos.activities.MeterValidationActivity" /> <!-- MENU Start -->
+        <activity
+            android:name="com.wizarpos.emvsample.activity.IdleActivity"
+            android:screenOrientation="nosensor"
+            android:theme="@style/AppTheme" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity> <!-- MENU -->
+        <!--
+   <activity android:name=".activity.AIDMenuActivity" />
+           <activity android:name=".activity.BlackCardMenuActivity" />
+           <activity android:name=".activity.CAPKMenuActivity" />
+           <activity android:name=".activity.CardManageActivity" />
+           <activity android:name=".activity.CommParamActivity" />
+           <activity android:name=".activity.EnquireMenuActivity" />
+        -->
+        <activity
+            android:name="com.wizarpos.emvsample.activity.FuncMenuActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.wizarpos.emvsample.payments_menu.transfer.TransferBankSelection"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.wizarpos.emvsample.payments_menu.transfer.TransferAmountEntry"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.wizarpos.emvsample.VasPurchaseProcessor"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.wizarpos.emvsample.activity.FuncActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.wizarpos.emvsample.activity.AirtimeVasActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.wizarpos.emvsample.activity.DataActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.wizarpos.emvsample.activity.DataPhoneEntry"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.wizarpos.emvsample.activity.AllData"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.wizarpos.emvsample.activity.AirtimeDataActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.wizarpos.emvsample.activity.MainActivity"
+            android:theme="@android:style/Theme.Translucent" /> <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.MAIN" /> -->
+        <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+        <!-- </intent-filter> -->
+        <!-- </activity> -->
+        <!--
+ <activity android:name=".activity.InitParamActivity" />
+         <activity android:name=".activity.ParamMenuActivity" />
+         <activity android:name=".activity.PrintMenuActivity" />
+         <activity android:name=".activity.RevokedCAPKMenuActivity" />
+         <activity android:name=".activity.TerminalMenuActivity" />
+         <activity android:name=".activity.TerminalParamActivity" />
+         <activity android:name=".activity.AIDTabActivity"             android:launchMode="singleTask" />
+         <activity android:name=".activity.CAPKTabActivity"            android:launchMode="singleTask" />
+         <activity android:name=".activity.RevokedCAPKTabActivity"     android:launchMode="singleTask" />
+         <activity android:name=".activity.ExceptionFileTabActivity"   android:launchMode="singleTask" />
+         <activity android:name=".activity.AIDQueryActivity"           android:launchMode="singleTask" />
+         <activity android:name=".activity.CAPKQueryActivity"          android:launchMode="singleTask" />
+         <activity android:name=".activity.RevokedCAPKQueryActivity"   android:launchMode="singleTask" />
+         <activity android:name=".activity.ExceptionFileQueryActivity" android:launchMode="singleTask" />
+        -->
+        <!-- Process Screen -->
+        <activity
+            android:name="com.wizarpos.emvsample.activity.RequestCardActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.wizarpos.emvsample.activity.login.LoginActivity"
+            android:screenOrientation="portrait" /> <!-- <activity android:name=".activity.RequestManualCardActivity" /> -->
+        <activity
+            android:name="com.wizarpos.emvsample.activity.RemoveCardActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.wizarpos.emvsample.activity.ConfirmBypassPinActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.wizarpos.emvsample.activity.ConfirmCardActivity"
+            android:screenOrientation="portrait" />
+        <!--
+ <activity android:name=".activity.ConfirmIDActivity" />
+         <activity android:name=".activity.ConfirmReferralActivity" />
+        -->
+        <activity
+            android:name="com.wizarpos.emvsample.activity.DataClearActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.wizarpos.emvsample.activity.EnquireTransActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.wizarpos.emvsample.activity.ErrorActivity"
+            android:screenOrientation="portrait" /> <!-- <activity android:name=".activity.InputAdminPassActivity" /> -->
+        <activity
+            android:name="com.wizarpos.emvsample.activity.InputAmountActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" /> <!-- <activity android:name=".activity.InputCashBackAmountActivity" /> -->
+        <activity
+            android:name="com.wizarpos.emvsample.activity.InputPINActivity"
+            android:screenOrientation="portrait" />
+        <!--
+  <activity android:name=".activity.InputTicketActivity" />
+          <activity android:name=".activity.ParameterActivity" />
+          <activity android:name=".activity.ParameterCHNActivity" />
+        -->
+        <activity
+            android:name="com.wizarpos.emvsample.activity.ProcessEMVCardActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.wizarpos.emvsample.activity.ProcessOnlineActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/notitle" /> <!-- <activity android:name=".activity.ReadCardActivity" /> -->
+        <activity
+            android:name="com.wizarpos.emvsample.activity.SelectEMVAppListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.wizarpos.emvsample.activity.ShowPBOCCardRecordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.wizarpos.emvsample.activity.ShowLastPBOCActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.wizarpos.emvsample.activity.ShowTransInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.wizarpos.emvsample.activity.TransResultActivity"
+            android:screenOrientation="portrait" /> <!-- Trans -->
+        <activity
+            android:name="com.wizarpos.emvsample.activity.Sale"
+            android:screenOrientation="portrait" />
+        <!--
+ <activity android:name=".activity.Cash" />
+         <activity android:name=".activity.CashBack" />
+        -->
+        <activity android:name="com.wizarpos.emvsample.activity.Settle" />
+        <!--
+     <activity android:name=".activity.UpCashSale" />
+             <activity android:name=".activity.UpCashSaleNew" />
+             <activity android:name=".activity.UpCashBalance" />
+        -->
+        <activity android:name="com.wizarpos.emvsample.activity.QueryCardRecord" />
+        <activity
+            android:name="com.wizarpos.emvsample.activity.WalletBalance"
+            android:parentActivityName="com.wizarpos.emvsample.activity.FuncMenuActivity" />
+        <activity
+            android:name="com.wizarpos.emvsample.activity.GetMasterKey"
+            android:screenOrientation="portrait" />
+        <activity android:name="com.wizarpos.emvsample.activity.auth.PinInterFace" />
+        <activity
+            android:name="com.wizarpos.emvsample.activity.auth.EodMenu"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.wizarpos.emvsample.activity.auth.NetworkSettings"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.wizarpos.emvsample.activity.RefundActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/notitle" />
+        <activity android:name="com.wizarpos.emvsample.activity.InputExtraAmountActivity" />
+        <activity
+            android:name="com.wizarpos.emvsample.PrintActivity"
+            android:exported="true" />
+
+        <service android:name="com.wizarpos.emvsample.service.CallHomeService" />
+
+        <provider
+            android:name="com.squareup.picasso.PicassoProvider"
+            android:authorities="com.wizarpos.emvsample.com.squareup.picasso"
+            android:exported="false" />
+        <provider
+            android:name="android.arch.lifecycle.ProcessLifecycleOwnerInitializer"
+            android:authorities="com.wizarpos.emvsample.lifecycle-trojan"
+            android:exported="false"
+            android:multiprocess="true" />
+
+        <service
+            android:name="com.itex.richard.payviceconnect.utils.MyLocationService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <provider
+            android:name="com.android.tools.ir.server.InstantRunContentProvider"
+            android:authorities="com.wizarpos.emvsample.com.android.tools.ir.server.InstantRunContentProvider"
+            android:multiprocess="true" />
+    </application>
+
+</manifest>

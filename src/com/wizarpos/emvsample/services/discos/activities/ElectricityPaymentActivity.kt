@@ -197,7 +197,7 @@ open class ElectricityPaymentActivity : BaseVasActivity() {
                 val isCardTransaction = true
                 val transactionTID = ""
 
-//                Log.i("FuncActivity.appState.generalElectricityDetails.electricMeterType  >>", FuncActivity.appState.generalElectricityDetails.electricMeterType)
+                Log.i("FuncActivity.appState.generalElectricityDetails.toString()  >>", FuncActivity.appState.generalElectricityDetails.toString())
 
                 when (appState.generalElectricityDetails.electricMeterType) {
 
@@ -425,13 +425,13 @@ open class ElectricityPaymentActivity : BaseVasActivity() {
             }
             1 -> {
                 if (amount.text.isNotEmpty() ) {
-                    if(amount.text.toString().toInt() < 50){
+//                    if(amount.text.toString().toInt() > 50){
                     airtime_amount = amount.text.toString().replace(" ", "")
                     SecureStorage.store("amountrecharge", airtime_amount.toString())
                     performTransaction()
-                    } else {
-                        toast("Enter valid amount - amount must not be less than 50 Naira")
-                    }
+//                    } else {
+//                        toast("Enter valid amount - amount must not be less than 50 Naira")
+//                    }
                 } else {
                     toast("amount cannot be Empty")
                 }
@@ -478,6 +478,8 @@ open class ElectricityPaymentActivity : BaseVasActivity() {
                 //You can use hashmaps
                 _-> payWithCard(phone_number, "")
                 appState.isWallet=false
+                FuncActivity.appState.trans.transAmount = (Integer.parseInt(airtime_amount) )* 100
+
                 Log.d("requestType>>>",requestType)
             }
 

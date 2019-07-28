@@ -52,10 +52,17 @@ class DataActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item?.itemId){
             android.R.id.home -> {
+                FuncActivity.appState.data = false
                 onBackPressed()
                 return true
             }
         }
         return false
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        FuncActivity.appState.data = false
+
     }
 }

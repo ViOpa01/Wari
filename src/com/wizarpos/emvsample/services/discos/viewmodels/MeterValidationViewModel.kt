@@ -93,7 +93,7 @@ class MeterValidationViewModel(application: Application): AndroidViewModel(appli
           }
 
           EKO_ELECTRICITY_POSTPAID,EKO_ELECTRICITY_PREPAID ->{
-              details=EkoModel.EkoLookupDetails(meter = meterNo)
+              details= EkoModel.EkoLookupDetails(meter = meterNo)
               payviceServices.EkoLookup(details)
                       .subscribeOn(Schedulers.io())
                       .observeOn(AndroidSchedulers.mainThread() )

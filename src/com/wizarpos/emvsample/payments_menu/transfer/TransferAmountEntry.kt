@@ -740,7 +740,7 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
                                         "\n#${transferResponse.amountSettled} \nBeneficiary : ${transferResponse.beneficiaryName}"
                                 positiveButton(buttonText = "Print") {
 
-                                    val map = hashMapOf<String, String>(
+                                    val map = linkedMapOf<String, String>(
                                             "Reference" to transferResponse.reference,
                                             "Message" to transferResponse.message,
                                             "Account Name" to transferResponse.beneficiaryName,

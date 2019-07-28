@@ -1,5 +1,11 @@
 package com.wizarpos.util;
 
+import android.util.Log;
+
+import com.wizarpos.emvsample.activity.FuncActivity;
+
+import static com.wizarpos.emvsample.activity.login.Helper.TAG;
+
 public class AppUtil
 {
 	public AppUtil() {
@@ -117,5 +123,19 @@ public class AppUtil
 			System.arraycopy(buffer, 0, destBuffer, 0, length);
 			return destBuffer;
 		}
+	}
+
+
+	public static void resetAllServicesStates(){
+		Log.d(TAG, "resetAllServicesStates: Reseting  ");
+		FuncActivity.appState.electricityBills=false;
+		FuncActivity.appState.isWithdrawal=false;
+		FuncActivity.appState.isTransfer=false;
+		FuncActivity.appState.gotv=false;
+		FuncActivity.appState.dstv=false;
+		FuncActivity.appState.startimes=false;
+		FuncActivity.appState.airtime =false;
+		FuncActivity.appState.cableTv =false;
+		FuncActivity.appState.isPurchase=false;
 	}
 }

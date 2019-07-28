@@ -93,6 +93,7 @@ public class MainApp extends Application implements Constants
 	
 	public TransDetailInfo trans = new TransDetailInfo();
 	public boolean needCard = false;
+	public boolean isPurchase = false;
 	public boolean enableContactlessCard = false;
 	public boolean promptCardCanRemoved = false;
 	public boolean promptOfflineDataAuthSucc = false;
@@ -181,6 +182,7 @@ public class MainApp extends Application implements Constants
 	public boolean transfer = false;
 	public boolean withdrawal = false;
 	public boolean airtime = false;
+	public boolean data = false;
 	public int reversalAmout;
 	public boolean electricityBills=false;
 	public Models.GeneralElectricityDetails generalElectricityDetails;

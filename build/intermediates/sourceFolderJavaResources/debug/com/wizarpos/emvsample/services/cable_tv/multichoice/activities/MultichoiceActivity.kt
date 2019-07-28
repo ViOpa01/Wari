@@ -303,6 +303,7 @@ class MultichoiceActivity : BaseServiceActivity() {
                 FuncActivity.appState.cableTv = true
                 FuncActivity.appState.needCard = true
                 FuncActivity.appState.isWallet =false
+                FuncActivity.appState.trans.transAmount = (Integer.parseInt( appState.multichoiceAmount) )* 100
                 FuncActivity.appState.dstvPayRequest = DstvModel.PayDetails(clientReference = clientReference,password = password,iuc = iucNumber,product_code = productCode,user_id = userId,terminal_id = terminalId,pin = authPin,unit =product.toString(),pfm = pfm )
                 val intent = Intent(this, Sale::class.java)
                 startActivityForResult(intent, StartimesActivity.STARTIMES_REQUEST_CODE_CARD)

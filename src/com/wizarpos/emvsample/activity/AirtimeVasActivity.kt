@@ -482,6 +482,7 @@ class AirtimeVasActivity : BaseVasActivity(), AirtimeProcessor.onAirtimeTransact
 
             isCard = true
             mAirtimeProvider = airtimeProvider
+            FuncActivity.appState.trans.transAmount = (Integer.parseInt(airtime_amount) )* 100
 
             SecureStorage.store("phonerecharge", phone_number)
             SecureStorage.store("airtimeprovider", airtimeProvider)
@@ -574,6 +575,7 @@ class AirtimeVasActivity : BaseVasActivity(), AirtimeProcessor.onAirtimeTransact
     }
 
     private fun processCardTransaction() {
+        FuncActivity.appState.data = false
 
         val airtimeProcessor = AirtimeProcessor(this, this, airtime_provider, phone_number.replace(" ", ""), airtime_amount)
         progressDialog.show()

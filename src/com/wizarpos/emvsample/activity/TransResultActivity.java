@@ -126,6 +126,7 @@ public class TransResultActivity extends FuncActivity
         initToolbar();
 
 
+
 		startimesViewModel= new StartimesViewModel(getApplication());
 
 		multichoiceViewModel = new MultichoiceViewModel(getApplication());
@@ -219,27 +220,27 @@ public class TransResultActivity extends FuncActivity
 								appState.withdrawal = true;
 								Log.d("okh", "result withdrawal credit now");
 								creditWallet();
-								FuncActivity.appState.withdrawal = false;
+//								FuncActivity.appState.withdrawal = false;
 							}
 							if (appState.airtime){
 //								appState.airtime = true;
 								Log.d("okh", "result airtime credit now");
 								creditAirtime();
-								appState.airtime =false;
+//								appState.airtime =false;
 							}
 							if(appState.cableTv ) {
 
 								if(appState.startimes){
 								StartimesModel.payRequest requestDetails = FuncActivity.appState.startimesPayRequest;
 								startimesViewModel.subscribe(requestDetails.getPin(), requestDetails.getPassword(), requestDetails.getCustomerName(), requestDetails.getPhone(), requestDetails.getProductCode(), requestDetails.getBouquet(), requestDetails.getPaymentMethod(), requestDetails.getSmartCardCode(), requestDetails.getAmount());
-									appState.startimes=false;
+//									appState.startimes=false;
 								}
 
 								else if(appState.gotv || appState.dstv){
 									DstvModel.PayDetails payDetails =appState.dstvPayRequest;
 									multichoiceViewModel.subscribe(payDetails.getIuc(),payDetails.getPin());
-									appState.gotv=false;
-									appState.dstv=false;
+//									appState.gotv=false;
+//									appState.dstv=false;
 
 								}
 
@@ -247,7 +248,6 @@ public class TransResultActivity extends FuncActivity
                             if(appState.electricityBills) {
 //                            	Log.d("appState.electricityBills",String.valueOf(appState.electricityBills));
 								processPayment(appState.generalElectricityDetails);
-								appState.electricityBills=false;
 
                             }
 							transactionStatus.setImageResource(R.drawable.ic_check_circle_black_24dp);
@@ -269,6 +269,8 @@ public class TransResultActivity extends FuncActivity
 
 
 							}
+					resetPurchase();
+
 						}
 		    		}
 					else
@@ -304,7 +306,8 @@ public class TransResultActivity extends FuncActivity
 			@Override
 			public void onChanged(@Nullable Object paymentResponse) {
 
-					Log.d("yellow >>>","Now");
+
+				Log.d("yellow >>>","Now");
 
 //					boolean  error=transactionResult.isApproved ?:true
 //					String vasTid =transactionResult.terminalID?:" "
@@ -1016,7 +1019,7 @@ public class TransResultActivity extends FuncActivity
         String TSI = appState.trans.getTSI();
         String cardType = appState.trans.getAppName();
         String AIP = appState.trans.getAIP();
-        String amount = (appState.trans.getTransAmount()/100)+"";
+        String amount = (appState.trans.getTransAmount())+"";
 		String Expiary = appState.trans.getExpiry();
         String othersAmount = appState.trans.getOthersAmount().toString();
 

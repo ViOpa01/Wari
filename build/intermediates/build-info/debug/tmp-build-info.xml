@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<instant-run
+    abi="armeabi-v7a,armeabi"
+    api-level="22"
+    build-mode="FULL"
+    density="xhdpi"
+    format="10"
+    pid="15688@FavourItex"
+    plugin-version="3.1.1"
+    timestamp="1563900009266"
+    token="2312972718471622181"
+    verifier="FULL_BUILD_REQUESTED"
+    version="22" >
+
+    <task
+        name="javac"
+        duration="0" />
+    <task
+        name="instant-run-dex"
+        duration="0" />
+    <task
+        name="instant-run-transform"
+        duration="0" />
+    <task
+        name="verifier"
+        duration="0" />
+
+    <artifact
+        location="C:\Users\Favour\AndroidStudioProjects\NIBSS\build\intermediates\instant-run-resources\resources-debug.ir.ap_"
+        type="RESOURCES" />
+
+</instant-run>

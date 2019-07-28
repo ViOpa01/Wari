@@ -175,7 +175,7 @@ public class Nibss {
         }
     }
 
-    //koko habbned
+
     private static class saveVasKeyHolder extends AsyncTask<VasTerminalData, Integer, Void> {
         protected Void doInBackground(VasTerminalData...vasTerminalData) {
             poslibdb.getVasTerminalDataDao().save(vasTerminalData[0]);
@@ -199,6 +199,7 @@ public class Nibss {
         }
     }
 
+    //For configuring the terminal
     public  void configureTerminal (final String terminalID, final Nibs<NIbbsData> t){
         Log.i("okh", "preping terminal");
 
@@ -287,6 +288,7 @@ public class Nibss {
     }
 
 
+    //Used to Make purchase
     public void goOnline(EmvCard emvCard, final Host.TransactionType transactionType,
                          final InputData inputData, KeyHolder keyHolder, ConfigData configData,
                          ConnectionData connectionData, final Nibs<TransactionResult> resultNibs){

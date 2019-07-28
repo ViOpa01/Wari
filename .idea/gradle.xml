@@ -9,6 +9,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/cloudpossdk" />
+            <option value="$PROJECT_DIR$/payviceconnect" />
             <option value="$PROJECT_DIR$/payviceconnect-debug" />
             <option value="$PROJECT_DIR$/payviceconnect-pfm" />
             <option value="$PROJECT_DIR$/payviceconnect_" />

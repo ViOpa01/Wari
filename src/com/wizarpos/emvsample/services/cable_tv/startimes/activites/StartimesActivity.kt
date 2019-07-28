@@ -47,6 +47,7 @@ import kotlinx.android.synthetic.main.activity_login.*
 
 import kotlinx.android.synthetic.main.content_startimes.*
 import org.jetbrains.anko.alert
+import org.jetbrains.anko.toast
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -307,6 +308,8 @@ class StartimesActivity : BaseServiceActivity() {
                 FuncActivity.appState.cableTv = true
                 FuncActivity.appState.needCard = true
                 appState.isWallet =false
+                FuncActivity.appState.trans.transAmount = (Integer.parseInt( appState.starTimesAmount) )* 100
+
                 FuncActivity.appState.startimesPayRequest = StartimesModel.payRequest(amount = amount, wallet = terminalId, username = userName, clientReference = clientReference, smartCardCode = smartCardCode.toLowerCase(), productCode = productCode,  password = password,paymentMethod = VasServices.CARD,type = "default",channel = "ANDROIDPOS",customerName =customerName ,phone =phone ,bouquet =bouquet ,pin =authPin ,pfm =pfm )
                 val intent = Intent(this, Sale::class.java)
                 startActivityForResult(intent, STARTIMES_REQUEST_CODE_CARD)
@@ -322,9 +325,19 @@ class StartimesActivity : BaseServiceActivity() {
             return false
         }
 
-        if (txtAmount.text.toString().isNullOrEmpty()) {
+        if (!txtAmount.text.toString().isNullOrEmpty()) {
+//
+//            if(txtAmount.text.toString().toInt() > 50){
+//               toast("Enter valid amount - amount must not be less than 50 Naira")
+//
+//
+//            } else {
+//                txtAmount.error = "Invalid Amount"
+//                return false
+//            }
+
+        }else {
             txtAmount.error = "Invalid Amount"
-//            Helper.showErrorAnim(txtAmount)
             return false
         }
 

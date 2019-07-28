@@ -199,22 +199,22 @@ public class ProcessEMVCardActivity extends FuncActivity
 					textLine1.setText("PLEASE INPUT PIN ON THE PINPAD");
 					mEMVProcessNextThread = new EMVProcessNextThread();
 					mEMVProcessNextThread.start();
-					Log.d("okh", "offline pin");
+					Log.d("okh", "offline pin >>>");
 					break;
 
 				case EMV_ONLINE_ENC_PIN:
 					inputPIN();
 //					mEMVProcessNextThread = new EMVProcessNextThread();
 //					mEMVProcessNextThread.start();
-					Log.d("okh", "online pin");
+					Log.d("okh", "online pin >>>");
 					//appState.trans.setEMVOnlineFlag(true);
 					break;
 				case EMV_PIN_BYPASS_CONFIRM:
 					confirmBypassPin();
-					Log.d("okh", "confirm");
+					Log.d("okh", "confirm >>");
 					break;
 				case EMV_PROCESS_ONLINE:
-					Log.d("okh", "process online");
+					Log.d("okh", "process online >>");
 					getEMVCardInfo();
 					appState.trans.setEMVOnlineFlag(true);
 						processOnline();
@@ -600,8 +600,7 @@ public class ProcessEMVCardActivity extends FuncActivity
 //		appState.trans.setICCRevData(iccData, 0, offset);
 //	}
 	
-	private void getEMVCardInfo()
-	{
+	private void getEMVCardInfo() {
 		byte[] tagData = new byte[100];
 		int tagDataLength = 0;
 
@@ -729,7 +728,7 @@ public class ProcessEMVCardActivity extends FuncActivity
 	
     class EMVThread extends Thread
     {
-    	public void run() 
+    	public void run()
     	{ 
     		super.run();
     		emv_trans_initialize();
@@ -751,7 +750,11 @@ public class ProcessEMVCardActivity extends FuncActivity
     
     class EMVProcessNextThread extends Thread
     {
-    	public void run() 
+
+
+
+
+		public void run()
     	{ 
     		super.run();
        		emv_process_next();

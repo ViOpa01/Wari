@@ -33,6 +33,8 @@ import com.wizarpos.emvsample.transaction.Nibss;
 import com.wizarpos.jni.PinPadInterface;
 import com.wizarpos.util.StringUtil;
 
+import static com.wizarpos.util.AppUtil.resetAllServicesStates;
+
 public class FuncMenuActivity extends FuncActivity
 {
 	private TextView textTitle  = null;
@@ -128,6 +130,7 @@ public class FuncMenuActivity extends FuncActivity
 			setEMVTermInfo();
 		}
 		startIdleTimer(TIMER_IDLE, 300);
+        resetAllServicesStates();
 	}
 
 	@Override
@@ -136,6 +139,7 @@ public class FuncMenuActivity extends FuncActivity
 		resetPurchase();
 		if(debug)Log.d(APP_TAG, "FuncMenuActivity onResume");
 		super.onResume();
+        resetAllServicesStates();
 	}
 
 	@Override
@@ -143,6 +147,7 @@ public class FuncMenuActivity extends FuncActivity
 	{
 		if(debug)Log.d(APP_TAG, "FuncMenuActivity onStop");
 		super.onStop();
+        resetAllServicesStates();
 	}
 
 	@Override
@@ -190,6 +195,7 @@ public class FuncMenuActivity extends FuncActivity
 //				break;
 			case R.id.bFunc_Sale:
 				appState.needCard = true;
+				appState.isPurchase=true;
 				sale();
 				break;
 

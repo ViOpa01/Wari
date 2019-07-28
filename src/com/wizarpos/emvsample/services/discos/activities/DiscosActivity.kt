@@ -14,7 +14,7 @@ class DiscosActivity : AppCompatActivity(),View.OnClickListener {
         const  val SERVICE = "service"
     }
 
-
+///fcfbfb e0e0e0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

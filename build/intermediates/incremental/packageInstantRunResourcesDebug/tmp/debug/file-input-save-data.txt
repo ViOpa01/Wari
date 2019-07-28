@@ -1,0 +1,11 @@
+#Internal package file, do not edit.
+#Mon Jul 22 08:54:11 WAT 2019
+1.base=C\:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\assets\\debug
+0.baseType=DIRECTORY
+1.baseType=DIRECTORY
+count=2
+1.set=ASSET
+0.path=config.xml
+0.set=ASSET
+0.base=C\:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\assets\\debug
+1.path=basic.xml

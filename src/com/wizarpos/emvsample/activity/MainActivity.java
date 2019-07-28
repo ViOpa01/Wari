@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.ColorSpace;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -14,6 +16,8 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -22,11 +26,14 @@ import com.cloudpos.POSTerminal;
 import com.cloudpos.printer.Format;
 import com.cloudpos.printer.PrinterDevice;
 import com.google.gson.Gson;
+import com.iisysgroup.androidlite.utils.PrintUtils;
+import com.squareup.picasso.Picasso;
 import com.wizarpos.emvsample.MainApp;
 import com.wizarpos.emvsample.R;
 import com.wizarpos.emvsample.activity.login.Helper;
 import com.wizarpos.emvsample.activity.login.securestorage.SecureStorage;
 import com.wizarpos.emvsample.constant.Constants;
+import com.wizarpos.emvsample.models.ReceiptModel;
 import com.wizarpos.emvsample.parameter.BalanceResponse;
 import com.wizarpos.emvsample.printer.PrinterCommand;
 import com.wizarpos.emvsample.printer.PrinterException;
@@ -40,6 +47,9 @@ import com.wizarpos.util.VasServices;
 import java.io.ByteArrayOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import static com.wizarpos.emvsample.activity.FuncActivity.appState;
 
@@ -55,33 +65,62 @@ public class MainActivity extends Activity {
     private Context context = MainActivity.this;
     private RelativeLayout printLayout;
     private boolean isDonePrinting=false;
+    private LinearLayout receipt;
+    private TextView merchantName;
+    int resourceId;
+    private TextView receiptOwner;
+
+    private ImageView bankImage;
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+//        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_print);
+
+        receipt= findViewById(R.id.receipt);
+        merchantName= findViewById(R.id.merchantName);
+        bankImage= findViewById(R.id.bankImage);
+        receiptOwner =findViewById(R.id.receiptOwner);
+        btnprintMerchant = findViewById(R.id.printMerchant);
+//        printLayout = findViewById(R.id.printLayout);
+
+        String bankNumber =SecureStorage.retrieve(Helper.TERMINAL_ENTERED_BY_USER,"").substring(0,4) +"png";
+        Log.d("MainActivity", bankNumber);
+        Picasso.get().load("http://www.merchant.payvice.com/external-assets/logos/2033.png").into(bankImage);
+
         walletID = SecureStorage.retrieve(Helper.TERMINAL_ID, "");
         printerDevice = (PrinterDevice) POSTerminal.getInstance(getApplicationContext()).getDevice(
                 "cloudpos.device.printer");
         Intent intent = getIntent();
         final TransactionModel transactionModel = (TransactionModel) intent.getSerializableExtra("transactionModel");
         final String[] copy = {intent.getStringExtra("copy")};
-        btnprintMerchant = findViewById(R.id.printMerchant);
-        printLayout = findViewById(R.id.printLayout);
-        printLayout.setOnClickListener(
-                new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                isDonePrinting =true;
 
-                finish();
-            }
-        });
+
+        receiptOwner.setText(copy[0]);
+
+
+//        printLayout.setOnClickListener(
+//                new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                isDonePrinting =true;
+//
+//                finish();
+//            }
+//        });
+
+
+//        title = "Merchant's copy"
+//        message = "Press OK to print Merchant's copy"
+
         printImage(transactionModel, copy[0]);
         btnprintMerchant.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                receiptOwner.setText(copy[0]);
                 copy[0] = "*** MERCHANT COPY ***";
                 printImage(transactionModel, copy[0]);
                 isDonePrinting=true;
@@ -98,8 +137,11 @@ public class MainActivity extends Activity {
         return true;
     }
 
-    private Handler handler = new Handler();
+    private void steUpView (){
 
+    }
+
+    private Handler handler = new Handler();
     private Runnable myRunnable = new Runnable() {
         public void run() {
 //            txt.setText(str);
@@ -143,10 +185,13 @@ public class MainActivity extends Activity {
 
 
                     String bankLogoName = "";
-                    int resourceId  = R.drawable.wari_small;;
+
+
                     if(transactionModel.getVasDetails().getLogo() != 0) {
                         resourceId = transactionModel.getVasDetails().getLogo();
-                        }
+                        bankImage.setImageResource(resourceId);
+
+                    }
 
 
                         Log.d("Yeah >>>", String.valueOf(resourceId));
@@ -157,17 +202,19 @@ public class MainActivity extends Activity {
 
                     printerDevice.printBitmap(format, bitmap);
                 }catch (Exception e){
-
+                    resourceId  = R.drawable.wari_small;;
                 }
-
                 printerDevice.printlnText("\n");
+
+
+                LinkedHashMap<String,String> receiptMap = new LinkedHashMap<>();
+
+
 
 
 
 //               if(transactionModel.getVasDetails() != null ) {
-
-
-                                       printerDevice.printlnText(format2,  SecureStorage.retrieve(Helper.VAS_MERCHANT_NAME,""));
+                printerDevice.printlnText(format2,  SecureStorage.retrieve(Helper.VAS_MERCHANT_NAME,""));
 
                 printerDevice.printlnText(format2,  SecureStorage.retrieve(Helper.MID,"") + "     " + SecureStorage.retrieve(Helper.TERMINAL_ENTERED_BY_USER,""));
 //               }else{
@@ -226,36 +273,32 @@ public class MainActivity extends Activity {
                 printerDevice.printlnText(format, appState.vasTransactionstatus);
 
 
-//                if (transactionModel.getVasDetails().getError() == true){
-//
-//                }else {
-//
-//                }
 
 
-//                if(transactionModel.getVasDetails() != null){
-//                    if (transactionModel.getVasDetails().getError() ) {
-//                        printerDevice.printText(format, transactionModel.getVasDetails().getTransactionStatusMessage());
-//                    }else {
-//                        printerDevice.printText(format, transactionModel.getCardDetails().getTransactionStatus());
-//                    }
-//                }
+
+
+
+
                 printerDevice.printlnText("\n");
 
-//                if(transactionModel.getVasDetails() != null ) {
-                    printerDevice.printlnText(format2, "TID:                " + SecureStorage.retrieve(Helper.TERMINAL_ENTERED_BY_USER,""));
-                    printerDevice.printlnText(format2, "TXN TID :           " +  SecureStorage.retrieve(Helper.VAS_TERMINAL_ID,""));
-                     if(!transactionModel.getVasDetails().getTransactionRef().equals("")) {
-                         printerDevice.printlnText(format2, "REF:" + transactionModel.getVasDetails().getTransactionRef());
-                     }
-//                    printerDevice.printlnText(format2, "WID: " + transactionModel.getVasDetails().getWalletId());
-//                }else {
+                 String terminalId= SecureStorage.retrieve(Helper.TERMINAL_ENTERED_BY_USER,"");
+                 String vasTerminalId = SecureStorage.retrieve(Helper.VAS_TERMINAL_ID,"");
+                 String walletId =SecureStorage.retrieve(Helper.TERMINAL_ID,"");
+                    printerDevice.printlnText(format2, "TID:                " + terminalId);
+                    printerDevice.printlnText(format2, "TXN TID :           " + vasTerminalId);
+                    printerDevice.printlnText(format2, "WID:                 " + walletId);
+
+                receiptMap.put("TID",terminalId);
+                receiptMap.put("TXN TID",vasTerminalId);
+                receiptMap.put("WID",walletId);
 
 
-//                }
+                if(!transactionModel.getVasDetails().getTransactionRef().equals("")) {
+                    String transactionRef =transactionModel.getVasDetails().getTransactionRef();
+                    receiptMap.put("REF",transactionRef);
 
-                    printerDevice.printlnText(format2, "WID:                 " + SecureStorage.retrieve(Helper.TERMINAL_ID,""));
-
+                    printerDevice.printlnText(format2, "REF:" +transactionRef );
+                }
 
 
                 if(!(transactionModel.getVasDetails().getVasType().isEmpty() )|| !(transactionModel.getVasDetails().getVasType() == null) ) {
@@ -270,8 +313,13 @@ public class MainActivity extends Activity {
                             Models.AirtimeModel airtimeModel = (Models.AirtimeModel) transactionModel.getVasDetails().getVasTypeModel();
 
                             if(!airtimeModel.getError()) {
-                    printerDevice.printlnText(format2, "RECIPIENT :      " + airtimeModel.getRecepiant_phone());
-                                printerDevice.printlnText(format2, "STAN:             " + transactionModel.getVasDetails().getStan());
+                                String phone = airtimeModel.getRecepiant_phone();
+                                String stan = transactionModel.getVasDetails().getStan();
+                                receiptMap.put("RECIPIENT",phone);
+                                receiptMap.put("STAN",stan);
+
+                                printerDevice.printlnText(format2, "RECIPIENT :      " + phone);
+                                printerDevice.printlnText(format2, "STAN:             " + stan);
 
                                 //              printerDevice.printlnText(format2, "TRANS SEQ : " + transactionModel.getVasDetails());
 //                    printerDevice.printlnText(format2, "DATE :     " + transactionModel.getVasDetails().getDateTime());
@@ -283,10 +331,19 @@ public class MainActivity extends Activity {
                             Models.TransferModel transferModel = (Models.TransferModel) transactionModel.getVasDetails().getVasTypeModel();
 
                             if(!transferModel.getError()) {
-                                printerDevice.printlnText(format2, "RECIPIENT :       " + transferModel.getRecepiant());
-                                printerDevice.printlnText(format2, "STAN :             " + transactionModel.getVasDetails().getStan());
-                                printerDevice.printlnText(format2, "ACC. NAME :       " + transferModel.getAccountName());
-                                printerDevice.printlnText(format2, "REC. Bank:             " + transferModel.getRecivingBank());
+                                String recipient = transferModel.getRecepiant();
+                                String stan = transactionModel.getVasDetails().getStan();
+                                String acountName =transferModel.getAccountName();
+                                String recivingBank =transferModel.getRecivingBank();
+
+                                receiptMap.put("RECIPIENT",recipient);
+                                receiptMap.put("STAN",stan);
+                                receiptMap.put("ACC. NAME",acountName);
+                                receiptMap.put("REC. Bank",recivingBank);
+                                printerDevice.printlnText(format2, "RECIPIENT :       " + recipient);
+                                printerDevice.printlnText(format2, "STAN :             " +stan );
+                                printerDevice.printlnText(format2, "ACC. NAME :       " + acountName);
+                                printerDevice.printlnText(format2, "REC. Bank:             " + recivingBank);
 
 //                  printerDevice.printlnText(format2, "TRANS SEQ :  " + transactionModel.getVasDetails());
 //                    printerDevice.printlnText(format2, "DATE :       " + transactionModel.getVasDetails().getDateTime());
@@ -318,8 +375,15 @@ public class MainActivity extends Activity {
 
                             if(!cableTvModel.getError()) {
 
-                    printerDevice.printlnText(format2, "IUC :              " + cableTvModel.getIuc());
-                    printerDevice.printlnText(format2, "STAN:             " + transactionModel.getVasDetails().getStan());
+                                String iuc = cableTvModel.getIuc();
+                                String stan = transactionModel.getVasDetails().getStan();
+
+                                receiptMap.put("IUC",iuc);
+                                receiptMap.put("STAN",stan);
+
+
+                    printerDevice.printlnText(format2, "IUC :              " + iuc );
+                    printerDevice.printlnText(format2, "STAN:             " +stan  );
 
 //
                             }
@@ -329,20 +393,39 @@ public class MainActivity extends Activity {
                         case Models.DISCO: {
                             Models.DiscosModel discosModel = ( Models.DiscosModel) transactionModel.getVasDetails().getVasTypeModel();
 
+
+
+
+
+
                             if(!discosModel.getRecepiant_name().trim().equals("")) {
-                                printerDevice.printlnText(format2, "NAME :    " + discosModel.getRecepiant_name());
-//                  printerDevice.printlnText(format2, "TRANS SEQ : " + transactionModel.getVasDetails());
+                                String recepiant_name = discosModel.getRecepiant_name();
+                                receiptMap.put("NAME",recepiant_name);
+
+
+
+                                printerDevice.printlnText(format2, "NAME :    " + recepiant_name);
                             }
                             if(!discosModel.getAddress().trim().equals("")) {
-                                printerDevice.printlnText(format2, "ADDR :   " + discosModel.getAddress());
+                                String address = discosModel.getAddress();
+                                receiptMap.put("ADDR",address);
+
+
+                                printerDevice.printlnText(format2, "ADDR :   " + address);
                             }
                             if(!discosModel.getMeterType().trim().equals("")) {
-                                printerDevice.printlnText(format2, "METER TYPE :            " + discosModel.getMeterType());
+                                String meterType =discosModel.getMeterType();
+                                receiptMap.put("METER TYPE",meterType);
+
+
+                                printerDevice.printlnText(format2, "METER TYPE :            " + meterType);
 
                             }
 
                             if(!discosModel.getMeterNumber().equals("")) {
-                                printerDevice.printlnText(format2, "METER NO :        " + discosModel.getMeterNumber());
+                                String meterNumber =discosModel.getMeterNumber();
+                                receiptMap.put("METER NO",meterNumber);
+                                printerDevice.printlnText(format2, "METER NO :          " + meterNumber);
                             }
                             if(!discosModel.getError()) {
 
@@ -351,28 +434,49 @@ public class MainActivity extends Activity {
                                 Log.d("discosModel.getUnit().trim() !=\"\"", String.valueOf(discosModel.getUnit().trim() !="").toString());
                                 Log.d("String.valueOf(discosModel.getUnit().trim().equals()).toString()", String.valueOf(discosModel.getUnit().trim().equals("")).toString());
 
+
+
+
+
+
                                 if(!discosModel.getUnit().trim().equals("")) {
-                                    printerDevice.printlnText(format2, "UNIT :            " + discosModel.getUnit());
+                                    String unit = discosModel.getUnit();
+                                    receiptMap.put("UNIT",unit);
+
+                                    printerDevice.printlnText(format2, "UNIT :            " + unit );
                                 }
                                 if(!discosModel.getUnit_value().trim().equals("")) {
+                                    String unit_value = discosModel.getUnit_value();
+                                    receiptMap.put("UNIT VALUE",unit_value);
+
                                     printerDevice.printlnText(format2, "UNIT VALUE :      " + discosModel.getUnit_value());
                                 }
                                 if(!discosModel.getArras().trim() .equals("")) {
-                                    printerDevice.printlnText(format2, "ARREARS :         " + discosModel.getArras());
+                                    String arras =discosModel.getArras();
+                                    receiptMap.put("ARREARS",arras);
+
+
+                                    printerDevice.printlnText(format2, "ARREARS :         " +arras );
                                 }
                                 if(!discosModel.getTarrif().trim().equals("")) {
+                                    String tarrif =discosModel.getTarrif();
+                                    receiptMap.put("TARRIF",tarrif);
                                     printerDevice.printlnText(format2, "TARRIF :          " + discosModel.getTarrif());
                                 }
 
                                     if(!discosModel.getToken().equals("")) {
-                                        printerDevice.printlnText(format2, "TOKEN  :   " + discosModel.getToken());
+                                        String token =discosModel.getToken();
+                                        receiptMap.put("TOKEN",token);
+                                        printerDevice.printlnText(format2, "TOKEN  :   " + token );
 
                                     }
 
-                                if(!transactionModel.getVasDetails().getStan().equals(""))
-                                printerDevice.printlnText(format2, "STAN:             " + transactionModel.getVasDetails().getStan());
+                                if(!transactionModel.getVasDetails().getStan().equals("")) {
+                                    String stan =transactionModel.getVasDetails().getStan();
+                                    receiptMap.put("STAN",stan);
+                                    printerDevice.printlnText(format2, "STAN:             " +stan );
 
-
+                                }
 
 //                    printerDevice.printlnText(format2, "DATE :       " + transactionModel.getVasDetails().getDateTime());
                             }
@@ -387,13 +491,19 @@ public class MainActivity extends Activity {
                         }
 
                     }
-
+                    String paymentMethod = "Card";
                     if(appState.isWallet) {
-                        printerDevice.printlnText(format2, "PAYMENT METHOD :  " + "Cash");
-                    }else{
-                        printerDevice.printlnText(format2, "PAYMENT METHOD :  " + "Card");
-
+                        paymentMethod ="Cash";
                     }
+
+                    printerDevice.printlnText(format2, "PAYMENT METHOD :     " + paymentMethod);
+
+
+
+                    receiptMap.put("PAYMENT METHOD ",paymentMethod);
+
+
+
                 }
          String date = transactionModel.getCardDetails().getISODateTime().trim().equals("")?transactionModel.getVasDetails().getDateTime().trim():transactionModel.getCardDetails().getISODateTime().trim();
                 printerDevice.printlnText(format2, "DATE:       " + date  );
@@ -402,27 +512,45 @@ public class MainActivity extends Activity {
 
 
                 if(!appState.isWallet) {
-//                       printerDevice.printlnText(format2, "TRANSACTION TYPE:      " + transactionModel.getCardDetails().getTransactionType().toUpperCase());
-                       printerDevice.printlnText(format2, "CARDHOLDER NAME :  " + transactionModel.getCardDetails().getCardholderName());
-                       printerDevice.printlnText(format2, "RRN:             " + transactionModel.getCardDetails().getRrn());
-//                       printerDevice.printlnText(format2, "stan:      " + transactionModel.getCardDetails().getTransactionType().toUpperCase());
-//                if (transactionModel.getTransactionType().equalsIgnoreCase("airtime") || transactionModel.getTransactionType().equalsIgnoreCase("data")){
-//                    printerDevice.printlnText(format2, "PHONE: "+transactionModel.getPhoneNumber());
-//                }
+
+                    String cardholderName = transactionModel.getCardDetails().getCardholderName();
+                    String rrn = transactionModel.getCardDetails().getRrn();
+                    String merchantName =transactionModel.getCardDetails().getMerchantName();
+                    String pan =transactionModel.getCardDetails().getPan();
+                    String ticket = transactionModel.getCardDetails().getTicket();
+                    String tvr = transactionModel.getCardDetails().getTVR();
+                    String aid =transactionModel.getCardDetails().getAID();
+                    String cardType =transactionModel.getCardDetails().getCardType();
+                    String expiry =transactionModel.getCardDetails().getExpiry();
 
 
-//                if (!transactionModel.getTransactionType().equalsIgnoreCase("transfer") && !transactionModel.getTransactionType().equalsIgnoreCase("airtime") && !transactionModel.getTransactionType().equalsIgnoreCase("data")){
-                       printerDevice.printlnText(format2, "MERCHANT:  " + transactionModel.getCardDetails().getMerchantName());
-                       printerDevice.printlnText(format2, "PAN:          " + transactionModel.getCardDetails().getPan());
-                       printerDevice.printlnText(format2, "TICKET:       " + transactionModel.getCardDetails().getTicket());
-//                    printerDevice.printlnText(format2, "UNRP:         "+transactionModel.getCardDetails().getUNRP()); Get stan !!!!!!
-//                    printerDevice.printlnText(format2, "AC:           "+transactionModel.getCardDetails().getAC());
-                       printerDevice.printlnText(format2, "TVR:          " + transactionModel.getCardDetails().getTVR());
-                       printerDevice.printlnText(format2, "AID:          " + transactionModel.getCardDetails().getAID());
-//                    printerDevice.printlnText(format2, "TSI:          "+transactionModel.getCardDetails().getTSI());
-                       printerDevice.printlnText(format2, "CARD TYPE:    " + transactionModel.getCardDetails().getCardType());
-                       printerDevice.printlnText(format2, "EXPIRY :          " + transactionModel.getCardDetails().getExpiry());
-//                }
+
+                    receiptMap.put("CARDHOLDER NAME",cardholderName);
+                    receiptMap.put("RRN",rrn);
+                    receiptMap.put("MERCHANT",merchantName);
+                    receiptMap.put("PAN",pan);
+                    receiptMap.put("TICKET",ticket);
+                    receiptMap.put("TVR",tvr);
+                    receiptMap.put("AID",aid);
+                    receiptMap.put("CARD TYPE",cardType);
+                    receiptMap.put("EXPIRY",expiry);
+
+
+
+
+
+
+
+
+                    printerDevice.printlnText(format2, "CARDHOLDER NAME :  " + cardholderName);
+                       printerDevice.printlnText(format2, "RRN:             " + rrn);
+                       printerDevice.printlnText(format2, "MERCHANT:  " + merchantName);
+                       printerDevice.printlnText(format2, "PAN:          " + pan);
+                       printerDevice.printlnText(format2, "TICKET:       " + ticket);
+                       printerDevice.printlnText(format2, "TVR:          " + tvr);
+                       printerDevice.printlnText(format2, "AID:          " + aid);
+                       printerDevice.printlnText(format2, "CARD TYPE:    " + cardType);
+                       printerDevice.printlnText(format2, "EXPIRY :          " + expiry);
                    }
 
 
@@ -430,22 +558,27 @@ public class MainActivity extends Activity {
                 Log.d("MainActivity", "printImage() called with: transactionModel getAmount = [" + transactionModel.getVasDetails().getAmount() + "], copy = [" +  transactionModel.getVasDetails().getAmount() + "]");
                 Log.d("MainActivity", "printImage() called with: transactionModel transactionModel.getCardDetails().getAmount() = [" + transactionModel.getCardDetails().getAmount() + "], getVasDetails().getAmount() = [" +  transactionModel.getVasDetails().getAmount() + "]");
                 Log.d("MainActivity", "printImage() called with: transactionModel transactionModel.getCardDetails().getAmount() = [" + ((transactionModel.getVasDetails().getAmount()).equals("0.00") ? transactionModel.getCardDetails().getAmount(): transactionModel.getVasDetails().getAmount()) + "]");
-                String amount = (transactionModel.getVasDetails().getAmount()).equals("0.00") ? transactionModel.getCardDetails().getAmount(): transactionModel.getVasDetails().getAmount();
+//                String amount = (transactionModel.getVasDetails().getAmount()).equals("0.00") ? transactionModel.getCardDetails().getAmount(): (transactionModel.getVasDetails().getAmount());appState.trans.transAmount
+                String amount = (transactionModel.getVasDetails().getAmount()).equals("0.00") ? transactionModel.getCardDetails().getAmount(): (appState.trans.getTransAmount().toString());
 
                Log.d("amount",amount);
+//               String nairaSign= 	\u20A6;
                 printerDevice.printlnText("\n");
                 printerDevice.printlnText(format, "***********************");
 //                if(transactionModel.getCardDetails() != null ) {
 //                    printerDevice.printlnText(format, "NGN " +transactionModel.getVasDetails().getAmount());
 //                }else{
 //                    printerDevice.printlnText(format, "NGN " + transactionModel.getCardDetails().getAmount());Double.valueOf(amount)))
-                              printerDevice.printlnText(format, ("NGN " + amount));
+                              printerDevice.printlnText(format, ("NGN " +  AppUtil.formatAmount(amount,true) ));
 //                }
                 printerDevice.printlnText(format, "***********************");
-
+               String transactionReason = "";
                 if(transactionModel.getVasDetails().getTransactionStatusMessage().isEmpty() || transactionModel.getVasDetails().getTransactionStatusMessage() == null ) {
+                    transactionReason =transactionModel.getCardDetails().getTransactionStatusReason();
                     printerDevice.printlnText(format, transactionModel.getCardDetails().getTransactionStatusReason());
                                    }else{
+                    transactionReason =transactionModel.getVasDetails().getTransactionStatusMessage();
+
                     printerDevice.printlnText(format, transactionModel.getVasDetails().getTransactionStatusMessage());
 
                 }
@@ -456,6 +589,12 @@ public class MainActivity extends Activity {
                 printerDevice.printlnText(format, "www.Wari.com");
                 printerDevice.printlnText(format, "0700-2255-4839");
                 printerDevice.printlnText("\n");
+
+                ReceiptModel receiptModel = new ReceiptModel(date, "Data Purchase",  appState.vasTransactionstatus, receiptMap,amount, transactionReason);
+
+                View view = PrintUtils.INSTANCE.generateReceipt(this, receiptModel, receipt);
+//                Bitmap bitmap = getBitmapFromView(view);
+//                printerDevice.printBitmap(format, bitmap);
 
                 printerDevice.close();
 
@@ -468,6 +607,25 @@ public class MainActivity extends Activity {
         } catch (DeviceException e) {
             e.printStackTrace();
         }
+    }
+
+    private Bitmap  getBitmapFromView( View view ){
+        //Define a bitmap with the same size as the view
+        Bitmap returnedBitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
+        //Bind a canvas to it
+        Canvas canvas = new Canvas(returnedBitmap);
+        //Get the view's background
+        Drawable bgDrawable = view.getBackground();
+        if (bgDrawable != null)
+            //has background drawable , then draw it on the canvas
+            bgDrawable.draw(canvas);
+        else
+            //does not have background drawable, then draw white background on the canvas
+            canvas.drawColor(Color.WHITE);
+        // draw the view on the canvas
+        view.draw(canvas);
+        //return the bitmap
+        return returnedBitmap;
     }
 
 

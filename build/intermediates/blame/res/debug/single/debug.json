@@ -312,6 +312,10 @@
         "source": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\res\\drawable-ldpi\\bg_main.png"
     },
     {
+        "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\layout-port_activity_print.xml.flat",
+        "source": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\res\\layout-port\\activity_print.xml"
+    },
+    {
         "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_ic_refresh_black_24dp.png.flat",
         "source": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\generated\\res\\pngs\\debug\\drawable-hdpi\\ic_refresh_black_24dp.png"
     },
@@ -2654,6 +2658,10 @@
     {
         "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4_abc_scrubber_primary_mtrl_alpha.9.png.flat",
         "source": "C:\\Users\\Favour\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\84c0c5be61e0faef3d73533d267dfc8c\\res\\drawable-xxhdpi-v4\\abc_scrubber_primary_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\layout_individual_receipt_item.xml.flat",
+        "source": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\res\\layout\\individual_receipt_item.xml"
     },
     {
         "merged": "C:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\res\\merged\\debug\\layout_design_bottom_navigation_item.xml.flat",
