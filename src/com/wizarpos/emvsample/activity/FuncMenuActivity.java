@@ -21,6 +21,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+import com.wizarpos.emvsample.AllVasActivity;
 import com.wizarpos.emvsample.activity.login.LoginActivity;
 import com.wizarpos.emvsample.activity.login.securestorage.SecureStorage;
 import com.wizarpos.emvsample.payments_menu.transfer.TransferAmountEntry;
@@ -33,6 +35,9 @@ import com.wizarpos.emvsample.transaction.Nibss;
 import com.wizarpos.jni.PinPadInterface;
 import com.wizarpos.util.StringUtil;
 
+import org.jetbrains.anko.AlertBuilder;
+import org.jetbrains.anko.AlertDialogBuilder;
+
 import static com.wizarpos.util.AppUtil.resetAllServicesStates;
 
 public class FuncMenuActivity extends FuncActivity
@@ -43,6 +48,7 @@ public class FuncMenuActivity extends FuncActivity
 
 	private ImageView ImageViewSale = null;
 	private ImageView ImageViewLastPBOC = null;
+	private ImageView ImageViewVas = null;
 	private ImageView ImageViewTrans = null;
 	private ImageView ImageViewSettle = null;
 	private ImageView ImageViewEncrypt = null;
@@ -51,8 +57,8 @@ public class FuncMenuActivity extends FuncActivity
 	private ImageView ImageViewwithdrawal = null;
 	private ImageView ImageViewAirtime = null;
 
-    private ImageView ImageViewElectricity= null;
-    private ImageView ImageViewCableTv= null;
+	private ImageView ImageViewElectricity= null;
+	private ImageView ImageViewCableTv= null;
 	private ImageView purchaseCashBack;
 	private AlertDialog alertDialog;
 	private ImageView ImageViewEod;
@@ -79,14 +85,20 @@ public class FuncMenuActivity extends FuncActivity
 		ImageViewSale = findViewById(R.id.bFunc_Sale);
 		ImageViewSale.setOnClickListener(new ClickListener());
 
-		ImageViewLastPBOC = findViewById(R.id.bFunc_LastPBOC);
-		ImageViewLastPBOC.setOnClickListener(new ClickListener());
+		ImageViewVas = findViewById(R.id.vas );
+		ImageViewVas.setOnClickListener(new ClickListener());
 
 		ImageViewTrans = findViewById(R.id.bFunc_Trans);
 		ImageViewTrans.setOnClickListener(new ClickListener());
-
-		ImageViewAirtime = findViewById(R.id.bFunc_Airtime);
-		ImageViewAirtime.setOnClickListener(new ClickListener());
+//
+//		ImageViewAirtime = findViewById(R.id.bFunc_Airtime);
+//		ImageViewAirtime.setOnClickListener(new ClickListener());
+//
+//		ImageViewElectricity = findViewById(R.id.imgVwElectricity);
+//		ImageViewElectricity.setOnClickListener(new ClickListener());
+//
+//		ImageViewCableTv= findViewById(R.id.imgVwCableTv);
+//		ImageViewCableTv.setOnClickListener(new ClickListener());
 
 		ImageViewEncrypt = findViewById(R.id.bFunc_encrypt);
 		ImageViewEncrypt.setOnClickListener(new ClickListener());
@@ -106,11 +118,7 @@ public class FuncMenuActivity extends FuncActivity
 		ImageViewsignOut = findViewById(R.id.signOut);
 		ImageViewsignOut.setOnClickListener(new ClickListener());
 
-        ImageViewElectricity = findViewById(R.id.imgVwElectricity);
-        ImageViewElectricity.setOnClickListener(new ClickListener());
 
-        ImageViewCableTv= findViewById(R.id.imgVwCableTv);
-        ImageViewCableTv.setOnClickListener(new ClickListener());
 	}
 
 	private void initToolbar() {
@@ -118,6 +126,7 @@ public class FuncMenuActivity extends FuncActivity
 		setSupportActionBar(toolbar);
 		ActionBar actionBar = getSupportActionBar();
 		actionBar.setTitle("WARI");
+
 	}
 
 	@Override
@@ -199,73 +208,60 @@ public class FuncMenuActivity extends FuncActivity
 				sale();
 				break;
 
-			case R.id.bFunc_LastPBOC:
-				startActivity(new Intent(FuncMenuActivity.this, GetMasterKey.class));
-				finish();
+				case R.id.vas:
+				startActivity(new Intent(FuncMenuActivity.this, AllVasActivity.class));
+//				finish();
 				break;
 
 			case R.id.bFunc_Trans:
 				startActivity(new Intent(FuncMenuActivity.this, WalletBalance.class));
 				break;
 
-			case R.id.bFunc_Airtime:
-				startActivity(new Intent(FuncMenuActivity.this, AirtimeDataActivity.class));
-				//finish();
-					break;
-
-                case R.id.imgVwElectricity:
-                    startActivity(new Intent(FuncMenuActivity.this, DiscosActivity.class));
-                    //finish();
-                    break;
-
-                case R.id.imgVwCableTv:
-                    startActivity(new Intent(FuncMenuActivity.this, CableTvActivity.class));
-                    //finish();
-                    break;
-
-			case R.id.bFunc_Settle:
-				AlertDialog.Builder alert = new AlertDialog.Builder(FuncMenuActivity.this, R.style.AlertDialogCustom);
-				alert.setTitle("Supervisor Pin");
-				final EditText editText = new EditText(FuncMenuActivity.this);
-				editText.setHint("Enter Pin");
-				editText.setTextColor(Color.parseColor("#ffffff"));
-				editText.setInputType(InputType.TYPE_NUMBER_VARIATION_PASSWORD);
-				LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-				LinearLayout linearLayout = new LinearLayout(FuncMenuActivity.this);
-				linearLayout.setLayoutParams(params);
-				linearLayout.setPadding(10,10,10,10);
-				linearLayout.setOrientation(LinearLayout.VERTICAL);
-				linearLayout.addView(editText);
-				alert.setView(linearLayout);
-				alert.setCancelable(false);
-
-				alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						dialog.dismiss();
-					}
-				});
-
-				alert.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						String passwordEn = editText.getText().toString();
-						if(passwordEn.isEmpty()){
-							editText.setError("Empty Field");
-						}
-						if(passwordEn.equals("1414")){
-							startActivity(new Intent(FuncMenuActivity.this, RefundActivity.class));
-						}else{
-							Toast.makeText(FuncMenuActivity.this,"Invalid Pin", Toast.LENGTH_LONG).show();
-							dialog.dismiss();
-						}
-					}
-				});
-
-				alert.show();
 
 
-				break;
+//			case R.id.bFunc_Settle:
+//				AlertDialog.Builder alert = new AlertDialog.Builder(FuncMenuActivity.this, R.style.AlertDialogCustom);
+//				alert.setTitle("Supervisor Pin");
+//				final EditText editText = new EditText(FuncMenuActivity.this);
+//				editText.setHint("Enter Pin");
+//				editText.setTextColor(Color.parseColor("#ffffff"));
+//				editText.setInputType(InputType.TYPE_NUMBER_VARIATION_PASSWORD);
+//				LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//				LinearLayout linearLayout = new LinearLayout(FuncMenuActivity.this);
+//				linearLayout.setLayoutParams(params);
+//				linearLayout.setPadding(10,10,10,10);
+//				linearLayout.setOrientation(LinearLayout.VERTICAL);
+//				linearLayout.addView(editText);
+//				alert.setView(linearLayout);
+//				alert.setCancelable(false);
+//
+//				alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+//					@Override
+//					public void onClick(DialogInterface dialog, int which) {
+//						dialog.dismiss();
+//					}
+//				});
+//
+//				alert.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+//					@Override
+//					public void onClick(DialogInterface dialog, int which) {
+//						String passwordEn = editText.getText().toString();
+//						if(passwordEn.isEmpty()){
+//							editText.setError("Empty Field");
+//						}
+//						if(passwordEn.equals("1414")){
+//							startActivity(new Intent(FuncMenuActivity.this, RefundActivity.class));
+//						}else{
+//							Toast.makeText(FuncMenuActivity.this,"Invalid Pin", Toast.LENGTH_LONG).show();
+//							dialog.dismiss();
+//						}
+//					}
+//				});
+//
+//				alert.show();
+//
+//
+//				break;
 
 			case R.id.bFunc_encrypt:
 				//Encrypt();
@@ -294,11 +290,30 @@ public class FuncMenuActivity extends FuncActivity
 					break;
 
 				case R.id.signOut:
-					SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-					sharedPreferences.edit().clear().apply();
-					SecureStorage.deleteAll();
-					finish();
-					startActivity(new Intent(getBaseContext(), LoginActivity.class));
+
+          final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getBaseContext());
+
+					alertDialogBuilder.setMessage("Are you sure you want to log out");
+					alertDialogBuilder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+							sharedPreferences.edit().clear().apply();
+							SecureStorage.deleteAll();
+							startActivity(new Intent(getBaseContext(), LoginActivity.class));
+
+							finish();
+						}
+					});
+					alertDialogBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+
+						}
+					});
+					alertDialogBuilder.show();
+
+
 
 					break;
 

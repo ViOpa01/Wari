@@ -2533,6 +2533,8 @@ com/squareup/picasso/Utils$PicassoThreadFactory.class
 com/squareup/picasso/Utils.class
 com/wizarpos/EMVKernel/EMVCandidateList.class
 com/wizarpos/EMVKernel/EMVInitParam.class
+com/wizarpos/emvsample/AllVasActivity$ClickListener.class
+com/wizarpos/emvsample/AllVasActivity.class
 com/wizarpos/emvsample/BaseCard.class
 com/wizarpos/emvsample/BuildConfig.class
 com/wizarpos/emvsample/MainApp$1.class
@@ -2557,6 +2559,8 @@ com/wizarpos/emvsample/R$string.class
 com/wizarpos/emvsample/R$style.class
 com/wizarpos/emvsample/R$styleable.class
 com/wizarpos/emvsample/R.class
+com/wizarpos/emvsample/VasActivity$ClickListener.class
+com/wizarpos/emvsample/VasActivity.class
 com/wizarpos/emvsample/VasCommunicator.class
 com/wizarpos/emvsample/VasProcessActivity.class
 com/wizarpos/emvsample/VasPurchaseProcessor$mDb$2.class
@@ -3007,11 +3011,15 @@ com/wizarpos/emvsample/payments_menu/transfer/TransferAmountEntry$onActivityResu
 com/wizarpos/emvsample/payments_menu/transfer/TransferAmountEntry$onActivityResult$2$1.class
 com/wizarpos/emvsample/payments_menu/transfer/TransferAmountEntry$onActivityResult$2.class
 com/wizarpos/emvsample/payments_menu/transfer/TransferAmountEntry$payWithCard$1.class
+com/wizarpos/emvsample/payments_menu/transfer/TransferAmountEntry$verifyTransferAccountDetails$1$onFailure$1$1.class
+com/wizarpos/emvsample/payments_menu/transfer/TransferAmountEntry$verifyTransferAccountDetails$1$onFailure$1.class
 com/wizarpos/emvsample/payments_menu/transfer/TransferAmountEntry$verifyTransferAccountDetails$1$onResponse$1$1.class
 com/wizarpos/emvsample/payments_menu/transfer/TransferAmountEntry$verifyTransferAccountDetails$1$onResponse$1.class
 com/wizarpos/emvsample/payments_menu/transfer/TransferAmountEntry$verifyTransferAccountDetails$1$onResponse$2$1.class
 com/wizarpos/emvsample/payments_menu/transfer/TransferAmountEntry$verifyTransferAccountDetails$1$onResponse$2.class
 com/wizarpos/emvsample/payments_menu/transfer/TransferAmountEntry$verifyTransferAccountDetails$1.class
+com/wizarpos/emvsample/payments_menu/transfer/TransferAmountEntry$verifyWithdrawalAccountDetails$1$onFailure$1$1.class
+com/wizarpos/emvsample/payments_menu/transfer/TransferAmountEntry$verifyWithdrawalAccountDetails$1$onFailure$1.class
 com/wizarpos/emvsample/payments_menu/transfer/TransferAmountEntry$verifyWithdrawalAccountDetails$1$onResponse$1$1.class
 com/wizarpos/emvsample/payments_menu/transfer/TransferAmountEntry$verifyWithdrawalAccountDetails$1$onResponse$1.class
 com/wizarpos/emvsample/payments_menu/transfer/TransferAmountEntry$verifyWithdrawalAccountDetails$1$onResponse$2$1.class

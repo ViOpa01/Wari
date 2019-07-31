@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ColorSpace;
@@ -11,6 +12,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -28,6 +30,7 @@ import com.cloudpos.printer.PrinterDevice;
 import com.google.gson.Gson;
 import com.iisysgroup.androidlite.utils.PrintUtils;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.RequestCreator;
 import com.wizarpos.emvsample.MainApp;
 import com.wizarpos.emvsample.R;
 import com.wizarpos.emvsample.activity.login.Helper;
@@ -72,6 +75,9 @@ public class MainActivity extends Activity {
 
     private ImageView bankImage;
 
+    private RequestCreator picassoImage;
+    String logo="";
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -86,9 +92,26 @@ public class MainActivity extends Activity {
         btnprintMerchant = findViewById(R.id.printMerchant);
 //        printLayout = findViewById(R.id.printLayout);
 
-        String bankNumber =SecureStorage.retrieve(Helper.TERMINAL_ENTERED_BY_USER,"").substring(0,4) +"png";
-        Log.d("MainActivity", bankNumber);
-        Picasso.get().load("http://www.merchant.payvice.com/external-assets/logos/2033.png").into(bankImage);
+        if(!SecureStorage.retrieve(Helper.TERMINAL_ENTERED_BY_USER,"").equals("")) {
+            String bankNumber = SecureStorage.retrieve(Helper.TERMINAL_ENTERED_BY_USER, "").substring(0, 4) + ".png";
+            Log.d("MainActivity", bankNumber);
+
+            logo=  SecureStorage.retrieve(Helper.BANK_LOGO,"");
+
+            Log.d("Logo >>>>", logo);
+
+
+            if(logo.equals("")) {
+                picassoImage = Picasso.get().load("http://www.merchant.payvice.com/external-assets/logos/" + bankNumber);
+            }
+        }
+        else{
+
+        }
+
+
+
+
 
         walletID = SecureStorage.retrieve(Helper.TERMINAL_ID, "");
         printerDevice = (PrinterDevice) POSTerminal.getInstance(getApplicationContext()).getDevice(
@@ -124,7 +147,7 @@ public class MainActivity extends Activity {
                 copy[0] = "*** MERCHANT COPY ***";
                 printImage(transactionModel, copy[0]);
                 isDonePrinting=true;
-                finish();
+                onBackPressed();
             }
         });
 
@@ -185,24 +208,67 @@ public class MainActivity extends Activity {
 
 
                     String bankLogoName = "";
-
+                    Bitmap bitmap=null;
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
 
                     if(transactionModel.getVasDetails().getLogo() != 0) {
                         resourceId = transactionModel.getVasDetails().getLogo();
                         bankImage.setImageResource(resourceId);
+                        Log.d("Yeah >>>", String.valueOf(resourceId));
+                        Drawable drawable = getResources().getDrawable(resourceId);
+                        bitmap= ((BitmapDrawable) drawable).getBitmap();
+
+                    }else {
+
+                        Log.d("logo.equals(\"\") >>>",String.valueOf(logo.equals("")).toString());
+                        if(logo.equals("")) {
+                            picassoImage.into(bankImage);
+//                        bitmap= picassoImage.get();
+//                        Log.d("picassoImage.get() ",picassoImage.get().toString());
+                            Drawable drawable =null ;
+                                   drawable =bankImage.getDrawable();
+                            Log.d("logo drawable  >>>",String.valueOf(drawable==null));
+
+                            bitmap= ((BitmapDrawable) drawable).getBitmap();
+
+                            appState.bankLogo = bitmap;
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                            byte[] b = stream.toByteArray();
+                            String _sBankLogo = Base64.encodeToString(b, Base64.DEFAULT);
+                            Log.d("logo string  >>>",_sBankLogo);
+
+                            Boolean status = SecureStorage.store(Helper.BANK_LOGO,_sBankLogo);
+
+                            Log.d("logo stored status     >>>",String.valueOf(status));
+
+                            String val = SecureStorage.retrieve(Helper.BANK_LOGO,"");
+
+
+                            Log.d("logo retrived   >>>",val);
+
+
+                        }else{
+                            byte[] imageAsBytes = Base64.decode(logo.getBytes(), Base64.DEFAULT);
+                            bitmap = BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length);
+                            bankImage.setImageBitmap(bitmap);
+
+
+                        }
+
+
+
+
 
                     }
 
 
-                        Log.d("Yeah >>>", String.valueOf(resourceId));
-                        Drawable drawable = getResources().getDrawable(resourceId);
-                        Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
-                        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+
+
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
 
                     printerDevice.printBitmap(format, bitmap);
                 }catch (Exception e){
-                    resourceId  = R.drawable.wari_small;;
+                    resourceId  = R.drawable.wari_small;
                 }
                 printerDevice.printlnText("\n");
 
@@ -229,25 +295,40 @@ public class MainActivity extends Activity {
 
                 printerDevice.printText(format2, "--------------------------------");
                 printerDevice.printlnText("\n");
+
+                String transactionType="";
                 if (transactionModel.getVasDetails().getProduct().toUpperCase().isEmpty() || transactionModel.getVasDetails().getVasType().toUpperCase() ==null) {
                      //You can use the logo to determine what shows up here
                     //Better still include it in your VasModel object and genrel electric variable
                     if(appState.isTransfer) {
-                        printerDevice.printlnText(format, "Transfer".toUpperCase());
+                        transactionType = "Transfer".toUpperCase();
+
+//                        printerDevice.printlnText(format, );
 
                     }else if (appState.isWithdrawal) {
-                        printerDevice.printlnText(format, "Withdrawal".toUpperCase());
+                        transactionType = "Withdrawal".toUpperCase();
+//                        printerDevice.printlnText(format, );
 
                     }else{
 
-                        printerDevice.printlnText(format, "Purchase".toUpperCase());
+                        transactionType ="Purchase".toUpperCase();
+
+//                        printerDevice.printlnText(format, );
+
+
                     }
 
                 }
                 else
                     {
-                        printerDevice.printlnText(format, transactionModel.getVasDetails().getProduct().toUpperCase());
+                        transactionType=transactionModel.getVasDetails().getProduct().toUpperCase();
+//                        printerDevice.printlnText(format,transactionModel.getVasDetails().getProduct().toUpperCase() );
                     }
+
+                printerDevice.printlnText(format, transactionType);
+
+
+
                 printerDevice.printlnText(format, copy);
 
 //                if(!appState.cableTv && !appState.airtime && !appState.withdrawal && !appState.electricityBills) {
@@ -585,12 +666,14 @@ public class MainActivity extends Activity {
 
 
                 printerDevice.printlnText(format, "-----------------------");
-                printerDevice.printlnText(format, "WARI");
-                printerDevice.printlnText(format, "www.Wari.com");
+
+                printerDevice.printlnText(format, "TAMSLITE v(1.0.0) WA");
+                printerDevice.printlnText(format, "Powered by ITEX");
+                printerDevice.printlnText(format, "www.iisysgroup.com");
                 printerDevice.printlnText(format, "0700-2255-4839");
                 printerDevice.printlnText("\n");
 
-                ReceiptModel receiptModel = new ReceiptModel(date, "Data Purchase",  appState.vasTransactionstatus, receiptMap,amount, transactionReason);
+                ReceiptModel receiptModel = new ReceiptModel(date, transactionType,  appState.vasTransactionstatus, receiptMap,amount, transactionReason);
 
                 View view = PrintUtils.INSTANCE.generateReceipt(this, receiptModel, receipt);
 //                Bitmap bitmap = getBitmapFromView(view);
@@ -628,6 +711,27 @@ public class MainActivity extends Activity {
         return returnedBitmap;
     }
 
+
+
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(context, FuncMenuActivity.class);
+
+        startActivity(intent);
+
+    }
+
+//    @Override
+//    protected void onCancel()
+//    {
+//        onBackPressed();
+//    }
+//
+//    @Override
+//    protected void onBack()
+//    {
+//        onBackPressed();
+//    }
 
 
 //    /                                bankLogoName = transactionModel.getBankLogoName();

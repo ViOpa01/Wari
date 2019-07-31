@@ -6,6 +6,7 @@ import android.arch.persistence.room.Room;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.preference.PreferenceManager;
@@ -199,6 +200,7 @@ public class MainApp extends Application implements Constants
 	public boolean isTransfer =false;
 	public StartimesModel.payRequest startimesPayRequest;
 	public DstvModel.PayDetails dstvPayRequest;
+	public Bitmap bankLogo;
 
 
 

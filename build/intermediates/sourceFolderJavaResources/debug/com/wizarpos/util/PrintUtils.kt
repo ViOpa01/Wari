@@ -24,6 +24,8 @@ import com.iisysgroup.poslib.host.entities.TransactionResult
 import com.iisysgroup.poslib.utils.Utilities
 
 import com.wizarpos.emvsample.R
+import com.wizarpos.emvsample.activity.login.Helper
+import com.wizarpos.emvsample.activity.login.securestorage.SecureStorage
 import com.wizarpos.emvsample.models.ReceiptModel
 import com.wizarpos.util.AppUtil
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -92,10 +94,13 @@ object PrintUtils {
     fun generateReceipt(context: Context, receiptModel: ReceiptModel, totalReceipt: LinearLayout) : View {
 
         receiptModel.map.forEach{
+            totalReceipt. merchantName.text = SecureStorage.retrieve(Helper.VAS_MERCHANT_NAME, "")
+            totalReceipt.merchantId.text = SecureStorage.retrieve(Helper.MID, "")
+            totalReceipt.terminalid.text = SecureStorage.retrieve(Helper.TERMINAL_ENTERED_BY_USER, "")
             totalReceipt.transactionStatus.text = receiptModel.transactionStatus
             totalReceipt.datetime.text = receiptModel.date
             totalReceipt.transactionType.text = receiptModel.transactionType
-            totalReceipt.transactionStatusReason.text = receiptModel.transactionStatusReason
+//            totalReceipt.transactionStatusReason.text = receiptModel.transactionStatusReason
 
 
             val linearLayout = LayoutInflater.from(context).inflate(R.layout.individual_receipt_item, null, false)
@@ -143,7 +148,7 @@ object PrintUtils {
         Log.i("oky","parseLongIntoNaira "+ amount)
 
 
-        amountTextView.text = amount.replace("N","\u20A6")
+        amountTextView.text = "NGN" + amount.replace("N","\u20A6")
         amountTextView.textSize = 24f
         amountTextView.gravity = Gravity.CENTER_HORIZONTAL
 
@@ -154,21 +159,52 @@ object PrintUtils {
         starText2.gravity = Gravity.CENTER_HORIZONTAL
 
 
+        val transactionReason = TextView(context)
+        transactionReason.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        transactionReason.text = receiptModel.transactionStatusReason
+        transactionReason.textSize = 19f
+        transactionReason.gravity = Gravity.CENTER_HORIZONTAL
+
+
+        val blankline = TextView(context)
+        blankline.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        blankline.text = "_________________________"
+        blankline.textSize = 14f
+        blankline.gravity = Gravity.CENTER_HORIZONTAL
+
+        val versionText = TextView(context)
+        versionText.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        versionText.text = "TAMSLITE v(1.0.0) WA"
+        versionText.textSize = 19f
+        versionText.gravity = Gravity.CENTER_HORIZONTAL
 
         val poweredText = TextView(context)
         poweredText.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-        poweredText.text = "Powered by Itex Integrated Services"
+        poweredText.text = "Powered by ITEX"
+        poweredText.textSize = 19f
         poweredText.gravity = Gravity.CENTER_HORIZONTAL
+
+        val websiteText = TextView(context)
+        websiteText.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        websiteText.text = "www.iisysgroup.com"
+        websiteText.textSize = 19f
+        websiteText.gravity = Gravity.CENTER_HORIZONTAL
+
 
         val phoneNumber = TextView(context)
         phoneNumber.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         phoneNumber.text = "0700-2255-4839"
+        phoneNumber.textSize = 19f
         phoneNumber.gravity = Gravity.CENTER_HORIZONTAL
 
         totalReceipt.addView(starText)
         totalReceipt.addView(amountTextView)
         totalReceipt.addView(starText2)
+        totalReceipt.addView(transactionReason)
+        totalReceipt.addView(blankline)
+        totalReceipt.addView(versionText)
         totalReceipt.addView(poweredText)
+        totalReceipt.addView(websiteText)
         totalReceipt.addView(phoneNumber)
 
         return totalReceipt

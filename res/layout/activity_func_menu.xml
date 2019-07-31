@@ -21,82 +21,8 @@
             android:paddingLeft="50dp"
             android:paddingRight="50dp" >
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="80dp"
-                android:gravity="center"
-                android:orientation="vertical" >
-                <Button
-                    android:id="@+id/bFunc_Sale"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/selector_sale" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Purchase" />
-            </LinearLayout>
 
 
-            
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="80dp"
-                android:gravity="center"
-                android:visibility="gone"
-                android:orientation="vertical" >
-                <Button
-                    android:id="@+id/bFunc_LastPBOC"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/selector_card_query" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="LAST EMV INFO" />
-            </LinearLayout>
-
-
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:layout_marginRight="80dp"
-                android:gravity="center"
-                android:orientation="vertical" >
-                <Button
-                    android:id="@+id/bFunc_Trans"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/selector_query_trans_detail" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="TRANS RECORD" />
-            </LinearLayout>
-
-            
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:visibility="gone"
-                android:orientation="vertical" >
-
-                <Button
-                    android:id="@+id/bFunc_Settle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/selector_settle" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="SETTLE" />
-            </LinearLayout>
 
         </LinearLayout>
     </LinearLayout>

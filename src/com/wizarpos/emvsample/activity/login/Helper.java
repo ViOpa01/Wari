@@ -63,6 +63,7 @@ public class Helper {
     public static String VAS_TERMINAL_ID = "vas_terminalId";
     public static String VAS_MERCHANT_NAME = "vas_merchant_name";
     public static String TERMINAL_ENTERED_BY_USER = "terminal__id";
+    public static String BANK_LOGO = "bank_logo";
     public static String MID = "merchant_id";
     public static String NIBSS_IP = "nibss_ip";
     public static String NIBSS_PORT = "nibss_port";

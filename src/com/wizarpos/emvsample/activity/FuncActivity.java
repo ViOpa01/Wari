@@ -22,6 +22,8 @@ import com.cloudpos.jniinterface.IFuntionListener;
 import com.google.gson.Gson;
 import com.wizarpos.emvsample.MainApp;
 import com.wizarpos.emvsample.R;
+import com.wizarpos.emvsample.activity.login.Helper;
+import com.wizarpos.emvsample.activity.login.securestorage.SecureStorage;
 import com.wizarpos.emvsample.constant.Constants;
 import com.wizarpos.emvsample.keys.AuthInfo;
 import com.wizarpos.emvsample.keys.KeyData;
@@ -445,7 +447,11 @@ public class FuncActivity extends AppCompatActivity implements Constants, IFunti
         appState = ((MainApp)getApplicationContext());
         Log.d("Funcactivity   OnActivity result: >>>>>>", new Gson().toJson(appState.getState()));
 		Log.d(" Funcactivity    onCreate: >>>>>>", "Here ");
-    }
+//		String logo=  SecureStorage.retrieve(Helper.BANK_LOGO,"");
+//
+//		Log.d("Logo >>>>", logo);
+
+	}
 
     @Override
     protected void onStop()

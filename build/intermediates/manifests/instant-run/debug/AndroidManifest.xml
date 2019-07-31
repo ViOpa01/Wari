@@ -38,6 +38,10 @@
         android:label="@string/app_name"
         android:testOnly="true"
         android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.wizarpos.emvsample.AllVasActivity"
+            android:screenOrientation="portrait" />
+        <!-- <activity android:name=".VasActivity"></activity> -->
         <activity android:name="com.wizarpos.emvsample.services.cable_tv.multichoice.activities.MultichoiceActivity" />
         <activity android:name="com.wizarpos.emvsample.services.cable_tv.CableTvActivity" />
         <activity android:name="com.wizarpos.emvsample.services.discos.activities.ElectricityPaymentActivity" />
@@ -95,9 +99,7 @@
         <activity
             android:name="com.wizarpos.emvsample.activity.AirtimeDataActivity"
             android:screenOrientation="portrait" />
-        <activity
-            android:name="com.wizarpos.emvsample.activity.MainActivity"
-            android:theme="@android:style/Theme.Translucent" /> <!-- <intent-filter> -->
+        <activity android:name="com.wizarpos.emvsample.activity.MainActivity" /> <!-- android:theme="@android:style/Theme.Translucent"  &lt;!&ndash; <intent-filter> &ndash;&gt;&ndash;&gt; -->
         <!-- <action android:name="android.intent.action.MAIN" /> -->
         <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
         <!-- </intent-filter> -->
@@ -212,11 +214,9 @@
             android:name="com.wizarpos.emvsample.activity.RefundActivity"
             android:screenOrientation="portrait"
             android:theme="@style/notitle" />
-        <activity android:name="com.wizarpos.emvsample.activity.InputExtraAmountActivity" />
-        <activity
-            android:name="com.wizarpos.emvsample.PrintActivity"
-            android:exported="true" />
-
+        <activity android:name="com.wizarpos.emvsample.activity.InputExtraAmountActivity" /> <!-- <activity -->
+        <!-- android:name=".PrintActivity" -->
+        <!-- android:exported="true" /> -->
         <service android:name="com.wizarpos.emvsample.service.CallHomeService" />
 
         <provider

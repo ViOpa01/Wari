@@ -1,7 +1,7 @@
-#Tue Jul 23 20:17:13 WAT 2019
-base.0=C\:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\transforms\\dexMerger\\debug\\0
+#Wed Jul 31 10:52:21 WAT 2019
+base.0=C\:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\transforms\\dexMerger\\debug\\19
 path.1=classes2.dex
 renamed.1=classes2.dex
 path.0=classes.dex
 renamed.0=classes.dex
-base.1=C\:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\transforms\\dexMerger\\debug\\0
+base.1=C\:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\transforms\\dexMerger\\debug\\19

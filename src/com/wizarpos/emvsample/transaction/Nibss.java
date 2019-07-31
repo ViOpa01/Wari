@@ -248,6 +248,7 @@ public class Nibss {
                           }
 
                         SecureStorage.store(Helper.TERMINAL_ENTERED_BY_USER, connectionData.getTerminalID());
+                        SecureStorage.store(Helper.BANK_LOGO,"");
 
 //
                           Log.d("okh", connectionData.getIpAddress() + " " + connectionData.getTerminalID() + " " + connectionData.getIpPort() + " " + connectionData.isSSL()+" " +connectionData.getId());

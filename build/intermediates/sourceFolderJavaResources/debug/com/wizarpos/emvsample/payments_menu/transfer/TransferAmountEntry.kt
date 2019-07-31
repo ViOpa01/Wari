@@ -288,9 +288,9 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
         val progressDialog = ProgressDialog(this)
         progressDialog.setCancelable(false)
         progressDialog.setTitle("Verification")
-        progressDialog.setMessage("Now looking for account details")
+        progressDialog.setMessage("Searching  for Account details")
         FuncActivity.appState!!.isWithdrawal=true
-//        progressDialog.show()
+        progressDialog.show()
 
         mWalletId = SharedPreferenceUtils.getPayviceWalletId(this@TransferAmountEntry)
 
@@ -301,9 +301,21 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
             TransferService.create().lookUpAccountNumberWithdrawal(accountDetails).enqueue(object : Callback<WithdrawalLookupSuccessModel> {
                 override fun onFailure(call: Call<WithdrawalLookupSuccessModel>, t: Throwable) {
                     Log.d("okh", t.message)
+                    progressDialog.dismiss()
+
+                    alert {
+                        title = "Response"
+                        message =t.message!!
+                        okButton {
+                            finish()
+                        }
+                    }.show()
+
                 }
 
                 override fun onResponse(call: Call<WithdrawalLookupSuccessModel>, response: retrofit2.Response<WithdrawalLookupSuccessModel>) {
+                    progressDialog.dismiss()
+
 
                     Log.d("okh", response.toString())
                     val amount = txtAmount.text.toString()
@@ -311,7 +323,9 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
                         alert {
                             title = "Response"
                             message = response.body()!!.message
-                            okButton { }
+                            okButton {
+                                finish()
+                            }
                         }.show()
                     } else {
                         mProductCode = response.body()!!.productCode
@@ -390,8 +404,17 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
     }
 
     private fun verifyTransferAccountDetails(){
-        longToast("Verification \n \n Now looking for account details. ").duration = Toast.LENGTH_LONG
+//        longToast("Verification \n \n Now looking for account details. ").duration = Toast.LENGTH_LONG
+
+        val progressDialog = ProgressDialog(this)
+        progressDialog.setCancelable(false)
+        progressDialog.setTitle("Verification")
+        progressDialog.setMessage("Searching  for Account details")
+
+
         FuncActivity.appState!!.isTransfer=true
+
+        progressDialog.show()
         lateinit var response : LookupSuccessModel
         mWalletId = SharedPreferenceUtils.getPayviceWalletId(this@TransferAmountEntry)
 
@@ -406,10 +429,21 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
 
                 override fun onFailure(call: Call<LookupSuccessModel>, t: Throwable) {
                     Log.d("okh", "error " + t.message)
+                    progressDialog.dismiss()
+
+                        alert {
+                            title = "Error"
+                            message = t.message!!
+                            okButton {
+                                finish()
+                            }
+                        }.show()
                 }
 
                 override fun onResponse(call: Call<LookupSuccessModel>, response: retrofit2.Response<LookupSuccessModel>) {
                     //  val responses = response as LookupSuccessModel
+
+                    progressDialog.dismiss()
 
                     if (response.body() != null) {
                         Log.d("okh", "response " + response.body().toString())
@@ -417,7 +451,9 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
                             alert {
                                 title = "Response"
                                 message = response.body()!!.message
-                                okButton { }
+                                okButton {
+                                    finish()
+                                }
                             }.show()
                         } else {
                             mProductCode = response.body()!!.productCode

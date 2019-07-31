@@ -595,6 +595,7 @@ open class ElectricityPaymentActivity : BaseVasActivity() {
                     intent.putExtra("copy", "** CUSTOMER COPY **")
                     context.startActivity(intent)
 
+//                    (context as Activity).finish()
                 } catch (e: Exception) {
 
                 }

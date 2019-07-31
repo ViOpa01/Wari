@@ -433,7 +433,7 @@ public class ProcessEMVCardActivity extends FuncActivity
         textTransType.setText(TransDefine.transInfo[appState.getTranType()].id_display_en);
         
         textLine1 = (TextView)findViewById(R.id.tProcessEMVCard_Line1);
-        textLine1.setText("PROCESSING CARD，PLS WAITING...");
+        textLine1.setText("PROCESSING CARD，PLS WAIT...");
 
 		mHandler.setFunActivity(this);
 		mEMVThread = new EMVThread();
@@ -459,7 +459,7 @@ public class ProcessEMVCardActivity extends FuncActivity
 	@Override
     protected void onStart() { 
         super.onStart(); 
-        textLine1.setText("PROCESSING CARD，PLS WAITING...");
+        textLine1.setText("PROCESSING CARD，PLS WAIT...");
     } 
     
     @Override 

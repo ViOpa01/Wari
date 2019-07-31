@@ -61,22 +61,22 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                
+
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
 
                 <ImageView
-                    android:id="@+id/bFunc_LastPBOC"
+                    android:id="@+id/vas"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:contentDescription="@string/keys"
-                    android:src="@drawable/ic_lock_open_black_24dp"/>
+                    android:src="@drawable/vas"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Get Keys"
+                    android:text="Vas"
                     android:textStyle="bold"
                     android:textSize="14sp"/>
             </LinearLayout>
@@ -141,114 +141,60 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal"
-            android:layout_marginBottom="20dp">
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/bFunc_Trans"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:contentDescription="@string/balance"
-                    android:src="@drawable/ic_account_balance_wallet_black_24dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Check Balance"
-                    android:textStyle="bold"
-                    android:textSize="14sp"/>
-            </LinearLayout>
 
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
+             <!--<LinearLayout-->
+                 <!--android:layout_width="match_parent"-->
+                 <!--android:layout_height="wrap_content"-->
+                 <!--android:layout_marginTop="10dp"-->
+                 <!--android:gravity="center_horizontal"-->
+                 <!--android:orientation="horizontal"-->
+                 <!--android:layout_marginBottom="20dp">-->
 
-                <ImageView
-                    android:id="@+id/bFunc_Airtime"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:contentDescription="@string/airtime"
-                    android:src="@drawable/ic_phone_android_black_24dp"/>
+                 <!--<LinearLayout-->
+                     <!--android:layout_width="0dp"-->
+                     <!--android:layout_height="wrap_content"-->
+                     <!--android:layout_weight="1"-->
+                     <!--android:gravity="center"-->
+                     <!--android:orientation="vertical">-->
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/airtime_and_data"
-                    android:textStyle="bold"
-                    android:textSize="14sp"/>
+                     <!--<ImageView-->
+                         <!--android:id="@+id/imgVwElectricity"-->
+                         <!--android:layout_width="70dp"-->
+                         <!--android:layout_height="70dp"-->
+                         <!--android:src="@drawable/electricity"/>-->
 
-            </LinearLayout>
-
-        </LinearLayout>
-
-             <LinearLayout
-                 android:layout_width="match_parent"
-                 android:layout_height="wrap_content"
-                 android:layout_marginTop="10dp"
-                 android:gravity="center_horizontal"
-                 android:orientation="horizontal"
-                 android:layout_marginBottom="20dp">
-
-                 <LinearLayout
-                     android:layout_width="0dp"
-                     android:layout_height="wrap_content"
-                     android:layout_weight="1"
-                     android:gravity="center"
-                     android:orientation="vertical">
-
-                     <ImageView
-                         android:id="@+id/imgVwElectricity"
-                         android:layout_width="70dp"
-                         android:layout_height="70dp"
-                         android:src="@drawable/electricity"/>
-
-                     <TextView
-                         android:layout_width="wrap_content"
-                         android:layout_height="wrap_content"
-                         android:text="@string/electricty"
-                         android:textStyle="bold"
-                         android:textSize="14sp"/>
-                 </LinearLayout>
+                     <!--<TextView-->
+                         <!--android:layout_width="wrap_content"-->
+                         <!--android:layout_height="wrap_content"-->
+                         <!--android:text="@string/electricty"-->
+                         <!--android:textStyle="bold"-->
+                         <!--android:textSize="14sp"/>-->
+                 <!--</LinearLayout>-->
 
 
-                 <LinearLayout
-                     android:layout_width="0dp"
-                     android:layout_height="wrap_content"
-                     android:layout_weight="1"
-                     android:gravity="center_horizontal"
-                     android:orientation="vertical">
+                 <!--<LinearLayout-->
+                     <!--android:layout_width="0dp"-->
+                     <!--android:layout_height="wrap_content"-->
+                     <!--android:layout_weight="1"-->
+                     <!--android:gravity="center_horizontal"-->
+                     <!--android:orientation="vertical">-->
 
-                     <ImageView
-                         android:id="@+id/imgVwCableTv"
-                         android:layout_width="70dp"
-                         android:layout_height="70dp"
-                         android:src="@drawable/cable_tv"/>
+                     <!--<ImageView-->
+                         <!--android:id="@+id/imgVwCableTv"-->
+                         <!--android:layout_width="70dp"-->
+                         <!--android:layout_height="70dp"-->
+                         <!--android:src="@drawable/cable_tv"/>-->
 
-                     <TextView
-                         android:layout_width="wrap_content"
-                         android:layout_height="wrap_content"
-                         android:text="@string/cable_tv"
-                         android:textStyle="bold"
-                         android:textSize="14sp"/>
-                 </LinearLayout>
+                     <!--<TextView-->
+                         <!--android:layout_width="wrap_content"-->
+                         <!--android:layout_height="wrap_content"-->
+                         <!--android:text="@string/cable_tv"-->
+                         <!--android:textStyle="bold"-->
+                         <!--android:textSize="14sp"/>-->
+                 <!--</LinearLayout>-->
 
-             </LinearLayout>
+             <!--</LinearLayout>-->
 
         <LinearLayout
                  android:layout_width="match_parent"
@@ -321,6 +267,30 @@
                      android:orientation="vertical">
 
                      <ImageView
+                         android:id="@+id/bFunc_Trans"
+                         android:layout_width="70dp"
+                         android:layout_height="70dp"
+                         android:contentDescription="@string/balance"
+                         android:src="@drawable/ic_account_balance_wallet_black_24dp"/>
+
+                     <TextView
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:text="Check Balance"
+                         android:textStyle="bold"
+                         android:textSize="14sp"/>
+                 </LinearLayout>
+
+
+
+                 <LinearLayout
+                     android:layout_width="0dp"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:gravity="center"
+                     android:orientation="vertical">
+
+                     <ImageView
                          android:id="@+id/signOut"
                          android:layout_width="70dp"
                          android:layout_height="70dp"
@@ -334,6 +304,62 @@
                          android:textStyle="bold"
                          android:textSize="14sp"/>
                  </LinearLayout>
+
+
+                 <!--<LinearLayout-->
+                 <!--android:layout_width="0dp"-->
+                 <!--android:layout_height="wrap_content"-->
+                 <!--android:layout_weight="1"-->
+                 <!--android:gravity="center_horizontal"-->
+                 <!--android:orientation="vertical">-->
+
+                 <!--<ImageView-->
+                 <!--android:id="@+id/bFunc_Airtime"-->
+                 <!--android:layout_width="70dp"-->
+                 <!--android:layout_height="70dp"-->
+                 <!--android:contentDescription="@string/airtime"-->
+                 <!--android:src="@drawable/ic_phone_android_black_24dp"/>-->
+
+                 <!--<TextView-->
+                 <!--android:layout_width="wrap_content"-->
+                 <!--android:layout_height="wrap_content"-->
+                 <!--android:text="@string/airtime_and_data"-->
+                 <!--android:textStyle="bold"-->
+                 <!--android:textSize="14sp"/>-->
+
+                 <!--</LinearLayout>-->
+
+             </LinearLayout>
+
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_marginTop="10dp"
+                 android:gravity="center_horizontal"
+                 android:orientation="horizontal"
+                 android:layout_marginBottom="20dp">
+
+                 <!--<LinearLayout-->
+                     <!--android:layout_width="0dp"-->
+                     <!--android:layout_height="wrap_content"-->
+                     <!--android:layout_weight="1"-->
+                     <!--android:gravity="center"-->
+                     <!--android:orientation="vertical">-->
+
+                     <!--<ImageView-->
+                         <!--android:id="@+id/signOut"-->
+                         <!--android:layout_width="70dp"-->
+                         <!--android:layout_height="70dp"-->
+                         <!--android:contentDescription="@string/balance"-->
+                         <!--android:src="@drawable/ic_account_circle_black_24dp"/>-->
+
+                     <!--<TextView-->
+                         <!--android:layout_width="wrap_content"-->
+                         <!--android:layout_height="wrap_content"-->
+                         <!--android:text="Sign out"-->
+                         <!--android:textStyle="bold"-->
+                         <!--android:textSize="14sp"/>-->
+                 <!--</LinearLayout>-->
 
 
              </LinearLayout>

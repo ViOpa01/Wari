@@ -999,6 +999,10 @@ public class TransResultActivity extends FuncActivity
         String transactionstatusReason = appState.trans.getTransactionResult().transactionStatusReason;
         String responseCode = appState.trans.getTransactionResult().responseCode;
         String terminalID = appState.nibssData.getConnectionData().getTerminalID();
+
+		if(SecureStorage.retrieve(Helper.TERMINAL_ENTERED_BY_USER,"").equals("")){
+			SecureStorage.store(Helper.TERMINAL_ENTERED_BY_USER,terminalID);
+		}
         String merchantID = appState.nibssData.getConfigData().getConfigData("03015").toString();
         String merchantName = appState.nibssData.getConfigData().getConfigData("52040").toString();
         String transactionType = appState.trans.getTransactionType();

@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Mon Jul 22 08:54:11 WAT 2019
+#Wed Jul 31 10:43:19 WAT 2019
 1.base=C\:\\Users\\Favour\\AndroidStudioProjects\\NIBSS\\build\\intermediates\\assets\\debug
 0.baseType=DIRECTORY
 1.baseType=DIRECTORY

@@ -29,7 +29,10 @@
         android:icon="@drawable/wari"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
-        <activity android:name=".services.cable_tv.multichoice.activities.MultichoiceActivity"></activity>
+        <activity android:name=".AllVasActivity"
+            android:screenOrientation="portrait" ></activity>
+        <!-- <activity android:name=".VasActivity"></activity> -->
+        <activity android:name=".services.cable_tv.multichoice.activities.MultichoiceActivity" />
         <activity android:name=".services.cable_tv.CableTvActivity" />
         <activity android:name=".services.discos.activities.ElectricityPaymentActivity" />
         <activity android:name=".services.discos.activities.DiscosActivity" />
@@ -59,6 +62,7 @@
         <activity
             android:name=".activity.FuncMenuActivity"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".payments_menu.transfer.TransferBankSelection"
             android:screenOrientation="portrait" />
@@ -86,9 +90,7 @@
         <activity
             android:name=".activity.AirtimeDataActivity"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.MainActivity"/>
-               <!--android:theme="@android:style/Theme.Translucent"  &lt;!&ndash; <intent-filter> &ndash;&gt;&ndash;&gt;-->
+        <activity android:name=".activity.MainActivity" /> <!-- android:theme="@android:style/Theme.Translucent"  &lt;!&ndash; <intent-filter> &ndash;&gt;&ndash;&gt; -->
         <!-- <action android:name="android.intent.action.MAIN" /> -->
         <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
         <!-- </intent-filter> -->
@@ -203,12 +205,9 @@
             android:name=".activity.RefundActivity"
             android:screenOrientation="portrait"
             android:theme="@style/notitle" />
-        <activity android:name=".activity.InputExtraAmountActivity" />
-
-        <!--<activity-->
-            <!--android:name=".PrintActivity"-->
-            <!--android:exported="true" />-->
-
+        <activity android:name=".activity.InputExtraAmountActivity" /> <!-- <activity -->
+        <!-- android:name=".PrintActivity" -->
+        <!-- android:exported="true" /> -->
         <service android:name=".service.CallHomeService" />
     </application>
 
