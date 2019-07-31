@@ -291,10 +291,10 @@ public class FuncMenuActivity extends FuncActivity
 
 				case R.id.signOut:
 
-          final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getBaseContext());
-
+           AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(FuncMenuActivity.this);
+					alertDialogBuilder.setTitle("WARI");
 					alertDialogBuilder.setMessage("Are you sure you want to log out");
-					alertDialogBuilder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
+					alertDialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 							SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
@@ -305,13 +305,16 @@ public class FuncMenuActivity extends FuncActivity
 							finish();
 						}
 					});
-					alertDialogBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+					alertDialogBuilder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 
 						}
 					});
-					alertDialogBuilder.show();
+
+					AlertDialog alert11 = alertDialogBuilder.create();
+					alert11.show();
+//					.show();
 
 
 
