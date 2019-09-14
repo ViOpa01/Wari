@@ -989,7 +989,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="0" width="1548" height="832" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" sideWeight="0.5042857" side_tool="true" weight="0.22647849" />
       <window_info content_ui="combo" id="Project" order="1" sideWeight="0.49571428" visible="true" weight="0.22647849" />
@@ -1001,11 +1000,11 @@
       <window_info id="Capture Tool" order="7" />
       <window_info id="Resources Explorer" order="8" weight="0.3293011" />
       <window_info anchor="bottom" x="23" y="205" width="1490" height="413" id="Version Control" order="0" weight="0.58498585" />
-      <window_info active="true" anchor="bottom" x="23" y="235" width="1490" height="353" id="Logcat" order="1" sideWeight="0.4986577" visible="true" weight="0.4842857" />
+      <window_info anchor="bottom" x="23" y="235" width="1490" height="353" id="Logcat" order="1" sideWeight="0.4986577" weight="0.4842857" />
       <window_info anchor="bottom" id="Build" order="2" sideWeight="0.4986577" weight="0.38857144" />
       <window_info anchor="bottom" id="TODO" order="3" weight="0.3286119" />
       <window_info anchor="bottom" id="Educational.CheckDetails" order="4" />
-      <window_info anchor="bottom" id="Terminal" order="5" weight="0.32714286" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="5" visible="true" weight="0.32714286" />
       <window_info anchor="bottom" id="Event Log" order="6" sideWeight="0.5013423" side_tool="true" weight="0.34330484" />
       <window_info anchor="bottom" id="Android Profiler" order="7" />
       <window_info anchor="bottom" id="Run" order="8" weight="0.8242857" />
