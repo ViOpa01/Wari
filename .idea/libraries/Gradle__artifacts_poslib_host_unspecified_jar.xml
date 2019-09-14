@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: artifacts:poslib-host:unspecified@jar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/poslib-host-debug.aar/ed2cf7ec46aec11a48dc2ec2f1cec5bd/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/poslib-host-debug.aar/ed2cf7ec46aec11a48dc2ec2f1cec5bd/jars/libs/j8583-1.10.2(2).jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/poslib-host-debug.aar/ed2cf7ec46aec11a48dc2ec2f1cec5bd/jars/libs/simple-xml-2.7.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/poslib-host-debug.aar/ed2cf7ec46aec11a48dc2ec2f1cec5bd/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/poslib-host-debug.aar/ed2cf7ec46aec11a48dc2ec2f1cec5bd/jars/libs/jpos-dep.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

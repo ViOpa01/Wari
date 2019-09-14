@@ -34,7 +34,6 @@ dependencies {
     implementation project(':poslib-commons-debug')
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
     implementation 'io.reactivex.rxjava2:rxjava:2.2.0'
-    implementation project(':poslib-host-debug')
     implementation "org.jetbrains.anko:anko-commons:$anko_version"
 //    implementation "org.jetbrains.anko:anko-sdk25-coroutines:$anko_version"
 //    implementation "org.jetbrains.anko:anko-appcompat-v7-coroutines:$anko_version"
@@ -100,6 +99,7 @@ dependencies {
         exclude module: 'commons-codec'
     }
     implementation project(path: ':payviceconnect')
+    implementation project(path: ':poslib-host')
     // optional - RxJava support for Room
 
 

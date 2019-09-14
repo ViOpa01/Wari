@@ -15,7 +15,7 @@
             <option value="$PROJECT_DIR$/payviceconnect_" />
             <option value="$PROJECT_DIR$/poslib-commons-debug" />
             <option value="$PROJECT_DIR$/poslib-device-debug" />
-            <option value="$PROJECT_DIR$/poslib-host-debug" />
+            <option value="$PROJECT_DIR$/poslib-host" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

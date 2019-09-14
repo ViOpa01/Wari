@@ -171,6 +171,8 @@ public class StringUtil
     return er;
   }
 
+
+
   public static void getSsKey(final Context context){
        /* final AlertDialogBuilder alertDialogBuilder = new AlertDialogBuilder(context);
         final ProgressDialog progressDialog = new ProgressDialog(context);

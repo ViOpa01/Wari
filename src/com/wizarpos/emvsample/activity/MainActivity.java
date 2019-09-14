@@ -107,6 +107,8 @@ public class MainActivity extends Activity {
         }
         else{
 
+            bankImage.setImageResource(R.drawable.wari_small);
+
         }
 
 

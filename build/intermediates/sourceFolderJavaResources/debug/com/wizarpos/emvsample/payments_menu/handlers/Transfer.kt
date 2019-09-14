@@ -30,7 +30,7 @@ class Transfer(val lifecycleOwner: LifecycleOwner, db: PosLibDatabase, val input
             val transactionData = TransactionData(inputData, it, configData, keyHolder)
 
 
-            LiveDataReactiveStreams.fromPublisher(hostInteractor.getTransactionResult(Host.TransactionType.PURCHASE, connData, transactionData).toFlowable())
+            LiveDataReactiveStreams.fromPublisher(hostInteractor.getTransactionResult(Host.TransactionType.PURCHASE, connData, transactionData,null,null).toFlowable())
         }
     }
 }

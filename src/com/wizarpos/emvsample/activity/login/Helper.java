@@ -60,6 +60,9 @@ public class Helper {
     public static String TOKEN = "token";
     public static String TERMINAL_ID = "terminal_id";
     public static String TERMINAL = "terminal";
+
+    public static String MERCHANT_NAME = "merchant_name";
+
     public static String VAS_TERMINAL_ID = "vas_terminalId";
     public static String VAS_MERCHANT_NAME = "vas_merchant_name";
     public static String TERMINAL_ENTERED_BY_USER = "terminal__id";

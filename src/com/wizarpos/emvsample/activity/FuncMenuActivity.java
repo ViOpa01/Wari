@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 
 import com.wizarpos.emvsample.AllVasActivity;
+import com.wizarpos.emvsample.activity.login.Helper;
 import com.wizarpos.emvsample.activity.login.LoginActivity;
 import com.wizarpos.emvsample.activity.login.securestorage.SecureStorage;
 import com.wizarpos.emvsample.payments_menu.transfer.TransferAmountEntry;
@@ -33,6 +34,7 @@ import com.wizarpos.emvsample.services.cable_tv.CableTvActivity;
 import com.wizarpos.emvsample.services.discos.activities.DiscosActivity;
 import com.wizarpos.emvsample.transaction.Nibss;
 import com.wizarpos.jni.PinPadInterface;
+import com.wizarpos.util.ClientReferenceKey;
 import com.wizarpos.util.StringUtil;
 
 import org.jetbrains.anko.AlertBuilder;
@@ -203,9 +205,32 @@ public class FuncMenuActivity extends FuncActivity
 //				sale();
 //				break;
 			case R.id.bFunc_Sale:
+				if(!SecureStorage.retrieve(Helper.TERMINAL_ENTERED_BY_USER,"").equals("")  || ClientReferenceKey.Companion.hasInternetConnectivity(FuncMenuActivity.this)) {
+
 				appState.needCard = true;
 				appState.isPurchase=true;
 				sale();
+
+				}else {
+					AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(FuncMenuActivity.this);
+					alertDialogBuilder.setTitle("Terminal not configured");
+					alertDialogBuilder.setMessage("Click the OK button to configure terminal");
+					alertDialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+                           configureTerminal();
+						}
+					});
+//					alertDialogBuilder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+//						@Override
+//						public void onClick(DialogInterface dialog, int which) {
+//
+//						}
+//					});
+
+					AlertDialog alert11 = alertDialogBuilder.create();
+					alert11.show();
+				}
 				break;
 
 				case R.id.vas:

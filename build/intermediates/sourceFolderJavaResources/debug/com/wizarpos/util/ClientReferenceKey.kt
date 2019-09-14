@@ -1,7 +1,10 @@
 package com.wizarpos.util
 
 import android.content.Context
+import android.net.ConnectivityManager
 import com.iisysgroup.poslib.host.entities.TransactionResult
+import com.wizarpos.emvsample.R
+import com.wizarpos.emvsample.activity.login.Helper
 //import com.wizarpos.emvsample.generators.PfmNotification
 import java.math.BigInteger
 import java.security.SecureRandom
@@ -46,5 +49,19 @@ class ClientReferenceKey {
         val now = Date()
         return sdfDate.format(now)
     }
+
+  companion object {
+      fun hasInternetConnectivity(context: Context): Boolean {
+          val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+          val status = connectivityManager.activeNetworkInfo != null && connectivityManager.activeNetworkInfo.isConnectedOrConnecting
+
+          if (!status)
+              Helper.showInfoDialog(context, null, context.getString(R.string.no_connectivity_prompt))
+
+          return status
+      }
+
+  }
 
 }

@@ -77,21 +77,21 @@ public class MainApp extends Application implements Constants
 
 	//Room DB
 	String TAG = "app_pit_ogl";
-    private byte tranType = TRAN_GOODS;
-    private byte paramType = -1;   // 参数设置类型
+	private byte tranType = TRAN_GOODS;
+	private byte paramType = -1;   // 参数设置类型
 	private byte processState = 0;  // 处理阶段
 	private byte state = 0;         //
-    private int  errorCode = 0;
-    private byte commState = COMM_DISCONNECTED;
-    private SharedPreferences terminalPref; 
-    private SharedPreferences batchPref;  
-    private Calendar mCalendar;
-    
-    private static MainApp _instance;
+	private int  errorCode = 0;
+	private byte commState = COMM_DISCONNECTED;
+	private SharedPreferences terminalPref;
+	private SharedPreferences batchPref;
+	private Calendar mCalendar;
+
+	private static MainApp _instance;
 
 	public DatabaseOpenHelper dbOpenHelper = null;
 	public SQLiteDatabase db = null;
-	
+
 	public TransDetailInfo trans = new TransDetailInfo();
 	public boolean needCard = false;
 	public boolean isPurchase = false;
@@ -99,20 +99,20 @@ public class MainApp extends Application implements Constants
 	public boolean promptCardCanRemoved = false;
 	public boolean promptOfflineDataAuthSucc = false;
 	public boolean resetCardError = false;
-	
+
 	public int cardType = -1;
 	public boolean msrError = false;
-	
+
 	public SmartCardControl contactUserCard;
 	public int logo =0;
 	public String product ="";
 	public String dataAmount ="";
 
 
-	    public String accountName ;
+	public String accountName ;
 
-		public String accountNumber;
-		public String recivingBank ;
+	public String accountNumber;
+	public String recivingBank ;
 	public boolean isWithdrawal = false;
 
 
@@ -122,14 +122,14 @@ public class MainApp extends Application implements Constants
 	public boolean acceptContactCard = true;
 	public boolean acceptContactlessCard = true;
 	public boolean promptCardIC = false;
-	
+
 	public byte recordType = 0x00;
 	public BatchInfo batchInfo;
 	public TerminalConfig terminalConfig;
-	
+
 	public boolean emvParamLoadFlag = false;
 	public boolean emvParamChanged = false;
-	
+
 	public TransDetailService transDetailService;
 	public AdviceService adviceService;
 	public AIDService aidService;
@@ -139,31 +139,31 @@ public class MainApp extends Application implements Constants
 	public int aidNumber = 0;
 	public byte[] aidList = new byte[300];
 	public byte pollCardState = 0;
-	
+
 	public AIDTable[] aids;
 	public int aidsIndex = 0;
 	public boolean aidsInfoChanged = false;
-	
+
 	public CAPKTable[] capks;
 	public int capksIndex = 0;
 	public boolean capkInfoChanged = false;
 	public String failedCAPKInfo = "";
-	
+
 	public ExceptionFileTable[] exceptionFiles;
 	public int exceptionFilesIndex = 0;
 	public boolean exceptionFileInfoChanged = false;
-	
+
 	public RevokedCAPKTable[] revokedCapks;
 	public int revokedCapksIndex = 0;
 	public boolean revokedCapkInfoChanged = false;
-	
-	public int currentYear; 
-	public int currentMonth; 
-	public int currentDay; 
-	public int currentHour; 
-	public int currentMinute; 
+
+	public int currentYear;
+	public int currentMonth;
+	public int currentDay;
+	public int currentHour;
+	public int currentMinute;
 	public int currentSecond;
-	
+
 	public int printReceipt = 0;
 	public int printVasReceipt = 0;
 	// 读卡设备信息
@@ -173,11 +173,11 @@ public class MainApp extends Application implements Constants
 	public boolean pinpadOpened = false;
 	public boolean needClearPinpad = false;
 
-//	 Services
+	//	 Services
 	public boolean refund = false;
 	public IsoRefundProcessData isoRefundProcessData = null;
 	public IsoReversalProcessData iisoReverSal = null;
-    public  int refundAmount = 0;
+	public  int refundAmount = 0;
 	public boolean purchaseWithCashBack = true;
 	public boolean revarsal = false;
 	public boolean transfer = false;
@@ -210,53 +210,53 @@ public class MainApp extends Application implements Constants
 
 
 	public static MainApp getInstance()
-    {
+	{
 		if (_instance == null)
-		    _instance = new MainApp();
+			_instance = new MainApp();
 		return _instance;
-    }
+	}
 
 
-    @Override
-    public void onCreate()
-    {
+	@Override
+	public void onCreate()
+	{
 		super.onCreate();
-        MultiDex.install(this);
-    	try{
+		MultiDex.install(this);
+		try{
 			poslibdb = Room.databaseBuilder(this, PosLibDatabase.class, "poslib.db")
 					.fallbackToDestructiveMigration()
 					.build();
 		}catch (Exception e){
-    		Log.d("okh", e.toString());
+			Log.d("okh", e.toString());
 		}
 		SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-         transactionModel = null;
+		transactionModel = null;
 		String hostKey = getString(R.string.key_host_type);
 		Host host;
-		if (sharedPreferences.getString(hostKey, "").equalsIgnoreCase("TAMS")){
-			host =  new TamsHost(this);
-		}
-		else if (sharedPreferences.getString(hostKey, "").equalsIgnoreCase("POSVAS")){
-			host =  new PosvasHost(this);
-		}
-		else  {
-			host =  new GtmsHost(this);
-		}
+//		if (sharedPreferences.getString(hostKey, "").equalsIgnoreCase("TAMS")){
+//			host =  new TamsHost(this);
+//		}
+//		else if (sharedPreferences.getString(hostKey, "").equalsIgnoreCase("POSVAS")){
+		host =  new PosvasHost(this);
+//		}
+//		else  {
+//			host =  new GtmsHost(this);
+//		}
 
 		hostInteractor = HostInteractor.getInstance(host);
 
 
 		if (null == _instance)
-		    _instance = MainApp.this;
+			_instance = MainApp.this;
 
 
 		try {
 			SecureStorage.init(this)
-                    .setEncryptionMethod(SecureStorage.Builder.EncryptionMethod.ENCRYPTED)
-                    .setPassword("4321dcbA")
-                    .setStoreName(TAG)
-                    .build();
+					.setEncryptionMethod(SecureStorage.Builder.EncryptionMethod.ENCRYPTED)
+					.setPassword("4321dcbA")
+					.setStoreName(TAG)
+					.build();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -278,7 +278,7 @@ public class MainApp extends Application implements Constants
 				String configString = configService.get();
 				if(configService == null || configString.isEmpty()){
 					nibssData = null;
-                    vasData = null;
+					vasData = null;
 				}else{
 					Log.i("okh",configString);
 					nibssData = new Gson().fromJson(configString,Nibss.NIbbsData.class);
@@ -335,40 +335,40 @@ public class MainApp extends Application implements Constants
 			capkService.createDefaultCapk();
 		}
 	}
-    
-    private void loadData(String tid, String mid, String merchantN)
-    {
+
+	private void loadData(String tid, String mid, String merchantN)
+	{
 		//Setup NibbsData
 
 
 		dbOpenHelper = new DatabaseOpenHelper(getBaseContext());
 		db = dbOpenHelper.getWritableDatabase();
-		
-    	terminalPref  = getSharedPreferences("terminalConfig", Context.MODE_PRIVATE); 
+
+		terminalPref  = getSharedPreferences("terminalConfig", Context.MODE_PRIVATE);
 		terminalConfig = new TerminalConfig(terminalPref);
-		
-	    batchPref     = getSharedPreferences("batchInfo", Context.MODE_PRIVATE);  
-	    batchInfo = new BatchInfo(batchPref);
-		
+
+		batchPref     = getSharedPreferences("batchInfo", Context.MODE_PRIVATE);
+		batchInfo = new BatchInfo(batchPref);
+
 		transDetailService = new TransDetailService(getBaseContext());
 		adviceService = new AdviceService(getBaseContext());
 		aidService = new AIDService(db);
 		capkService = new CAPKService(db);
 		revokedCAPKService = new RevokedCAPKService(db);
 		exceptionFileService = new ExceptionFileService(db);
-		
+
 		terminalConfig.loadTerminalConfig(tid,mid,merchantN);
 		batchInfo.loadBatch();
 		if(aidService.getAIDCount() == 0)
 		{
 			aidService.createDefaultAID();
 		}
-		
+
 		if(capkService.getCAPKCount() == 0)
 		{
 			capkService.createDefaultCapk();
 		}
-    }
+	}
 
 
 	public void setupNibbsData(String termi,final Nibss.Nibs<String> t) {
@@ -413,117 +413,117 @@ public class MainApp extends Application implements Constants
 	}
 
 	public void initData()
-    {
-    	tranType = TRAN_GOODS;    // 交易类型
-    	paramType = -1;
-    	processState = 0;  // 处理阶段
-    	state = 0;         // 
-        errorCode = 0;
-        cardType = -1;
-        idleFlag = false;
-        promptCardCanRemoved = false;
-        promptOfflineDataAuthSucc = false;
-        printReceipt = 0;
+	{
+		tranType = TRAN_GOODS;    // 交易类型
+		paramType = -1;
+		processState = 0;  // 处理阶段
+		state = 0;         //
+		errorCode = 0;
+		cardType = -1;
+		idleFlag = false;
+		promptCardCanRemoved = false;
+		promptOfflineDataAuthSucc = false;
+		printReceipt = 0;
 		printVasReceipt = 0;
-        resetCardError = false;
-        
-        trans.init();
-        trans.setTrace(terminalConfig.getTrace());
+		resetCardError = false;
+
+		trans.init();
+		trans.setTrace(terminalConfig.getTrace());
 
 
-    }
+	}
 
 	// tranType
-    public byte getTranType()
-    {
-    	return tranType;
-    }
-    
-    public void setTranType(byte tranType)
-    {
-    	this.tranType = tranType;
-    }
-    
-    // paramType
-    public byte getParamType()
-    {
-    	return paramType;
-    }
-    
-    public void setParamType(byte paramState)
-    {
-    	this.paramType = paramState;
-    }
-    
-    // processState
-    public byte getProcessState()
-    {
-    	return processState;
-    }
-    
-    public void setProcessState(byte processState)
-    {
-    	this.processState = processState;
-    }
-    
-    // state
-    public byte getState()
-    {
-    	return state;
-    }
-    
-    public void setState(byte state)
-    {
-    	this.state = state;
-    }
-    
-    // errorCode
-    public int getErrorCode()
-    {
-    	if(debug)Log.d(APP_TAG, "getErrorCode = " + errorCode  );
-    	return errorCode;
-    }
-    
-    public void setErrorCode(int errorCode)
-    {
-    	if(debug)Log.d(APP_TAG, "setErrorCode = " + errorCode);
-    	this.errorCode = errorCode;
-    }
-    
-    // commState
-    public byte getCommState()
-    {
-    	return commState;
-    }
-    
-    public void setCommState(byte state)
-    {
-    	commState = state;
-    }
-    
-    public void getCurrentDateTime()
-    {
-		long time = System.currentTimeMillis(); 
-		/*透过Calendar对象来取得小时与分钟*/ 
-		mCalendar = Calendar.getInstance(); 
-		mCalendar.setTimeInMillis(time); 
+	public byte getTranType()
+	{
+		return tranType;
+	}
+
+	public void setTranType(byte tranType)
+	{
+		this.tranType = tranType;
+	}
+
+	// paramType
+	public byte getParamType()
+	{
+		return paramType;
+	}
+
+	public void setParamType(byte paramState)
+	{
+		this.paramType = paramState;
+	}
+
+	// processState
+	public byte getProcessState()
+	{
+		return processState;
+	}
+
+	public void setProcessState(byte processState)
+	{
+		this.processState = processState;
+	}
+
+	// state
+	public byte getState()
+	{
+		return state;
+	}
+
+	public void setState(byte state)
+	{
+		this.state = state;
+	}
+
+	// errorCode
+	public int getErrorCode()
+	{
+		if(debug)Log.d(APP_TAG, "getErrorCode = " + errorCode  );
+		return errorCode;
+	}
+
+	public void setErrorCode(int errorCode)
+	{
+		if(debug)Log.d(APP_TAG, "setErrorCode = " + errorCode);
+		this.errorCode = errorCode;
+	}
+
+	// commState
+	public byte getCommState()
+	{
+		return commState;
+	}
+
+	public void setCommState(byte state)
+	{
+		commState = state;
+	}
+
+	public void getCurrentDateTime()
+	{
+		long time = System.currentTimeMillis();
+		/*透过Calendar对象来取得小时与分钟*/
+		mCalendar = Calendar.getInstance();
+		mCalendar.setTimeInMillis(time);
 		currentYear = mCalendar.get(Calendar.YEAR);
 		currentMonth = mCalendar.get(Calendar.MONTH)+1;
 		currentDay = mCalendar.get(Calendar.DAY_OF_MONTH);
-		currentHour = mCalendar.get(Calendar.HOUR); 
+		currentHour = mCalendar.get(Calendar.HOUR);
 		if(mCalendar.get(Calendar.AM_PM) == Calendar.PM)
 		{
 			currentHour += 12;
 		}
 		currentMinute = mCalendar.get(Calendar.MINUTE);
 		currentSecond = mCalendar.get(Calendar.SECOND);
-    }
+	}
 
-    public void prep(String termId, final Context context, final Nibss.Nibs<String> callback){
+	public void prep(String termId, final Context context, final Nibss.Nibs<String> callback){
 //		final ProgressDialog pd = new ProgressDialog(context, R.style.AlertDialogCustom);
 //		pd.setMessage("Preping please wait");
 //		pd.show();
-        Toast.makeText(context, "Configuring please wait", Toast.LENGTH_SHORT).show();
+		Toast.makeText(context, "Configuring please wait", Toast.LENGTH_SHORT).show();
 
 		setupNibbsData(termId,new Nibss.Nibs<String>() {
 			@Override

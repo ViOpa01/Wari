@@ -116,8 +116,10 @@ public class TransResultActivity extends FuncActivity
 	StartimesViewModel startimesViewModel =   null;
 
 	MultichoiceViewModel multichoiceViewModel =   null;
+	String tid ;
 
-    @Override
+
+	@Override
     public void onCreate(Bundle savedInstanceState)
     {
 		super.onCreate(savedInstanceState);
@@ -125,7 +127,7 @@ public class TransResultActivity extends FuncActivity
         setContentView(R.layout.activity_trans_result);
         initToolbar();
 
-
+		tid = SecureStorage.retrieve(Helper.TERMINAL_ENTERED_BY_USER, "");
 
 		startimesViewModel= new StartimesViewModel(getApplication());
 
@@ -600,7 +602,9 @@ public class TransResultActivity extends FuncActivity
 
 		EmvCard emvCard = new EmvCard(appState.trans.getCardHolderName(), appState.trans.getTrack2Data(), appState.trans.getICCData(), pinInfo);
 
-		com.itex.richard.payviceconnect.model.Pfm pfm = new com.itex.richard.payviceconnect.model.Pfm(new PfmStateGenerator(this).generateState(), new PfmJournalGenerator(appState.trans.getTransactionResult(), appState.nibssData.getConfigData(), false,  generalElectricityDetails.getAmount(), emvCard,generalElectricityDetails.getElectricMeterType(),generalElectricityDetails.getElectricMeterType(),"").generateJournal());
+
+
+		com.itex.richard.payviceconnect.model.Pfm pfm = new com.itex.richard.payviceconnect.model.Pfm(new PfmStateGenerator(this,tid).generateState(), new PfmJournalGenerator(appState.trans.getTransactionResult(), appState.nibssData.getConfigData(), false,  generalElectricityDetails.getAmount(), emvCard,generalElectricityDetails.getElectricMeterType(),generalElectricityDetails.getElectricMeterType(),"").generateJournal());
 
 
 		mEleectricityPaymentVM.payElectricBill(this ,generalElectricityDetails.getAmount(), generalElectricityDetails.getWallet(), generalElectricityDetails.getUserName(), generalElectricityDetails.getRequestType(),generalElectricityDetails.getMeterType().toLowerCase(),generalElectricityDetails.getMeterNumber(),generalElectricityDetails.getChannel(), generalElectricityDetails.getPhone_number(), generalElectricityDetails.getProductCode(),pin ,generalElectricityDetails.getPaymentMetod(),generalElectricityDetails.getElectricMeterType(),generalElectricityDetails.getPassword(),generalElectricityDetails.getMeterName(),generalElectricityDetails.getClientReference(),generalElectricityDetails.getTerminalId(),pfm);
@@ -648,7 +652,7 @@ public class TransResultActivity extends FuncActivity
 
 		EmvCard emvCard = new EmvCard(appState.trans.getCardHolderName(), appState.trans.getTrack2Data(), appState.trans.getICCData(), pinInfo);
 
-		com.itex.richard.payviceconnect.model.Pfm pfm = new com.itex.richard.payviceconnect.model.Pfm(new PfmStateGenerator(this).generateState(), new PfmJournalGenerator(appState.trans.getTransactionResult(), appState.nibssData.getConfigData(), false,  airtime_amount, emvCard,"Airtime",airtimeProvider,"").generateJournal());
+		com.itex.richard.payviceconnect.model.Pfm pfm = new com.itex.richard.payviceconnect.model.Pfm(new PfmStateGenerator(this,tid).generateState(), new PfmJournalGenerator(appState.trans.getTransactionResult(), appState.nibssData.getConfigData(), false,  airtime_amount, emvCard,"Airtime",airtimeProvider,"").generateJournal());
 
 
 		AirtimeRequestDetails details = new AirtimeRequestDetails(terminalID, username, airtime_amount, phone_number, airtimeProvider, mpin, password,pfm);
@@ -659,7 +663,7 @@ public class TransResultActivity extends FuncActivity
 			@Override
 			public void onResponse(Call<AirtimeModel.AirtimePinResponse> call, Response<AirtimeModel.AirtimePinResponse> response) {
 				TransactionModel transactionModel = null;
-				String date = new PfmStateGenerator(getBaseContext()).getCurrentTime();
+				String date = new PfmStateGenerator(getBaseContext(),tid).getCurrentTime();
 
 				String bankLogoName = "";
 				try {
@@ -761,7 +765,7 @@ public class TransResultActivity extends FuncActivity
 		EmvCard.PinInfo pinInfo = new EmvCard.PinInfo(appState.trans.getPinBlock(), null, null);
 		EmvCard emvCard = new EmvCard(appState.trans.getCardHolderName(), appState.trans.getTrack2Data(), appState.trans.getICCData(), pinInfo);
 
-		com.itex.richard.payviceconnect.model.Pfm pfm = new com.itex.richard.payviceconnect.model.Pfm(new PfmStateGenerator(this).generateState(), new PfmJournalGenerator(appState.trans.getTransactionResult(), appState.nibssData.getConfigData(), false,  amount.toString(), emvCard,"Transfer","Cash-In","").generateJournal());
+		com.itex.richard.payviceconnect.model.Pfm pfm = new com.itex.richard.payviceconnect.model.Pfm(new PfmStateGenerator(this,tid).generateState(), new PfmJournalGenerator(appState.trans.getTransactionResult(), appState.nibssData.getConfigData(), false,  amount.toString(), emvCard,"Transfer","Cash-In","").generateJournal());
 
 		withdrawalDetails =  new WithdrawalDetails(wallet, username, password, pin, "default", amount, "", vendorBankCode, "ANDROIDPOS", "card", productCode,  pfm);
 

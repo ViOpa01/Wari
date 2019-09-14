@@ -341,7 +341,10 @@ class AirtimeVasActivity : BaseVasActivity(), AirtimeProcessor.onAirtimeTransact
 
                     var vasDetails: Models.VasDetails? = null
 
-                    val date: String  =  PfmStateGenerator(getBaseContext()).getCurrentTime()
+                    val tid = SecureStorage.retrieve(Helper.TERMINAL_ENTERED_BY_USER, "")
+
+
+                    val date: String  =  PfmStateGenerator(getBaseContext(),tid).getCurrentTime()
 //                    if (airtimetype.equals("wallet", ignoreCase = true)) {
                         vasDetails = Models.VasDetails(stan,amount, wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product, responsemessage, vasmerchantID, transactionRef, VasServices.CASH, logo, date, error, Models.AIRTIME, airtimeModel)
 //                    } else if (airtimetype.equals("card", ignoreCase = true)) {

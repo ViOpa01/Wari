@@ -43,7 +43,10 @@ class MultichoiceInteractorImpl(val context: Context) : MultichoiceInteractor {
 
         val emvCard = EmvCard(FuncActivity.appState.trans.cardHolderName, FuncActivity.appState.trans.track2Data, FuncActivity.appState.trans.iccData, pinInfo)
 
-        val pfm = com.itex.richard.payviceconnect.model.Pfm(PfmStateGenerator(context).generateState(), PfmJournalGenerator(FuncActivity.appState.trans.transactionResult, FuncActivity.appState.nibssData.configData, false,plan.amount, emvCard, product.name, plan.name, "").generateJournal())
+        val tid = SecureStorage.retrieve(Helper.TERMINAL_ENTERED_BY_USER, "")
+
+
+        val pfm = com.itex.richard.payviceconnect.model.Pfm(PfmStateGenerator(context,tid).generateState(), PfmJournalGenerator(FuncActivity.appState.trans.transactionResult, FuncActivity.appState.nibssData.configData, false,plan.amount, emvCard, product.name, plan.name, "").generateJournal())
 
 
         val subscriptionDetails = DstvModel.PayDetails(iuc, plan.product_code,

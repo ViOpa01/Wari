@@ -345,7 +345,7 @@ public class ProcessOnlineActivity extends FuncActivity
 
 		@Override
 		protected void onPostExecute(VasTerminalDataDao vasTerminalDataDao) {
-			Log.d("okh", "vas transresult "+vasTerminalDataDao.get().getTid()+ vasTerminalDataDao.get().getMasterKey());
+//			Log.d("okh", "vas transresult "+vasTerminalDataDao.get().getTid()+ vasTerminalDataDao.get().getMasterKey());
 			super.onPostExecute(vasTerminalDataDao);
 		}
 	}
@@ -373,7 +373,7 @@ public class ProcessOnlineActivity extends FuncActivity
 
 			ConnectionData connectionData = new ConnectionData(TID, "196.6.103.73", 5043, true);
 
-			KeyHolder keyHolder = new KeyHolder(vasTerminalDetails.getMasterKey(), vasTerminalDetails.getSessionKey(), vasTerminalDetails.getPinKey());
+			KeyHolder keyHolder = new KeyHolder("", vasTerminalDetails.getSessionKey(), vasTerminalDetails.getPinKey());
 
 
 			configData.storeConfigData("04002", "90");

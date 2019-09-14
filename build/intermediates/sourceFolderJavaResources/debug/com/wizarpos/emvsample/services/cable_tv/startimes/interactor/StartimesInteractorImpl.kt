@@ -34,7 +34,11 @@ class StartimesInteractorImpl(val context: Context) : StartimesInteractor {
 
         val emvCard = EmvCard(FuncActivity.appState.trans.cardHolderName, FuncActivity.appState.trans.track2Data, FuncActivity.appState.trans.iccData, pinInfo)
 
-        val pfm = com.itex.richard.payviceconnect.model.Pfm(PfmStateGenerator(context).generateState(), PfmJournalGenerator(FuncActivity.appState.trans.transactionResult, FuncActivity.appState.nibssData.configData, false, amount.toString(), emvCard, "Startimes", bouquet, "").generateJournal())
+        val tid = SecureStorage.retrieve(Helper.TERMINAL_ENTERED_BY_USER, "")
+
+
+
+        val pfm = com.itex.richard.payviceconnect.model.Pfm(PfmStateGenerator(context,tid).generateState(), PfmJournalGenerator(FuncActivity.appState.trans.transactionResult, FuncActivity.appState.nibssData.configData, false, amount.toString(), emvCard, "Startimes", bouquet, "").generateJournal())
 
 
         val subscriptionDetails = StartimesModel.payRequest(amount = amount,wallet = terminalId,username = userId,password =password,type = type,channel =channel,smartCardCode =smartCardCode,customerName = customerName,phone = phone,productCode = productCode,bouquet = bouquet,paymentMethod = paymentMethod,pin = authPin,clientReference = clientReference,pfm = pfm )

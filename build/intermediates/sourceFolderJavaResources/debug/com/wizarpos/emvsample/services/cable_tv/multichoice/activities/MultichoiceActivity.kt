@@ -286,7 +286,11 @@ class MultichoiceActivity : BaseServiceActivity() {
 
         val emvCard = EmvCard(FuncActivity.appState.trans.cardHolderName, FuncActivity.appState.trans.track2Data, FuncActivity.appState.trans.iccData, pinInfo)
 
-        val pfm = com.itex.richard.payviceconnect.model.Pfm(PfmStateGenerator(this).generateState(), PfmJournalGenerator(FuncActivity.appState.trans.transactionResult, FuncActivity.appState.nibssData.configData, false, amount.toString(), emvCard,productCode ,viewModel.productLiveData.value!!.toString() , "").generateJournal())
+        val tid = SecureStorage.retrieve(Helper.TERMINAL_ENTERED_BY_USER, "")
+
+
+        val pfm = com.itex.richard.payviceconnect.model.Pfm(PfmStateGenerator(this,tid).generateState(), PfmJournalGenerator(FuncActivity.appState.trans.transactionResult, FuncActivity.appState.nibssData.configData, false, amount.toString(), emvCard,productCode ,viewModel.productLiveData.value!!.toString() , "").generateJournal())
+
 
 
         val clientReference = StringUtil.getClientRef(this@MultichoiceActivity, "")

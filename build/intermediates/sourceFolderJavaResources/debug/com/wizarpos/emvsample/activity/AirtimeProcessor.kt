@@ -51,22 +51,48 @@ class AirtimeProcessor(val context : Context, listener : onAirtimeTransactionRes
     }
 
     fun performTransaction(isCard: Boolean = false, pin : String){
+        Log.d("airtimeType performTransaction >>>>>", "wallet")
+
         this.isCard = isCard
 
         val pinInfo = EmvCard.PinInfo(FuncActivity.appState.trans.getPinBlock(), null, null)
-		val emvCard = EmvCard(FuncActivity.appState.trans.getCardHolderName(), FuncActivity.appState.trans.getTrack2Data(), FuncActivity.appState.trans.getICCData(), pinInfo)
 
-		val pfm:com.itex.richard.payviceconnect.model.Pfm = com.itex.richard.payviceconnect.model.Pfm(PfmStateGenerator(context).generateState(), PfmJournalGenerator(FuncActivity.appState.trans.getTransactionResult(), FuncActivity.appState.nibssData.getConfigData(), false, airtimeAmount, emvCard, "Airtime", airtimeProvider, "").generateJournal())
+        Log.d("pinInfo  >>>>>", Gson().toJson(pinInfo))
+
+        val emvCard = EmvCard(FuncActivity.appState.trans.getCardHolderName(), FuncActivity.appState.trans.getTrack2Data(), FuncActivity.appState.trans.getICCData(), pinInfo)
+        Log.d("emvCard  >>>>>", Gson().toJson(emvCard))
+
+        val tid = SecureStorage.retrieve(Helper.TERMINAL_ENTERED_BY_USER, "")
 
 
+        Log.d("generate State   >>>>>", Gson().toJson(PfmStateGenerator(context,tid ).generateState()))
+
+        Log.d("Journal Generator  >>>>>", Gson().toJson(PfmJournalGenerator(FuncActivity.appState.trans.getTransactionResult(), FuncActivity.appState.nibssData.getConfigData(), false, airtimeAmount, emvCard, "Airtime", airtimeProvider, "").generateJournal()))
+
+//        val tid = SecureStorage.retrieve(Helper.TERMINAL_ENTERED_BY_USER, "")
+
+//
+        val pfm:com.itex.richard.payviceconnect.model.Pfm = com.itex.richard.payviceconnect.model.Pfm(PfmStateGenerator(context,tid ).generateState(), PfmJournalGenerator(FuncActivity.appState.trans.getTransactionResult(), FuncActivity.appState.nibssData.getConfigData(), false, airtimeAmount, emvCard, "Airtime", airtimeProvider, "").generateJournal())
+        Log.d("pfm  >>>>>", Gson().toJson(pfm))
+
+
+
+        Log.d("airtimeType About to purchase  >>>>>", "Here")
 
         if (isCard){
+            Log.d("airtimeType About to purchase  >>>>>", "card")
+
             val details = AirtimeRequestDetails(amount = airtimeAmount, phone = phoneNumber, service = airtimeProvider, terminal_id = wallet_id, user_id = wallet_username, password = wallet_clear_password, pin = pin, pfm = pfm)
             AirtimeService.create().airtimeCardPurchase(details).enqueue(this)
             return
         }
+        Log.d("airtimeType About to purchase alrigh >>>>>", "wallet")
 
         val details = AirtimeRequestDetails(amount = airtimeAmount, phone = phoneNumber, service = airtimeProvider, terminal_id = wallet_id, user_id = wallet_username, password = wallet_clear_password, pin = pin, pfm = pfm)
+
+        Log.d("AirtimeRequestDetails wallet  >>>>>", Gson().toJson(details))
+
+
         AirtimeService.create().airtimePurchase(details).enqueue(this)
 
     }

@@ -2,12 +2,16 @@ package com.wizarpos.emvsample.transaction;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
+import android.util.Base64;
 import android.util.Log;
 import android.widget.Toast;
 
 
 import com.iisysgroup.poslib.ISO.GTMS.GtmsHost;
+import com.iisysgroup.poslib.ISO.POSVAS.PosvasHost;
 import com.iisysgroup.poslib.ISO.common.IsoRefundProcessData;
 import com.iisysgroup.poslib.ISO.common.IsoReversalProcessData;
 import com.iisysgroup.poslib.ISO.common.IsoReversalTransactionData;
@@ -24,8 +28,11 @@ import com.iisysgroup.poslib.host.entities.TransactionResult;
 import com.iisysgroup.poslib.host.entities.VasTerminalData;
 import com.iisysgroup.poslib.utils.InputData;
 import com.iisysgroup.poslib.utils.TransactionData;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.RequestCreator;
 import com.wizarpos.emvsample.MainApp;
 import com.wizarpos.emvsample.VasTerminalService;
+import com.wizarpos.emvsample.activity.FuncActivity;
 import com.wizarpos.emvsample.activity.login.Helper;
 import com.wizarpos.emvsample.activity.login.securestorage.SecureStorage;
 import com.wizarpos.emvsample.constant.Constants;
@@ -34,6 +41,7 @@ import com.wizarpos.emvsample.db.TransactionResultService;
 import com.wizarpos.util.AppUtil;
 
 
+import java.io.ByteArrayOutputStream;
 import java.io.Serializable;
 
 import io.reactivex.Single;
@@ -41,6 +49,8 @@ import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+
+import static com.wizarpos.emvsample.activity.FuncActivity.appState;
 
 
 public class Nibss {
@@ -56,15 +66,21 @@ public class Nibss {
 
     public Nibss(Context context){
         this.context = context;
-        hostInteractor = HostInteractor.getInstance(new GtmsHost(context));
+//        hostInteractor = HostInteractor.getInstance(new GtmsHost(context));
+        hostInteractor = HostInteractor.getInstance(new PosvasHost(context));
+
         mainApp = MainApp.getInstance();
         SharedPreferences sharedPreferences = context.getSharedPreferences(Constants.netWork_pref, Context.MODE_PRIVATE);
 //        ip = sharedPreferences.getString("ip","196.6.103.73");//
 //        port = sharedPreferences.getString("port", "5043");//
 
-        ip = sharedPreferences.getString("ip","196.6.103.73");
-        port = sharedPreferences.getString("port", "5043");
+//        ip = sharedPreferences.getString("ip","196.6.103.73");
+////        port = sharedPreferences.getString("port", "5043");
 
+        ip = sharedPreferences.getString("ip","196.6.103.18");
+        port = sharedPreferences.getString("port", "5014");
+
+//        196.6.103.18 5014
 //         ip = "197.253.19.78";
 //         port = "5001";
 
@@ -72,6 +88,8 @@ public class Nibss {
         //        final ConnectionData connectionData = new ConnectionData("2033GP23", "196.6.103.73", 5043, true);
 
     }
+
+
 
     public static PosLibDatabase poslibdb = MainApp.getInstance().poslibdb;
 
@@ -88,33 +106,33 @@ public class Nibss {
 
         Log.d("okh", terminalID+ "  " + ip + "  " + port + " " + sslStatus);
         Log.d(TAG, "ConnectionData() called with: ip  = [" + ip  + "], port = [" + port + "], sslStatus= = [" + sslStatus + "]");
-          hostInteractor.getKeyHolder(connectionData)
-                  .subscribeOn(Schedulers.io())
-                  .observeOn(AndroidSchedulers.mainThread())
-                  .subscribe(new SingleObserver<KeyHolder>() {
-                      @Override
-                      public void onSubscribe(Disposable d) {
+        hostInteractor.getKeyHolder(connectionData)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<KeyHolder>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
 
-                      }
+                    }
 
 
-                      @Override
-                      public void onError(Throwable e) {
-                          Log.i("okh", "Error on prepare getKeyHolder method " + e.getMessage());
-                          Toast.makeText(context, "Could not prep, please retry", Toast.LENGTH_SHORT).show();
-                          e.printStackTrace();
-                         t.error(e.getMessage());
-                      }
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.i("okh", "Error on prepare getKeyHolder method " + e.getMessage());
+                        Toast.makeText(context, "Could not prep, please retry", Toast.LENGTH_SHORT).show();
+                        e.printStackTrace();
+                        t.error(e.getMessage());
+                    }
 
-                      @Override
-                      public void onSuccess(final KeyHolder keyHolder) {
-                         // new saveKeyHolder().execute(keyHolder);
+                    @Override
+                    public void onSuccess(final KeyHolder keyHolder) {
+                        // new saveKeyHolder().execute(keyHolder);
 
-                          Log.i("okh", "KeyHolder Ready");
-                          Log.i("okh", "Master key "  + keyHolder.getMasterKey());
-                          Log.i("okh", "pin key "  + keyHolder.getPinKey());
-                          Log.i("okh", "session key "  + keyHolder.getSessionKey());
-                          Log.i("okh", "preping to fetch config data");
+                        Log.i("okh", "KeyHolder Ready");
+                        Log.i("okh", "Master key "  + keyHolder.getMasterKey());
+                        Log.i("okh", "pin key "  + keyHolder.getPinKey());
+                        Log.i("okh", "session key "  + keyHolder.getSessionKey());
+                        Log.i("okh", "preping to fetch config data");
 
 //                          if(mainApp.nibssData != null){
 //                              mainApp.nibssData.setKeyHolder(keyHolder);
@@ -125,36 +143,36 @@ public class Nibss {
 //
 //                          Log.d("okh", keyHolder.getPinKey() + " " + keyHolder.getSessionKey() + " " + keyHolder.getMasterKey());
 
-                           hostInteractor.getConfigData(connectionData,keyHolder)
-                                   .subscribeOn(Schedulers.io())
-                                   .observeOn(AndroidSchedulers.mainThread())
-                                   .subscribe(new SingleObserver<ConfigData>() {
-                                       @Override
-                                       public void onSubscribe(Disposable d) {
+                        hostInteractor.getConfigData(connectionData,keyHolder)
+                                .subscribeOn(Schedulers.io())
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .subscribe(new SingleObserver<ConfigData>() {
+                                    @Override
+                                    public void onSubscribe(Disposable d) {
 
-                                       }
+                                    }
 
-                                       @Override
-                                       public void onSuccess(ConfigData configData) {
-                                           Toast.makeText(context, "Successfully Configured", Toast.LENGTH_SHORT).show();
-                                           Log.i("okh", "Config data ready");
+                                    @Override
+                                    public void onSuccess(ConfigData configData) {
+                                        Toast.makeText(context, "Successfully Configured", Toast.LENGTH_SHORT).show();
+                                        Log.i("okh", "Config data ready");
 //                                           SecureStorage.store(Helper.TERMINAL, connectionData.getTerminalID());
-                                           Log.i("okh", configData.toString());
-                                            NIbbsData nIbbsData = new NIbbsData(keyHolder, configData,connectionData);
-                                            t.complete(nIbbsData);
-                                       }
+                                        Log.i("okh", configData.toString());
+                                        NIbbsData nIbbsData = new NIbbsData(keyHolder, configData,connectionData);
+                                        t.complete(nIbbsData);
+                                    }
 
-                                       @Override
-                                       public void onError(Throwable e) {
-                                           Log.i("okh" , "Error on Nibbs getConfigData callable in prepare method");
-                                           e.printStackTrace();
-                                           t.error(e.getMessage());
-                                       }
-                                   });
-                      }
+                                    @Override
+                                    public void onError(Throwable e) {
+                                        Log.i("okh" , "Error on Nibbs getConfigData callable in prepare method");
+                                        e.printStackTrace();
+                                        t.error(e.getMessage());
+                                    }
+                                });
+                    }
 
 
-                  });
+                });
 
     }
 
@@ -165,7 +183,7 @@ public class Nibss {
             Log.d("OkH", keyholder[0].getMasterKey());
             Log.d("sbd","dfddd");
 
-         //   SharedPreferenceUtils.setIsTerminalPrepped(this, true);
+            //   SharedPreferenceUtils.setIsTerminalPrepped(this, true);
 
             return null;
         }
@@ -179,7 +197,7 @@ public class Nibss {
     private static class saveVasKeyHolder extends AsyncTask<VasTerminalData, Integer, Void> {
         protected Void doInBackground(VasTerminalData...vasTerminalData) {
             poslibdb.getVasTerminalDataDao().save(vasTerminalData[0]);
-            Log.d("OkH", "vasmaster "+vasTerminalData[0].getMasterKey());
+//            Log.d("OkH", "vasmaster "+vasTerminalData[0].getMasterKey());
             Log.d("sbd","dfddd");
             Log.d("OkH", "vasname "+poslibdb.getVasTerminalDataDao().get().getMerchantName());
             Log.d("OkH", "vasterminal "+poslibdb.getVasTerminalDataDao().get().getTid());
@@ -242,18 +260,31 @@ public class Nibss {
                         Log.i("okh", "session key "  + keyHolder.getSessionKey());
                         Log.i("okh", "preping to fetch config data");
 
-                          if(mainApp.nibssData != null){
-                              mainApp.nibssData.setKeyHolder(keyHolder);
-                              t.complete(mainApp.nibssData);
-                          }
+                        if(mainApp.nibssData != null){
+                            mainApp.nibssData.setKeyHolder(keyHolder);
+                            t.complete(mainApp.nibssData);
+                        }
 
                         SecureStorage.store(Helper.TERMINAL_ENTERED_BY_USER, connectionData.getTerminalID());
+
+                        //You can get logo from you
                         SecureStorage.store(Helper.BANK_LOGO,"");
 
 //
-                          Log.d("okh", connectionData.getIpAddress() + " " + connectionData.getTerminalID() + " " + connectionData.getIpPort() + " " + connectionData.isSSL()+" " +connectionData.getId());
+                        Log.d("okh", connectionData.getIpAddress() + " " + connectionData.getTerminalID() + " " + connectionData.getIpPort() + " " + connectionData.isSSL()+" " +connectionData.getId());
 //
-                          Log.d("okh", keyHolder.getPinKey() + " " + keyHolder.getSessionKey() + " " + keyHolder.getMasterKey());
+                        Log.d("okh", keyHolder.getPinKey() + " " + keyHolder.getSessionKey() + " " + keyHolder.getMasterKey());
+
+                        SecureStorage.store(Helper.BANK_LOGO,"");
+
+
+
+
+
+
+
+//                        String merchantName;
+
 
                         hostInteractor.getConfigData(connectionData,keyHolder)
                                 .subscribeOn(Schedulers.io())
@@ -272,6 +303,58 @@ public class Nibss {
                                         String ter = SecureStorage.retrieve(Helper.TERMINAL, "");
                                         NIbbsData nIbbsData = new NIbbsData(keyHolder, configData,connectionData);
                                         t.complete(nIbbsData);
+
+
+                                        new Thread(new Runnable() {
+                                            @Override
+                                            public void run() {
+
+//                                                String merchantName =  poslibdb.getConfigDataDao().get().getConfigData("52040").toString();
+//
+//
+//                                                 RequestCreator picassoImage= Picasso.get().load("http://www.merchant.payvice.com/external-assets/logos/" + bankNumber);
+//                                                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+//
+//
+//                                                Bitmap bitmap= ((BitmapDrawable) drawable).getBitmap();
+//
+//                                                appState.bankLogo = bitmap;
+//                                                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+//                                                byte[] b = stream.toByteArray();
+//                                                String _sBankLogo = Base64.encodeToString(b, Base64.DEFAULT);
+//                                                Log.d("logo string  >>>",_sBankLogo);
+//
+//                                                Boolean status = SecureStorage.store(Helper.BANK_LOGO,_sBankLogo);
+//
+//                                                Log.d("logo stored status     >>>",String.valueOf(status));
+//
+//                                                String val = SecureStorage.retrieve(Helper.BANK_LOGO,"");
+//
+//
+//                                                Log.d("logo retrived   >>>",val);
+
+
+
+
+
+                                                String merchantName = FuncActivity.appState.nibssData.getConfigData().getConfigData("52040").toString();
+
+
+                                                Log.d(TAG + "onSuccess: get nerchantName >>>>>>> ", merchantName);
+
+
+                                                SecureStorage.store(Helper.MERCHANT_NAME,merchantName);
+
+
+
+
+                                            }
+                                        }).start();
+
+
+
+
+
                                     }
 
                                     @Override
@@ -295,15 +378,15 @@ public class Nibss {
                          ConnectionData connectionData, final Nibs<TransactionResult> resultNibs){
         TransactionData transactionData = new TransactionData(inputData,emvCard, configData, keyHolder);
 
-       try{
-           Log.d("okh", "nibss pinblock "+emvCard.getPinInfo().getKey());
-       }catch (Exception e){
-           Log.d("okh", "No pin block");
-       }
+        try{
+            Log.d("okh", "nibss pinblock "+emvCard.getPinInfo().getKey());
+        }catch (Exception e){
+            Log.d("okh", "No pin block");
+        }
 
 //       Log.d("okh", Arrays.toString(emvCard.getPinInfo().getPinBlock()) + " " + transactionType + " " + inputData.getAccountType() + " " + keyHolder + " " + configData + " " + connectionData + resultNibs);
 
-        hostInteractor.getTransactionResult(transactionType,connectionData,transactionData)
+        hostInteractor.getTransactionResult(transactionType,connectionData,transactionData,null,null)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new SingleObserver<TransactionResult>() {
@@ -314,7 +397,7 @@ public class Nibss {
 
                     @Override
                     public void onSuccess(final TransactionResult transactionResult) {
-                            Log.i("okh", transactionResult.toString());
+                        Log.i("okh", transactionResult.toString());
 
                         TransactionResultService transactionResultService = new TransactionResultService(mainApp.db, context);
                         if(mainApp.trans.getTransactionType().equals("Purchase") || mainApp.trans.getTransactionType().equals("Purchase with Cash Back") ){
@@ -328,7 +411,7 @@ public class Nibss {
 
                     @Override
                     public void onError(Throwable e) {
-                       resultNibs.error(e.getLocalizedMessage());
+                        resultNibs.error(e.getLocalizedMessage());
                     }
                 });
 
@@ -345,7 +428,7 @@ public class Nibss {
         }catch (Exception e){
             Log.i("ok2", "No pin block");
         }
-        hostInteractor.getTransactionResult(transactionType,connectionData,transactionData)
+        hostInteractor.getTransactionResult(transactionType,connectionData,transactionData,null,null)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new SingleObserver<TransactionResult>() {
@@ -377,15 +460,15 @@ public class Nibss {
 
 
     public void reverse(EmvCard emvCard, final Host.TransactionType transactionType,
-                         final InputData inputData, KeyHolder keyHolder, ConfigData configData,
-                         ConnectionData connectionData,IsoReversalProcessData processData, final Nibs<TransactionResult> resultNibs){
+                        final InputData inputData, KeyHolder keyHolder, ConfigData configData,
+                        ConnectionData connectionData,IsoReversalProcessData processData, final Nibs<TransactionResult> resultNibs){
         IsoReversalTransactionData transactionData = new IsoReversalTransactionData(inputData,emvCard,configData,keyHolder, processData);
         try{
             Log.i("ok2", emvCard.getPinInfo().getKey().toString());
         }catch (Exception e){
             Log.i("ok2", "No pin block");
         }
-        hostInteractor.getTransactionResult(transactionType,connectionData,transactionData)
+        hostInteractor.getTransactionResult(transactionType,connectionData,transactionData,null,null)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new SingleObserver<TransactionResult>() {
@@ -463,10 +546,10 @@ public class Nibss {
 
 
     //Use for call back durring preparation
-  public  interface  Nibs<T>{
-         void complete(T res);
+    public  interface  Nibs<T>{
+        void complete(T res);
         void error(String e);
-  }
+    }
 
     private Single<VasTerminalData> getVasTerminalService()  {
         return VasTerminalService.Factory.INSTANCE.getService().getVasTerminalDetails();
@@ -479,37 +562,37 @@ public class Nibss {
                 .subscribeOn(Schedulers.io())
                 .subscribe(new SingleObserver<VasTerminalData>() {
 
-                               @Override
-                               public void onSubscribe(Disposable d) {
+                    @Override
+                    public void onSubscribe(Disposable d) {
 
-                               }
+                    }
 
-                               @Override
-                               public void onSuccess(VasTerminalData vasTerminalData) {
-                                   Log.d("okh", "itex vas "+ vasTerminalData.getMerchantName());
-                                   Log.d("okh", "itex vas "+ vasTerminalData.getTid());
+                    @Override
+                    public void onSuccess(VasTerminalData vasTerminalData) {
+                        Log.d("okh", Helper.VAS_MERCHANT_NAME+" >>>>>>>>>> "+ vasTerminalData.getMerchantName());
+                        Log.d("okh", Helper.VAS_TERMINAL_ID +"  >>>>>>>>>>>> "+ vasTerminalData.getTid());
 
-                                   SecureStorage.store(Helper.VAS_TERMINAL_ID,vasTerminalData.getTid());
+                        SecureStorage.store(Helper.VAS_TERMINAL_ID,vasTerminalData.getTid());
 
-                                   SecureStorage.store(Helper.VAS_MERCHANT_NAME,vasTerminalData.getMerchantName());
+                        SecureStorage.store(Helper.VAS_MERCHANT_NAME,vasTerminalData.getMerchantName());
 
-                                    new saveVasKeyHolder().execute(vasTerminalData);
+                        new saveVasKeyHolder().execute(vasTerminalData);
 //                                   launch {
 //                                       (application as App).db.vasTerminalDataDao.save(it)
 //                                   }
-                               }
+                    }
 
-                               @Override
-                               public void onError(Throwable e) {
+                    @Override
+                    public void onError(Throwable e) {
 
-                               }
-                           });
+                    }
+                });
 
     }
 
 
 
-  public static class NIbbsData implements Serializable{
+    public static class NIbbsData implements Serializable{
         private KeyHolder k; private ConfigData cd; private ConnectionData conD;
         public NIbbsData(KeyHolder keyHolder, ConfigData configData, ConnectionData connectionData){
             this.k = keyHolder;
@@ -517,23 +600,23 @@ public class Nibss {
             this.conD = connectionData;
         }
 
-      public KeyHolder getKeyHolder() {
-          return k;
-      }
+        public KeyHolder getKeyHolder() {
+            return k;
+        }
 
-      public void setKeyHolder(KeyHolder keys){
+        public void setKeyHolder(KeyHolder keys){
             this.k = keys;
-          Log.i("okh", "Key saved");
-      }
+            Log.i("okh", "Key saved");
+        }
 
-      public ConfigData getConfigData() {
-          return cd;
-      }
+        public ConfigData getConfigData() {
+            return cd;
+        }
 
-      public ConnectionData getConnectionData() {
-          return conD;
-      }
-  }
+        public ConnectionData getConnectionData() {
+            return conD;
+        }
+    }
 
 
     public static class VasData implements Serializable{

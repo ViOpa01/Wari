@@ -48,7 +48,7 @@ class VasPurchaseProcessor: BaseCardPaymentProcessor(){
             val connectionData = ConnectionData(vasTerminalDetails.tid, "196.6.103.73", 5043, true)
 //                    val connectionData = ConnectionData(vasTerminalDetails.tid, "197.253.19.78", 5001, true)
 
-                    val keyHolder = KeyHolder(vasTerminalDetails.masterKey, vasTerminalDetails.sessionKey, vasTerminalDetails.pinKey)
+                    val keyHolder = KeyHolder("", vasTerminalDetails.sessionKey, vasTerminalDetails.pinKey)
 
             val configData = ConfigData()
 

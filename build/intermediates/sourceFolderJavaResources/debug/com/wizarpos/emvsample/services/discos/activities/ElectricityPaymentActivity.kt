@@ -509,7 +509,10 @@ open class ElectricityPaymentActivity : BaseVasActivity() {
 
         val emvCard = EmvCard(appState.trans.cardHolderName, appState.trans.track2Data, appState.trans.iccData, pinInfo)
 
-        val pfm = Pfm(PfmStateGenerator(this).generateState(), PfmJournalGenerator(FuncActivity.appState.trans.transactionResult, FuncActivity.appState.nibssData.configData, false, airtime_amount, emvCard, electricMeterType, electricMeterType, "").generateJournal())
+        val tid = SecureStorage.retrieve(Helper.TERMINAL_ENTERED_BY_USER, "")
+
+
+        val pfm = Pfm(PfmStateGenerator(this,tid).generateState(), PfmJournalGenerator(FuncActivity.appState.trans.transactionResult, FuncActivity.appState.nibssData.configData, false, airtime_amount, emvCard, electricMeterType, electricMeterType, "").generateJournal())
 
 
         val pinView = LayoutInflater.from(this).inflate(R.layout.activity_enter_pin, null, false)

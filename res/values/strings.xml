@@ -18,6 +18,9 @@
     <string name="error_amount_over_limit">AMOUNT OVER LIMIT</string>
     <string name="error_amount_zero">transaction terminated,please use other interface</string>
 
+    <string name="no_connectivity_prompt">Could not detect internet connectivity.</string>
+
+
     <string name="error_ic">IC ERROR</string>
     <string name="error_init_ic">INIT IC DEVICE ERROR</string>
     <string name="error_no_trans_in_card">NO TRANS IN CARD</string>
