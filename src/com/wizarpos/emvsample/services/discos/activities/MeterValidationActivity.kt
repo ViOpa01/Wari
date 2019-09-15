@@ -296,7 +296,7 @@ class MeterValidationActivity:AppCompatActivity(),View.OnClickListener{
 
             R.id.proceedBtn ->{
                 password = SecureStorage.retrieve(Helper.STORED_PASSWORD,"")
-                channel = "ANDROID"
+                channel = "ANDROIDPOS"
                 username =SecureStorage.retrieve(Helper.USER_ID,"")
                 wallet = SecureStorage.retrieve(Helper.TERMINAL_ID,"")
                 authPin = SecureStorage.retrieve(Helper.PIN,"")

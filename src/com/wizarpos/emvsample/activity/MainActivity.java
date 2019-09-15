@@ -642,9 +642,15 @@ public class MainActivity extends Activity {
                 Log.d("MainActivity", "printImage() called with: transactionModel transactionModel.getCardDetails().getAmount() = [" + transactionModel.getCardDetails().getAmount() + "], getVasDetails().getAmount() = [" +  transactionModel.getVasDetails().getAmount() + "]");
                 Log.d("MainActivity", "printImage() called with: transactionModel transactionModel.getCardDetails().getAmount() = [" + ((transactionModel.getVasDetails().getAmount()).equals("0.00") ? transactionModel.getCardDetails().getAmount(): transactionModel.getVasDetails().getAmount()) + "]");
 //                String amount = (transactionModel.getVasDetails().getAmount()).equals("0.00") ? transactionModel.getCardDetails().getAmount(): (transactionModel.getVasDetails().getAmount());appState.trans.transAmount
-                String amount = (transactionModel.getVasDetails().getAmount()).equals("0.00") ? transactionModel.getCardDetails().getAmount(): (appState.trans.getTransAmount().toString());
+                Log.d("amount check amt  >>>>>>>> ",  (transactionModel.getVasDetails().getAmount()));
 
-               Log.d("amount",amount);
+                Log.d("amount check   >>>>>>>> ", String.valueOf((transactionModel.getVasDetails().getAmount()).equals("0.00")));
+
+//                int vasTransactionAmount = ;
+//                String amount = (transactionModel.getVasDetails().getAmount()).equals("0.00") ? transactionModel.getCardDetails().getAmount(): (appState.trans.getTransAmount().toString());
+                String amount = (transactionModel.getVasDetails().getAmount()).equals("0.00") ? transactionModel.getCardDetails().getAmount(): (String.valueOf(Integer.parseInt(transactionModel.getVasDetails().getAmount()) * 100));
+
+                Log.d("amount",amount);
 //               String nairaSign= 	\u20A6;
                 printerDevice.printlnText("\n");
                 printerDevice.printlnText(format, "***********************");
