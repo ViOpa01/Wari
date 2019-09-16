@@ -257,7 +257,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/MainApp.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-523">
+            <state relative-caret-position="-124">
               <caret line="521" column="18" selection-start-line="521" selection-start-column="18" selection-end-line="521" selection-end-column="18" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -267,28 +267,37 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/payments_menu/handlers/Transfer.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="361">
-              <caret line="32" column="142" selection-start-line="32" selection-start-column="142" selection-end-line="32" selection-end-column="142" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/transaction/Nibss.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="112">
+            <state relative-caret-position="-173">
               <caret line="297" column="45" selection-start-line="297" selection-start-column="45" selection-end-line="297" selection-end-column="45" />
             </state>
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/AirtimeVasActivity.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="20" column="49" selection-start-line="20" selection-start-column="49" selection-end-line="20" selection-end-column="49" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/generators/PfmStateGenerator.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="209">
+              <caret line="28" column="32" lean-forward="true" selection-start-line="28" selection-start-column="32" selection-end-line="28" selection-end-column="32" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="241">
-              <caret line="650" column="155" selection-start-line="650" selection-start-column="155" selection-end-line="650" selection-end-column="155" />
+            <state relative-caret-position="3718">
+              <caret line="656" column="66" lean-forward="true" selection-start-line="656" selection-start-column="66" selection-end-line="656" selection-end-column="66" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -301,15 +310,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="19">
               <caret line="1" column="26" selection-start-line="1" selection-start-column="26" selection-end-line="1" selection-end-column="26" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/login/Helper.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="64" selection-start-line="64" selection-end-line="64" />
             </state>
           </provider>
         </entry>
@@ -365,7 +365,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Now</find>
       <find>TransRes</find>
       <find>positive</find>
       <find>setPositiveButton</find>
@@ -395,6 +394,7 @@
       <find>MainActi</find>
       <find>ANDROID</find>
       <find>channel</find>
+      <find>pfm</find>
     </findStrings>
     <replaceStrings>
       <replace>printerDevices</replace>
@@ -431,7 +431,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/InputPINActivity.java" />
         <option value="$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/AirtimeDataActivity.kt" />
         <option value="$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/DataActivity.kt" />
         <option value="$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/DataPhoneEntry.kt" />
@@ -461,7 +460,6 @@
         <option value="$PROJECT_DIR$/src/com/wizarpos/util/PrintUtils.kt" />
         <option value="$PROJECT_DIR$/res/drawable/vas.xml" />
         <option value="$PROJECT_DIR$/src/com/wizarpos/emvsample/models/PfmStateGenerator.kt" />
-        <option value="$PROJECT_DIR$/src/com/wizarpos/emvsample/generators/PfmStateGenerator.kt" />
         <option value="$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/AirtimeVasActivity.kt" />
         <option value="$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/AirtimeProcessor.kt" />
         <option value="$PROJECT_DIR$/src/com/wizarpos/emvsample/services/cable_tv/multichoice/activities/MultichoiceActivity.kt" />
@@ -482,6 +480,8 @@
         <option value="$PROJECT_DIR$/src/com/wizarpos/emvsample/MainApp.java" />
         <option value="$PROJECT_DIR$/src/com/wizarpos/emvsample/transaction/Nibss.java" />
         <option value="$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/MainActivity.java" />
+        <option value="$PROJECT_DIR$/src/com/wizarpos/emvsample/services/discos/activities/MeterValidationActivity.kt" />
+        <option value="$PROJECT_DIR$/src/com/wizarpos/emvsample/generators/PfmStateGenerator.kt" />
       </list>
     </option>
   </component>
@@ -980,11 +980,11 @@
       <window_info id="Capture Tool" order="7" />
       <window_info id="Resources Explorer" order="8" weight="0.3293011" />
       <window_info anchor="bottom" x="23" y="205" width="1490" height="413" id="Version Control" order="0" weight="0.58498585" />
-      <window_info active="true" anchor="bottom" x="23" y="235" width="1490" height="353" id="Logcat" order="1" sideWeight="0.4986577" visible="true" weight="0.48300284" />
+      <window_info anchor="bottom" x="23" y="235" width="1490" height="353" id="Logcat" order="1" sideWeight="0.4986577" weight="0.48300284" />
       <window_info anchor="bottom" id="Build" order="2" sideWeight="0.4986577" weight="0.38526914" />
       <window_info anchor="bottom" id="TODO" order="3" weight="0.3286119" />
       <window_info anchor="bottom" id="Educational.CheckDetails" order="4" />
-      <window_info anchor="bottom" id="Terminal" order="5" weight="0.32577905" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="5" visible="true" weight="0.32577905" />
       <window_info anchor="bottom" id="Event Log" order="6" sideWeight="0.5013423" side_tool="true" weight="0.34330484" />
       <window_info anchor="bottom" id="Android Profiler" order="7" />
       <window_info anchor="bottom" id="Run" order="8" weight="0.8242857" />
@@ -1378,27 +1378,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/generators/PfmStateGenerator.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="24" column="72" selection-start-line="24" selection-start-column="72" selection-end-line="24" selection-end-column="72" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/AirtimeProcessor.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
           <caret line="58" selection-start-line="58" selection-end-line="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/AirtimeVasActivity.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="343" column="39" selection-start-line="343" selection-end-line="344" />
-          <folding>
-            <element signature="e#41#1553#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1545,10 +1528,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.support/recyclerview-v7/27.1.1/ad225a74247e675db0b05ea4f8b17202acbb7f9d/recyclerview-v7-27.1.1-sources.jar!/android/support/v7/util/AsyncListUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="1" column="26" selection-start-line="1" selection-start-column="26" selection-end-line="1" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/MainApp.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-523">
+        <state relative-caret-position="-124">
           <caret line="521" column="18" selection-start-line="521" selection-start-column="18" selection-end-line="521" selection-end-column="18" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3718">
+          <caret line="656" column="66" lean-forward="true" selection-start-line="656" selection-start-column="66" selection-end-line="656" selection-end-column="66" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1557,25 +1557,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/transaction/Nibss.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
+        <state relative-caret-position="-173">
           <caret line="297" column="45" selection-start-line="297" selection-start-column="45" selection-end-line="297" selection-end-column="45" />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.support/recyclerview-v7/27.1.1/ad225a74247e675db0b05ea4f8b17202acbb7f9d/recyclerview-v7-27.1.1-sources.jar!/android/support/v7/util/AsyncListUtil.java">
+    <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/AirtimeVasActivity.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="1" column="26" selection-start-line="1" selection-start-column="26" selection-end-line="1" selection-end-column="26" />
+        <state relative-caret-position="150">
+          <caret line="20" column="49" selection-start-line="20" selection-start-column="49" selection-end-line="20" selection-end-column="49" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/MainActivity.java">
+    <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/generators/PfmStateGenerator.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="241">
-          <caret line="650" column="155" selection-start-line="650" selection-start-column="155" selection-end-line="650" selection-end-column="155" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="209">
+          <caret line="28" column="32" lean-forward="true" selection-start-line="28" selection-start-column="32" selection-end-line="28" selection-end-column="32" />
         </state>
       </provider>
     </entry>
