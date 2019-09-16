@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\Favour\\AndroidStudioProjects\\Just Wari Online\\wari-pos\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-kn\\values-kn.xml",
+            "outputFile": "/Users/maxwell/Desktop/Wari Newland/build/intermediates/incremental/mergeDebugResources/merged.dir/values-kn/values-kn.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Favour\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-27.1.1.aar\\b2c00584b833f21304a6dfe37248b172\\res\\values-kn\\values-kn.xml",
+                    "source": "/Users/maxwell/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/89b38c0ae93be33ba2ed70b1f7598855/res/values-kn/values-kn.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -21,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Favour\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\d8eb0dca661cd70c1b20b83a81876ba1\\res\\values-kn\\values-kn.xml",
+                    "source": "/Users/maxwell/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/b22723df402cb0ee703f723d5c9029ed/res/values-kn/values-kn.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",

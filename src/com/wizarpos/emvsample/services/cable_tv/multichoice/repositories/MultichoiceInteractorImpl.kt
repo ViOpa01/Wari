@@ -10,10 +10,12 @@ import com.wizarpos.emvsample.activity.login.Helper
 import com.wizarpos.emvsample.activity.login.securestorage.SecureStorage
 import com.wizarpos.emvsample.generators.PfmStateGenerator
 import com.wizarpos.emvsample.models.PfmJournalGenerator
+import com.wizarpos.util.MemoryUtil
 import com.wizarpos.util.StringUtil
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import java.util.*
 
 
 class MultichoiceInteractorImpl(val context: Context) : MultichoiceInteractor {
@@ -47,7 +49,7 @@ class MultichoiceInteractorImpl(val context: Context) : MultichoiceInteractor {
 
 
         val pfm = com.itex.richard.payviceconnect.model.Pfm(PfmStateGenerator(context,tid).generateState(), PfmJournalGenerator(FuncActivity.appState.trans.transactionResult, FuncActivity.appState.nibssData.configData, false,plan.amount, emvCard, product.name, plan.name, "").generateJournal())
-
+        MemoryUtil.setValue(context, MemoryUtil.LastTransactionTimeKey, Date());
 
         val subscriptionDetails = DstvModel.PayDetails(iuc, plan.product_code,
                 userId, terminalId, null,  authPin, product.toString(), clientReference,pfm)

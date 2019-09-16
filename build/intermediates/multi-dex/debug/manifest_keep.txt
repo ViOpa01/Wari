@@ -1,3 +1,3 @@
-# Referenced at C:\Users\Favour\AndroidStudioProjects\Just Wari Online\wari-pos\build\intermediates\manifests\full\debug\AndroidManifest.xml:34
+# Referenced at /Users/maxwell/Desktop/Wari Newland/build/intermediates/manifests/full/debug/AndroidManifest.xml:34
 -keep class com.wizarpos.emvsample.MainApp { <init>(...); }
 

@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: artifacts:poslib-device-debug:unspecified@jar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/poslib-device-debug.aar/42022d29db293e752f89b20327679ee2/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/poslib-device-debug.aar/42022d29db293e752f89b20327679ee2/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/poslib-device-debug.aar/4ab6bac10f991d8e07fecc0ad513c775/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/poslib-device-debug.aar/4ab6bac10f991d8e07fecc0ad513c775/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

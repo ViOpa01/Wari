@@ -1,12 +1,17 @@
 package com.wizarpos.emvsample.activity;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.provider.Settings;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
@@ -42,7 +47,7 @@ import org.jetbrains.anko.AlertDialogBuilder;
 
 import static com.wizarpos.util.AppUtil.resetAllServicesStates;
 
-public class FuncMenuActivity extends FuncActivity
+public class FuncMenuActivity extends FuncActivity implements LocationListener
 {
 	private TextView textTitle  = null;
 	private Button   buttonBack = null;
@@ -64,6 +69,11 @@ public class FuncMenuActivity extends FuncActivity
 	private ImageView purchaseCashBack;
 	private AlertDialog alertDialog;
 	private ImageView ImageViewEod;
+
+	protected LocationManager locationManager;
+	protected LocationListener locationListener;
+	protected Context context;
+	public static String latitude,longitude;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState)
@@ -120,6 +130,8 @@ public class FuncMenuActivity extends FuncActivity
 		ImageViewsignOut = findViewById(R.id.signOut);
 		ImageViewsignOut.setOnClickListener(new ClickListener());
 
+		locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
 
 	}
 
@@ -142,6 +154,7 @@ public class FuncMenuActivity extends FuncActivity
 		}
 		startIdleTimer(TIMER_IDLE, 300);
         resetAllServicesStates();
+		checkLocationStatus();
 	}
 
 	@Override
@@ -190,6 +203,28 @@ public class FuncMenuActivity extends FuncActivity
 	protected void onBack()
 	{
 		onBackPressed();
+	}
+
+	@Override
+	public void onLocationChanged(Location location) {
+		latitude = String.valueOf(location.getLatitude());
+		longitude = String.valueOf(location.getLongitude());
+		Log.d("getLocation", "onLocationChanged: "+latitude);
+	}
+
+	@Override
+	public void onStatusChanged(String provider, int status, Bundle extras) {
+		Log.d("getLocation", "onStatusChanged: "+provider);
+	}
+
+	@Override
+	public void onProviderEnabled(String provider) {
+		Log.d("getLocation", "onProviderEnabled: " + provider);
+	}
+
+	@Override
+	public void onProviderDisabled(String provider) {
+		Log.d("getLocation", "onProviderDisabled: "+provider);
 	}
 
 	public class ClickListener implements View.OnClickListener
@@ -347,6 +382,43 @@ public class FuncMenuActivity extends FuncActivity
 
 			}
 		}
+	}
+
+	private void checkLocationStatus(){
+		LocationManager lm = (LocationManager)this.getSystemService(Context.LOCATION_SERVICE);
+		boolean gps_enabled = false;
+		boolean network_enabled = false;
+
+		try {
+			gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
+		} catch(Exception ex) {}
+
+		try {
+			network_enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+		} catch(Exception ex) {}
+
+		if(!gps_enabled && !network_enabled) {
+			// notify user
+			buildAlertMessageNoGps();
+		}
+	}
+
+	private void buildAlertMessageNoGps() {
+		final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage("Your GPS seems to be disabled, do you want to enable it?")
+				.setCancelable(false)
+				.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+					public void onClick(final DialogInterface dialog, final int id) {
+						startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+					}
+				})
+				.setNegativeButton("No", new DialogInterface.OnClickListener() {
+					public void onClick(final DialogInterface dialog, final int id) {
+						dialog.cancel();
+					}
+				});
+		final AlertDialog alert = builder.create();
+		alert.show();
 	}
 
 	private void configureTerminal() {

@@ -33,10 +33,7 @@ import com.wizarpos.emvsample.models.PfmJournalGenerator
 import com.wizarpos.emvsample.services.discos.activities.DiscosActivity.Companion.SERVICE
 import com.wizarpos.emvsample.services.discos.activities.ElectricityPaymentActivity
 import com.wizarpos.emvsample.services.helper.activity.util.Models
-import com.wizarpos.util.PinAlertUtils
-import com.wizarpos.util.Service
-import com.wizarpos.util.StringUtil
-import com.wizarpos.util.VasServices
+import com.wizarpos.util.*
 import kotlinx.android.synthetic.main.activity_multichoice.*
 import kotlinx.android.synthetic.main.content_multichoice.*
 import kotlinx.android.synthetic.main.content_multichoice.historyLayout
@@ -290,8 +287,7 @@ class MultichoiceActivity : BaseServiceActivity() {
 
 
         val pfm = com.itex.richard.payviceconnect.model.Pfm(PfmStateGenerator(this,tid).generateState(), PfmJournalGenerator(FuncActivity.appState.trans.transactionResult, FuncActivity.appState.nibssData.configData, false, amount.toString(), emvCard,productCode ,viewModel.productLiveData.value!!.toString() , "").generateJournal())
-
-
+        MemoryUtil.setValue(this, MemoryUtil.LastTransactionTimeKey, Date());
 
         val clientReference = StringUtil.getClientRef(this@MultichoiceActivity, "")
         when (paymentOption) {

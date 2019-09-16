@@ -453,6 +453,7 @@ public class FuncActivity extends AppCompatActivity implements Constants, IFunti
 
 	}
 
+
     @Override
     protected void onStop()
     {

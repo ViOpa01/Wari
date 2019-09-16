@@ -37,6 +37,7 @@ import com.wizarpos.emvsample.services.discos.activities.MeterValidationActivity
 import com.wizarpos.emvsample.services.discos.activities.MeterValidationActivity.Companion.REQUEST_TYPE
 import com.wizarpos.emvsample.services.discos.viewmodels.EleectricityPaymentVM
 import com.wizarpos.emvsample.services.helper.activity.util.Models
+import com.wizarpos.util.MemoryUtil
 import com.wizarpos.util.PinAlertUtils
 import com.wizarpos.util.TransactionModel
 import com.wizarpos.util.VasServices
@@ -513,7 +514,7 @@ open class ElectricityPaymentActivity : BaseVasActivity() {
 
 
         val pfm = Pfm(PfmStateGenerator(this,tid).generateState(), PfmJournalGenerator(FuncActivity.appState.trans.transactionResult, FuncActivity.appState.nibssData.configData, false, airtime_amount, emvCard, electricMeterType, electricMeterType, "").generateJournal())
-
+        MemoryUtil.setValue(this, MemoryUtil.LastTransactionTimeKey, Date());
 
         val pinView = LayoutInflater.from(this).inflate(R.layout.activity_enter_pin, null, false)
         PinAlertUtils.getPin(this, pinView) {

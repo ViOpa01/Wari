@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\Favour\\AndroidStudioProjects\\Just Wari Online\\wari-pos\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-w820dp-v13\\values-w820dp-v13.xml",
+            "outputFile": "/Users/maxwell/Desktop/Wari Newland/build/intermediates/incremental/mergeDebugResources/merged.dir/values-w820dp-v13/values-w820dp-v13.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Favour\\.gradle\\caches\\transforms-1\\files-1.1\\poslib-device-debug.aar\\42022d29db293e752f89b20327679ee2\\res\\values-w820dp-v13\\values-w820dp-v13.xml",
+                    "source": "/Users/maxwell/.gradle/caches/transforms-1/files-1.1/poslib-device-debug.aar/4ab6bac10f991d8e07fecc0ad513c775/res/values-w820dp-v13/values-w820dp-v13.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

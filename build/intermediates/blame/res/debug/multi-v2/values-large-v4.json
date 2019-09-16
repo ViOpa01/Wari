@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\Favour\\AndroidStudioProjects\\Just Wari Online\\wari-pos\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-large-v4\\values-large-v4.xml",
+            "outputFile": "/Users/maxwell/Desktop/Wari Newland/build/intermediates/incremental/mergeDebugResources/merged.dir/values-large-v4/values-large-v4.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Favour\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\d8eb0dca661cd70c1b20b83a81876ba1\\res\\values-large-v4\\values-large-v4.xml",
+                    "source": "/Users/maxwell/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/b22723df402cb0ee703f723d5c9029ed/res/values-large-v4/values-large-v4.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10",
                         "startColumns": "4,4,4,4,4,4,4,4,4",

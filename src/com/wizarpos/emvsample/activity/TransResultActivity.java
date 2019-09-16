@@ -49,6 +49,7 @@ import com.wizarpos.emvsample.services.helper.activity.util.Models.GeneralElectr
 import com.wizarpos.emvsample.services.helper.activity.util.Models;
 import com.wizarpos.emvsample.transaction.TransDefine;
 import com.wizarpos.jni.PinPadInterface;
+import com.wizarpos.util.MemoryUtil;
 import com.wizarpos.util.SharedPreferenceUtils;
 import com.wizarpos.util.StringUtil;
 import com.wizarpos.util.TransactionModel;
@@ -59,6 +60,7 @@ import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -605,7 +607,7 @@ public class TransResultActivity extends FuncActivity
 
 
 		com.itex.richard.payviceconnect.model.Pfm pfm = new com.itex.richard.payviceconnect.model.Pfm(new PfmStateGenerator(this,tid).generateState(), new PfmJournalGenerator(appState.trans.getTransactionResult(), appState.nibssData.getConfigData(), false,  generalElectricityDetails.getAmount(), emvCard,generalElectricityDetails.getElectricMeterType(),generalElectricityDetails.getElectricMeterType(),"").generateJournal());
-
+		MemoryUtil.setValue(this, MemoryUtil.LastTransactionTimeKey, new Date());
 
 		mEleectricityPaymentVM.payElectricBill(this ,generalElectricityDetails.getAmount(), generalElectricityDetails.getWallet(), generalElectricityDetails.getUserName(), generalElectricityDetails.getRequestType(),generalElectricityDetails.getMeterType().toLowerCase(),generalElectricityDetails.getMeterNumber(),generalElectricityDetails.getChannel(), generalElectricityDetails.getPhone_number(), generalElectricityDetails.getProductCode(),pin ,generalElectricityDetails.getPaymentMetod(),generalElectricityDetails.getElectricMeterType(),generalElectricityDetails.getPassword(),generalElectricityDetails.getMeterName(),generalElectricityDetails.getClientReference(),generalElectricityDetails.getTerminalId(),pfm);
         SecureStorage.store("pinentered", "");
@@ -653,7 +655,7 @@ public class TransResultActivity extends FuncActivity
 		EmvCard emvCard = new EmvCard(appState.trans.getCardHolderName(), appState.trans.getTrack2Data(), appState.trans.getICCData(), pinInfo);
 
 		com.itex.richard.payviceconnect.model.Pfm pfm = new com.itex.richard.payviceconnect.model.Pfm(new PfmStateGenerator(this,tid).generateState(), new PfmJournalGenerator(appState.trans.getTransactionResult(), appState.nibssData.getConfigData(), false,  airtime_amount, emvCard,"Airtime",airtimeProvider,"").generateJournal());
-
+		MemoryUtil.setValue(this, MemoryUtil.LastTransactionTimeKey, new Date());
 
 		AirtimeRequestDetails details = new AirtimeRequestDetails(terminalID, username, airtime_amount, phone_number, airtimeProvider, mpin, password,pfm);
 
@@ -766,6 +768,7 @@ public class TransResultActivity extends FuncActivity
 		EmvCard emvCard = new EmvCard(appState.trans.getCardHolderName(), appState.trans.getTrack2Data(), appState.trans.getICCData(), pinInfo);
 
 		com.itex.richard.payviceconnect.model.Pfm pfm = new com.itex.richard.payviceconnect.model.Pfm(new PfmStateGenerator(this,tid).generateState(), new PfmJournalGenerator(appState.trans.getTransactionResult(), appState.nibssData.getConfigData(), false,  amount.toString(), emvCard,"Transfer","Cash-In","").generateJournal());
+		MemoryUtil.setValue(this, MemoryUtil.LastTransactionTimeKey, new  Date());
 
 		withdrawalDetails =  new WithdrawalDetails(wallet, username, password, pin, "default", amount, "", vendorBankCode, "ANDROIDPOS", "card", productCode,  pfm);
 

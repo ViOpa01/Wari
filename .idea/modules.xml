@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/Wari Newland.iml" filepath="$PROJECT_DIR$/Wari Newland.iml" />
       <module fileurl="file://$PROJECT_DIR$/cloudpossdk/cloudpossdk.iml" filepath="$PROJECT_DIR$/cloudpossdk/cloudpossdk.iml" />
       <module fileurl="file://$PROJECT_DIR$/payviceconnect/payviceconnect.iml" filepath="$PROJECT_DIR$/payviceconnect/payviceconnect.iml" />
       <module fileurl="file://$PROJECT_DIR$/payviceconnect-debug/payviceconnect-debug.iml" filepath="$PROJECT_DIR$/payviceconnect-debug/payviceconnect-debug.iml" />
@@ -10,7 +11,6 @@
       <module fileurl="file://$PROJECT_DIR$/poslib-commons-debug/poslib-commons-debug.iml" filepath="$PROJECT_DIR$/poslib-commons-debug/poslib-commons-debug.iml" />
       <module fileurl="file://$PROJECT_DIR$/poslib-device-debug/poslib-device-debug.iml" filepath="$PROJECT_DIR$/poslib-device-debug/poslib-device-debug.iml" />
       <module fileurl="file://$PROJECT_DIR$/poslib-host/poslib-host.iml" filepath="$PROJECT_DIR$/poslib-host/poslib-host.iml" />
-      <module fileurl="file://$PROJECT_DIR$/wari-pos.iml" filepath="$PROJECT_DIR$/wari-pos.iml" />
     </modules>
   </component>
 </project>

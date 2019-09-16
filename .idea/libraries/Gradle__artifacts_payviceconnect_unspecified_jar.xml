@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: artifacts:payviceconnect:unspecified@jar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/payviceconnect-debug.aar/43385c68bb5f5cbd220f5d2bfe3837d5/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/payviceconnect-debug.aar/43385c68bb5f5cbd220f5d2bfe3837d5/jars/classes.jar!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/payviceconnect-debug.aar/43385c68bb5f5cbd220f5d2bfe3837d5/jars/libs/gradle-wrapper.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/payviceconnect-debug.aar/46413ff808f7aa8fcaa7fad390e31ea1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/payviceconnect-debug.aar/46413ff808f7aa8fcaa7fad390e31ea1/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/payviceconnect-debug.aar/46413ff808f7aa8fcaa7fad390e31ea1/jars/libs/gradle-wrapper.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

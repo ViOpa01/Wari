@@ -11,11 +11,13 @@ import com.wizarpos.emvsample.activity.login.Helper
 import com.wizarpos.emvsample.activity.login.securestorage.SecureStorage
 import com.wizarpos.emvsample.generators.PfmStateGenerator
 import com.wizarpos.emvsample.models.PfmJournalGenerator
+import com.wizarpos.util.MemoryUtil
 import com.wizarpos.util.StringUtil
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import org.apache.commons.codec.binary.StringUtils
+import java.util.*
 
 /**
  * Created by Olije Favour on 6/24/2019.
@@ -39,7 +41,7 @@ class StartimesInteractorImpl(val context: Context) : StartimesInteractor {
 
 
         val pfm = com.itex.richard.payviceconnect.model.Pfm(PfmStateGenerator(context,tid).generateState(), PfmJournalGenerator(FuncActivity.appState.trans.transactionResult, FuncActivity.appState.nibssData.configData, false, amount.toString(), emvCard, "Startimes", bouquet, "").generateJournal())
-
+        MemoryUtil.setValue(context, MemoryUtil.LastTransactionTimeKey, Date());
 
         val subscriptionDetails = StartimesModel.payRequest(amount = amount,wallet = terminalId,username = userId,password =password,type = type,channel =channel,smartCardCode =smartCardCode,customerName = customerName,phone = phone,productCode = productCode,bouquet = bouquet,paymentMethod = paymentMethod,pin = authPin,clientReference = clientReference,pfm = pfm )
 

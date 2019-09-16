@@ -1,19 +1,11 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\Favour\\AndroidStudioProjects\\Just Wari Online\\wari-pos\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v14\\values-v14.xml",
+            "outputFile": "/Users/maxwell/Desktop/Wari Newland/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v14/values-v14.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Favour\\AndroidStudioProjects\\Just Wari Online\\wari-pos\\res\\values-v14\\font_certs.xml",
+                    "source": "/Users/maxwell/Desktop/Wari Newland/res/values-v14/font_certs.xml",
                     "from": {
-                        "startLines": "2,6,11",
-                        "startColumns": "4,4,4",
-                        "startOffsets": "57,263,1993",
-                        "endLines": "5,10,15",
-                        "endColumns": "12,19,19",
-                        "endOffsets": "257,1987,3582"
-                    },
-                    "to": {
                         "startLines": "2,6,11",
                         "startColumns": "4,4,4",
                         "startOffsets": "55,257,1982",

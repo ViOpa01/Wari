@@ -12,12 +12,14 @@ import com.wizarpos.emvsample.activity.login.Helper
 import com.wizarpos.emvsample.activity.login.securestorage.SecureStorage
 import com.wizarpos.emvsample.generators.PfmStateGenerator
 import com.wizarpos.emvsample.models.PfmJournalGenerator
+import com.wizarpos.util.MemoryUtil
 import com.wizarpos.util.SharedPreferenceUtils
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.net.ConnectException
 import java.net.SocketTimeoutException
+import java.util.*
 
 class AirtimeProcessor(val context : Context, listener : onAirtimeTransactionResultListener, airtimeProvider : String, phoneNumber : String, airtimeAmount : String, isCard : Boolean = false) :  Callback<AirtimeModel.AirtimePinResponse> {
 
@@ -74,8 +76,7 @@ class AirtimeProcessor(val context : Context, listener : onAirtimeTransactionRes
 //
         val pfm:com.itex.richard.payviceconnect.model.Pfm = com.itex.richard.payviceconnect.model.Pfm(PfmStateGenerator(context,tid ).generateState(), PfmJournalGenerator(FuncActivity.appState.trans.getTransactionResult(), FuncActivity.appState.nibssData.getConfigData(), false, airtimeAmount, emvCard, "Airtime", airtimeProvider, "").generateJournal())
         Log.d("pfm  >>>>>", Gson().toJson(pfm))
-
-
+        MemoryUtil.setValue(context, MemoryUtil.LastTransactionTimeKey, Date());
 
         Log.d("airtimeType About to purchase  >>>>>", "Here")
 

@@ -2,7 +2,9 @@ package com.wizarpos.emvsample.generators
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.ContentProviderClient
 import android.content.Context
+import android.content.Context.LOCATION_SERVICE
 import android.content.Intent
 import android.content.IntentFilter
 import android.net.ConnectivityManager
@@ -14,10 +16,18 @@ import android.telephony.gsm.GsmCellLocation
 import java.text.SimpleDateFormat
 import java.util.*
 import android.content.pm.PackageManager
+import android.location.Location
+import android.location.LocationListener
+import android.location.LocationManager
+import android.location.LocationProvider
+import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.util.Log
 import com.iisysgroup.poslib.deviceinterface.printer.PrinterState
 import com.wizarpos.emvsample.R
+import com.wizarpos.emvsample.activity.FuncMenuActivity
+import com.wizarpos.util.CommonUtils
+import com.wizarpos.util.MemoryUtil
 
 
 //todo check this out to be sure it is not negative
@@ -25,7 +35,6 @@ import com.wizarpos.emvsample.R
 class PfmStateGenerator(val context : Context,val terminalId : String ) {
 
     val REQUEST_ACCESS_COARSE_LOCATION = 234
-
     enum class CHARGING_STATUS {
         CHARGING, NOTCHARGING, UNKNOWN, FULLYCHARGED
     }
@@ -60,13 +69,11 @@ class PfmStateGenerator(val context : Context,val terminalId : String ) {
 
         Log.d("getSoftwareNumber  >>>",getSoftwareNumber() )
 
-//        Log.d("getLastTransactionTime  >>>",getLastTransactionTime() )
+        Log.d("getLastTransactionTime  >>>",getLastTransactionTime() )
 
 //        Log.d("getPads  >>>",getPads() )
 
-
-
-        return com.itex.richard.payviceconnect.model.State(getSerialNumber(), getCurrentTime(), getBatteryLevel(), getChargingStatus().toString() , terminalId,getCommMethod().toString(),"", "Location", "Signal strength ", getTerminalModelName(), getTerminalManufacturer(), hasBattery().toString(), getSoftwareNumber(), "last Trans time", "Pads")
+        return com.itex.richard.payviceconnect.model.State(getSerialNumber(), getCurrentTime(), getBatteryLevel(), getChargingStatus().toString() , terminalId,getCommMethod().toString(),"", getLocation(), "Signal strength ", getTerminalModelName(), getTerminalManufacturer(), hasBattery().toString(), getSoftwareNumber(), getLastTransactionTime(), "Pads")
 
     }
 
@@ -140,10 +147,9 @@ class PfmStateGenerator(val context : Context,val terminalId : String ) {
         return ""
     }
 
+
     @SuppressLint("MissingPermission")
     private fun getLocation(): String{
-
-
 //        val telephonyManager = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
 //        val networkOperator = telephonyManager.networkOperator
 //        val permissionCheck = ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION)
@@ -167,7 +173,8 @@ class PfmStateGenerator(val context : Context,val terminalId : String ) {
 //
 //        }
 //
-        return "cid:\"\", lac:\"\", mcc:\"\", mnc:\"\", ss:\"\""
+
+        return FuncMenuActivity.latitude + "," + FuncMenuActivity.longitude;
     }
 
 
@@ -190,7 +197,8 @@ class PfmStateGenerator(val context : Context,val terminalId : String ) {
     }
 
     private fun getLastTransactionTime() : String {
-        return ""
+        Log.d("getLastTransactionTime", "timingg......." + MemoryUtil.getValue(context, MemoryUtil.LastTransactionTimeKey))
+        return MemoryUtil.getValue(context, MemoryUtil.LastTransactionTimeKey).toString()
     }
 
     private fun getPads(): String {
