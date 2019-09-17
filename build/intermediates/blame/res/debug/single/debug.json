@@ -1,11 +1,11 @@
 [
     {
-        "merged": "/Users/maxwell/Desktop/Wari Newland/build/intermediates/res/merged/debug/color-v23_abc_tint_seek_thumb.xml.flat",
-        "source": "/Users/maxwell/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/b22723df402cb0ee703f723d5c9029ed/res/color-v23/abc_tint_seek_thumb.xml"
-    },
-    {
         "merged": "/Users/maxwell/Desktop/Wari Newland/build/intermediates/res/merged/debug/color_abc_primary_text_material_dark.xml.flat",
         "source": "/Users/maxwell/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/b22723df402cb0ee703f723d5c9029ed/res/color/abc_primary_text_material_dark.xml"
+    },
+    {
+        "merged": "/Users/maxwell/Desktop/Wari Newland/build/intermediates/res/merged/debug/color-v23_abc_tint_seek_thumb.xml.flat",
+        "source": "/Users/maxwell/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/b22723df402cb0ee703f723d5c9029ed/res/color-v23/abc_tint_seek_thumb.xml"
     },
     {
         "merged": "/Users/maxwell/Desktop/Wari Newland/build/intermediates/res/merged/debug/drawable-ldpi_ic_event_note_black_24dp.png.flat",
@@ -16,16 +16,16 @@
         "source": "/Users/maxwell/Desktop/Wari Newland/res/layout/activity_getmasterkey.xml"
     },
     {
-        "merged": "/Users/maxwell/Desktop/Wari Newland/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_abc_ic_star_half_black_48dp.png.flat",
-        "source": "/Users/maxwell/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/b22723df402cb0ee703f723d5c9029ed/res/drawable-xxxhdpi-v4/abc_ic_star_half_black_48dp.png"
+        "merged": "/Users/maxwell/Desktop/Wari Newland/build/intermediates/res/merged/debug/layout-port_activity_process_emv_card.xml.flat",
+        "source": "/Users/maxwell/Desktop/Wari Newland/res/layout-port/activity_process_emv_card.xml"
     },
     {
         "merged": "/Users/maxwell/Desktop/Wari Newland/build/intermediates/res/merged/debug/drawable-hdpi-v4_ic_times_circle.png.flat",
         "source": "/Users/maxwell/.gradle/caches/transforms-1/files-1.1/poslib-device-debug.aar/4ab6bac10f991d8e07fecc0ad513c775/res/drawable-hdpi-v4/ic_times_circle.png"
     },
     {
-        "merged": "/Users/maxwell/Desktop/Wari Newland/build/intermediates/res/merged/debug/layout-port_activity_process_emv_card.xml.flat",
-        "source": "/Users/maxwell/Desktop/Wari Newland/res/layout-port/activity_process_emv_card.xml"
+        "merged": "/Users/maxwell/Desktop/Wari Newland/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_abc_ic_star_half_black_48dp.png.flat",
+        "source": "/Users/maxwell/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/b22723df402cb0ee703f723d5c9029ed/res/drawable-xxxhdpi-v4/abc_ic_star_half_black_48dp.png"
     },
     {
         "merged": "/Users/maxwell/Desktop/Wari Newland/build/intermediates/res/merged/debug/drawable_selector_settle.xml.flat",

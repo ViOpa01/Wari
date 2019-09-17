@@ -22,6 +22,8 @@ import android.location.LocationManager
 import android.location.LocationProvider
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
+import android.telephony.CellInfoGsm
+import android.telephony.CellSignalStrengthGsm
 import android.util.Log
 import com.iisysgroup.poslib.deviceinterface.printer.PrinterState
 import com.wizarpos.emvsample.R
@@ -58,7 +60,7 @@ class PfmStateGenerator(val context : Context,val terminalId : String ) {
 
         Log.d("getLocation  >>>",getLocation())
 
-//        Log.d("getSignalStrength  >>>",getSignalStrength() )
+        Log.d("getSignalStrength  >>>",getSignalStrength() )
 
         Log.d("getTerminalModelName  >>>",getTerminalModelName() )
 
@@ -73,7 +75,7 @@ class PfmStateGenerator(val context : Context,val terminalId : String ) {
 
 //        Log.d("getPads  >>>",getPads() )
 
-        return com.itex.richard.payviceconnect.model.State(getSerialNumber(), getCurrentTime(), getBatteryLevel(), getChargingStatus().toString() , terminalId,getCommMethod().toString(),"", getLocation(), "Signal strength ", getTerminalModelName(), getTerminalManufacturer(), hasBattery().toString(), getSoftwareNumber(), getLastTransactionTime(), "Pads")
+        return com.itex.richard.payviceconnect.model.State(getSerialNumber(), getCurrentTime(), getBatteryLevel(), getChargingStatus().toString() , terminalId,getCommMethod().toString(),"", getLocation(), getSignalStrength(), getTerminalModelName(), getTerminalManufacturer(), hasBattery().toString(), getSoftwareNumber(), getLastTransactionTime(), "Pads")
 
     }
 
@@ -144,7 +146,10 @@ class PfmStateGenerator(val context : Context,val terminalId : String ) {
     }
 
     private fun getSignalStrength() : String{
-        return ""
+        val telephonyManager = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
+        val cellInfo = telephonyManager.allCellInfo[0] as CellInfoGsm
+        val cellSignalStrength = cellInfo.cellSignalStrength
+        return cellSignalStrength.dbm.toString()
     }
 
 
