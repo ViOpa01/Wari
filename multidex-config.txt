@@ -1,0 +1,4 @@
+-keep class com.wizarpos.** { *; }
+-keep class android.support.** { *; }
+-keep class android.arch.lifecycle.** {*;}
+-keep class kotlinx.coroutines.experimental.android.AndroidExceptionPreHandler { *; }

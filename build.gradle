@@ -1,0 +1,199 @@
+buildscript {
+    ext.kotlin_version = '1.3.10'
+    repositories {
+        google()
+        jcenter()
+
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.1.1'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+
+    }
+}
+allprojects {
+    repositories {
+        google()
+        jcenter()
+
+
+    }
+}
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+//PASSWORD for release is android, ALIAS is androiddebugkey, JKS file is waripos.jks
+//kotlin { experimental { coroutines 'enable' } }
+ext.anko_version = '0.10.4'
+ext.rxbinding_version = '2.1.1'
+configurations.all { exclude group: 'com.android.support', module: 'support-v4' }
+
+
+dependencies {
+    implementation project(':poslib-commons-debug')
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.0'
+    implementation "org.jetbrains.anko:anko-commons:$anko_version"
+//    implementation "org.jetbrains.anko:anko-sdk25-coroutines:$anko_version"
+//    implementation "org.jetbrains.anko:anko-appcompat-v7-coroutines:$anko_version"
+    implementation 'com.android.support:multidex:1.0.3'
+    implementation project(':poslib-device-debug')
+    implementation project(':cloudpossdk')
+    implementation 'org.bouncycastle:bcprov-jdk15:1.38'
+    configurations {
+        compile.exclude group: 'org.jetbrains', module: 'annotations'
+    }
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+//    implementation('org.simpleframework:simple-xml:2.7.1') {
+//        exclude group: 'stax', module: 'stax-api'
+//        exclude group: 'xpp3', module: 'xpp3'
+//    }
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.0.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.8.1'
+    implementation 'com.squareup.okhttp3:okhttp:3.2.0'
+    implementation 'com.squareup.okhttp3:okhttp-urlconnection:3.2.0'
+    implementation 'android.arch.lifecycle:extensions:1.1.1'
+
+
+    kapt 'android.arch.lifecycle:compiler:1.1.1'
+
+
+    implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation "org.jetbrains.anko:anko-sdk25-coroutines:$anko_version"
+    implementation "org.jetbrains.anko:anko-appcompat-v7-coroutines:$anko_version"
+    implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2'
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    // compile project(':poslib-device-debug')
+    implementation 'com.github.danielgindi:httprequest:1.2.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
+    implementation 'com.andrognito.pinlockview:pinlockview:2.1.0'
+    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.android.support:cardview-v7:27.1.1'
+    implementation 'com.android.support:design:27.1.1'
+    implementation 'com.android.support:recyclerview-v7:27.1.1'
+    implementation "android.arch.lifecycle:reactivestreams:1.1.1"
+    //implementation 'com.google.zxing:core:3.2.1'
+    //implementation 'com.journeyapps:zxing-android-embedded:3.2.0@aar'
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+
+    //Acts as TextvieWatcher
+
+    implementation "com.jakewharton.rxbinding2:rxbinding:$rxbinding_version"
+    implementation "com.jakewharton.rxbinding2:rxbinding-design:$rxbinding_version"
+    implementation "com.jakewharton.rxbinding2:rxbinding-kotlin:$rxbinding_version"
+
+    implementation 'android.arch.lifecycle:viewmodel:1.1.1'
+    implementation 'android.arch.lifecycle:livedata:1.1.1'
+    //implementation 'com.android.support:support-v4:27.1.1'
+    def room_version = "1.1.0"
+    implementation('android.arch.persistence.room:runtime:1.1.0') {
+        exclude module: 'commons-codec'
+    }
+    //    implementation ('android.arch.persistence.room:compiler:1.1.0'){
+    //        exclude module: 'commons-codec'
+    //    }
+    annotationProcessor('android.arch.persistence.room:compiler:1.1.0') {
+        exclude module: 'commons-codec'
+    }
+    implementation project(path: ':payviceconnect')
+    implementation project(path: ':poslib-host')
+    // optional - RxJava support for Room
+
+
+}
+
+android {
+    compileSdkVersion 26
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/compiler.kotlin_module'
+    }
+
+    sourceSets {
+        main {
+            manifest.srcFile 'AndroidManifest.xml'
+            java.srcDirs = ['src']
+            resources.srcDirs = ['src']
+            aidl.srcDirs = ['src']
+            renderscript.srcDirs = ['src']
+            res.srcDirs = ['res']
+            assets.srcDirs = ['assets']
+        }
+
+        debug.setRoot('build-types/debug')
+        release.setRoot('build-types/release')
+    }
+    defaultConfig {
+        minSdkVersion 19
+        targetSdkVersion 21
+        multiDexEnabled true
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath true
+            }
+        }
+    }
+    lintOptions {
+
+        abortOnError false
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
+            multiDexKeepProguard file('multidex-config.txt')
+        }
+        debug {
+            multiDexKeepProguard file('multidex-config.txt')
+        }
+    }
+
+}
+
+//task buildNative(type: Exec, description: 'Compile JNI source via NDK') {
+//
+//    Properties property = new Properties()
+//    property.load(project.rootProject.file('local.properties').newDataInputStream())
+//
+//    def ndkDir = property.getProperty('ndk.dir')
+//    def jniDir = "jni"
+//    commandLine "/$ndkDir/ndk-build.cmd",
+//            '-C', file(jniDir).absolutePath,
+//            '-j', Runtime.runtime.availableProcessors(),
+//            'all',
+//            'NDK_DEBUG=0'
+//}
+//
+//tasks.withType(JavaCompile){
+//    compileTask -> compileTask.dependsOn buildNative
+//}
+//
+//
+//task cleanNative(type: Exec, description: 'Clean output files') {
+//    Properties property = new Properties()
+//    property.load(project.rootProject.file('local.properties').newDataInputStream())
+//
+//    def ndkDir = property.getProperty('ndk.dir')
+//    def jniDir = "jni"
+//    commandLine "/$ndkDir/ndk-build.cmd",
+//            '-C', file(jniDir).absolutePath,
+//            '-j', Runtime.runtime.availableProcessors(),
+//            'clean',
+//            'NDK_DEBUG=0'
+//}
+//
+//clean.dependsOn cleanNative
+

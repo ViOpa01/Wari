@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/constraint_layout"
+    >
+
+    <!--tools:context=".services.discos.activities.MeterValidationActivity"-->
+
+
+
+
+    <!--<View-->
+        <!--android:id="@+id/phone_number"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:visibility="visible"/>-->
+
+    <include
+        android:id="@+id/enter_phone_number_or_amount"
+        layout="@layout/enter_amount"
+        android:visibility="gone"
+        />
+
+    <include
+        android:id="@+id/validate"
+        layout="@layout/_disco"
+        android:visibility="visible"
+        />
+
+    <!--<include-->
+        <!--android:id="@+id/amopho"-->
+        <!--layout="@layout/activity_amount_phone__no"-->
+        <!--android:visibility="gone"-->
+        <!--/>-->
+
+
+</android.support.constraint.ConstraintLayout>
+
+
+
+
+    <!--&lt;!&ndash;Allows Users to select product and enter meter number &ndash;&gt;-->
+<!--<LinearLayout-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:layout_marginLeft="16dp"-->
+<!--android:layout_marginRight="16dp"-->
+<!--android:layout_marginTop="16dp"-->
+<!--android:background="@drawable/bordered_all"-->
+<!--android:descendantFocusability="beforeDescendants"-->
+<!--android:focusableInTouchMode="true"-->
+<!--android:orientation="vertical"-->
+<!--android:padding="16dp">-->
+
+<!--<RelativeLayout-->
+    <!--android:id="@+id/selectProductBtn"-->
+    <!--style="@style/selectable_layout_style">-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/productText"-->
+        <!--style="@style/selectable_layout_text"-->
+        <!--android:layout_alignBottom="@+id/serviceImage"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_toLeftOf="@+id/serviceImage"-->
+        <!--android:layout_toStartOf="@+id/serviceImage"-->
+        <!--android:drawableLeft="@drawable/ic_smartphone"-->
+        <!--android:drawablePadding="12dp"-->
+        <!--android:fontFamily="@font/titillium_web_regular"-->
+        <!--android:gravity="center_vertical"-->
+        <!--android:text="Select product" />-->
+
+    <!--<ImageButton-->
+        <!--android:id="@+id/serviceImage"-->
+        <!--style="@style/selectable_layout_image"-->
+        <!--android:clickable="false"-->
+        <!--android:scaleType="fitCenter"-->
+        <!--app:srcCompat="@drawable/ic_track_changes" />-->
+
+    <!--<View-->
+        <!--style="@style/selectable_layout_line"-->
+        <!--android:layout_alignRight="@id/serviceImage" />-->
+<!--</RelativeLayout>-->
+
+
+<!--<LinearLayout-->
+    <!--android:id="@+id/amountEntryLayout"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:orientation="vertical"-->
+    <!--tools:visibility="visible">-->
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_marginTop="4dp"-->
+        <!--android:orientation="horizontal">-->
+
+        <!--<android.support.design.widget.TextInputLayout-->
+            <!--android:id="@+id/recipientTIL"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:orientation="horizontal">-->
+
+            <!--<EditText-->
+                <!--android:id="@+id/edtTxtMeterNumber"-->
+                <!--style="@style/airtime_input_style"-->
+                <!--android:drawableLeft="@drawable/ic_person"-->
+                <!--android:hint="Meter number "-->
+                <!--android:fontFamily="@font/titillium_web_regular"-->
+                <!--android:inputType="number|text" />-->
+        <!--</android.support.design.widget.TextInputLayout>-->
+
+    <!--</LinearLayout>-->
+
+    <!--&lt;!&ndash;<LinearLayout&ndash;&gt;-->
+    <!--&lt;!&ndash;android:id="@+id/phoneTILRV"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_alignParentLeft="true"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_marginTop="4dp"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:orientation="horizontal">&ndash;&gt;-->
+
+    <!--&lt;!&ndash;<android.support.design.widget.TextInputLayout&ndash;&gt;-->
+    <!--&lt;!&ndash;android:id="@+id/phoneTIL"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_width="0dp"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_weight="1"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:orientation="horizontal">&ndash;&gt;-->
+
+    <!--&lt;!&ndash;<EditText&ndash;&gt;-->
+    <!--&lt;!&ndash;android:id="@+id/phoneEdit"&ndash;&gt;-->
+    <!--&lt;!&ndash;style="@style/airtime_input_style"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:hint="Phone Number"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:drawableLeft="@drawable/ic_call"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:fontFamily="@font/titillium_web_regular"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:inputType="number" />&ndash;&gt;-->
+    <!--&lt;!&ndash;</android.support.design.widget.TextInputLayout>&ndash;&gt;-->
+
+    <!--&lt;!&ndash;</LinearLayout>&ndash;&gt;-->
+
+    <!--&lt;!&ndash;<RelativeLayout&ndash;&gt;-->
+    <!--&lt;!&ndash;android:id="@+id/naira_signRV"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_marginBottom="7dp"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:orientation="horizontal">&ndash;&gt;-->
+
+    <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+    <!--&lt;!&ndash;android:id="@+id/naira_sign"&ndash;&gt;-->
+    <!--&lt;!&ndash;style="@style/naira_drawable_style"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_alignBottom="@+id/amountTIL"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:fontFamily="@font/titillium_web_bolder"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:text="\u20A6" />&ndash;&gt;-->
+
+    <!--&lt;!&ndash;<android.support.design.widget.TextInputLayout&ndash;&gt;-->
+    <!--&lt;!&ndash;android:id="@+id/amountTIL"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:paddingLeft="38dp">&ndash;&gt;-->
+    <!--&lt;!&ndash;<View style="@style/edit_text_underline" />&ndash;&gt;-->
+    <!--&lt;!&ndash;<EditText&ndash;&gt;-->
+    <!--&lt;!&ndash;android:id="@+id/amountEdit"&ndash;&gt;-->
+    <!--&lt;!&ndash;style="@style/airtime_input_style.amount"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:fontFamily="@font/titillium_web_regular"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:hint="Enter Amount" />&ndash;&gt;-->
+    <!--&lt;!&ndash;</android.support.design.widget.TextInputLayout>&ndash;&gt;-->
+
+
+    <!--&lt;!&ndash;</RelativeLayout>&ndash;&gt;-->
+
+
+<!--</LinearLayout>-->
+
+<!--</LinearLayout>-->
+
+    <!--&lt;!&ndash;End of Validation so Allows Users to select product and enter meter number is made invisible &ndash;&gt;-->
+
+
+    <!--&lt;!&ndash;Allows Users to select product and enter meter number &ndash;&gt;-->
+<!--<LinearLayout-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:layout_marginLeft="16dp"-->
+<!--android:layout_marginRight="16dp"-->
+<!--android:layout_marginTop="16dp"-->
+<!--android:background="@drawable/bordered_all"-->
+<!--android:descendantFocusability="beforeDescendants"-->
+<!--android:focusableInTouchMode="true"-->
+<!--android:orientation="vertical"-->
+<!--android:padding="16dp">-->
+
+<!--<RelativeLayout-->
+    <!--android:id="@+id/selectProductBtn"-->
+    <!--style="@style/selectable_layout_style">-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/productText"-->
+        <!--style="@style/selectable_layout_text"-->
+        <!--android:layout_alignBottom="@+id/serviceImage"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_toLeftOf="@+id/serviceImage"-->
+        <!--android:layout_toStartOf="@+id/serviceImage"-->
+        <!--android:drawableLeft="@drawable/ic_smartphone"-->
+        <!--android:drawablePadding="12dp"-->
+        <!--android:fontFamily="@font/titillium_web_regular"-->
+        <!--android:gravity="center_vertical"-->
+        <!--android:text="Select product" />-->
+
+    <!--<ImageButton-->
+        <!--android:id="@+id/serviceImage"-->
+        <!--style="@style/selectable_layout_image"-->
+        <!--android:clickable="false"-->
+        <!--android:scaleType="fitCenter"-->
+        <!--app:srcCompat="@drawable/ic_track_changes" />-->
+
+    <!--<View-->
+        <!--style="@style/selectable_layout_line"-->
+        <!--android:layout_alignRight="@id/serviceImage" />-->
+<!--</RelativeLayout>-->
+
+
+<!--<LinearLayout-->
+    <!--android:id="@+id/amountEntryLayout"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:orientation="vertical"-->
+    <!--tools:visibility="visible">-->
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_marginTop="4dp"-->
+        <!--android:orientation="horizontal">-->
+
+        <!--<android.support.design.widget.TextInputLayout-->
+            <!--android:id="@+id/recipientTIL"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:orientation="horizontal">-->
+
+            <!--<EditText-->
+                <!--android:id="@+id/edtTxtMeterNumber"-->
+                <!--style="@style/airtime_input_style"-->
+                <!--android:drawableLeft="@drawable/ic_person"-->
+                <!--android:hint="Meter number "-->
+                <!--android:fontFamily="@font/titillium_web_regular"-->
+                <!--android:inputType="number|text" />-->
+        <!--</android.support.design.widget.TextInputLayout>-->
+
+    <!--</LinearLayout>-->
+
+    <!--&lt;!&ndash;<LinearLayout&ndash;&gt;-->
+    <!--&lt;!&ndash;android:id="@+id/phoneTILRV"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_alignParentLeft="true"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_marginTop="4dp"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:orientation="horizontal">&ndash;&gt;-->
+
+    <!--&lt;!&ndash;<android.support.design.widget.TextInputLayout&ndash;&gt;-->
+    <!--&lt;!&ndash;android:id="@+id/phoneTIL"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_width="0dp"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_weight="1"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:orientation="horizontal">&ndash;&gt;-->
+
+    <!--&lt;!&ndash;<EditText&ndash;&gt;-->
+    <!--&lt;!&ndash;android:id="@+id/phoneEdit"&ndash;&gt;-->
+    <!--&lt;!&ndash;style="@style/airtime_input_style"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:hint="Phone Number"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:drawableLeft="@drawable/ic_call"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:fontFamily="@font/titillium_web_regular"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:inputType="number" />&ndash;&gt;-->
+    <!--&lt;!&ndash;</android.support.design.widget.TextInputLayout>&ndash;&gt;-->
+
+    <!--&lt;!&ndash;</LinearLayout>&ndash;&gt;-->
+
+    <!--&lt;!&ndash;<RelativeLayout&ndash;&gt;-->
+    <!--&lt;!&ndash;android:id="@+id/naira_signRV"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_marginBottom="7dp"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:orientation="horizontal">&ndash;&gt;-->
+
+    <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+    <!--&lt;!&ndash;android:id="@+id/naira_sign"&ndash;&gt;-->
+    <!--&lt;!&ndash;style="@style/naira_drawable_style"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_alignBottom="@+id/amountTIL"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:fontFamily="@font/titillium_web_bolder"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:text="\u20A6" />&ndash;&gt;-->
+
+    <!--&lt;!&ndash;<android.support.design.widget.TextInputLayout&ndash;&gt;-->
+    <!--&lt;!&ndash;android:id="@+id/amountTIL"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:paddingLeft="38dp">&ndash;&gt;-->
+    <!--&lt;!&ndash;<View style="@style/edit_text_underline" />&ndash;&gt;-->
+    <!--&lt;!&ndash;<EditText&ndash;&gt;-->
+    <!--&lt;!&ndash;android:id="@+id/amountEdit"&ndash;&gt;-->
+    <!--&lt;!&ndash;style="@style/airtime_input_style.amount"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:fontFamily="@font/titillium_web_regular"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:hint="Enter Amount" />&ndash;&gt;-->
+    <!--&lt;!&ndash;</android.support.design.widget.TextInputLayout>&ndash;&gt;-->
+
+
+    <!--&lt;!&ndash;</RelativeLayout>&ndash;&gt;-->
+
+
+<!--</LinearLayout>-->
+
+<!--</LinearLayout>-->
+    <!--&lt;!&ndash;End of Validation so Allows Users to select product and enter meter number is made invisible &ndash;&gt;-->

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Wariok.iml" filepath="$PROJECT_DIR$/Wariok.iml" />
+      <module fileurl="file://$PROJECT_DIR$/payviceconnect-debug/Wariok-payviceconnect-debug.iml" filepath="$PROJECT_DIR$/payviceconnect-debug/Wariok-payviceconnect-debug.iml" />
+      <module fileurl="file://$PROJECT_DIR$/payviceconnect-pfm/Wariok-payviceconnect-pfm.iml" filepath="$PROJECT_DIR$/payviceconnect-pfm/Wariok-payviceconnect-pfm.iml" />
+      <module fileurl="file://$PROJECT_DIR$/payviceconnect_/Wariok-payviceconnect_.iml" filepath="$PROJECT_DIR$/payviceconnect_/Wariok-payviceconnect_.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cloudpossdk/cloudpossdk.iml" filepath="$PROJECT_DIR$/cloudpossdk/cloudpossdk.iml" />
+      <module fileurl="file://$PROJECT_DIR$/payviceconnect/payviceconnect.iml" filepath="$PROJECT_DIR$/payviceconnect/payviceconnect.iml" />
+      <module fileurl="file://$PROJECT_DIR$/payviceconnect-debug/payviceconnect-debug.iml" filepath="$PROJECT_DIR$/payviceconnect-debug/payviceconnect-debug.iml" />
+      <module fileurl="file://$PROJECT_DIR$/payviceconnect-pfm/payviceconnect-pfm.iml" filepath="$PROJECT_DIR$/payviceconnect-pfm/payviceconnect-pfm.iml" />
+      <module fileurl="file://$PROJECT_DIR$/payviceconnect_/payviceconnect_.iml" filepath="$PROJECT_DIR$/payviceconnect_/payviceconnect_.iml" />
+      <module fileurl="file://$PROJECT_DIR$/poslib-commons-debug/poslib-commons-debug.iml" filepath="$PROJECT_DIR$/poslib-commons-debug/poslib-commons-debug.iml" />
+      <module fileurl="file://$PROJECT_DIR$/poslib-device-debug/poslib-device-debug.iml" filepath="$PROJECT_DIR$/poslib-device-debug/poslib-device-debug.iml" />
+      <module fileurl="file://$PROJECT_DIR$/poslib-host/poslib-host.iml" filepath="$PROJECT_DIR$/poslib-host/poslib-host.iml" />
+    </modules>
+  </component>
+</project>
