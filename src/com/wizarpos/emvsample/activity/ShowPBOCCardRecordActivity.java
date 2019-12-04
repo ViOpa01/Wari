@@ -16,6 +16,9 @@ import java.io.UnsupportedEncodingException;
 import static com.cloudpos.jniinterface.EMVJNIInterface.emv_get_card_record;
 import static com.cloudpos.jniinterface.EMVJNIInterface.emv_get_tag_data;
 
+//import static com.cloudpos.jniinterface.EMVJNIInterfaces.emv_get_card_record;
+//import static com.cloudpos.jniinterface.EMVJNIInterfaces.emv_get_tag_data;
+
 public class ShowPBOCCardRecordActivity extends FuncActivity
 {
 	private int currentTransIndex = 0;

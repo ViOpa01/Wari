@@ -1,8 +1,8 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:2:1-219:12
-INJECTED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:2:1-219:12
-INJECTED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:2:1-219:12
+ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:2:1-226:12
+INJECTED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:2:1-226:12
+INJECTED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:2:1-226:12
 MERGED from [com.android.support:multidex:1.0.3] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\multidex-1.0.3.aar\3299eceb33cb2b04dfd19c247636a053\AndroidManifest.xml:17:1-22:12
 MERGED from [:poslib-commons-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-commons-debug.aar\09ea6188926781b063a134fd6f2ac0d6\AndroidManifest.xml:2:1-16:12
 MERGED from [com.jakewharton.rxbinding2:rxbinding-design:2.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\rxbinding-design-2.1.1.aar\767eb9d928f4629a713e74511b68abb0\AndroidManifest.xml:2:1-8:12
@@ -10,7 +10,7 @@ MERGED from [com.jakewharton.rxbinding2:rxbinding-kotlin:2.1.1] C:\Users\Favour\
 MERGED from [com.jakewharton.rxbinding2:rxbinding:2.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\rxbinding-2.1.1.aar\88f96c42f41b54953aa5657f44b12936\AndroidManifest.xml:2:1-8:12
 MERGED from [io.reactivex.rxjava2:rxandroid:2.1.0] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\rxandroid-2.1.0.aar\d0ef9ce5c752154e934fbc85028fb750\AndroidManifest.xml:15:1-20:12
 MERGED from [:poslib-device-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-device-debug.aar\3867bc9ca85c011268ae0e699f0f9090\AndroidManifest.xml:2:1-18:12
-MERGED from [:cloudpossdk] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\cloudpossdk.aar\4981d2eb8498b48481801c679c18d715\AndroidManifest.xml:2:1-11:12
+MERGED from [:cloudpossdk] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\cloudpossdk.aar\75e726610d1c6b7cdcdc3a7095455ef8\AndroidManifest.xml:2:1-11:12
 MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\cce2611189455a27145e4396003954c9\AndroidManifest.xml:2:1-11:12
 MERGED from [com.squareup.picasso:picasso:2.71828] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\picasso-2.71828.aar\911c4f5e78b4db998cc311ee9919e8c1\AndroidManifest.xml:2:1-14:12
 MERGED from [android.arch.lifecycle:extensions:1.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\extensions-1.1.1.aar\43512bbb026a7600365892aebde41eb1\AndroidManifest.xml:17:1-30:12
@@ -21,6 +21,7 @@ MERGED from [com.android.support:design:27.1.1] C:\Users\Favour\.gradle\caches\t
 MERGED from [com.android.support:recyclerview-v7:27.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-27.1.1.aar\394213ad457c06a4533004918bc46359\AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.lifecycle:reactivestreams:1.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\reactivestreams-1.1.1.aar\ac70f957f58949a5b7c84ca4dc7cb8ea\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:appcompat-v7:27.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.1.aar\d8eb0dca661cd70c1b20b83a81876ba1\AndroidManifest.xml:17:1-22:12
+MERGED from [com.github.bumptech.glide:glide:4.7.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\glide-4.7.1.aar\cb91a2a86885da0160f4cc676b1571d7\AndroidManifest.xml:2:1-13:12
 MERGED from [com.android.support:support-fragment:27.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\support-fragment-27.1.1.aar\edc87673f5b08fd0195be7e7187036e1\AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.1.aar\06852acea8f728ef0680e45bf01e0cdc\AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.lifecycle:livedata:1.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\livedata-1.1.1.aar\d27f8bc687fb514a127f8ec84c04f373\AndroidManifest.xml:17:1-22:12
@@ -29,18 +30,19 @@ MERGED from [:payviceconnect] C:\Users\Favour\.gradle\caches\transforms-1\files-
 MERGED from [:poslib-host] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-host-debug.aar\99cd1c1925c2e0f3789e56a6680bc00c\AndroidManifest.xml:2:1-16:12
 MERGED from [com.android.support:animated-vector-drawable:27.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-27.1.1.aar\7eb8a1e670a3eadd99fe8a5822fcc761\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:support-vector-drawable:27.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-27.1.1.aar\c153d2660bbc9d7b28c9db818cc732ba\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:transition:27.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\transition-27.1.1.aar\3f6bfa75e82fb12b35728ee91655e016\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:support-core-ui:27.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\support-core-ui-27.1.1.aar\8ce338c4bd801a61d2cdd3598e4c2106\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:transition:27.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\transition-27.1.1.aar\3f6bfa75e82fb12b35728ee91655e016\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:support-core-utils:27.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\support-core-utils-27.1.1.aar\e387853667715d600fc73e36999f472f\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:support-compat:27.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\support-compat-27.1.1.aar\b2c00584b833f21304a6dfe37248b172\AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\fdd26a9732e9a9e3420e0a14030ff8e3\AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.1.aar\95d7b725218871f994f012d7062dff49\AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.core:runtime:1.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\3ebff5fb4b02a852c820fb7ede66d471\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:exifinterface:27.1.0] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\exifinterface-27.1.0.aar\8ade291f2d51b210f76aa6d25ed45edd\AndroidManifest.xml:17:1-22:12
+MERGED from [com.github.bumptech.glide:gifdecoder:4.7.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\gifdecoder-4.7.1.aar\59f7910351b318e8b4a6e969eb9b334b\AndroidManifest.xml:2:1-11:12
 MERGED from [android.arch.persistence:db-framework:1.1.0] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\db-framework-1.1.0.aar\0139e7886c07ef678f5f248cc860e733\AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.persistence:db:1.1.0] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\db-1.1.0.aar\03d839bcbcb3b83590e7ed24d0d30369\AndroidManifest.xml:17:1-22:12
-INJECTED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:2:1-219:12
-INJECTED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:2:1-219:12
+INJECTED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:2:1-226:12
+INJECTED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:2:1-226:12
 	package
 		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:3:5-37
 	android:versionName
@@ -71,8 +73,8 @@ MERGED from [io.reactivex.rxjava2:rxandroid:2.1.0] C:\Users\Favour\.gradle\cache
 MERGED from [io.reactivex.rxjava2:rxandroid:2.1.0] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\rxandroid-2.1.0.aar\d0ef9ce5c752154e934fbc85028fb750\AndroidManifest.xml:18:5-43
 MERGED from [:poslib-device-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-device-debug.aar\3867bc9ca85c011268ae0e699f0f9090\AndroidManifest.xml:7:5-9:41
 MERGED from [:poslib-device-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-device-debug.aar\3867bc9ca85c011268ae0e699f0f9090\AndroidManifest.xml:7:5-9:41
-MERGED from [:cloudpossdk] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\cloudpossdk.aar\4981d2eb8498b48481801c679c18d715\AndroidManifest.xml:7:5-9:41
-MERGED from [:cloudpossdk] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\cloudpossdk.aar\4981d2eb8498b48481801c679c18d715\AndroidManifest.xml:7:5-9:41
+MERGED from [:cloudpossdk] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\cloudpossdk.aar\75e726610d1c6b7cdcdc3a7095455ef8\AndroidManifest.xml:7:5-9:41
+MERGED from [:cloudpossdk] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\cloudpossdk.aar\75e726610d1c6b7cdcdc3a7095455ef8\AndroidManifest.xml:7:5-9:41
 MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\cce2611189455a27145e4396003954c9\AndroidManifest.xml:5:5-7:41
 MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\cce2611189455a27145e4396003954c9\AndroidManifest.xml:5:5-7:41
 MERGED from [com.squareup.picasso:picasso:2.71828] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\picasso-2.71828.aar\911c4f5e78b4db998cc311ee9919e8c1\AndroidManifest.xml:5:5-44
@@ -93,6 +95,8 @@ MERGED from [android.arch.lifecycle:reactivestreams:1.1.1] C:\Users\Favour\.grad
 MERGED from [android.arch.lifecycle:reactivestreams:1.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\reactivestreams-1.1.1.aar\ac70f957f58949a5b7c84ca4dc7cb8ea\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:appcompat-v7:27.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.1.aar\d8eb0dca661cd70c1b20b83a81876ba1\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:appcompat-v7:27.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.1.aar\d8eb0dca661cd70c1b20b83a81876ba1\AndroidManifest.xml:20:5-44
+MERGED from [com.github.bumptech.glide:glide:4.7.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\glide-4.7.1.aar\cb91a2a86885da0160f4cc676b1571d7\AndroidManifest.xml:7:5-9:41
+MERGED from [com.github.bumptech.glide:glide:4.7.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\glide-4.7.1.aar\cb91a2a86885da0160f4cc676b1571d7\AndroidManifest.xml:7:5-9:41
 MERGED from [com.android.support:support-fragment:27.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\support-fragment-27.1.1.aar\edc87673f5b08fd0195be7e7187036e1\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-fragment:27.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\support-fragment-27.1.1.aar\edc87673f5b08fd0195be7e7187036e1\AndroidManifest.xml:20:5-44
 MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.1.aar\06852acea8f728ef0680e45bf01e0cdc\AndroidManifest.xml:20:5-44
@@ -109,10 +113,10 @@ MERGED from [com.android.support:animated-vector-drawable:27.1.1] C:\Users\Favou
 MERGED from [com.android.support:animated-vector-drawable:27.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-27.1.1.aar\7eb8a1e670a3eadd99fe8a5822fcc761\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-vector-drawable:27.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-27.1.1.aar\c153d2660bbc9d7b28c9db818cc732ba\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-vector-drawable:27.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-27.1.1.aar\c153d2660bbc9d7b28c9db818cc732ba\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:transition:27.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\transition-27.1.1.aar\3f6bfa75e82fb12b35728ee91655e016\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:transition:27.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\transition-27.1.1.aar\3f6bfa75e82fb12b35728ee91655e016\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-core-ui:27.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\support-core-ui-27.1.1.aar\8ce338c4bd801a61d2cdd3598e4c2106\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-core-ui:27.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\support-core-ui-27.1.1.aar\8ce338c4bd801a61d2cdd3598e4c2106\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:transition:27.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\transition-27.1.1.aar\3f6bfa75e82fb12b35728ee91655e016\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:transition:27.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\transition-27.1.1.aar\3f6bfa75e82fb12b35728ee91655e016\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-core-utils:27.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\support-core-utils-27.1.1.aar\e387853667715d600fc73e36999f472f\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-core-utils:27.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\support-core-utils-27.1.1.aar\e387853667715d600fc73e36999f472f\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-compat:27.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\support-compat-27.1.1.aar\b2c00584b833f21304a6dfe37248b172\AndroidManifest.xml:20:5-44
@@ -125,6 +129,8 @@ MERGED from [android.arch.core:runtime:1.1.1] C:\Users\Favour\.gradle\caches\tra
 MERGED from [android.arch.core:runtime:1.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\3ebff5fb4b02a852c820fb7ede66d471\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:exifinterface:27.1.0] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\exifinterface-27.1.0.aar\8ade291f2d51b210f76aa6d25ed45edd\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:exifinterface:27.1.0] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\exifinterface-27.1.0.aar\8ade291f2d51b210f76aa6d25ed45edd\AndroidManifest.xml:20:5-44
+MERGED from [com.github.bumptech.glide:gifdecoder:4.7.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\gifdecoder-4.7.1.aar\59f7910351b318e8b4a6e969eb9b334b\AndroidManifest.xml:5:5-7:41
+MERGED from [com.github.bumptech.glide:gifdecoder:4.7.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\gifdecoder-4.7.1.aar\59f7910351b318e8b4a6e969eb9b334b\AndroidManifest.xml:5:5-7:41
 MERGED from [android.arch.persistence:db-framework:1.1.0] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\db-framework-1.1.0.aar\0139e7886c07ef678f5f248cc860e733\AndroidManifest.xml:20:5-44
 MERGED from [android.arch.persistence:db-framework:1.1.0] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\db-framework-1.1.0.aar\0139e7886c07ef678f5f248cc860e733\AndroidManifest.xml:20:5-44
 MERGED from [android.arch.persistence:db:1.1.0] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\db-1.1.0.aar\03d839bcbcb3b83590e7ed24d0d30369\AndroidManifest.xml:20:5-44
@@ -204,7 +210,7 @@ ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidM
 	android:name
 		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:25:22-78
 application
-ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:27:5-217:19
+ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:27:5-224:19
 MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\cce2611189455a27145e4396003954c9\AndroidManifest.xml:9:5-20
 MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\cce2611189455a27145e4396003954c9\AndroidManifest.xml:9:5-20
 MERGED from [com.squareup.picasso:picasso:2.71828] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\picasso-2.71828.aar\911c4f5e78b4db998cc311ee9919e8c1\AndroidManifest.xml:7:5-12:19
@@ -215,8 +221,12 @@ MERGED from [com.github.danielgindi:httprequest:1.2.0] C:\Users\Favour\.gradle\c
 MERGED from [com.github.danielgindi:httprequest:1.2.0] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\httprequest-1.2.0.aar\1b07c61603403bc8536d14ee3bb86163\AndroidManifest.xml:10:5-20
 MERGED from [com.andrognito.pinlockview:pinlockview:2.1.0] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\pinlockview-2.1.0.aar\1c9970a83665138d2f598bfd744e3b87\AndroidManifest.xml:11:5-53
 MERGED from [com.andrognito.pinlockview:pinlockview:2.1.0] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\pinlockview-2.1.0.aar\1c9970a83665138d2f598bfd744e3b87\AndroidManifest.xml:11:5-53
+MERGED from [com.github.bumptech.glide:glide:4.7.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\glide-4.7.1.aar\cb91a2a86885da0160f4cc676b1571d7\AndroidManifest.xml:11:5-20
+MERGED from [com.github.bumptech.glide:glide:4.7.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\glide-4.7.1.aar\cb91a2a86885da0160f4cc676b1571d7\AndroidManifest.xml:11:5-20
 MERGED from [:payviceconnect] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\92d2784b9022d9068af75ef2fafffa7d\AndroidManifest.xml:16:5-21:19
 MERGED from [:payviceconnect] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\92d2784b9022d9068af75ef2fafffa7d\AndroidManifest.xml:16:5-21:19
+MERGED from [com.github.bumptech.glide:gifdecoder:4.7.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\gifdecoder-4.7.1.aar\59f7910351b318e8b4a6e969eb9b334b\AndroidManifest.xml:9:5-20
+MERGED from [com.github.bumptech.glide:gifdecoder:4.7.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\gifdecoder-4.7.1.aar\59f7910351b318e8b4a6e969eb9b334b\AndroidManifest.xml:9:5-20
 	android:label
 		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:30:9-41
 	android:icon
@@ -298,227 +308,239 @@ ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidM
 	android:name
 		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:69:13-54
 activity#com.wizarpos.emvsample.payments_menu.transfer.TransferBankSelection
-ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:71:9-73:52
+ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:75:9-77:52
 	android:screenOrientation
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:73:13-49
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:77:13-49
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:72:13-73
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:76:13-73
 activity#com.wizarpos.emvsample.payments_menu.transfer.TransferAmountEntry
-ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:74:9-76:52
+ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:78:9-80:52
 	android:screenOrientation
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:76:13-49
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:80:13-49
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:75:13-71
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:79:13-71
 activity#com.wizarpos.emvsample.VasPurchaseProcessor
-ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:77:9-79:52
+ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:81:9-83:52
 	android:screenOrientation
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:79:13-49
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:83:13-49
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:78:13-49
-activity#com.wizarpos.emvsample.activity.FuncActivity
-ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:80:9-82:52
-	android:screenOrientation
 		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:82:13-49
+activity#com.wizarpos.emvsample.activity.FuncActivity
+ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:84:9-86:52
+	android:screenOrientation
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:86:13-49
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:81:13-50
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:85:13-50
 activity#com.wizarpos.emvsample.activity.AirtimeVasActivity
-ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:83:9-85:52
+ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:87:9-89:52
 	android:screenOrientation
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:85:13-49
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:89:13-49
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:84:13-56
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:88:13-56
 activity#com.wizarpos.emvsample.activity.DataActivity
-ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:86:9-88:52
+ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:90:9-92:52
 	android:screenOrientation
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:88:13-49
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:92:13-49
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:87:13-50
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:91:13-50
 activity#com.wizarpos.emvsample.activity.DataPhoneEntry
-ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:89:9-91:52
+ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:93:9-95:52
 	android:screenOrientation
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:91:13-49
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:95:13-49
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:90:13-52
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:94:13-52
 activity#com.wizarpos.emvsample.activity.AllData
-ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:92:9-94:52
+ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:96:9-98:52
 	android:screenOrientation
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:94:13-49
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:98:13-49
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:93:13-45
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:97:13-45
 activity#com.wizarpos.emvsample.activity.AirtimeDataActivity
-ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:95:9-97:52
+ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:99:9-101:52
 	android:screenOrientation
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:97:13-49
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:101:13-49
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:96:13-57
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:100:13-57
 activity#com.wizarpos.emvsample.activity.MainActivity
-ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:98:9-59
+ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:102:9-59
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:98:19-56
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:102:19-56
 activity#com.wizarpos.emvsample.activity.RequestCardActivity
-ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:120:9-122:52
+ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:124:9-126:52
 	android:screenOrientation
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:122:13-49
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:126:13-49
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:121:13-57
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:125:13-57
 activity#com.wizarpos.emvsample.activity.login.LoginActivity
-ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:123:9-125:52
+ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:127:9-129:52
 	android:screenOrientation
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:125:13-49
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:129:13-49
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:124:13-57
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:128:13-57
 activity#com.wizarpos.emvsample.activity.RemoveCardActivity
-ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:126:9-128:52
+ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:130:9-132:52
 	android:screenOrientation
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:128:13-49
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:132:13-49
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:127:13-56
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:131:13-56
 activity#com.wizarpos.emvsample.activity.ConfirmBypassPinActivity
-ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:129:9-131:52
+ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:133:9-135:52
 	android:screenOrientation
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:131:13-49
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:135:13-49
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:130:13-62
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:134:13-62
 activity#com.wizarpos.emvsample.activity.ConfirmCardActivity
-ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:132:9-134:52
+ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:136:9-138:52
 	android:screenOrientation
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:134:13-49
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:138:13-49
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:133:13-57
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:137:13-57
 activity#com.wizarpos.emvsample.activity.DataClearActivity
-ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:139:9-141:52
+ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:143:9-145:52
 	android:screenOrientation
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:141:13-49
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:145:13-49
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:140:13-55
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:144:13-55
 activity#com.wizarpos.emvsample.activity.EnquireTransActivity
-ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:142:9-144:52
+ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:146:9-148:52
 	android:screenOrientation
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:144:13-49
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:148:13-49
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:143:13-58
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:147:13-58
 activity#com.wizarpos.emvsample.activity.ErrorActivity
-ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:145:9-147:52
+ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:149:9-151:52
 	android:screenOrientation
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:147:13-49
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:151:13-49
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:146:13-51
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:150:13-51
 activity#com.wizarpos.emvsample.activity.InputAmountActivity
-ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:148:9-151:47
-	android:screenOrientation
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:150:13-49
-	android:theme
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:151:13-44
-	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:149:13-57
-activity#com.wizarpos.emvsample.activity.InputPINActivity
-ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:152:9-154:52
+ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:152:9-155:47
 	android:screenOrientation
 		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:154:13-49
-	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:153:13-54
-activity#com.wizarpos.emvsample.activity.ProcessEMVCardActivity
-ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:160:9-162:52
-	android:screenOrientation
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:162:13-49
-	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:161:13-60
-activity#com.wizarpos.emvsample.activity.ProcessOnlineActivity
-ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:163:9-166:46
-	android:screenOrientation
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:165:13-49
 	android:theme
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:166:13-43
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:155:13-44
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:164:13-59
-activity#com.wizarpos.emvsample.activity.SelectEMVAppListActivity
-ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:167:9-169:52
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:153:13-57
+activity#com.wizarpos.emvsample.activity.InputPINActivity
+ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:156:9-158:52
+	android:screenOrientation
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:158:13-49
+	android:name
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:157:13-54
+activity#com.wizarpos.emvsample.activity.ProcessEMVCardActivity
+ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:164:9-166:52
+	android:screenOrientation
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:166:13-49
+	android:name
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:165:13-60
+activity#com.wizarpos.emvsample.activity.ProcessOnlineActivity
+ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:167:9-170:46
 	android:screenOrientation
 		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:169:13-49
+	android:theme
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:170:13-43
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:168:13-62
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:168:13-59
+activity#com.wizarpos.emvsample.activity.SelectEMVAppListActivity
+ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:171:9-173:52
+	android:screenOrientation
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:173:13-49
+	android:name
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:172:13-62
 activity#com.wizarpos.emvsample.activity.ShowPBOCCardRecordActivity
-ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:170:9-172:52
+ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:174:9-176:52
 	android:screenOrientation
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:172:13-49
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:176:13-49
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:171:13-64
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:175:13-64
 activity#com.wizarpos.emvsample.activity.ShowLastPBOCActivity
-ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:173:9-175:52
+ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:177:9-179:52
 	android:screenOrientation
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:175:13-49
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:179:13-49
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:174:13-58
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:178:13-58
 activity#com.wizarpos.emvsample.activity.ShowTransInfoActivity
-ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:176:9-178:52
+ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:180:9-182:52
 	android:screenOrientation
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:178:13-49
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:182:13-49
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:177:13-59
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:181:13-59
 activity#com.wizarpos.emvsample.activity.TransResultActivity
-ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:179:9-181:52
+ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:183:9-185:52
 	android:screenOrientation
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:181:13-49
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:185:13-49
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:180:13-57
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:184:13-57
 activity#com.wizarpos.emvsample.activity.Sale
-ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:182:9-184:52
+ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:186:9-188:52
 	android:screenOrientation
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:184:13-49
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:188:13-49
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:183:13-42
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:187:13-42
 activity#com.wizarpos.emvsample.activity.Settle
-ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:189:9-53
+ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:193:9-53
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:189:19-50
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:193:19-50
 activity#com.wizarpos.emvsample.activity.QueryCardRecord
-ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:195:9-62
+ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:199:9-62
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:195:19-59
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:199:19-59
 activity#com.wizarpos.emvsample.activity.WalletBalance
-ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:196:9-198:71
+ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:200:9-202:71
 	android:parentActivityName
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:198:13-68
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:202:13-68
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:197:13-51
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:201:13-51
 activity#com.wizarpos.emvsample.activity.GetMasterKey
-ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:199:9-201:52
-	android:screenOrientation
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:201:13-49
-	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:200:13-50
-activity#com.wizarpos.emvsample.activity.auth.PinInterFace
-ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:202:9-64
-	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:202:19-61
-activity#com.wizarpos.emvsample.activity.auth.EodMenu
 ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:203:9-205:52
 	android:screenOrientation
 		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:205:13-49
 	android:name
 		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:204:13-50
+activity#com.wizarpos.emvsample.activity.auth.PinInterFace
+ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:206:9-64
+	android:name
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:206:19-61
+activity#com.wizarpos.emvsample.activity.auth.EodMenu
+ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:207:9-209:52
+	android:screenOrientation
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:209:13-49
+	android:name
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:208:13-50
 activity#com.wizarpos.emvsample.activity.auth.NetworkSettings
-ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:206:9-208:52
+ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:210:9-212:52
 	android:screenOrientation
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:208:13-49
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:212:13-49
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:207:13-58
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:211:13-58
 activity#com.wizarpos.emvsample.activity.RefundActivity
-ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:209:9-212:46
+ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:213:9-216:46
 	android:screenOrientation
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:211:13-49
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:215:13-49
 	android:theme
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:212:13-43
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:216:13-43
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:210:13-52
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:214:13-52
 activity#com.wizarpos.emvsample.activity.InputExtraAmountActivity
-ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:213:9-71
+ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:217:9-71
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:213:19-68
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:217:19-68
 service#com.wizarpos.emvsample.service.CallHomeService
-ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:216:9-60
+ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:220:9-60
 	android:name
-		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:216:18-57
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:220:18-57
+activity#com.wizarpos.emvsample.activity.InputOfflinePINActivity
+ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:222:9-106
+	android:screenOrientation
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:222:68-104
+	android:name
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:222:19-67
+activity#com.wizarpos.emvsample.activity.InputOnlinePINActivity
+ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:223:9-105
+	android:screenOrientation
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:223:67-103
+	android:name
+		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:223:19-66
 uses-permission#android.permission.READ_PHONE_STATE
 ADDED from [:poslib-commons-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-commons-debug.aar\09ea6188926781b063a134fd6f2ac0d6\AndroidManifest.xml:12:5-75
 MERGED from [:poslib-device-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-device-debug.aar\3867bc9ca85c011268ae0e699f0f9090\AndroidManifest.xml:11:5-75

@@ -76,6 +76,10 @@
         <activity
             android:name="com.wizarpos.emvsample.activity.FuncMenuActivity"
             android:screenOrientation="portrait" />
+
+        <!-- <activity -->
+        <!-- android:name=".history_summary.EODActivity" -->
+        <!-- android:screenOrientation="portrait" /> -->
         <activity
             android:name="com.wizarpos.emvsample.payments_menu.transfer.TransferBankSelection"
             android:screenOrientation="portrait" />
@@ -222,6 +226,13 @@
         <!-- android:name=".PrintActivity" -->
         <!-- android:exported="true" /> -->
         <service android:name="com.wizarpos.emvsample.service.CallHomeService" />
+        <!-- <activity android:name=".activity.InputAmountActivity" android:screenOrientation="nosensor"/> -->
+        <activity
+            android:name="com.wizarpos.emvsample.activity.InputOfflinePINActivity"
+            android:screenOrientation="nosensor" />
+        <activity
+            android:name="com.wizarpos.emvsample.activity.InputOnlinePINActivity"
+            android:screenOrientation="nosensor" />
 
         <provider
             android:name="com.squareup.picasso.PicassoProvider"

@@ -11,6 +11,8 @@
     <string name="key_pref_port">key_port</string>
     <string name="key_pref_port_type">key_port_type</string>
     <string name="insert_card">Please Insert Debit Card</string>
+    <string name="error_pinpad">PINPAD ERROR</string>
+
 
     <string name="key_is_user_logged_in">is_user_logged_in</string>
     <string name="key_is_terminal_prepped">is_terminal_prepped</string>

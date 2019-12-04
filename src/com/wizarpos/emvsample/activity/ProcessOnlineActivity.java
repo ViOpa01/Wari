@@ -11,7 +11,9 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.cloudpos.jniinterface.PINPadInterface;
 import com.google.gson.Gson;
+import com.iisysgroup.poslib.ISO.POSVAS.PosvasKeyProcessor;
 import com.iisysgroup.poslib.commons.emv.EmvCard;
 import com.iisysgroup.poslib.host.Host;
 import com.iisysgroup.poslib.host.dao.PosLibDatabase;
@@ -33,10 +35,21 @@ import com.wizarpos.emvsample.transaction.Nibss;
 import com.wizarpos.util.ByteUtil;
 import com.wizarpos.util.StringUtil;
 
+import java.io.IOException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
+import java.security.spec.InvalidKeySpecException;
+
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+
 import static com.cloudpos.jniinterface.EMVJNIInterface.emv_get_tag_data;
 import static com.cloudpos.jniinterface.EMVJNIInterface.emv_get_tag_list_data;
 import static com.cloudpos.jniinterface.EMVJNIInterface.emv_is_tag_present;
 import static com.cloudpos.jniinterface.EMVJNIInterface.emv_set_online_result;
+import static com.iisysgroup.poslib.ISO.POSVAS.PosvasKeyProcessor.decryptKey;
+import static com.wizarpos.emvsample.getMasterKey.getMasterKey;
 import static com.wizarpos.emvsample.transaction.Nibss.poslibdb;
 
 public class ProcessOnlineActivity extends FuncActivity
@@ -134,8 +147,66 @@ public class ProcessOnlineActivity extends FuncActivity
 			EmvCard.PinInfo pinInfo;
 			byte[] pinblock = appState.trans.getPinBlock();
 			if(pinblock != null){
-                Log.d("okh", "pinblock1 :" + pinblock);
-				pinInfo = new EmvCard.PinInfo(appState.trans.getPinBlock(),null, StringUtil.hexString2bytes(appState.clearPin));
+                Log.d(" >>>>>> okh", "pinblock1 :" + pinblock);
+                String StringedPinBlock = StringUtil.toHexString(pinblock,false);
+				Log.d(">>>>> okh", "pinblock1 StringedPinBlock :" + StringedPinBlock);
+                PINPadInterface.close();
+
+//				String clearPinBlock = null;
+////
+////					Log.d("okh", "pinblock1 StringedPinBlock before use  :" + StringedPinBlock);
+////
+////					//se clear pin key
+////
+//				Log.d("okh", "pinblock1 stringCipherNewUserKey : " +  appState.stringCipherNewUserKey);
+//				Log.d("okh", "pinblock1 static key : " + appState.PlainKeyInjected);
+//				String clearPinKey;
+//				try {
+//					 clearPinKey = PosvasKeyProcessor.decryptKey(appState.PlainKeyInjected, appState.stringCipherNewUserKey);
+//					Log.d("okh", "pinblock1 clearPinKey>>>>> clearPinKey :" + clearPinKey);
+//
+//
+//
+//
+//					clearPinBlock = StringUtil.threeDesDecrypt(appState.stringCipherNewUserKey, StringedPinBlock);
+//				} catch (InvalidKeyException e) {
+//					e.printStackTrace();
+//				} catch (NoSuchAlgorithmException e) {
+//					e.printStackTrace();
+//				} catch (NoSuchPaddingException e) {
+//					e.printStackTrace();
+//				} catch (InvalidKeySpecException e) {
+//					e.printStackTrace();
+//				} catch (IllegalBlockSizeException e) {
+//					e.printStackTrace();
+//				} catch (NoSuchProviderException e) {
+//					e.printStackTrace();
+//				} catch (IOException e) {
+//					e.printStackTrace();
+//				}
+
+								pinInfo = new EmvCard.PinInfo(appState.trans.getPinBlock(),null, pinblock);
+
+
+
+
+
+//				Log.d("okh", "pinblock1 Decrypted with pin injected >>>>> clearPinBlock :" + clearPinBlock);
+
+
+//				String clearMaster = getMasterKey(appState.nibssData.getKeyHolder().getMasterKey(),false);
+//				String clearPinKey;
+//				try {
+//					clearPinKey = decryptKey(appState.nibssData.getKeyHolder().getPinKey(), clearMaster);
+//					Log.i("clearkey",clearPinKey);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+////					notifyPinError();
+//					return;
+//				}
+
+//				pinInfo = new EmvCard.PinInfo(appState.trans.getPinBlock(),null, StringUtil.hexString2bytes(appState.clearPin));
+//				pinInfo = new EmvCard.PinInfo(appState.trans.getPinBlock(),null, StringUtil.hexString2bytes(clearPinKey));
 
 //                emvCard = new EmvCard(appState.trans.getCardHolderName(),appState.trans.getTrack2Data(),
 //                        appState.trans.getICCData(),pinInfo);
@@ -202,7 +273,8 @@ public class ProcessOnlineActivity extends FuncActivity
 							}
 						});
 
-			}else if(transactionType == Host.TransactionType.PURCHASE_WITH_CASH_BACK){
+			}
+			else if(transactionType == Host.TransactionType.PURCHASE_WITH_CASH_BACK){
 
 
 				Log.d(" process online okh  ", "Reversal");
@@ -256,7 +328,8 @@ public class ProcessOnlineActivity extends FuncActivity
 							}
 						});
 
-			}else if(transactionType == Host.TransactionType.REVERSAL){
+			}
+			else if(transactionType == Host.TransactionType.REVERSAL){
 				Log.d("okh", "reversal");
 				nibss.reverse(emvCard,transactionType,inputData,appState.nibssData.getKeyHolder(), appState.nibssData.getConfigData(),
 						appState.nibssData.getConnectionData(),appState.iisoReverSal,new Nibss.Nibs<TransactionResult>() {
@@ -297,7 +370,8 @@ public class ProcessOnlineActivity extends FuncActivity
 								processResult();
 							}
 						});
-			}else if (appState.airtime || appState.data || appState.cableTv || appState.electricityBills ||appState.withdrawal){
+			}
+			else if (appState.airtime || appState.data || appState.cableTv || appState.electricityBills ||appState.withdrawal){
 				Log.i("okh", "appState.airtime || appState.data || appState.cableTv || appState.electricityBills");
 //				Nibss nibss = new Nibss(ProcessOnlineActivity.this);
 
@@ -494,7 +568,8 @@ public class ProcessOnlineActivity extends FuncActivity
 
 
 
-			}else{
+			}
+			else{
 				Log.d(" process online okh  ", "purchase");
 
 				Log.d(" process online okh airtime", String.valueOf(appState.airtime));
@@ -768,6 +843,8 @@ public class ProcessOnlineActivity extends FuncActivity
 		if(debug)Log.d(APP_TAG, "processResult");
 		switch(appState.getProcessState())
 		{
+
+//			Log.d(APP_TAG, String.val(appState.getProcessState()));
 		case PROCESS_NORMAL:
 			if (    appState.trans.getResponseCode() != null
 				 &&	appState.trans.getResponseCode()[0] == '0'
@@ -778,6 +855,8 @@ public class ProcessOnlineActivity extends FuncActivity
     			{
 					appState.trans.setEMVOnlineResult(ONLINE_SUCCESS);
 					byte[] issuerData = appState.trans.getIssuerAuthData();
+					if(debug)Log.d(APP_TAG, "ProcessOnlineActivity  success");
+
 					if(issuerData != null && issuerData.length > 0)
     				{
     					emv_set_online_result(appState.trans.getEMVOnlineResult(), appState.trans.getResponseCode(), issuerData, issuerData.length);
@@ -794,11 +873,16 @@ public class ProcessOnlineActivity extends FuncActivity
 				    && appState.trans.getResponseCode()[1] == 'F'
 			       )
 			{
+
+				if(debug)Log.d(APP_TAG, "ProcessOnlineActivity  Fail");
+
 				appState.trans.setEMVOnlineResult(ONLINE_FAIL);
 				emv_set_online_result(appState.trans.getEMVOnlineResult(), appState.trans.getResponseCode(), new byte[]{' '}, 0);
 			}
 			else{
 				appState.trans.setEMVOnlineResult(ONLINE_DENIAL);
+				if(debug)Log.d(APP_TAG, "ProcessOnlineActivity  DENIAL");
+
 				byte[] issuerData = appState.trans.getIssuerAuthData();
 				if(issuerData != null && issuerData.length > 0)
 				{

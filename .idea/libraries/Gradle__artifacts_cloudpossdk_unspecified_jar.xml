@@ -1,11 +1,11 @@
 <component name="libraryTable">
   <library name="Gradle: artifacts:cloudpossdk:unspecified@jar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/cloudpossdk.aar/4981d2eb8498b48481801c679c18d715/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/cloudpossdk.aar/4981d2eb8498b48481801c679c18d715/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/cloudpossdk.aar/4981d2eb8498b48481801c679c18d715/jars/libs/cloudpossdkinterfaceimpl_001_en.jar!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/cloudpossdk.aar/4981d2eb8498b48481801c679c18d715/jars/libs/cloudpossdkinterface_en.jar!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/cloudpossdk.aar/4981d2eb8498b48481801c679c18d715/jars/libs/printHtml.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/cloudpossdk.aar/75e726610d1c6b7cdcdc3a7095455ef8/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/cloudpossdk.aar/75e726610d1c6b7cdcdc3a7095455ef8/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/cloudpossdk.aar/75e726610d1c6b7cdcdc3a7095455ef8/jars/libs/cloudpossdkinterfaceimpl_001_en.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/cloudpossdk.aar/75e726610d1c6b7cdcdc3a7095455ef8/jars/libs/cloudpossdkinterface_en.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/cloudpossdk.aar/75e726610d1c6b7cdcdc3a7095455ef8/jars/libs/printHtml_fix2.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

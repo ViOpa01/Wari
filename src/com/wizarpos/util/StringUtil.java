@@ -4,10 +4,17 @@ import android.content.Context;
 import android.os.Build;
 import android.util.Log;
 
+import com.iisysgroup.poslib.commons.TripleDES;
 import com.itex.richard.payviceconnect.model.SessionKey;
 import com.itex.richard.payviceconnect.wrapper.PayviceServices;
 
 import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.codec.binary.Hex;
+
+import javax.crypto.Cipher;
+import javax.crypto.SecretKey;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.DESedeKeySpec;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -349,6 +356,96 @@ public class StringUtil
     return isHexChar(hexString, true);
   }
 
+
+  /**
+   * 3DES Encrypt the data
+   *
+   * @param key  Key to encrypt with
+   * @param data Data to be encrypted
+   * @return Hex string of encrypted data
+   */
+  public static String tripleDesEncrypt(String key, String data) {
+    //checkNotNull(key);
+    //checkNotNull(data);
+    int len = data.length();
+    //checkArgument(len == 16 || len == 32 || len == 48, "Invalid data for 3DES Encrypt");
+
+    try {
+      byte[] keyBytes = Hex.decodeHex(key.toCharArray());
+      byte[] desKey = new byte[24];
+      System.arraycopy(keyBytes, 0, desKey, 0, 16);
+      System.arraycopy(keyBytes, 0, desKey, 16, 8);
+
+      DESedeKeySpec keySpec = new DESedeKeySpec(desKey);
+
+      SecretKey secretKey = SecretKeyFactory.getInstance("DESede").generateSecret(keySpec);
+
+      Cipher ecipher = Cipher.getInstance("DESede/ECB/NoPadding");
+      ecipher.init(Cipher.ENCRYPT_MODE, secretKey);
+
+      byte[] encryptedData = ecipher.doFinal(Hex.decodeHex(data.toCharArray()));
+      return hex(encryptedData).toUpperCase();
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+
+
+
+
+  public static String hex(byte[] data) {
+
+    StringBuilder sb = new StringBuilder();
+    for (byte b : data) {
+      sb.append(Character.forDigit(((b & 240)) >> 4, 16));
+      sb.append(Character.forDigit(((b & 15)), 16));
+
+    }
+    return sb.toString();
+  }
+
+  public static String threeDesDecrypt(String encryptedToken, String key) {
+
+    Log.d("okh  About to do desDecrypt ", "pinblock1>>>>>> stringCipherNewUserKey : " +  encryptedToken);
+    Log.d("okh  About to do desDecrypt", "pinblock1>>>>>>> pinblock : " +  key);
+
+    byte[] mkB = TripleDES.hexToByte(key + key.substring(0, 16));
+    SecretKey keyse = TripleDES.readKey(mkB);
+
+
+    return TripleDES.Decrypt(keyse, encryptedToken);
+  }
+
+
+  // 转成16进制
+  public static byte[] StrToHexByte(String str) {
+    if (str == null)
+      return null;
+    else if (str.length() < 2)
+      return null;
+    else {
+      int len = str.length() / 2;
+      byte[] buffer = new byte[len];
+      for (int i = 0; i < len; i++) {
+        buffer[i] = (byte) Integer.parseInt(
+                str.substring(i * 2, i * 2 + 2), 16);
+      }
+      return buffer;
+    }
+  }
+
+  public static String bytes2HexString(byte[] b) {
+    String ret = "";
+    for (byte element : b) {
+      String hex = Integer.toHexString(element & 0xFF);
+      if (hex.length() == 1) {
+        hex = '0' + hex;
+      }
+      ret += hex.toUpperCase();
+    }
+    return ret;
+  }
 
   //%%%%%%%%%%%%%%%%%%%%%% HEX to ASCII %%%%%%%%%%%%%%%%%%%%%%
   public static String convertHexToString(String hex){

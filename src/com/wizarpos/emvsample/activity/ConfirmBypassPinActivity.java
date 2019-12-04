@@ -13,7 +13,9 @@ import android.widget.TextView;
 import com.wizarpos.emvsample.R;
 import com.wizarpos.emvsample.transaction.TransDefine;
 
-import static com.cloudpos.jniinterface.EMVJNIInterface.emv_set_pin_bypass_confirmed;
+import static com.wizarpos.emvsample.activity.CardFunctions.emv_set_pin_bypass_confirmed;
+
+//import static com.cloudpos.jniinterface.EMVJNIInterfaces.emv_set_pin_bypass_confirmed;
 
 public class ConfirmBypassPinActivity extends FuncActivity
 {

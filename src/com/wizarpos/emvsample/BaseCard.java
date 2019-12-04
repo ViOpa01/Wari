@@ -241,7 +241,7 @@ public class BaseCard implements Constants
     // errorCode
     public int getErrorCode()
     {
-    	if(debug)Log.d(APP_TAG, "getErrorCode = " + errorCode  );
+    	if(debug)Log.d(APP_TAG, "BaseCard getErrorCode = " + errorCode  );
     	return errorCode;
     }
     

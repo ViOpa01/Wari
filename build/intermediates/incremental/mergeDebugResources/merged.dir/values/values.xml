@@ -903,6 +903,7 @@
     <string name="error_not_accepted">NOT ACCEPTED</string>
     <string name="error_other_card">IC ERROR</string>
     <string name="error_pin_timeout">PIN TIMEOUT</string>
+    <string name="error_pinpad">PINPAD ERROR</string>
     <string name="error_pre_process">Preprocess Failed</string>
     <string name="error_settle_first">PLEASE SETTLE FIRST</string>
     <string name="error_trans_empty">NO TRANS</string>

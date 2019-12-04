@@ -1,7 +1,6 @@
 package com.iisysgroup.payvice.startimes.presenter
 
 import android.arch.lifecycle.LiveData
-import com.cloudpos.card.Card
 import com.iisysgroup.payvice.startimes.interactor.StartimesInteractor
 import com.itex.richard.payviceconnect.model.DstvModel
 import com.wizarpos.util.Service

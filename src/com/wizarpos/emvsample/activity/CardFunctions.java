@@ -318,6 +318,8 @@ public class CardFunctions extends BaseCard {
             case CARD_ERROR_NOTIFIER:
                 //cancelMSRThread();
                trans.setEmvCardError(true);
+                Log.e(APP_TAG, "CardFunction handleMessageSafe  resetCardError = true ");
+
                 resetCardError = true;
                 needCard = true;
                 //sale();

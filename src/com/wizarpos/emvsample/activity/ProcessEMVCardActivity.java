@@ -18,12 +18,15 @@ import com.wizarpos.util.AppUtil;
 import com.wizarpos.util.ByteUtil;
 import com.wizarpos.util.StringUtil;
 
+import static com.cloudpos.jniinterface.EMVJNIInterface.emv_anti_shake_finish;
 import static com.cloudpos.jniinterface.EMVJNIInterface.emv_get_candidate_list;
+import static com.cloudpos.jniinterface.EMVJNIInterface.emv_get_offlinepin_times;
 import static com.cloudpos.jniinterface.EMVJNIInterface.emv_get_tag_data;
 import static com.cloudpos.jniinterface.EMVJNIInterface.emv_get_tag_list_data;
 import static com.cloudpos.jniinterface.EMVJNIInterface.emv_is_need_advice;
 import static com.cloudpos.jniinterface.EMVJNIInterface.emv_is_need_signature;
 import static com.cloudpos.jniinterface.EMVJNIInterface.emv_is_tag_present;
+import static com.cloudpos.jniinterface.EMVJNIInterface.emv_offlinepin_verified;
 import static com.cloudpos.jniinterface.EMVJNIInterface.emv_process_next;
 import static com.cloudpos.jniinterface.EMVJNIInterface.emv_set_currency_symbol;
 import static com.cloudpos.jniinterface.EMVJNIInterface.emv_set_kernel_type;
@@ -34,9 +37,30 @@ import static com.cloudpos.jniinterface.EMVJNIInterface.emv_set_tag_data;
 import static com.cloudpos.jniinterface.EMVJNIInterface.emv_set_trans_amount;
 import static com.cloudpos.jniinterface.EMVJNIInterface.emv_set_trans_type;
 import static com.cloudpos.jniinterface.EMVJNIInterface.emv_trans_initialize;
+//import static com.cloudpos.jniinterface.EMVJNIInterfaces.emv_anti_shake_finish;
+//import static com.cloudpos.jniinterface.EMVJNIInterfaces.emv_get_candidate_list;
+//import static com.cloudpos.jniinterface.EMVJNIInterfaces.emv_get_offlinepin_times;
+//import static com.cloudpos.jniinterface.EMVJNIInterfaces.emv_get_tag_data;
+//import static com.cloudpos.jniinterface.EMVJNIInterfaces.emv_get_tag_list_data;
+//import static com.cloudpos.jniinterface.EMVJNIInterfaces.emv_is_need_advice;
+//import static com.cloudpos.jniinterface.EMVJNIInterfaces.emv_is_need_signature;
+//import static com.cloudpos.jniinterface.EMVJNIInterfaces.emv_is_tag_present;
+//import static com.cloudpos.jniinterface.EMVJNIInterfaces.emv_offlinepin_verified;
+//import static com.cloudpos.jniinterface.EMVJNIInterfaces.emv_process_next;
+//import static com.cloudpos.jniinterface.EMVJNIInterfaces.emv_set_currency_symbol;
+//import static com.cloudpos.jniinterface.EMVJNIInterfaces.emv_set_kernel_type;
+//import static com.cloudpos.jniinterface.EMVJNIInterfaces.emv_set_online_pin_entered;
+//import static com.cloudpos.jniinterface.EMVJNIInterfaces.emv_set_online_result;
+//import static com.cloudpos.jniinterface.EMVJNIInterfaces.emv_set_other_amount;
+//import static com.cloudpos.jniinterface.EMVJNIInterfaces.emv_set_tag_data;
+//import static com.cloudpos.jniinterface.EMVJNIInterfaces.emv_set_trans_amount;
+//import static com.cloudpos.jniinterface.EMVJNIInterfaces.emv_set_trans_type;
+//import static com.cloudpos.jniinterface.EMVJNIInterfaces.emv_trans_initialize;
 
 public class ProcessEMVCardActivity extends FuncActivity
 {
+	private static final String TAG = "ProcessEMVCardActivity";
+
 	private int defaultTagList[] = {    0x57,
 										0x5A,
 										0x5F20,
@@ -109,306 +133,39 @@ public class ProcessEMVCardActivity extends FuncActivity
     private Thread mEMVThread = null;
     private Thread mEMVProcessNextThread = null;
     private Thread mEMVProcessNextThread2 = null;
+	private boolean needCheckOfflinePin = false;
 
 	@Override
 	public void handleMessageSafe(Message msg) {
 		/*这里是处理信息的方法*/
+		Log.d(TAG +"  handleMessageSafe  >>>>>>>>", "Here again handleMessageSafe");
+		/*这里是处理信息的方法*/
+
+		Log.d(TAG +"   handleMessageSafe  >>>>>>>", "msg.what = " + msg.what);
 		switch (msg.what)
 		{
 		case EMV_PROCESS_NEXT_COMPLETED_NOTIFIER:
-			if(debug)Log.d(APP_TAG, "EMV_PROCESS_NEXT_COMPLETED_NOTIFIER, emvStatus = " + appState.trans.getEMVStatus() + ", emvRetCode = " + appState.trans.getEMVRetCode());
-			byte[] tagData;
-			int tagDataLength = 0;
-			switch (appState.trans.getEMVStatus())
-			{
-			case STATUS_CONTINUE:
-				switch (appState.trans.getEMVRetCode())
-				{
-				case EMV_CANDIDATE_LIST:
-					appState.aidNumber = emv_get_candidate_list(appState.aidList, appState.aidList.length);
-
-					selectEMVAppList();
-					break;
-				case EMV_APP_SELECTED:
-					if( appState.getTranType() == QUERY_CARD_RECORD || appState.trans.getTransAmount() > 0)
-					{
-						mEMVProcessNextThread = new EMVProcessNextThread();
-						mEMVProcessNextThread.start();
-					}
-					else{
-						inputAmount();
-					}
-					break;
-				case EMV_READ_APP_DATA:
-					if(emv_is_tag_present(0x9F79) >= 0 )
-					{
-						tagData = new byte[6];
-						emv_get_tag_data(0x9F79, tagData, 6);
-						appState.trans.setECBalance(ByteUtil.bcdToInt(tagData));
-					}
-
-					tagData = new byte[100];
-					if(emv_is_tag_present(0x5A) >= 0)
-					{
-						tagDataLength = emv_get_tag_data(0x5A, tagData, tagData.length);
-						appState.trans.setPAN(StringUtil.toString(AppUtil.removeTailF(ByteUtil.bcdToAscii(tagData, 0, tagDataLength))));
-					}
-					// Track2
-					if( emv_is_tag_present(0x57) >= 0)
-					{
-						tagDataLength = emv_get_tag_data(0x57, tagData, tagData.length);
-						appState.trans.setTrack2Data(StringUtil.toString(AppUtil.removeTailF(ByteUtil.bcdToAscii(tagData, 0, tagDataLength))));
-					}
-					// CSN
-					if( emv_is_tag_present(0x5F34) >= 0)
-					{
-						tagDataLength = emv_get_tag_data(0x5F34, tagData, tagData.length);
-						appState.trans.setCSN(tagData[0]);
-					}
-					// Expiry
-					if( emv_is_tag_present(0x5F24) >= 0)
-					{
-						tagDataLength = emv_get_tag_data(0x5F24, tagData, tagData.length);
-						appState.trans.setExpiry(StringUtil.toHexString(tagData, 0, 3, false).substring(0, 4));
-					}
-					//confirmCard();
-					Toast.makeText(this, "Please Enter Pin", Toast.LENGTH_SHORT).show();
-					mEMVProcessNextThread = new EMVProcessNextThread();
-					mEMVProcessNextThread.start();
-
-					break;
-				case EMV_DATA_AUTH:
-					byte[] TSI = new byte[2];
-					byte[] TVR = new byte[5];
-					emv_get_tag_data(0x9B, TSI, 2); // TSI
-					emv_get_tag_data(0x95, TVR, 5); // TVR
-					if(   (TSI[0] & (byte)0x80) == (byte)0x80
-						&& (TVR[0] & (byte)0x40) == (byte)0x00
-						&& (TVR[0] & (byte)0x08) == (byte)0x00
-						&& (TVR[0] & (byte)0x04) == (byte)0x00
-						)
-					{
-						appState.promptOfflineDataAuthSucc = true;
-					}
-
-					Toast.makeText(this, "Please Enter Pin", Toast.LENGTH_SHORT).show();
-					mEMVProcessNextThread = new EMVProcessNextThread();
-					mEMVProcessNextThread.start();
-					break;
-				case EMV_OFFLINE_PIN:
-					textLine1.setText("PLEASE INPUT PIN ON THE PINPAD");
-					mEMVProcessNextThread = new EMVProcessNextThread();
-					mEMVProcessNextThread.start();
-					Log.d("okh", "offline pin >>>");
-					break;
-
-				case EMV_ONLINE_ENC_PIN:
-					inputPIN();
-//					mEMVProcessNextThread = new EMVProcessNextThread();
-//					mEMVProcessNextThread.start();
-					Log.d("okh", "online pin >>>");
-					//appState.trans.setEMVOnlineFlag(true);
-					break;
-				case EMV_PIN_BYPASS_CONFIRM:
-					confirmBypassPin();
-					Log.d("okh", "confirm >>");
-					break;
-				case EMV_PROCESS_ONLINE:
-					Log.d("okh", "process online >>");
-					getEMVCardInfo();
-					appState.trans.setEMVOnlineFlag(true);
-						processOnline();
-//                    textLine1.setText("PLEASE INPUT PIN ON THE PINPAD");
-//                    mEMVProcessNextThread = new EMVProcessNextThread();
-//                    mEMVProcessNextThread.start();
-					break;
-				default:
-					mEMVProcessNextThread = new EMVProcessNextThread();
-					mEMVProcessNextThread.start();
-					break;
-				}
-				break;
-			case STATUS_COMPLETION:
-				appState.terminalConfig.incTrace();
-				appState.trans.setNeedSignature(emv_is_need_signature());
-
-				tagData = new byte[50];
-				if( emv_is_tag_present(0x95) >= 0)
-				{
-					tagDataLength = emv_get_tag_data(0x95, tagData, tagData.length);
-					appState.terminalConfig.setLastTVR(StringUtil.toHexString(tagData, 0, tagDataLength, false));
-				}
-				if( emv_is_tag_present(0x9B) >= 0)
-				{
-					tagDataLength = emv_get_tag_data(0x9B, tagData, tagData.length);
-					appState.terminalConfig.setLastTSI(StringUtil.toHexString(tagData, 0, tagDataLength, false));
-				}
-
-				//getEMVCardInfo();
-				if ((TransDefine.transInfo[appState.getTranType()].flag & T_NOCAPTURE) == 0)
-				{
-					if( appState.trans.getEMVRetCode() == APPROVE_OFFLINE )
-					{
-						if(appState.terminalConfig.getUploadType() == 0)
-						{
-							if(   appState.trans.getEMVOnlineFlag() == true
-								&& appState.trans.getEMVOnlineResult() == ONLINE_FAIL
-								)
-							{
-								saveAdvice();
-							}
-							offlineSuccess();
-						}
-						else{
-							// 需判断是否联机
-							if(   appState.trans.getEMVOnlineFlag() == true
-								&& appState.trans.getEMVOnlineResult() == ONLINE_FAIL
-								)
-							{
-								// Reversal
-								appState.setProcessState(PROCESS_REVERSAL);
-								processOnline();
-							}
-							else{
-								// Confirm
-								appState.setProcessState(PROCESS_CONFIMATION);
-								getEMVCardInfo();
-								processOnline();
-							}
-							return;
-						}
-
-					}
-					else if(appState.trans.getEMVRetCode() == APPROVE_ONLINE)
-					{
-						if(appState.terminalConfig.getUploadType() == 0)
-						{
-							transSuccess();
-						}
-						else{
-							appState.setProcessState(PROCESS_CONFIMATION);
-							getEMVCardInfo();
-							processOnline();
-							return;
-						}
-					}
-					else{
-						if(   appState.trans.getEMVOnlineFlag() == true
-							&& appState.trans.getEMVOnlineResult() == ONLINE_FAIL
-							)
-						{
-							// 通讯失败
-							if(appState.terminalConfig.getUploadType() == 0)
-							{
-								saveAdvice();
-							}
-							else{
-								appState.setProcessState(PROCESS_REVERSAL);
-								getEMVCardInfo();
-								processOnline();
-								return;
-							}
-						}
-						else if(   appState.trans.getEMVOnlineFlag() == true
-							&& appState.trans.getEMVOnlineResult() == ONLINE_SUCCESS
-							)
-						{
-							if(emv_is_need_advice() == 1)
-							{
-								if(appState.terminalConfig.getUploadType() == 0)
-								{
-									saveAdvice();
-								}
-								else{
-									appState.setProcessState(PROCESS_ADVICE_ONLINE);
-									getEMVCardInfo();
-									processOnline();
-									return;
-								}
-							}
-							else{
-								if(appState.terminalConfig.getUploadType() == 0)
-								{
-									saveAdvice();
-								}
-								else{
-									appState.setProcessState(PROCESS_REVERSAL);
-									getEMVCardInfo();
-									processOnline();
-									return;
-								}
-							}
-						}
-						else{
-							if(emv_is_need_advice() == 1)
-							{
-								if(appState.terminalConfig.getUploadType() == 0)
-								{
-									saveAdvice();
-								}
-								else{
-									appState.setProcessState(PROCESS_ADVICE_ONLINE);
-									getEMVCardInfo();
-									processOnline();
-									return;
-								}
-							}
-						}
-					}
-					appState.setProcessState(PROCESS_NORMAL);
-				}
-				setResult(RESULT_OK, getIntent());
-				finish();
-				break;
-			default:
-				switch (appState.trans.getEMVRetCode())
-				{
-//    					case ERROR_NO_APP:
-//    					case ERROR_INIT_APP:
-//    						//appState.trans.setEmvCardError(true);
-//    						//setResult(RESULT_OK, getIntent());
-//    						appState.setErrorCode(R.string.error_no_app);
-//    						finish();
-//    						break;
-				case ERROR_OTHER_CARD:
-					appState.trans.setEmvCardError(true);
-					//setResult(RESULT_OK, getIntent());
-					appState.setErrorCode(R.string.error_other_card);
-					finish();
-					break;
-				case ERROR_EXPIRED_CARD:
-					appState.setErrorCode(R.string.error_expiry_card);
-					finish();
-					break;
-				case ERROR_CARD_BLOCKED:
-					appState.setErrorCode(R.string.error_card_blocked);
-					finish();
-					break;
-				case ERROR_APP_BLOCKED:
-					appState.setErrorCode(R.string.error_app_blocked);
-					finish();
-					break;
-				case ERROR_SERVICE_NOT_ALLOWED:
-					appState.setErrorCode(R.string.error_not_accepted);
-					finish();
-					break;
-				case ERROR_PINENTERY_TIMEOUT:
-					appState.setErrorCode(R.string.error_pin_timeout);
-					finish();
-					break;
-				default:
-					appState.setErrorCode(R.string.error_ic );
-					finish();
-					break;
-				}
-				break;
-			}
+			emvProcessCompleted();
 			break;
 		case PREPROCESS_ERROR_NOTIFIER:
 			if(appState.getErrorCode() == 0)
-				appState.setErrorCode(R.string.error_pre_process);
+				Log.i("ProcessEMVCardActivity","requestCode == PREPROCESS_ERROR_NOTIFIER ");
+
+			appState.setErrorCode(R.string.error_pre_process);
 			finish();
 			break;
+
+			case CARD_INSERT_NOTIFIER:
+				Log.i(TAG, "cardInserted");
+				cancelMSRThread();
+				emv_anti_shake_finish(1);
+				cancelContactlessCard();
+
+				appState.trans.setEmvCardError(false);
+				appState.trans.setCardEntryMode(INSERT_ENTRY);
+				new EMVThread().start();
+
+				break;
 		}
 	}
 
@@ -458,7 +215,8 @@ public class ProcessEMVCardActivity extends FuncActivity
 
 	@Override
     protected void onStart() { 
-        super.onStart(); 
+        super.onStart();
+        Log.i("OnStart",   "PROCESSING CARD，PLS WAIT...");
         textLine1.setText("PROCESSING CARD，PLS WAIT...");
     } 
     
@@ -516,6 +274,8 @@ public class ProcessEMVCardActivity extends FuncActivity
 			{
 				if( requestCode == STATE_PROCESS_ONLINE )
 				{
+
+					Log.i("ProcessEMVCardActivity","requestCode == STATE_PROCESS_ONLINE ");
 					appState.trans.setEMVOnlineResult(ONLINE_FAIL);
 					emv_set_online_result(appState.trans.getEMVOnlineResult(), appState.trans.getResponseCode(), new byte[]{' '}, 0);
 			        mEMVProcessNextThread = new EMVProcessNextThread(); 
@@ -545,7 +305,9 @@ public class ProcessEMVCardActivity extends FuncActivity
 				setEMVTransAmount(Integer.toString(appState.trans.getTransAmount()));
 				emv_set_other_amount(new byte[]{'0', 0x00});
 			}
-			else if(requestCode == STATE_INPUT_PIN)
+			//Todo 26
+//			else if(requestCode == STATE_INPUT_PIN)
+			else if(requestCode == STATE_INPUT_ONLINE_PIN)
 			{
 				if(appState.trans.getPinEntryMode() == CAN_PIN)
 				{
@@ -554,6 +316,12 @@ public class ProcessEMVCardActivity extends FuncActivity
 				else{
 					emv_set_online_pin_entered(0);
 				}
+			}
+			//TODO 27
+			else if(requestCode == STATE_INPUT_OFFLINE_PIN)
+			{
+				emvProcessCompleted();
+				return;
 			}
 		}
         mEMVProcessNextThread = new EMVProcessNextThread(); 
@@ -608,6 +376,7 @@ public class ProcessEMVCardActivity extends FuncActivity
 		int offset = 0; 
 		if(appState.getProcessState() == PROCESS_CONFIMATION)
 		{
+			//ToDO undone  29
 			//offset = emv_get_tag_list_data(confirmTagList, confirmTagList.length, iccData, iccData.length);
 		}
 		else{
@@ -699,6 +468,28 @@ public class ProcessEMVCardActivity extends FuncActivity
 			System.arraycopy(tagData, 0, amt, 0, amt.length);
 			appState.trans.setECBalance(ByteUtil.bcdToInt(amt));
 		}
+
+		//TODO 30
+		if(needCheckOfflinePin)
+		{
+			int wrongOfflinePinTimes = 0;
+			int offlinePinVerified = emv_offlinepin_verified();
+
+			int offlinepinTimes = emv_get_offlinepin_times();
+			if(offlinepinTimes > 0)
+			{
+				wrongOfflinePinTimes = offlinepinTimes - (offlinePinVerified == 1 ? 1 : 0);
+			}
+			if(debug)Log.d(TAG, "offlinePinVerified = " + offlinePinVerified);
+			if(debug)Log.d(TAG, "Wrong offline Pin Times = " + wrongOfflinePinTimes);
+			if( offlinePinVerified == 1)
+			{
+				appState.trans.setPinEntryMode(CAN_PIN);  // Offline PIN Verified
+			}
+			else if (offlinePinVerified == -1){
+				if(debug)Log.d(TAG, "Wrong offline Pin");
+			}
+		}
 	}
 	
 	public static void setEMVData()
@@ -736,6 +527,7 @@ public class ProcessEMVCardActivity extends FuncActivity
 			setEMVTransAmount(Integer.toString(appState.trans.getTransAmount()));
        		setEMVData();
 
+       		//Todo Undone 31
 			//pre-process
 			if(appState.trans.getEMVKernelType() == QPBOC_KERNAL && !preProcessQpboc())
 			{
@@ -744,6 +536,8 @@ public class ProcessEMVCardActivity extends FuncActivity
 				mHandler.sendMessage(msg);
 				return;
 			}
+
+
        		emv_process_next();
     	}
     }
@@ -757,4 +551,425 @@ public class ProcessEMVCardActivity extends FuncActivity
        		emv_process_next();
     	}
     }
+
+	public void emvProcessCompleted() {
+
+		if(debug)Log.d(APP_TAG, "  >>>>>> EMV_PROCESS_NEXT_COMPLETED_NOTIFIER, emvStatus = " + appState.trans.getEMVStatus() + ", emvRetCode = " + appState.trans.getEMVRetCode());
+		byte[] tagData;
+		int tagDataLength = 0;
+		Log.d(TAG, "  >>>>>> EMV_PROCESS_NEXT_COMPLETED_NOTIFIER, emvStatus = " + appState.trans.getEMVStatus() + ", emvRetCode = " + appState.trans.getEMVRetCode());
+
+		switch (appState.trans.getEMVStatus())
+		{
+			case STATUS_CONTINUE:
+				Log.d(TAG, "  >>>>>> STATUS_CONTINUE, emvStatus = " + appState.trans.getEMVStatus() + ", emvRetCode = " + appState.trans.getEMVRetCode());
+
+				switch (appState.trans.getEMVRetCode())
+				{
+
+					case EMV_CANDIDATE_LIST:
+						appState.aidNumber = emv_get_candidate_list(appState.aidList, appState.aidList.length);
+						Log.d(TAG, "  >>>>>> EMV_CANDIDATE_LIST, emvStatus = " + appState.trans.getEMVStatus() + ", emvRetCode = " + appState.trans.getEMVRetCode());
+
+						selectEMVAppList();
+						break;
+					case EMV_APP_SELECTED:
+						if( appState.getTranType() == QUERY_CARD_RECORD || appState.trans.getTransAmount() > 0)
+						{
+							Log.d(TAG, "  >>>>>> EMV_APP_SELECTED  appState.getTranType() == QUERY_CARD_RECORD || appState.trans.getTransAmount() > 0, emvStatus = " + appState.trans.getEMVStatus() + ", emvRetCode = " + appState.trans.getEMVRetCode());
+
+							mEMVProcessNextThread = new EMVProcessNextThread();
+							mEMVProcessNextThread.start();
+						}
+						else{
+							inputAmount();
+
+							Log.d(TAG, "  >>>>>> EMV_APP_SELECTED  else appState.getTranType() == QUERY_CARD_RECORD || appState.trans.getTransAmount() > 0, emvStatus = " + appState.trans.getEMVStatus() + ", emvRetCode = " + appState.trans.getEMVRetCode());
+
+						}
+						break;
+					case EMV_READ_APP_DATA:
+						Log.d(TAG, "  >>>>>>EMV_READ_APP_DATA, emvStatus = " + appState.trans.getEMVStatus() + ", emvRetCode = " + appState.trans.getEMVRetCode());
+
+						if(emv_is_tag_present(0x9F79) >= 0 )
+						{
+							tagData = new byte[6];
+							emv_get_tag_data(0x9F79, tagData, 6);
+							appState.trans.setECBalance(ByteUtil.bcdToInt(tagData));
+						}
+
+						tagData = new byte[100];
+						if(emv_is_tag_present(0x5A) >= 0)
+						{
+							tagDataLength = emv_get_tag_data(0x5A, tagData, tagData.length);
+							appState.trans.setPAN(StringUtil.toString(AppUtil.removeTailF(ByteUtil.bcdToAscii(tagData, 0, tagDataLength))));
+						}
+						// Track2
+						if( emv_is_tag_present(0x57) >= 0)
+						{
+							tagDataLength = emv_get_tag_data(0x57, tagData, tagData.length);
+							appState.trans.setTrack2Data(StringUtil.toString(AppUtil.removeTailF(ByteUtil.bcdToAscii(tagData, 0, tagDataLength))));
+						}
+						// CSN
+						if( emv_is_tag_present(0x5F34) >= 0)
+						{
+							tagDataLength = emv_get_tag_data(0x5F34, tagData, tagData.length);
+							appState.trans.setCSN(tagData[0]);
+						}
+						// Expiry
+						if( emv_is_tag_present(0x5F24) >= 0)
+						{
+							tagDataLength = emv_get_tag_data(0x5F24, tagData, tagData.length);
+							appState.trans.setExpiry(StringUtil.toHexString(tagData, 0, 3, false).substring(0, 4));
+						}
+						//confirmCard();
+						Toast.makeText(this, "Please Enter Pin", Toast.LENGTH_SHORT).show();
+						mEMVProcessNextThread = new EMVProcessNextThread();
+						mEMVProcessNextThread.start();
+
+						break;
+					case EMV_DATA_AUTH:
+
+						Log.d(TAG, "  >>>>>>EMV_DATA_AUTH, emvStatus = " + appState.trans.getEMVStatus() + ", emvRetCode = " + appState.trans.getEMVRetCode());
+
+						byte[] TSI = new byte[2];
+						byte[] TVR = new byte[5];
+						emv_get_tag_data(0x9B, TSI, 2); // TSI
+						emv_get_tag_data(0x95, TVR, 5); // TVR
+						if(   (TSI[0] & (byte)0x80) == (byte)0x80
+								&& (TVR[0] & (byte)0x40) == (byte)0x00
+								&& (TVR[0] & (byte)0x08) == (byte)0x00
+								&& (TVR[0] & (byte)0x04) == (byte)0x00
+						)
+						{
+							appState.promptOfflineDataAuthSucc = true;
+						}
+
+						Toast.makeText(this, "Please Enter Pin", Toast.LENGTH_SHORT).show();
+						mEMVProcessNextThread = new EMVProcessNextThread();
+						mEMVProcessNextThread.start();
+						break;
+                    //Todo 22
+
+					case EMV_OFFLINE_PIN:
+//						textLine1.setText("PLEASE INPUT PIN ON THE PINPAD");
+//						mEMVProcessNextThread = new EMVProcessNextThread();
+//						mEMVProcessNextThread.start();
+//						Log.d("okh", "offline pin >>>");
+
+						Log.d(TAG, "  >>>>>>EMV_OFFLINE_PIN, emvStatus = " + appState.trans.getEMVStatus() + ", emvRetCode = " + appState.trans.getEMVRetCode());
+
+
+						if(appState.pinpadType == PINPAD_CUSTOM_UI)
+						{
+							inputOfflinePIN();
+							Log.d(TAG, "  >>>>>> EMV_OFFLINE_PIN appState.pinpadType == PINPAD_CUSTOM_UI, emvStatus = " + appState.trans.getEMVStatus() + ", emvRetCode = " + appState.trans.getEMVRetCode());
+
+						}
+						else
+						{
+							Log.d(TAG, "  >>>>>> EMV_OFFLINE_PIN  else  appState.pinpadType == PINPAD_CUSTOM_UI, emvStatus = " + appState.trans.getEMVStatus() + ", emvRetCode = " + appState.trans.getEMVRetCode());
+
+							needCheckOfflinePin = true;
+							textLine1.setText("PLEASE INPUT PIN ON THE PINPAD");
+							mEMVProcessNextThread = new EMVProcessNextThread();
+							mEMVProcessNextThread.start();
+
+
+						}
+
+						break;
+
+					case EMV_ONLINE_ENC_PIN:
+						//ToDo 19
+//						inputPIN();
+////					mEMVProcessNextThread = new EMVProcessNextThread();
+////					mEMVProcessNextThread.start();
+//						Log.d("okh", "online pin >>>");
+//						//appState.trans.setEMVOnlineFlag(true);
+
+						Log.d(TAG, "  >>>>>> EMV_ONLINE_ENC_PIN , emvStatus = " + appState.trans.getEMVStatus() + ", emvRetCode = " + appState.trans.getEMVRetCode());
+
+
+						if(appState.pinpadType == PINPAD_NONE)
+						{
+							emv_set_online_pin_entered(1);
+							mEMVProcessNextThread = new EMVProcessNextThread();
+							mEMVProcessNextThread.start();
+
+							Log.d(TAG, "  >>>>>> EMV_ONLINE_ENC_PIN , appState.pinpadType == PINPAD_NONE emvStatus = " + appState.trans.getEMVStatus() + ", emvRetCode = " + appState.trans.getEMVRetCode());
+
+						}
+						else
+						{
+
+							Log.d(TAG, "  >>>>>> EMV_ONLINE_ENC_PIN , else appState.pinpadType == PINPAD_NONE emvStatus = " + appState.trans.getEMVStatus() + ", emvRetCode = " + appState.trans.getEMVRetCode());
+
+							inputOnlinePIN();
+
+						}
+						break;
+						//TODO 24
+//					case EMV_PIN_BYPASS_CONFIRM:
+//						confirmBypassPin();
+//						Log.d("okh", "confirm >>");
+//						break;
+					case EMV_PROCESS_ONLINE:
+						Log.d("okh", "process online >>");
+						getEMVCardInfo();
+						appState.trans.setEMVOnlineFlag(true);
+						processOnline();
+//                    textLine1.setText("PLEASE INPUT PIN ON THE PINPAD");
+//                    mEMVProcessNextThread = new EMVProcessNextThread();
+//                    mEMVProcessNextThread.start();
+						break;
+					default:
+						mEMVProcessNextThread = new EMVProcessNextThread();
+						mEMVProcessNextThread.start();
+						break;
+				}
+				break;
+//			case EMV_START:
+//
+//			{
+//				//Fictional condition
+//				if(emv_is_tag_present(0x9F79) >= 0 )
+//				{
+//					tagData = new byte[6];
+//					emv_get_tag_data(0x9F79, tagData, 6);
+//					appState.trans.setECBalance(ByteUtil.bcdToInt(tagData));
+//				}
+//
+//				tagData = new byte[100];
+//				if(emv_is_tag_present(0x5A) >= 0)
+//				{
+//					tagDataLength = emv_get_tag_data(0x5A, tagData, tagData.length);
+//					appState.trans.setPAN(StringUtil.toString(AppUtil.removeTailF(ByteUtil.bcdToAscii(tagData, 0, tagDataLength))));
+//				}
+//				// Track2
+//				if( emv_is_tag_present(0x57) >= 0)
+//				{
+//					tagDataLength = emv_get_tag_data(0x57, tagData, tagData.length);
+//					appState.trans.setTrack2Data(StringUtil.toString(AppUtil.removeTailF(ByteUtil.bcdToAscii(tagData, 0, tagDataLength))));
+//				}
+//				// CSN
+//				if( emv_is_tag_present(0x5F34) >= 0)
+//				{
+//					tagDataLength = emv_get_tag_data(0x5F34, tagData, tagData.length);
+//					appState.trans.setCSN(tagData[0]);
+//				}
+//				// Expiry
+//				if( emv_is_tag_present(0x5F24) >= 0)
+//				{
+//					tagDataLength = emv_get_tag_data(0x5F24, tagData, tagData.length);
+//					appState.trans.setExpiry(StringUtil.toHexString(tagData, 0, 3, false).substring(0, 4));
+//				}
+//				//confirmCard();
+//				Toast.makeText(this, "Please Enter Pin", Toast.LENGTH_SHORT).show();
+//				mEMVProcessNextThread = new EMVProcessNextThread();
+//				mEMVProcessNextThread.start();
+//			}
+//			break;
+			case STATUS_COMPLETION:
+
+				Log.d(TAG, "  >>>>>> STATUS_COMPLETION ,  emvStatus = " + appState.trans.getEMVStatus() + ", emvRetCode = " + appState.trans.getEMVRetCode());
+
+				appState.terminalConfig.incTrace();
+				appState.trans.setNeedSignature(emv_is_need_signature());
+
+				tagData = new byte[50];
+				if( emv_is_tag_present(0x95) >= 0)
+				{
+					tagDataLength = emv_get_tag_data(0x95, tagData, tagData.length);
+					appState.terminalConfig.setLastTVR(StringUtil.toHexString(tagData, 0, tagDataLength, false));
+				}
+				if( emv_is_tag_present(0x9B) >= 0)
+				{
+					tagDataLength = emv_get_tag_data(0x9B, tagData, tagData.length);
+					appState.terminalConfig.setLastTSI(StringUtil.toHexString(tagData, 0, tagDataLength, false));
+				}
+//				ToDo 25 UNDONE
+//				getEMVCardInfo();
+
+
+
+
+				if ((TransDefine.transInfo[appState.getTranType()].flag & T_NOCAPTURE) == 0)
+				{
+
+					Log.d(TAG, "  >>>>>> STATUS_COMPLETION (TransDefine.transInfo[appState.getTranType()].flag & T_NOCAPTURE) == 0 ,  emvStatus = " + appState.trans.getEMVStatus() + ", emvRetCode = " + appState.trans.getEMVRetCode());
+
+					if( appState.trans.getEMVRetCode() == APPROVE_OFFLINE )
+					{
+
+						Log.d(TAG, "  >>>>>> STATUS_COMPLETION appState.trans.getEMVRetCode() == APPROVE_OFFLINE ,  emvStatus = " + appState.trans.getEMVStatus() + ", emvRetCode = " + appState.trans.getEMVRetCode());
+
+						if(appState.terminalConfig.getUploadType() == 0)
+						{
+							Log.d(TAG, "  >>>>>> STATUS_COMPLETION appState.terminalConfig.getUploadType() == 0 ,  emvStatus = " + appState.trans.getEMVStatus() + ", emvRetCode = " + appState.trans.getEMVRetCode());
+
+							if(   appState.trans.getEMVOnlineFlag() == true
+									&& appState.trans.getEMVOnlineResult() == ONLINE_FAIL
+							)
+							{
+								Log.d(TAG, "  >>>>>> STATUS_COMPLETION  appState.trans.getEMVOnlineFlag() == true,  emvStatus = " + appState.trans.getEMVStatus() + ", emvRetCode = " + appState.trans.getEMVRetCode());
+
+								saveAdvice();
+							}
+							offlineSuccess();
+						}
+						else{
+							Log.d(TAG, "  >>>>>> STATUS_COMPLETION  else appState.terminalConfig.getUploadType() == 0,  emvStatus = " + appState.trans.getEMVStatus() + ", emvRetCode = " + appState.trans.getEMVRetCode());
+
+							// 需判断是否联机
+							if(   appState.trans.getEMVOnlineFlag() == true
+									&& appState.trans.getEMVOnlineResult() == ONLINE_FAIL
+							)
+							{
+								// Reversal
+								appState.setProcessState(PROCESS_REVERSAL);
+								processOnline();
+
+								Log.d(TAG, "  >>>>>> STATUS_COMPLETION  appState.trans.getEMVOnlineFlag() == true && appState.trans.getEMVOnlineResult() == ONLINE_FAIL,  emvStatus = " + appState.trans.getEMVStatus() + ", emvRetCode = " + appState.trans.getEMVRetCode());
+
+							}
+							else{
+								Log.d(TAG, "  >>>>>> STATUS_COMPLETION  else appState.trans.getEMVOnlineFlag() == true && appState.trans.getEMVOnlineResult() == ONLINE_FAIL,  emvStatus = " + appState.trans.getEMVStatus() + ", emvRetCode = " + appState.trans.getEMVRetCode());
+
+
+								// Confirm
+								appState.setProcessState(PROCESS_CONFIMATION);
+								getEMVCardInfo();
+								processOnline();
+							}
+							return;
+						}
+
+					}
+					else if(appState.trans.getEMVRetCode() == APPROVE_ONLINE)
+					{
+						if(appState.terminalConfig.getUploadType() == 0)
+						{
+							transSuccess();
+						}
+						else{
+							appState.setProcessState(PROCESS_CONFIMATION);
+							getEMVCardInfo();
+							processOnline();
+							return;
+						}
+					}
+					else{
+						if(   appState.trans.getEMVOnlineFlag() == true
+								&& appState.trans.getEMVOnlineResult() == ONLINE_FAIL
+						)
+						{
+							// 通讯失败
+							if(appState.terminalConfig.getUploadType() == 0)
+							{
+								saveAdvice();
+							}
+							else{
+								appState.setProcessState(PROCESS_REVERSAL);
+								getEMVCardInfo();
+								processOnline();
+								return;
+							}
+						}
+						else if(   appState.trans.getEMVOnlineFlag() == true
+								&& appState.trans.getEMVOnlineResult() == ONLINE_SUCCESS
+						)
+						{
+							if(emv_is_need_advice() == 1)
+							{
+								if(appState.terminalConfig.getUploadType() == 0)
+								{
+									saveAdvice();
+								}
+								else{
+									appState.setProcessState(PROCESS_ADVICE_ONLINE);
+									getEMVCardInfo();
+									processOnline();
+									return;
+								}
+							}
+							else{
+								if(appState.terminalConfig.getUploadType() == 0)
+								{
+									saveAdvice();
+								}
+								else{
+									appState.setProcessState(PROCESS_REVERSAL);
+									getEMVCardInfo();
+									processOnline();
+									return;
+								}
+							}
+						}
+						else{
+							if(emv_is_need_advice() == 1)
+							{
+								if(appState.terminalConfig.getUploadType() == 0)
+								{
+									saveAdvice();
+								}
+								else{
+									appState.setProcessState(PROCESS_ADVICE_ONLINE);
+									getEMVCardInfo();
+									processOnline();
+									return;
+								}
+							}
+						}
+					}
+					appState.setProcessState(PROCESS_NORMAL);
+				}
+				setResult(RESULT_OK, getIntent());
+				finish();
+				break;
+			default:
+				switch (appState.trans.getEMVRetCode())
+				{
+//    					case ERROR_NO_APP:
+//    					case ERROR_INIT_APP:
+//    						//appState.trans.setEmvCardError(true);
+//    						//setResult(RESULT_OK, getIntent());
+//    						appState.setErrorCode(R.string.error_no_app);
+//    						finish();
+//    						break;
+					case ERROR_OTHER_CARD:
+						appState.trans.setEmvCardError(true);
+						//setResult(RESULT_OK, getIntent());
+						appState.setErrorCode(R.string.error_other_card);
+						finish();
+						break;
+					case ERROR_EXPIRED_CARD:
+						appState.setErrorCode(R.string.error_expiry_card);
+						finish();
+						break;
+					case ERROR_CARD_BLOCKED:
+						appState.setErrorCode(R.string.error_card_blocked);
+						finish();
+						break;
+					case ERROR_APP_BLOCKED:
+						appState.setErrorCode(R.string.error_app_blocked);
+						finish();
+						break;
+					case ERROR_SERVICE_NOT_ALLOWED:
+						appState.setErrorCode(R.string.error_not_accepted);
+						finish();
+						break;
+					case ERROR_PINENTERY_TIMEOUT:
+						appState.setErrorCode(R.string.error_pin_timeout);
+						finish();
+						break;
+					default:
+						appState.setErrorCode(R.string.error_ic );
+						finish();
+						break;
+				}
+				break;
+		}
+
+	}
 }

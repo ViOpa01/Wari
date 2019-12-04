@@ -68,6 +68,10 @@
         <activity
             android:name=".activity.FuncMenuActivity"
             android:screenOrientation="portrait" />
+
+<!--        <activity-->
+<!--            android:name=".history_summary.EODActivity"-->
+<!--            android:screenOrientation="portrait" />-->
         <activity
             android:name=".payments_menu.transfer.TransferBankSelection"
             android:screenOrientation="portrait" />
@@ -214,6 +218,9 @@
         <!-- android:name=".PrintActivity" -->
         <!-- android:exported="true" /> -->
         <service android:name=".service.CallHomeService" />
+<!--        <activity android:name=".activity.InputAmountActivity" android:screenOrientation="nosensor"/>-->
+        <activity android:name=".activity.InputOfflinePINActivity" android:screenOrientation="nosensor"/>
+        <activity android:name=".activity.InputOnlinePINActivity" android:screenOrientation="nosensor"/>
     </application>
 
 </manifest>

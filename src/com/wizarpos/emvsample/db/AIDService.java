@@ -291,8 +291,11 @@ public class AIDService {
     	aidTable.setAid("A0000000041010");
 		// C2
 		aidTable.setKernelConfig((byte)0x20);
-		aidTable.setCtlNoOnDeviceCVM(appState.terminalConfig.getContactlessLimit());
-		aidTable.setCtlOnDeviceCVM(appState.terminalConfig.getContactlessLimit());
+
+		//Commented out because it is crashing my app
+
+//		aidTable.setCtlNoOnDeviceCVM(appState.terminalConfig.getContactlessLimit());
+//		aidTable.setCtlOnDeviceCVM(appState.terminalConfig.getContactlessLimit());
 		aidTable.setCvmCapCVMRequired((byte)0x60);   // Online PIN & Signature
 		aidTable.setCvmCapNoCVMRequired((byte)0x68); // Online PIN & Signature & No CVM
 		aidTable.setMscvmCapCVMRequired((byte)0x20);

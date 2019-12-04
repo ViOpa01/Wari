@@ -16,8 +16,12 @@ public interface Constants
 	final byte ONLINE_FAIL    = -1;
 	final byte ONLINE_DENIAL  =  0;
 	final byte ONLINE_SUCCESS =  1;
-	
-	final int  DEFAULT_IDLE_TIME_SECONDS = 180;
+
+	//TODO 9
+//	final int  DEFAULT_IDLE_TIME_SECONDS = 180; //Previously
+	final int  DEFAULT_IDLE_TIME_SECONDS = 60;  //Now
+
+
 	final byte[] DEFAULT_KEY = {(byte)0x11,(byte)0x11,(byte)0x11,(byte)0x11,(byte)0x11,(byte)0x11,(byte)0x11,(byte)0x11};
 	final byte MAX_AMOUNT_LENGTH = 13;
 	final int IDLE_TIME_SECONDS = 60;
@@ -122,13 +126,26 @@ public interface Constants
     final byte STATE_INPUT_RRN               = 7;
     final byte STATE_INPUT_AUTH_CODE         = 8;
     final byte STATE_INPUT_TIP               = 9;
-    final byte STATE_INPUT_PIN               =10;
-    final byte STATE_PROCESS_ONLINE          =11;
+    //ToDo 17
+	final byte STATE_INPUT_ONLINE_PIN        =10;
+	//ToDo 18
+	final byte STATE_PROCESS_ONLINE          =11;
     final byte STATE_INPUT_ADMIN_PASS        =12;
     final byte STATE_REQUEST_CARD_ERROR      =13;
     final byte STATE_SHOW_TRANS_INFO         =14;
 
-    final byte STATE_PROCESS_EMV_CARD        =16;
+	//TODO 23
+
+	// Pinpad Type
+	final int PINPAD_CUSTOM_UI = 1;
+	final int PINPAD_SYSTEM_UI = 2;
+	final int PINPAD_NONE      = 3;
+
+	//TODO 28
+	final byte STATE_INPUT_OFFLINE_PIN       =15;
+
+
+	final byte STATE_PROCESS_EMV_CARD        =16;
     final byte STATE_SELECT_EMV_APP          =17;
     final byte STATE_CONFIRM_ID              =18;
     final byte STATE_CONFIRM_BYPASS_PIN      =19;
@@ -150,6 +167,9 @@ public interface Constants
 	final int COMM_CONNECT_ERROR_NOTIFIER           =  8;
 	final int PACK8583_ERROR_NOTIFIER               =  9;
 	final int PACK8583_SUCCESS_NOTIFIER             = 10;
+
+  //TODO 11
+	final int OFFLINE_PIN_NOTIFIER                  = 31;
 
 	final int PIN_SUCCESS_NOTIFIER                  = 12;
 	final int PIN_ERROR_NOTIFIER                    = 13;

@@ -4,7 +4,6 @@ import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
-import com.cloudpos.card.Card
 import com.iisysgroup.payvice.base.interactor.MultichoiceInteractor
 import com.iisysgroup.payvice.base.presenter.MultichoicePresenter
 import com.iisysgroup.payvice.baseimpl.interactor.MultichoiceInteractorImpl

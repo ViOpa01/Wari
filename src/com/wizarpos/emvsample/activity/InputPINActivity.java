@@ -10,6 +10,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.cloudpos.jniinterface.PINPadInterface;
 import com.iisysgroup.poslib.ISO.GTMS.GtmsKeyProcessor;
 import com.wizarpos.emvsample.R;
 import com.wizarpos.emvsample.keys.PinBlockEncryptionUtil;
@@ -108,6 +109,9 @@ public class InputPINActivity extends FuncActivity implements PinPadCallbackHand
 					setResult(Activity.RESULT_OK, getIntent());
 					break;
 				case PIN_ERROR_NOTIFIER:
+
+					Log.d("inputPIN() PPIN_ERROR_NOTIFIER >>>>", " InputPinActivity  " + PIN_ERROR_NOTIFIER);
+
 					appState.setErrorCode(R.string.prepTerminal);
 					break;
 				case PIN_CANCELLED_NOTIFIER:
@@ -192,6 +196,11 @@ public class InputPINActivity extends FuncActivity implements PinPadCallbackHand
 			commHandler.obtainMessage(PIN_KEY_CALLBACK, data[0], data[1]).sendToTarget();
 	}
 
+	@Override
+	public void processCallback(int nCount, int nExtra) {
+
+	}
+
 	@SuppressLint("HandlerLeak")
 	protected Handler createCommHandler()
 	{	// 无 Pinpad时跳过. DuanCS@[20141001]
@@ -217,18 +226,18 @@ public class InputPINActivity extends FuncActivity implements PinPadCallbackHand
 
 	class ReadPINThread extends Thread
     {
-    	public void run() 
-    	{ 
+    	public void run()
+    	{
     		byte[] pinBlock = new byte[8];
     		byte[] zeroPAN = appState.trans.getPAN().getBytes();
-    		
+
     		// masterKey is new byte[]{'1','1','1','1','1','1','1','1' }
 			//Q1上不支持单倍长PINKEY
 			if(appState.nibssData == null)
 			{
 				if(debug)Log.d(APP_TAG, "pinpad open error");
 				notifyPinError();
-				PinPadInterface.close();
+				PINPadInterface.close();
 				appState.pinpadOpened = false;
 				return;
 			}
@@ -252,7 +261,7 @@ public class InputPINActivity extends FuncActivity implements PinPadCallbackHand
 			int ret = -1;
     		if(appState.pinpadOpened == false)
     		{
-    			if(PinPadInterface.open() < 0)
+    			if(PINPadInterface.open() < 0)
     		    {
     				notifyPinError();
     				return;
@@ -328,7 +337,7 @@ public class InputPINActivity extends FuncActivity implements PinPadCallbackHand
     		notifyPinSuccess();
 			PinPadInterface.close();
 			appState.pinpadOpened = false;
-		} 
+		}
     }
 
 	public byte[] parseHexBinary(String s) {

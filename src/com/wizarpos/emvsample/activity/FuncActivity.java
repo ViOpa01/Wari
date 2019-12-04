@@ -18,12 +18,11 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.TextView;
 
-import com.cloudpos.jniinterface.IFuntionListener;
+import com.cloudpos.jniinterface.IFuntionListeners;
+import com.cloudpos.jniinterface.PINPadInterface;
 import com.google.gson.Gson;
 import com.wizarpos.emvsample.MainApp;
 import com.wizarpos.emvsample.R;
-import com.wizarpos.emvsample.activity.login.Helper;
-import com.wizarpos.emvsample.activity.login.securestorage.SecureStorage;
 import com.wizarpos.emvsample.constant.Constants;
 import com.wizarpos.emvsample.keys.AuthInfo;
 import com.wizarpos.emvsample.keys.KeyData;
@@ -39,8 +38,6 @@ import com.wizarpos.util.CommonUtils;
 import com.wizarpos.util.Logger;
 import com.wizarpos.util.NumberUtil;
 import com.wizarpos.util.StringUtil;
-
-import org.jpos.util.LogSource;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -75,7 +72,8 @@ import static com.cloudpos.jniinterface.EMVJNIInterface.emv_terminal_param_set_t
 import static com.cloudpos.jniinterface.EMVJNIInterface.get_card_type;
 import static com.cloudpos.jniinterface.EMVJNIInterface.open_reader;
 
-public class FuncActivity extends AppCompatActivity implements Constants, IFuntionListener
+
+public class FuncActivity extends AppCompatActivity implements Constants, IFuntionListeners
 {
 	protected static WeakReferenceHandler mHandler = new WeakReferenceHandler(null);
     protected static Socket socket = null;
@@ -104,28 +102,39 @@ public class FuncActivity extends AppCompatActivity implements Constants, IFunti
 
 	private static final String TAG = "FuncActivity";
     
-	public void handleMessageSafe(Message msg){}
+	public void handleMessageSafe(Message msg){
+		Log.d(TAG, "handleMessage method  is called  >>>>");
+
+	}
 
 	protected static class WeakReferenceHandler extends Handler{
 
 	    private WeakReference<FuncActivity> mActivity;
 	    public WeakReferenceHandler(FuncActivity activity){
 	        mActivity = new WeakReference<FuncActivity>(activity);
-        }
+			Log.d(TAG, "WeakReferenceHandler method  is called  >>>>");
+
+		}
 
         public void setFunActivity(FuncActivity activity){
             mActivity = new WeakReference<FuncActivity>(activity);
-        }
+			Log.d(TAG, "setFunActivity method  is called  >>>>");
+
+		}
 		@Override
 		public void handleMessage(Message msg) {
 			FuncActivity activity = mActivity.get();
 			if(activity != null){
 				activity.handleMessageSafe(msg);
+				Log.d(TAG, "handleMessage method  is called  >>>>");
+
 			}
 		}
 	}
 
-	public void capkChecksumErrorDialog(Context context) 
+
+
+    public void capkChecksumErrorDialog(Context context)
 	{
 		Builder builder = new Builder(context);
 		builder.setTitle("提示");
@@ -138,21 +147,29 @@ public class FuncActivity extends AppCompatActivity implements Constants, IFunti
 		});
 		builder.create().show();
 	}
- 	public void emvProcessCallback(byte[] data)
+
+    @Override
+    public void emvProcessCallback(byte[] data)
 	{
-		if(debug)Log.d(APP_TAG, "emvProcessNextCompleted");
-		appState.trans.setEMVStatus(data[0]);
+		if(debug)Log.d(APP_TAG, "FuncActivity emvProcessCallback emvProcessNextCompleted");
+
+        Log.d(TAG, " >>>>> FuncActivity emvProcessCallback  StringUtil.bytes2HexString(data)" + StringUtil.bytes2HexString(data));
+        Log.d(TAG, ">>>>> FuncActivity emvProcessCallback data[0]" +data[0]);
+        Log.d(TAG, ">>>>> FuncActivity emvProcessCallback data[1]"+ data[1]);
+
+        appState.trans.setEMVStatus(data[0]);
 		appState.trans.setEMVRetCode(data[1]);
-		
+
      	Message msg = new Message();
      	msg.what = EMV_PROCESS_NEXT_COMPLETED_NOTIFIER;
      	mHandler.sendMessage(msg);
 	}
-    
-	public void cardEventOccured(int eventType)
+
+    @Override
+    public void cardEventOccured(int eventType)
 	{
 		Log.d(TAG, "cardEventOccured: >>>>>");
- 		if(debug)Log.d(APP_TAG, "get cardEventOccured");
+ 		if(debug)Log.d(APP_TAG, "get cardEventOccured >>>>>");
  		Message msg = new Message();
  		if(eventType == SMART_CARD_EVENT_INSERT_CARD)
  		{
@@ -523,8 +540,8 @@ public class FuncActivity extends AppCompatActivity implements Constants, IFunti
              		        {
              		        	// clear pinpad
              		        	appState.needClearPinpad = false;
-                 	    		PinPadInterface.setText(0, null, 0, 0);
-                 	    		PinPadInterface.setText(1, null, 0, 0);
+                 	    		PINPadInterface.showText(0, null, 0, 0);
+                 	    		PINPadInterface.showText(1, null, 0, 0);
              		        }
             			    
                     		setResult(Activity.RESULT_CANCELED, getIntent());
@@ -898,8 +915,11 @@ public class FuncActivity extends AppCompatActivity implements Constants, IFunti
 	public void go2Idle()
 	{
 		cancelIdleTimer();
+		//TODO 32
 //		Intent intent = new Intent(this, IdleActivity.class);
 //		startActivity(intent);
+		Intent intent = new Intent(this, IdleActivity.class);
+		startActivity(intent);
 	}
 	
 	public void go2Error(int errorCode)
@@ -962,6 +982,8 @@ public class FuncActivity extends AppCompatActivity implements Constants, IFunti
 	// trans flow For Result
 	public void requestCard(boolean acceptMSR, boolean acceptContact, boolean acceptContactless)
 	{
+		//TODO 12
+		cancelIdleTimer();
 
 		appState.setState(STATE_REQUEST_CARD);
 		if(appState.msrError == false)
@@ -998,27 +1020,50 @@ public class FuncActivity extends AppCompatActivity implements Constants, IFunti
 //		Intent intent = new Intent(this, RequestManualCardActivity.class);
 //		startActivityForResult(intent, appState.getState());
 //	}
-	
-	public void confirmBypassPin()
-	{
-		cancelIdleTimer();
-		Intent intent = new Intent(this, ConfirmBypassPinActivity.class);
-		startActivityForResult(intent, STATE_CONFIRM_BYPASS_PIN);
-	}
-	
+
+	//TODO 13
+//	public void confirmBypassPin()
+//	{
+//		cancelIdleTimer();
+//		Intent intent = new Intent(this, ConfirmBypassPinActivity.class);
+//		startActivityForResult(intent, STATE_CONFIRM_BYPASS_PIN);
+//	}
+
+
 	public void confirmCard()
 	{
 		cancelIdleTimer();
 		Intent intent = new Intent(this, ConfirmCardActivity.class);
 		startActivityForResult(intent, STATE_CONFIRM_CARD);
 	}
-	
+
+
 	public void inputAmount()
 	{
 		cancelIdleTimer();
 		Intent intent = new Intent(this, InputAmountActivity.class);
 		startActivityForResult(intent, STATE_INPUT_AMOUNT);
 	}
+
+	//TODO 14
+	public void inputOnlinePIN()
+	{
+		cancelIdleTimer();
+		Intent intent = new Intent(this, InputOnlinePINActivity.class);
+		startActivityForResult(intent, STATE_INPUT_ONLINE_PIN);
+	}
+
+
+	//TODO 15
+	public void inputOfflinePIN()
+	{
+		cancelIdleTimer();
+		Intent intent = new Intent(this, InputOfflinePINActivity.class);
+		startActivityForResult(intent, STATE_INPUT_OFFLINE_PIN);
+	}
+
+
+
 
 	public void refundNext(Intent intent){
 		setResult(Activity.RESULT_OK, intent);
@@ -1037,15 +1082,15 @@ public class FuncActivity extends AppCompatActivity implements Constants, IFunti
 	}
 
 
-	
-	public void inputPIN()
-	{
-		Log.d("inputPIN() PIN STATE_INPUT_AMOUNT >>>>", "inputPIN()  Funcactivity ");
-
-		cancelIdleTimer();
-		Intent intent = new Intent(this, InputPINActivity.class);
-		startActivityForResult(intent, STATE_INPUT_PIN);
-	}
+	//ToDo 18
+//	public void inputPIN()
+//	{
+//		Log.d("inputPIN() PIN STATE_INPUT_AMOUNT >>>>", "inputPIN()  Funcactivity ");
+//
+//		cancelIdleTimer();
+//		Intent intent = new Intent(this, InputPINActivity.class);
+//		startActivityForResult(intent, STATE_INPUT_PIN);
+//	}
 	public void processOnline()
 	{
 		cancelIdleTimer();

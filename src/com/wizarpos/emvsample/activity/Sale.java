@@ -8,6 +8,8 @@ import android.util.Log;
 import com.wizarpos.emvsample.R;
 import com.wizarpos.util.StringUtil;
 
+import static com.wizarpos.emvsample.constant.Constant.CONTACT_EMV_KERNAL;
+
 public class Sale extends FuncActivity
 {
 	private static final String TAG = "Sale";
@@ -28,6 +30,9 @@ public class Sale extends FuncActivity
                                    );
 		if (appState.batchInfo.getSettlePending() != 0)
 		{
+
+			Log.d(TAG, "onCreate() : appState.batchInfo.getSettlePending() >>>>");
+
 			appState.setErrorCode(R.string.error_settle_first);
 	    	showTransResult();
 			return;
@@ -79,7 +84,7 @@ public class Sale extends FuncActivity
 	protected void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
 
-		Log.d("requestCode >>>>>>", String.valueOf(requestCode));
+		Log.d("onActivityResult requestCode >>>>>>", String.valueOf(requestCode));
 
 		if(   requestCode != STATE_TRANS_END  && appState.getErrorCode() > 0 )
 		{
@@ -102,9 +107,12 @@ public class Sale extends FuncActivity
 
 			}
             else {
-				Log.d(TAG," processEMVCard STATE_REQUEST_CARD PBOC_KERNAL  >>>>");
+				Log.d(TAG," processEMVCard STATE_REQUEST_CARD PBOC_KERNAL  About to call online key   >>>>");
+//ToDo 19
 
-				inputPIN();
+//				inputPIN();
+
+				inputOnlinePIN();
 
 			}
 			break;
@@ -113,8 +121,13 @@ public class Sale extends FuncActivity
             {
                 Log.d(TAG," processEMVCard STATE_REQUEST_CARD PBOC_KERNAL  >>>>");
 
-                processEMVCard(PBOC_KERNAL);
-            }
+                //TODO Original code
+//                processEMVCard(PBOC_KERNAL);
+
+				//TODO What I saw from the code sent
+				processEMVCard(CONTACT_EMV_KERNAL);
+
+			}
             else if(appState.trans.getCardEntryMode() == CONTACTLESS_ENTRY)
             {
                 processEMVCard(QPBOC_KERNAL);
@@ -126,14 +139,22 @@ public class Sale extends FuncActivity
 			break;
         case STATE_CONFIRM_CARD:
 			Log.d(TAG,"processOnline STATE_CONFIRM_CARD inputPIN() >>>>");
+//ToDo 20
 
-			inputPIN();
-            break;
-		case STATE_INPUT_PIN:
-			Log.d(TAG,"processOnline STATE_INPUT_PIN processOnline() >>>>");
+//			inputPIN();
+			inputOnlinePIN();
 
-			processOnline();
 			break;
+			//ToDo 21
+//		case STATE_INPUT_PIN:
+//			Log.d(TAG,"processOnline STATE_INPUT_PIN processOnline() >>>>");
+//
+//			processOnline();
+//			break;
+
+			case STATE_INPUT_ONLINE_PIN:
+				processOnline();
+				break;
 		case STATE_PROCESS_ONLINE: {
 
 			Log.d(TAG,"processOnline STATE_PROCESS_ONLINE >>>>");
@@ -144,7 +165,7 @@ public class Sale extends FuncActivity
 			break;
 		case STATE_PROCESS_EMV_CARD:
 			if(!appState.goneOnline){
-				Log.d(TAG,"processOnline STATE_PROCESS_EMV_CARD >>>>");
+				Log.d(TAG,"processOnline STATE_PROCESS_EMV_CARD  go online  not  true>>>>");
 				processOnline();
 			}else{
 				Log.d(TAG,"showTransResult STATE_PROCESS_EMV_CARD  >>>>");

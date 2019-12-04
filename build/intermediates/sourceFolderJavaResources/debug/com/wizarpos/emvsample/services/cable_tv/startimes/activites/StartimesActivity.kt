@@ -13,7 +13,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import com.cloudpos.card.Card
 import com.iisysgroup.payvice.activities.BaseServiceActivity
 
 
@@ -272,7 +271,7 @@ class StartimesActivity : BaseServiceActivity() {
 //    }
 
 
-    private fun continuePayment(paymentOption: String, card: Card?, lookupResponse: StartimesModel.lookupResponse) {
+    private fun continuePayment(paymentOption: String, card: String?, lookupResponse: StartimesModel.lookupResponse) {
 //        val smartCardNumber = smartcardnumber.text.toString()
         appState.starTimesAmount=txtAmount.text.toString()
         val amount =txtAmount.text.trim().toString().toInt()*100

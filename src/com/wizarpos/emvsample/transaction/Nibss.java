@@ -62,6 +62,7 @@ public class Nibss {
     String ip;
     String port;
     boolean sslStatus;
+    public static PosLibDatabase poslibdb;
 
     private static final String TAG = "Nibss";
 
@@ -90,11 +91,15 @@ public class Nibss {
         sslStatus = sharedPreferences.getBoolean("ssl", true);
         //        final ConnectionData connectionData = new ConnectionData("2033GP23", "196.6.103.73", 5043, true);
 
+
+        poslibdb = MainApp.getInstance().poslibdb;
+
     }
 
 
 
-    public static PosLibDatabase poslibdb = MainApp.getInstance().poslibdb;
+
+
 
     //Key Keys to
 //    public  void prepare (String terminalID, final Nibs<NIbbsData> t){
@@ -196,6 +201,7 @@ public class Nibss {
 //        }
 //    }
 
+//    poslibdb= (getA).poslibdb
 
     private static class saveVasKeyHolder extends AsyncTask<VasTerminalData, Integer, Void> {
         protected Void doInBackground(VasTerminalData...vasTerminalData) {
@@ -208,20 +214,30 @@ public class Nibss {
             SecureStorage.store(Helper.VAS_TERMINAL_ID,  vasTerminalData[0].getTid());
             SecureStorage.store(Helper.VAS_MERCHANT_NAME,  vasTerminalData[0].getMerchantName());
 
-               poslibdb.getVasTerminalDataDao().save(vasTerminalData[0]);
+//            if (poslibdb !=null) {
 
 
-            if (vasTerminalData[0] != null ){
-                poslibdb.getVasTerminalDataDao().update(vasTerminalData[0]);
-//                Log.d("After updating  ",new Gson().toJson(poslibdb.getVasTerminalDataDao().get()));
+//            Log.d(" >>> MainApp poslibdb  ",new Gson().toJson(poslibdb));
 
 
-            }else{
-                poslibdb.getVasTerminalDataDao().save(vasTerminalData[0]);
-//                Log.d("After Saving ",new Gson().toJson(poslibdb.getVasTerminalDataDao().get()));
 
-            }
 
+
+            poslibdb.getVasTerminalDataDao().save(vasTerminalData[0]);
+
+
+                if (vasTerminalData[0] != null) {
+//                    poslibdb.getVasTerminalDataDao().update(vasTerminalData[0]);
+                Log.d("After updating  ",new Gson().toJson(poslibdb.getVasTerminalDataDao().get()));
+
+
+                }
+//                else {
+//                    poslibdb.getVasTerminalDataDao().save(vasTerminalData[0]);
+////                Log.d("After Saving ",new Gson().toJson(poslibdb.getVasTerminalDataDao().get()));
+//
+//                }
+//            }
 //            Log.d("finally afer After updating/saving   ",new Gson().toJson(poslibdb.getVasTerminalDataDao().get()));
             Log.d("Vascommunicator  ",new Gson().toJson(new Gson().fromJson(SecureStorage.retrieve(Helper.VAS_COMMUNICATOR,""),VasTerminalData.class)));
 

@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.cloudpos.jniinterface.PINPadInterface;
 import com.google.gson.Gson;
 import com.iisysgroup.payvice.baseimpl.viewmodel.MultichoiceViewModel;
 import com.iisysgroup.payvice.startimes.viewmodel.StartimesViewModel;
@@ -2527,8 +2528,8 @@ public class TransResultActivity extends FuncActivity
 			        {
 			        	// clear pinpad
 			        	appState.needClearPinpad = false;
-	    	    		PinPadInterface.setText(0, null, 0, 0);
-	    	    		PinPadInterface.setText(1, null, 0, 0);
+	    	    		PINPadInterface.showText(0, null, 0, 0);
+	    	    		PINPadInterface.showText(1, null, 0, 0);
 			        }
 					setResult(Activity.RESULT_OK, getIntent());
 					exit();

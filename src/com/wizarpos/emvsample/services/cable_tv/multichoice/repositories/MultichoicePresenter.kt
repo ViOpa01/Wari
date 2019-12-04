@@ -1,7 +1,6 @@
 package com.iisysgroup.payvice.base.presenter
 
 import android.arch.lifecycle.LiveData
-import com.cloudpos.card.Card
 import com.iisysgroup.payvice.base.interactor.MultichoiceInteractor
 import com.itex.richard.payviceconnect.model.DstvModel
 import com.wizarpos.util.Service

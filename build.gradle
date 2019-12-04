@@ -27,7 +27,13 @@ apply plugin: 'kotlin-android-extensions'
 //kotlin { experimental { coroutines 'enable' } }
 ext.anko_version = '0.10.4'
 ext.rxbinding_version = '2.1.1'
-configurations.all { exclude group: 'com.android.support', module: 'support-v4' }
+configurations.all {
+    exclude group: 'com.android.support', module: 'support-v4'
+//    exclude group: 'com.cloudpos.jniinterface.EMVJNIInterfaces', module: 'cloudpossdk'
+//    exclude group: 'com.cloudpos.jniinterface.IFuntionListeners', module: 'cloudpossdk'
+
+
+}
 
 
 dependencies {
@@ -40,6 +46,11 @@ dependencies {
     implementation 'com.android.support:multidex:1.0.3'
     implementation project(':poslib-device-debug')
     implementation project(':cloudpossdk')
+
+//            {
+//        exclude group: 'com.cloudpos.jniinterface.EMVJNIInterfaces'
+//        exclude group: 'com.cloudpos.jniinterface.IFuntionListeners'
+//    }
     implementation 'org.bouncycastle:bcprov-jdk15:1.38'
     configurations {
         compile.exclude group: 'org.jetbrains', module: 'annotations'
@@ -87,6 +98,8 @@ dependencies {
 
     implementation 'android.arch.lifecycle:viewmodel:1.1.1'
     implementation 'android.arch.lifecycle:livedata:1.1.1'
+    implementation 'com.github.bumptech.glide:glide:4.7.1'
+
     //implementation 'com.android.support:support-v4:27.1.1'
     def room_version = "1.1.0"
     implementation('android.arch.persistence.room:runtime:1.1.0') {
@@ -118,7 +131,10 @@ android {
         exclude 'META-INF/notice.txt'
         exclude 'META-INF/ASL2.0'
         exclude 'META-INF/compiler.kotlin_module'
+//        exclude '**/com/cloudpos/jniinterface/EMVJNIInterfaces.class'
+//        exclude '**/com/cloudpos/jniinterface/IFuntionListeners.class'
     }
+
 
     sourceSets {
         main {
@@ -129,6 +145,13 @@ android {
             renderscript.srcDirs = ['src']
             res.srcDirs = ['res']
             assets.srcDirs = ['assets']
+            java {
+//                exclude '**/com/cloudpos/jniinterface/EMVJNIInterfaces.class'
+//                exclude '**/com/cloudpos/jniinterface/IFuntionListeners'
+//                exclude '**/EMVJNIInterfaces.class'
+//                exclude '**/IFuntionListeners'
+            }
+
         }
 
         debug.setRoot('build-types/debug')
@@ -149,6 +172,13 @@ android {
 
         abortOnError false
     }
+//    sourceSets {
+//        main {
+//            java {
+//                exclude '**/className.java'
+//            }
+//        }
+//    }
 
     buildTypes {
         release {

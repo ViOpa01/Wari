@@ -86,7 +86,7 @@ public class InputAmountActivity extends FuncActivity {
 			if ( appState.needCard && (!appState.isWallet) &&(!appState.isPurchase)){
 //		     Toast.makeText(this, "Here", Toast.LENGTH_SHORT).show();
 
-//			Log.i(TAG + " Amount >>>>>>", String.valueOf(appState.dataAmount));
+			Log.i(TAG + "appState.needCard && (!appState.isWallet) &&(!appState.isPurchase)) >>>>>> ", String.valueOf(appState.dataAmount));
 			Intent intent = getIntent();
 //			appState.trans.setTransAmount(Integer.parseInt(appState.dataAmount) * 100);
 			setResult(Activity.RESULT_OK, intent);
@@ -301,7 +301,7 @@ public class InputAmountActivity extends FuncActivity {
 
 							startActivityForResult(new Intent(InputAmountActivity.this, InputExtraAmountActivity.class), 6565);
 						} else {
-							Log.i(TAG, "Enter is Returning  >>>>> ");
+							Log.i(TAG, "Enter is Returning Not cash back  >>>>> ");
 
 							setResult(Activity.RESULT_OK, intent);
 							exit();

@@ -12,12 +12,12 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.ProgressBar;
 
+import com.cloudpos.jniinterface.PINPadInterface;
 import com.wizarpos.emvsample.MainApp;
 import com.wizarpos.emvsample.R;
 import com.wizarpos.emvsample.constant.Constants;
 import com.wizarpos.emvsample.transaction.TransDefine;
 import com.wizarpos.jni.MsrInterface;
-import com.wizarpos.jni.PinPadInterface;
 
 import java.io.IOException;
 import java.lang.ref.WeakReference;
@@ -208,8 +208,8 @@ public class FunctionsAll implements Constants
              		        {
              		        	// clear pinpad
              		        	appState.needClearPinpad = false;
-                 	    		PinPadInterface.setText(0, null, 0, 0);
-                 	    		PinPadInterface.setText(1, null, 0, 0);
+								PINPadInterface.showText(0, null, 0, 0);
+								PINPadInterface.showText(1, null, 0, 0);
              		        }
             			    
                     		context.setResult(Activity.RESULT_CANCELED, context.getIntent());
@@ -657,13 +657,14 @@ public class FunctionsAll implements Constants
 		Intent intent = new Intent(context, InputAmountActivity.class);
 		context.startActivityForResult(intent, STATE_INPUT_AMOUNT);
 	}
-	
-	public void inputPIN()
-	{
-		cancelIdleTimer();
-		Intent intent = new Intent(context, InputPINActivity.class);
-		context.startActivityForResult(intent, STATE_INPUT_PIN);
-	}
+
+	//Todo 33
+//	public void inputPIN()
+//	{
+//		cancelIdleTimer();
+//		Intent intent = new Intent(context, InputPINActivity.class);
+//		context.startActivityForResult(intent, STATE_INPUT_PIN);
+//	}
 	public void processOnline()
 	{
 		cancelIdleTimer();

@@ -7,24 +7,24 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
-import android.os.AsyncTask;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.multidex.MultiDex;
-import android.support.multidex.MultiDexApplication;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.iisysgroup.poslib.ISO.GTMS.GtmsHost;
+
+
+import com.iisysgroup.poslib.ISO.GTMS.GtmsKeyProcessor;
 import com.iisysgroup.poslib.ISO.POSVAS.PosvasHost;
+import com.iisysgroup.poslib.ISO.POSVAS.PosvasKeyProcessor;
 import com.iisysgroup.poslib.ISO.common.IsoRefundProcessData;
 import com.iisysgroup.poslib.ISO.common.IsoReversalProcessData;
-import com.iisysgroup.poslib.TAMS.TamsHost;
 import com.iisysgroup.poslib.host.Host;
 import com.iisysgroup.poslib.host.HostInteractor;
 import com.iisysgroup.poslib.host.dao.PosLibDatabase;
-import com.iisysgroup.poslib.host.dao.VasTerminalDataDao;
+import com.iisysgroup.poslib.host.entities.KeyHolder;
 import com.itex.richard.payviceconnect.model.DstvModel;
 import com.itex.richard.payviceconnect.model.StartimesModel;
 import com.wizarpos.emvsample.activity.DataModel;
@@ -45,17 +45,19 @@ import com.wizarpos.emvsample.db.RevokedCAPKService;
 import com.wizarpos.emvsample.db.RevokedCAPKTable;
 import com.wizarpos.emvsample.db.TransDetailInfo;
 import com.wizarpos.emvsample.db.TransDetailService;
+import com.wizarpos.emvsample.db.detailed.EodDoa;
 import com.wizarpos.emvsample.parameter.BatchInfo;
 import com.wizarpos.emvsample.parameter.TerminalConfig;
-import com.wizarpos.emvsample.printer.PrinterException;
-import com.wizarpos.emvsample.printer.PrinterHelper;
 import com.wizarpos.emvsample.services.helper.activity.util.Models;
 import com.wizarpos.emvsample.transaction.Nibss;
+import com.wizarpos.jni.PinPadInterface;
+import com.wizarpos.util.StringUtil;
 import com.wizarpos.util.TransactionModel;
 
 import java.lang.reflect.Method;
 import java.util.Calendar;
 
+import static com.wizarpos.emvsample.activity.FuncActivity.appState;
 
 
 public class MainApp extends Application implements Constants
@@ -76,6 +78,9 @@ public class MainApp extends Application implements Constants
 	public static TransactionModel transactionModel;
 
 	public DataModel.DataSubscriptionDetails dataSubscriptionDetails= null;
+
+	public int pinpadType = PINPAD_CUSTOM_UI;  // PINPAD_SYSTEM_UI
+
 
 
 	//Room DB
@@ -166,6 +171,8 @@ public class MainApp extends Application implements Constants
 	public int currentHour;
 	public int currentMinute;
 	public int currentSecond;
+	public String stringCipherNewUserKey=null;
+	public String PlainKeyInjected=null;
 
 	public int printReceipt = 0;
 	public int printVasReceipt = 0;
@@ -214,23 +221,90 @@ public class MainApp extends Application implements Constants
 
 	public static MainApp getInstance()
 	{
-		if (_instance == null)
+		if (_instance == null) {
 			_instance = new MainApp();
+			Log.d("Main App", " >>>> _instance" );
+
+		}
 		return _instance;
 	}
 
+//	val TransactionDb by lazy {
+//	AllTransDataBase.getInstance(this).getTransactionDataDoa();
+//}
+
+
+//	val vasDb by lazy {
+//	AllTransDataBase.getInstance(this).getVasDataBase();
+//}
+
+//	val eodDb by lazy {
+//	AllTransDataBase.getInstance(this).getEodDataBase();
+//}
+
+//
+	public EodDoa eodDb;
+
+//	public VasTransactionDoa vasDb;
+//	public TransactionDataDoa transactionDb;
+//
 
 	@Override
 	public void onCreate()
 	{
 		super.onCreate();
 		MultiDex.install(this);
+
+
+           //decrypt pin key with master key to get clear pin key and then encrypt with the static master key
+//		KeyHolder res=mainApp.nibssData.getKeyHolder();
+//		String clearmasterKey;
+//		String clearPinKey = null;
+//		String encryptedPinKey;
+//
+//		Log.i("complete", "getPinKey: "+  res.getPinKey());
+//		Log.i("complete", "getMasterKey: "+  res.getMasterKey());
+//		Log.i("complete", "getSessionKey: "+  res.getSessionKey());
+//		clearmasterKey = PosvasKeyProcessor.getMasterKey(res.getMasterKey(), res.isTestPlatform());
+//		encryptedPinKey = res.getPinKey();
+////                Log.d("complete", "masterKey: "+res.getKeyHolder().getMasterKey());
+//		Log.d("complete", "clearmasterKey: "+clearmasterKey);
+//		try {
+//
+//			clearPinKey =PosvasKeyProcessor.decryptKey(res.getPinKey(),clearmasterKey);
+//			Log.d("complete", "clearPinKey : "+ clearPinKey);
+//
+//		}catch (Throwable e){
+//
+//		}
+//
+//		String stringCipherNewUserKey = StringUtil.tripleDesEncrypt("81847D3F139805A564CD6C28E52624B7",clearPinKey);
+//
+//		Log.d("complete", "stringCipherNewUserKey : "+ stringCipherNewUserKey);
+//
+//
+//		byte arryCipherNewUserKey[] =StringUtil.StrToHexByte(stringCipherNewUserKey);
+//
+//		Log.d("complete", "arryCipherNewUserKey : "+ arryCipherNewUserKey);
+//
+//		PinPadInterface.updateUserKey(3,0,arryCipherNewUserKey,16);
+
+
+//		eodDb =  TransDataBase.Companion.getInstance(this).getEodDataBase();
+//		vasDb =  AllTransDataBase.Companion.getInstance(this).getVasDataBase();
+//		transactionDb= AllTransDataBase.Companion.getInstance(this).getTransactionDataDoa();
+//
+
+
+
 		try{
 			poslibdb = Room.databaseBuilder(this, PosLibDatabase.class, "poslib.db")
 					.fallbackToDestructiveMigration()
 					.build();
+			Log.d("Main App", " >>>>okh  Successfully setup  Poslibdb" );
+
 		}catch (Exception e){
-			Log.d("okh", e.toString());
+			Log.d(" >>>>okh   exception for settingUp db ", e.toString());
 		}
 		SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
@@ -269,6 +343,8 @@ public class MainApp extends Application implements Constants
 		}catch (Exception e){
 
 		}
+//		Log.d("Main App", " >>>>okh  Successfully setup  Poslibdb = " + new Gson().toJson(poslibdb) );
+
 
 //		contactlessUserCard = new SmartCardControl(SmartCardControl.CARD_CONTACTLESS);
 		loadData();
@@ -339,39 +415,39 @@ public class MainApp extends Application implements Constants
 		}
 	}
 
-	private void loadData(String tid, String mid, String merchantN)
-	{
-		//Setup NibbsData
-
-
-		dbOpenHelper = new DatabaseOpenHelper(getBaseContext());
-		db = dbOpenHelper.getWritableDatabase();
-
-		terminalPref  = getSharedPreferences("terminalConfig", Context.MODE_PRIVATE);
-		terminalConfig = new TerminalConfig(terminalPref);
-
-		batchPref     = getSharedPreferences("batchInfo", Context.MODE_PRIVATE);
-		batchInfo = new BatchInfo(batchPref);
-
-		transDetailService = new TransDetailService(getBaseContext());
-		adviceService = new AdviceService(getBaseContext());
-		aidService = new AIDService(db);
-		capkService = new CAPKService(db);
-		revokedCAPKService = new RevokedCAPKService(db);
-		exceptionFileService = new ExceptionFileService(db);
-
-		terminalConfig.loadTerminalConfig(tid,mid,merchantN);
-		batchInfo.loadBatch();
-		if(aidService.getAIDCount() == 0)
-		{
-			aidService.createDefaultAID();
-		}
-
-		if(capkService.getCAPKCount() == 0)
-		{
-			capkService.createDefaultCapk();
-		}
-	}
+//	private void loadData(String tid, String mid, String merchantN)
+//	{
+//		//Setup NibbsData
+//
+//
+//		dbOpenHelper = new DatabaseOpenHelper(getBaseContext());
+//		db = dbOpenHelper.getWritableDatabase();
+//
+//		terminalPref  = getSharedPreferences("terminalConfig", Context.MODE_PRIVATE);
+//		terminalConfig = new TerminalConfig(terminalPref);
+//
+//		batchPref     = getSharedPreferences("batchInfo", Context.MODE_PRIVATE);
+//		batchInfo = new BatchInfo(batchPref);
+//
+//		transDetailService = new TransDetailService(getBaseContext());
+//		adviceService = new AdviceService(getBaseContext());
+//		aidService = new AIDService(db);
+//		capkService = new CAPKService(db);
+//		revokedCAPKService = new RevokedCAPKService(db);
+//		exceptionFileService = new ExceptionFileService(db);
+//
+//		terminalConfig.loadTerminalConfig(tid,mid,merchantN);
+//		batchInfo.loadBatch();
+//		if(aidService.getAIDCount() == 0)
+//		{
+//			aidService.createDefaultAID();
+//		}
+//
+//		if(capkService.getCAPKCount() == 0)
+//		{
+//			capkService.createDefaultCapk();
+//		}
+//	}
 
 
 	public void setupNibbsData(String termi,final Nibss.Nibs<String> t) {
@@ -386,6 +462,8 @@ public class MainApp extends Application implements Constants
 //				} catch (PrinterException e) {
 //					e.printStackTrace();
 //				}
+
+
 				new Thread(new Runnable() {
 					@Override
 					public void run() {
@@ -483,7 +561,7 @@ public class MainApp extends Application implements Constants
 	// errorCode
 	public int getErrorCode()
 	{
-		if(debug)Log.d(APP_TAG, "getErrorCode = " + errorCode  );
+		if(debug)Log.d(APP_TAG, "MainApp Method  getErrorCode = " + errorCode  );
 		return errorCode;
 	}
 

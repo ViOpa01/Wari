@@ -42,7 +42,7 @@ public class CallHomeService extends Service {
 
                         }
                     }, 60000,300000);
-            Log.i("okh", "FileScannerService Timer started....");
+            Log.i("CallHome okh", "FileScannerService Timer started....");
         }catch (Exception e){
             e.printStackTrace();
         }

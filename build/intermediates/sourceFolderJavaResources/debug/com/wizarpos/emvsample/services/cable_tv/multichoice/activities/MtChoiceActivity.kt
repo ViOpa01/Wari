@@ -11,7 +11,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import com.cloudpos.card.Card
 import com.iisysgroup.payvice.activities.BaseServiceActivity
 import com.iisysgroup.payvice.baseimpl.viewmodel.MultichoiceViewModel
 import com.iisysgroup.payvice.dialogs.MultichoicePlanDialog
@@ -263,7 +262,7 @@ class MtChoiceActivity : BaseServiceActivity() {
 //    }
 
 
-    private fun continuePayment(paymentOption: String, card: Card?,lookupResponse: DstvModel.DstvResponse) {
+    private fun continuePayment(paymentOption: String, card: String?,lookupResponse: DstvModel.DstvResponse) {
 
         appState.multichoiceAccount  = beneficiaryEdit.text.toString()
         appState.multichoiceAmount =(viewModel.selectPlanLiveData.value?.amount?.toDouble()?.toInt() ?: 0 ).toString()

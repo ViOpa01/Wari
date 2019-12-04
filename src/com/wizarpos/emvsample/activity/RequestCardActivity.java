@@ -13,8 +13,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.wizarpos.emvsample.R;
-import com.wizarpos.emvsample.transaction.TransDefine;
 import com.wizarpos.util.AppUtil;
+
+import static com.cloudpos.jniinterface.EMVJNIInterface.emv_anti_shake_finish;
 
 public class RequestCardActivity extends FuncActivity
 {
@@ -26,7 +27,10 @@ public class RequestCardActivity extends FuncActivity
 	private TextView txtPrompt = null;
 	private TextView txtError = null;
 	private TextView txtAmount = null;
-	
+
+	final String APP_TAG = "RequestCardActivity";
+
+
 	@Override
     public void onCreate(Bundle savedInstanceState)
 	{
@@ -52,7 +56,9 @@ public class RequestCardActivity extends FuncActivity
         
         if(appState.resetCardError == true)
         {
-        	txtError.setText("IC ERROR, PLEASE REBOOT DEVICE");
+			Log.e(APP_TAG, "RequestCardActivity  handleMessageSafe  resetCardError = true ");
+
+			txtError.setText("IC ERROR, PLEASE REBOOT DEVICE");
         }
         else if(appState.trans.getEmvCardError() == true)
         {
@@ -83,11 +89,16 @@ public class RequestCardActivity extends FuncActivity
 	@Override
 	public void handleMessageSafe(Message msg)
 	{
-		Log.d("handleMessageSafe", "Here again handleMessageSafe");
+		Log.d("RequestCard Activity  handleMessageSafe  >>>>>>>>", "Here again handleMessageSafe");
 		/*这里是处理信息的方法*/
+
+		Log.d("RequestCard Activity  handleMessageSafe  >>>>>>>", "msg.what = " + msg.what);
+
 		switch (msg.what)
 		{
-		case MSR_READ_DATA_NOTIFIER:
+
+
+			case MSR_READ_DATA_NOTIFIER:
 			if(   appState.trans.getServiceCode().length() > 0
 				&& (   appState.trans.getServiceCode().getBytes()[0] == '2'
 				|| appState.trans.getServiceCode().getBytes()[0] == '6'
@@ -97,14 +108,14 @@ public class RequestCardActivity extends FuncActivity
 				if(appState.trans.getEmvCardError() == false)
 				{
 
-					Log.d("MSR_READ_DATA_NOTIFIER  appState.trans.getEmvCardError() == false >>>","Here");
+					Log.d("Request Card Activity MSR_READ_DATA_NOTIFIER  appState.trans.getEmvCardError() == false >>>>>","Here");
 					startMSRThread();
 					appState.promptCardIC = true;
 					setPrompt();
 				}
 				else{
 
-					Log.d("! MSR_READ_DATA_NOTIFIER  appState.trans.getEmvCardError() == false >>>","Here");
+					Log.d("RequestCard Activity ! MSR_READ_DATA_NOTIFIER  appState.trans.getEmvCardError() == false >>>>>","Here");
 
 					cancelAllCard();
 					setResult(Activity.RESULT_OK, getIntent());
@@ -132,7 +143,9 @@ public class RequestCardActivity extends FuncActivity
 
 			appState.msrError = true;
 			appState.acceptMSR = false;
+
 			txtPrompt.setText(appState.getString(R.string.insert_card));
+
 			break;
 		case MSR_READ_ERROR_NOTIFIER:
 			Log.d(" Read  MSR_READ_ERROR_NOTIFIER  >>>>","HERE ");
@@ -140,10 +153,12 @@ public class RequestCardActivity extends FuncActivity
 			readAllCard();
 			break;
 		case CARD_INSERT_NOTIFIER:
+			//TODO 8
+			emv_anti_shake_finish(1);
 			Bundle bundle = msg.getData();
 			int nEventID = bundle.getInt("nEventID");
 			int nSlotIndex = bundle.getInt("nSlotIndex");
-			Log.d("Inserd card CARD_INSERT_NOTIFIER >>>","Here");
+			Log.d("Inserted card CARD_INSERT_NOTIFIER >>>","Here");
 
 			if(debug)Log.d(APP_TAG, "get CONTACT_CARD_EVENT_NOTIFIER,event[" + nEventID + "]slot[" + nSlotIndex + "]" );
 			if(   nSlotIndex == 0  && nEventID == SMART_CARD_EVENT_INSERT_CARD )
@@ -151,6 +166,9 @@ public class RequestCardActivity extends FuncActivity
 				appState.trans.setEmvCardError(false);
 				if(appState.acceptContactlessCard == true)
 				{
+
+					Log.d("RequestCardActivity appState.acceptContactlessCard == true >>>","Here");
+
 					cancelContactlessCard();
 				}
 				appState.trans.setCardEntryMode(INSERT_ENTRY);
@@ -179,10 +197,15 @@ public class RequestCardActivity extends FuncActivity
 			exit();
 			break;
 		case CARD_ERROR_NOTIFIER:
+			//OEM MESSAGE
+//			txtError.setText("IC POWERON ERROR");
+
 			txtError.setText("IC ERROR, PLEASE REBOOT DEVICE");
 			txtPrompt.setText("PLEASE INSERT CARD");
 			appState.trans.setEmvCardError(true);
 			break;
+
+
 		}
 	}
 
@@ -238,7 +261,7 @@ public class RequestCardActivity extends FuncActivity
 		case STATE_REQUEST_CARD_ERROR:
 			if(resultCode == Activity.RESULT_OK)
 			{
-				Log.d("onActivityResult STATE_REQUEST_CARD_ERROR >>>","card error ");
+				Log.d("RequestCardActivity  STATE_REQUEST_CARD_ERROR >>>","card error ");
 
 				setResult(Activity.RESULT_OK, getIntent());
 			}

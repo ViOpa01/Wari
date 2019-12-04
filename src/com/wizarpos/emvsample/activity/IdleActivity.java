@@ -1,5 +1,6 @@
 package com.wizarpos.emvsample.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
@@ -10,18 +11,26 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.cloudpos.jniinterface.IFuntionListener;
 import com.wizarpos.emvsample.R;
 import com.wizarpos.emvsample.activity.login.LoginActivity;
 import com.wizarpos.emvsample.constant.Constants;
 import com.wizarpos.jni.ContactICCardReaderInterface;
 import com.wizarpos.jni.ContactlessICCardReaderInterface;
+import com.wizarpos.util.StringUtil;
 
+import static com.cloudpos.jniinterface.EMVJNIInterface.emv_get_config_checksum;
+import static com.cloudpos.jniinterface.EMVJNIInterface.emv_get_kernel_checksum;
+import static com.cloudpos.jniinterface.EMVJNIInterface.emv_get_kernel_id;
+import static com.cloudpos.jniinterface.EMVJNIInterface.emv_get_process_type;
 import static com.cloudpos.jniinterface.EMVJNIInterface.emv_get_version_string;
 import static com.cloudpos.jniinterface.EMVJNIInterface.emv_kernel_initialize;
 import static com.cloudpos.jniinterface.EMVJNIInterface.emv_set_force_online;
 import static com.cloudpos.jniinterface.EMVJNIInterface.emv_set_kernel_attr;
+import static com.cloudpos.jniinterface.EMVJNIInterface.get_card_type;
 import static com.cloudpos.jniinterface.EMVJNIInterface.loadEMVKernel;
 import static com.cloudpos.jniinterface.EMVJNIInterface.registerFunctionListener;
+
 
 public class IdleActivity extends FuncActivity implements Constants
 {
@@ -32,6 +41,11 @@ public class IdleActivity extends FuncActivity implements Constants
 	private TextView idleLine1;
 	private TextView idleLine2;
 	private TextView idleLine3;
+	private TextView idleLine4;
+	private TextView idleLine5;
+
+	private static final String TAG = "IdleActivity";
+
 
 	@Override
     public void onCreate(Bundle savedInstanceState)
@@ -63,7 +77,10 @@ public class IdleActivity extends FuncActivity implements Constants
         idleLine1 = (TextView)findViewById(R.id.idleLine1);
     	idleLine2 = (TextView)findViewById(R.id.idleLine2);
     	idleLine3 = (TextView)findViewById(R.id.idleLine3);
-    	
+    	//TODO 3
+		idleLine4 = (TextView)findViewById(R.id.idleLine4);
+		idleLine5 = (TextView)findViewById(R.id.idleLine5);
+
     	idleLine1.setText("Purchase");
     	idleLine2.setText("PLEASE INSERT CARD");
     	idleLine3.setText("Powered by TamsLite");
@@ -118,7 +135,8 @@ public class IdleActivity extends FuncActivity implements Constants
             break;
         case CARD_ERROR_NOTIFIER:
             cancelMSRThread();
-            appState.trans.setEmvCardError(true);
+			Log.e(APP_TAG, "idleActivity handleMessageSafe  resetCardError = true ");
+			appState.trans.setEmvCardError(true);
             appState.resetCardError = true;
             appState.needCard = true;
             sale();
@@ -135,10 +153,12 @@ public class IdleActivity extends FuncActivity implements Constants
         appState.idleFlag = true;
 		if(appState.emvParamLoadFlag == false)
 		{
+			//From modification
 			loadEMVParam();
-			byte[] version = new byte[32];
-			int len = emv_get_version_string(version, version.length);
-			idleLine3.setText(new String(version, 0, len));
+//          TODO 1 original code
+//			byte[] version = new byte[32];
+//			int len = emv_get_version_string(version, version.length);
+//			idleLine3.setText(new String(version, 0, len));
 		}
 		else{
 			if(appState.emvParamChanged == true)
@@ -146,6 +166,25 @@ public class IdleActivity extends FuncActivity implements Constants
 				setEMVTermInfo();
 			}
 		}
+
+
+  //TODO 4
+		byte[] version = new byte[32];
+		byte[] kernelChecksum = new byte[8];
+		byte[] configChecksum = new byte[4];
+
+		int len = emv_get_version_string(version, version.length);
+		idleLine3.setText(new String(version, 0, len));
+
+		if(emv_get_kernel_checksum(kernelChecksum, kernelChecksum.length) > 0)
+		{
+			idleLine4.setText("KC: " + StringUtil.toHexString(kernelChecksum, false));
+		}
+		if(emv_get_config_checksum(configChecksum, configChecksum.length) > 0)
+		{
+			idleLine5.setText("CC: " + StringUtil.toHexString(configChecksum, false));
+		}
+
 
         mHandler.setFunActivity(this);
 
@@ -164,13 +203,15 @@ public class IdleActivity extends FuncActivity implements Constants
         super.onResume();
 
     }
+
+    //TODO 5
     
-//    @Override
-//    protected void onStop() {
-//    	if(debug)Log.e(APP_TAG, "idleActivity onStop");
-//        super.onStop();
-//
-//    }
+    @Override
+    protected void onStop() {
+    	if(debug)Log.e(APP_TAG, "idleActivity onStop");
+        super.onStop();
+
+    }
 
 	@Override
 	protected void onPause() {
@@ -204,6 +245,8 @@ public class IdleActivity extends FuncActivity implements Constants
 		onBackPressed();
 	}
 
+
+
 	public void loadEMVParam()
     {
     	//lib path
@@ -211,16 +254,95 @@ public class IdleActivity extends FuncActivity implements Constants
 		tmpEmvLibDir = appState.getDir("", 0).getAbsolutePath();
 		tmpEmvLibDir = tmpEmvLibDir.substring(0, tmpEmvLibDir.lastIndexOf('/')) + "/lib/libEMVKernal.so";
 
+
+
 		if (loadEMVKernel(tmpEmvLibDir.getBytes(),tmpEmvLibDir.getBytes().length) == 0)
     	{
-			registerFunctionListener(this);
+			registerFunctionListener(new IFuntionListener() {
+				@Override
+				public void emvProcessCallback(byte[] data)
+				{
+					if(debug)Log.d(APP_TAG, "Idle emvProcessCallback  emvProcessNextCompleted");
+
+
+					Log.d(TAG, " >>>>> emvProcessCallback  StringUtil.bytes2HexString(data)" + StringUtil.bytes2HexString(data));
+					Log.d(TAG, ">>>>>  emvProcessCallback data[0]" +data[0]);
+					Log.d(TAG, ">>>>>  emvProcessCallback data[1]"+ data[1]);
+
+
+					appState.trans.setEMVStatus(data[0]);
+					appState.trans.setEMVRetCode(data[1]);
+
+					Message msg = new Message();
+					msg.what = EMV_PROCESS_NEXT_COMPLETED_NOTIFIER;
+					mHandler.sendMessage(msg);
+				}
+
+				@Override
+				public void cardEventOccured(int eventType)
+				{
+					Log.d(TAG, "cardEventOccured: >>>>>");
+					if(debug)Log.d(APP_TAG, "get cardEventOccured");
+					Message msg = new Message();
+					if(eventType == SMART_CARD_EVENT_INSERT_CARD)
+					{
+
+						appState.cardType = get_card_type();
+						if(debug)Log.d(APP_TAG, "  >>>> cardType = " + appState.cardType);
+
+						if(appState.cardType == CARD_CONTACT)
+						{
+							Log.d(TAG, "cardEventOccured: >>>>>   appState.cardType == CARD_CONTACT    sent  CARD_INSERT_NOTIFIER");
+
+							msg.what = CARD_INSERT_NOTIFIER;
+							mHandler.sendMessage(msg);
+						}
+						else if(appState.cardType == CARD_CONTACTLESS)
+						{
+
+							Log.d(TAG, "cardEventOccured: >>>>>   appState.cardType == CARD_CONTACTLESS    sent  CARD_TAPED_NOTIFIER");
+
+							msg.what = CARD_TAPED_NOTIFIER;
+							mHandler.sendMessage(msg);
+						}
+						else{
+							appState.cardType = -1;
+						}
+					}
+					else if(eventType == SMART_CARD_EVENT_POWERON_ERROR)
+					{
+
+						Log.d(TAG, "cardEventOccured: >>>>>   eventType == SMART_CARD_EVENT_POWERON_ERROR    sent  CARD_ERROR_NOTIFIER");
+
+						appState.cardType = -1;
+						msg.what = CARD_ERROR_NOTIFIER;
+						mHandler.sendMessage(msg);
+					}
+					else if(eventType == SMART_CARD_EVENT_REMOVE_CARD)
+					{
+						appState.cardType = -1;
+						Log.d(TAG, "cardEventOccured: >>>>>   eventType == SMART_CARD_EVENT_REMOVE_CARD    sent  appState.cardType = -1");
+
+					}
+					else if(eventType == SMART_CARD_EVENT_CONTALESS_HAVE_MORE_CARD)
+					{
+						appState.cardType = -1;
+						msg.what = CONTACTLESS_HAVE_MORE_CARD_NOTIFIER;
+						Log.d(TAG, "cardEventOccured: >>>>>   eventType == SMART_CARD_EVENT_CONTALESS_HAVE_MORE_CARD   sent  CONTACTLESS_HAVE_MORE_CARD_NOTIFIER;");
+
+						mHandler.sendMessage(msg);
+					}
+
+				}
+			});
+
 			emv_kernel_initialize();
 			emv_set_kernel_attr(new byte[]{0x20}, 1);
 
-			/*if(loadCAPK() == -2)
+			if(loadCAPK() == -2)
 			{
 				capkChecksumErrorDialog(IdleActivity.this);
-			}*/
+			}
 			loadAID();
 			loadCAPK();
 			loadExceptionFile();
@@ -229,8 +351,18 @@ public class IdleActivity extends FuncActivity implements Constants
 
 			emv_set_force_online(appState.terminalConfig.getforceOnline());
 
+			//TODO commented out due to crash 7 5 and 6 are the two classes added
+			Log.i("test", "kernel id:"+emv_get_kernel_id());
+			Log.i("test", "process type:"+ emv_get_process_type());
+
 			appState.emvParamLoadFlag = true;
     	}
+//
+//		byte[] defaultPINKey = new byte[]{'2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2'};
+//		if (PinPadInterface.open() >= 0) {
+//			PinPadInterface.updateUserKey(appState.terminalConfig.getKeyIndex(), 0, defaultPINKey, defaultPINKey.length);
+//			PinPadInterface.close();
+//		}
     }
 
 	@Override

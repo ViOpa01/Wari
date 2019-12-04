@@ -5,7 +5,6 @@ import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.util.Log
-import com.cloudpos.card.Card
 import com.google.gson.Gson
 
 import com.iisysgroup.payvice.startimes.interactor.StartimesInteractor

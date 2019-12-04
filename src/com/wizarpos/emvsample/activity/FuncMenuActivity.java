@@ -24,6 +24,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.cloudpos.jniinterface.PINPadInterface;
+import com.iisysgroup.poslib.ISO.GTMS.GtmsKeyProcessor;
+import com.iisysgroup.poslib.ISO.POSVAS.PosvasKeyProcessor;
+import com.iisysgroup.poslib.host.entities.KeyHolder;
 import com.wizarpos.emvsample.AllVasActivity;
 import com.wizarpos.emvsample.activity.login.Helper;
 import com.wizarpos.emvsample.activity.login.LoginActivity;
@@ -44,6 +48,7 @@ import com.wizarpos.util.StringUtil;
 import org.jetbrains.anko.AlertBuilder;
 import org.jetbrains.anko.AlertDialogBuilder;
 
+import static com.wizarpos.emvsample.transaction.Nibss.poslibdb;
 import static com.wizarpos.util.AppUtil.resetAllServicesStates;
 
 public class FuncMenuActivity extends FuncActivity implements LocationListener
@@ -80,7 +85,11 @@ public class FuncMenuActivity extends FuncActivity implements LocationListener
 		setContentView(R.layout.activity_func_menu);
 		initToolbar();
         resetAllServicesStates();
-		new FuncActivity();
+        appState.PlainKeyInjected="31313131313131313232323232323232";
+
+
+        //TODO 32
+//		new FuncActivity();
 
 //		textTitle = (TextView)findViewById(R.id.tAppTitle);
 //		textTitle.setText("MAIN");
@@ -128,6 +137,94 @@ public class FuncMenuActivity extends FuncActivity implements LocationListener
 		ImageViewsignOut.setOnClickListener(new ClickListener());
 
 
+
+
+		if(appState.nibssData !=null) {
+
+
+//
+			KeyHolder res = appState.nibssData.getKeyHolder();
+			String clearmasterKey;
+			String clearPinKey = null;
+			String encryptedPinKey;
+
+			Log.i(">>>> complete", "getPinKey: " + res.getPinKey());
+			Log.i(">>>> complete", "getMasterKey: " + res.getMasterKey());
+			Log.i(">>>> complete", "getSessionKey: " + res.getSessionKey());
+			clearmasterKey = PosvasKeyProcessor.getMasterKey(res.getMasterKey(), res.isTestPlatform());
+			encryptedPinKey = res.getPinKey();
+//                Log.d("complete", "masterKey: "+res.getKeyHolder().getMasterKey());
+			Log.d(">>>> complete", "clearmasterKey: " + clearmasterKey);
+			try {
+
+				clearPinKey = PosvasKeyProcessor.decryptKey(res.getPinKey(), clearmasterKey);
+//				byte [] byteString={0x38,0x38, 0x38,0x38, 0x38,0x38, 0x38,0x38, 0x38,0x38, 0x38,0x38, 0x38,0x38, 0x38,0x38};
+
+//                Log.d("complete pinblock1", "byte of masterkey : " + byteString);
+
+//                String value = StringUtil.bytes2HexString(byteString);
+
+//                Log.d("complete pinblock1", "byteString of masterkey : " + value);
+
+
+//				clearPinKey = PosvasKeyProcessor.decryptKey(res.getPinKey(), clearmasterKey);
+
+//				clearPinKey = PosvasKeyProcessor.decryptKey(res.getPinKey(), value);
+
+				Log.d(">>>> complete pinblock1", "clearPinKey : " + clearPinKey);
+
+
+
+
+			} catch (Throwable e) {
+
+			}
+     //Use the plain key(E7CB159098F02682308B82321EBA2C0A) to decrypt stringCipherNewUserKey to get the clear pin key
+			String stringCipherNewUserKey = StringUtil.tripleDesEncrypt("31313131313131313232323232323232", clearPinKey);
+
+            appState.stringCipherNewUserKey=stringCipherNewUserKey;
+
+
+
+			Log.d(">>>> complete", "stringCipherNewUserKey : " +  appState.stringCipherNewUserKey);
+			Log.d(">>>> complete", "static key : " + appState.PlainKeyInjected);
+
+
+			byte arryCipherNewUserKey[] = StringUtil.StrToHexByte(stringCipherNewUserKey);
+
+			Log.d(">>>> complete", "arryCipherNewUserKey : " + arryCipherNewUserKey);
+
+//			int value = PinPadInterface.updateUserKey(1, 0, arryCipherNewUserKey, 16);
+            PINPadInterface.open();
+			int value = com.cloudpos.jniinterface.PINPadInterface.updateUserKey(1, 0, arryCipherNewUserKey, 16);
+
+            Log.d(">>>>>> pinblock1 PinPadInterface.updateUserKey ",String.valueOf(value));
+
+
+							byte [] checkvalue={0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
+
+			Log.d(">>>>>> pinblock1  complete pinblock1", "byte of masterkey : " + checkvalue);
+
+                String checkvalueString = StringUtil.bytes2HexString(checkvalue);
+
+			Log.d(">>>>>> pinblock1  complete pinblock1", "byte of string checkvalueString  : " + checkvalueString);
+
+			String outcome = StringUtil.tripleDesEncrypt(clearPinKey, checkvalueString);
+
+
+			Log.d(">>>> complete pinblock1", "checkvalue  : " + outcome);
+
+			PINPadInterface.close();
+
+
+//
+//
+		}
+
+
+
+
+
 	}
 
 	private void initToolbar() {
@@ -145,8 +242,12 @@ public class FuncMenuActivity extends FuncActivity implements LocationListener
 		super.onStart();
 		if(appState.emvParamChanged == true)
 		{
+
+			//Sets the terminal parameters
 			setEMVTermInfo();
 		}
+		//TODO 33
+//		startIdleTimer(TIMER_IDLE, 300);
 		startIdleTimer(TIMER_IDLE, 300);
         resetAllServicesStates();
 	}
@@ -338,7 +439,9 @@ public class FuncMenuActivity extends FuncActivity implements LocationListener
 				break;
 
 			case R.id.eod:
+
 			    startActivity(new Intent(FuncMenuActivity.this, PinInterFace.class));
+
 				break;
 
 			case R.id.transfer:
@@ -493,6 +596,9 @@ public class FuncMenuActivity extends FuncActivity implements LocationListener
 			@Override
 			public void complete(String res) {
 				Toast.makeText(FuncMenuActivity.this,"Successfully Configured",Toast.LENGTH_LONG).show();
+
+
+
 			    startActivity(new Intent(FuncMenuActivity.this, GetMasterKey.class));
 			    finish();
 			}
