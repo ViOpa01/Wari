@@ -429,7 +429,7 @@
             "outputFile": "C:\\Users\\Favour\\AndroidStudioProjects\\wari-onlinecard\\Wariok\\build\\intermediates\\res\\merged\\debug\\values-w820dp-v13_values-w820dp-v13.arsc.flat",
             "map": [
                 {
-                    "source": "C:\\Users\\Favour\\.gradle\\caches\\transforms-1\\files-1.1\\poslib-device-debug.aar\\3867bc9ca85c011268ae0e699f0f9090\\res\\values-w820dp-v13\\values-w820dp-v13.xml",
+                    "source": "C:\\Users\\Favour\\.gradle\\caches\\transforms-1\\files-1.1\\poslib-device-debug.aar\\a54f85ade64d7b97c74cb96b09669906\\res\\values-w820dp-v13\\values-w820dp-v13.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -1167,6 +1167,23 @@
                     }
                 },
                 {
+                    "source": "C:\\Users\\Favour\\.gradle\\caches\\transforms-1\\files-1.1\\poslib-device-debug.aar\\a54f85ade64d7b97c74cb96b09669906\\res\\values\\values.xml",
+                    "from": {
+                        "startLines": "4,5",
+                        "startColumns": "4,4",
+                        "startOffsets": "169,227",
+                        "endColumns": "57,94",
+                        "endOffsets": "222,317"
+                    },
+                    "to": {
+                        "startLines": "873,952",
+                        "startColumns": "4,4",
+                        "startOffsets": "69579,74915",
+                        "endColumns": "57,94",
+                        "endOffsets": "69632,75005"
+                    }
+                },
+                {
                     "source": "C:\\Users\\Favour\\.gradle\\caches\\transforms-1\\files-1.1\\recyclerview-v7-27.1.1.aar\\394213ad457c06a4533004918bc46359\\res\\values\\values.xml",
                     "from": {
                         "startLines": "3,4,5,6,7,8,9",
@@ -1181,23 +1198,6 @@
                         "startOffsets": "62254,62313,62361,63028,63103,63179,65422",
                         "endColumns": "58,47,55,74,75,71,65",
                         "endOffsets": "62308,62356,62412,63098,63174,63246,65483"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\Favour\\.gradle\\caches\\transforms-1\\files-1.1\\poslib-device-debug.aar\\3867bc9ca85c011268ae0e699f0f9090\\res\\values\\values.xml",
-                    "from": {
-                        "startLines": "4,5",
-                        "startColumns": "4,4",
-                        "startOffsets": "169,227",
-                        "endColumns": "57,94",
-                        "endOffsets": "222,317"
-                    },
-                    "to": {
-                        "startLines": "873,952",
-                        "startColumns": "4,4",
-                        "startOffsets": "69579,74915",
-                        "endColumns": "57,94",
-                        "endOffsets": "69632,75005"
                     }
                 },
                 {

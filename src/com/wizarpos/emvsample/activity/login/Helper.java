@@ -102,7 +102,13 @@ public class Helper {
 
     public static String HISTORY_SERIAL = "history_serial";
     public static String COMMISSION_KEY = "commission key";
+    public static String IS_KEY_INJECTED = "key_Injected";
+    public static String CLEAR_PIN_KEY = "clear_pin_key";
+    public static String CLEAR_SESSION_KEY = "clear_session_key";
+    public static String IS_PREPPING = "prepping";
+
     public static int REQUEST_INVITE = 121;
+
     public static int default_commission = 0;
     public static String TAG = "Payvice";
 

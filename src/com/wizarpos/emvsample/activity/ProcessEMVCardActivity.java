@@ -243,20 +243,21 @@ public class ProcessEMVCardActivity extends FuncActivity
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
-		if(debug)Log.d(APP_TAG, "ProcessEMVCard onActivityResult, requesCode=" + requestCode + ",resultCode=" + resultCode);
+		if(debug)Log.d(APP_TAG, ">>>> ProcessEMVCardActivity  complete pinblock1: ProcessEMVCard onActivityResult, requesCode=" + requestCode + ",resultCode=" + resultCode);
 		if(appState.getProcessState() != PROCESS_NORMAL)
 		{
-			if(   appState.getProcessState() == PROCESS_REVERSAL
-			   && appState.trans.getEMVRetCode() == APPROVE_OFFLINE
-			  )
+			Log.d(APP_TAG, ">>>> ProcessEMVCardActivity  complete pinblock1: appState.getProcessState() != PROCESS_NORMAL" );
+
+			if(appState.getProcessState() == PROCESS_REVERSAL && appState.trans.getEMVRetCode() == APPROVE_OFFLINE )
 			{
+
+				Log.d(APP_TAG, ">>>> ProcessEMVCardActivity  complete pinblock1: appState.getProcessState() != PROCESS_NORMAL +++++ appState.getProcessState() == PROCESS_REVERSAL && appState.trans.getEMVRetCode() == APPROVE_OFFLINE " );
+
 				appState.setProcessState(PROCESS_CONFIMATION);
 				getEMVCardInfo();
 				processOnline();
 			}
-			else if(   emv_is_need_advice() == 1
-					&& appState.getProcessState() != PROCESS_ADVICE_ONLINE
-				   )
+			else if(   emv_is_need_advice() == 1  && appState.getProcessState() != PROCESS_ADVICE_ONLINE)
 			{
 				appState.setProcessState(PROCESS_ADVICE_ONLINE);
 				getEMVCardInfo();
@@ -651,7 +652,7 @@ public class ProcessEMVCardActivity extends FuncActivity
 						break;
                     //Todo 22
 
-					case EMV_OFFLINE_PIN:
+					/*case EMV_OFFLINE_PIN:
 //						textLine1.setText("PLEASE INPUT PIN ON THE PINPAD");
 //						mEMVProcessNextThread = new EMVProcessNextThread();
 //						mEMVProcessNextThread.start();
@@ -678,7 +679,7 @@ public class ProcessEMVCardActivity extends FuncActivity
 
 						}
 
-						break;
+						break; */
 
 					case EMV_ONLINE_ENC_PIN:
 						//ToDo 19

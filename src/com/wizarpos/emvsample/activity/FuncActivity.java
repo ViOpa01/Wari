@@ -1130,6 +1130,7 @@ public class FuncActivity extends AppCompatActivity implements Constants, IFunti
 	public void showTransResult()
 	{
 		cancelIdleTimer();
+		Log.i(">>>> complete FuncActivity  pinblock1 STATE_TRANS_END "," About to call TransResultActivity " +STATE_TRANS_END);
 		Intent intent = new Intent(this, TransResultActivity.class);
 		startActivityForResult(intent, STATE_TRANS_END);
 	}

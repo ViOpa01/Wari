@@ -88,11 +88,15 @@ public class Sale extends FuncActivity
 
 		if(   requestCode != STATE_TRANS_END  && appState.getErrorCode() > 0 )
 		{
+			Log.i(">>>> complete  Sale Activity   pinblock1   requestCode != STATE_TRANS_END  && appState.getErrorCode() > 0  "," showTransResult() " );
+
 			showTransResult();
 			return;
 		}
 		if(resultCode != Activity.RESULT_OK)
 		{
+			Log.i(">>>> complete  Sale Activity   pinblock1   esultCode != Activity.RESULT_OK  "," exitTrans() " );
+
 			exitTrans();
 			return;
 		}
@@ -158,6 +162,8 @@ public class Sale extends FuncActivity
 		case STATE_PROCESS_ONLINE: {
 
 			Log.d(TAG,"processOnline STATE_PROCESS_ONLINE >>>>");
+			Log.i(">>>> complete  Sale Activity   pinblock1   STATE_PROCESS_ONLINE  "," showTransResult() " );
+
 
 			showTransResult();
 
@@ -168,8 +174,12 @@ public class Sale extends FuncActivity
 				Log.d(TAG,"processOnline STATE_PROCESS_EMV_CARD  go online  not  true>>>>");
 				processOnline();
 			}else{
+
 				Log.d(TAG,"showTransResult STATE_PROCESS_EMV_CARD  >>>>");
-                showTransResult();
+
+				Log.i(">>>> complete  Sale Activity   pinblock1   STATE_PROCESS_EMV_CARD  "," showTransResult() " );
+
+				showTransResult();
 			}
 
 			break;

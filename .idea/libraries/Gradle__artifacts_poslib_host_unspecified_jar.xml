@@ -1,11 +1,11 @@
 <component name="libraryTable">
   <library name="Gradle: artifacts:poslib-host:unspecified@jar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/poslib-host-debug.aar/99cd1c1925c2e0f3789e56a6680bc00c/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/poslib-host-debug.aar/99cd1c1925c2e0f3789e56a6680bc00c/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/poslib-host-debug.aar/99cd1c1925c2e0f3789e56a6680bc00c/jars/libs/j8583-1.10.2(2).jar!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/poslib-host-debug.aar/99cd1c1925c2e0f3789e56a6680bc00c/jars/libs/jpos-dep.jar!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/poslib-host-debug.aar/99cd1c1925c2e0f3789e56a6680bc00c/jars/libs/simple-xml-2.7.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/poslib-host-debug.aar/c3eee8813b89509a5644def8df65a875/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/poslib-host-debug.aar/c3eee8813b89509a5644def8df65a875/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/poslib-host-debug.aar/c3eee8813b89509a5644def8df65a875/jars/libs/j8583-1.10.2(2).jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/poslib-host-debug.aar/c3eee8813b89509a5644def8df65a875/jars/libs/jpos-dep.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/poslib-host-debug.aar/c3eee8813b89509a5644def8df65a875/jars/libs/simple-xml-2.7.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

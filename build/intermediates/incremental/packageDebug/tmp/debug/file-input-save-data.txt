@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Mon Dec 02 14:55:46 WAT 2019
+#Thu Dec 05 17:48:53 WAT 2019
 5.base=C\:\\Users\\Favour\\AndroidStudioProjects\\wari-onlinecard\\Wariok\\build\\intermediates\\assets\\debug
 42.base=C\:\\Users\\Favour\\AndroidStudioProjects\\wari-onlinecard\\Wariok\\build\\intermediates\\transforms\\stripDebugSymbol\\debug\\0
 22.path=lib/armeabi-v7a/libjni_cloudpos_led.so

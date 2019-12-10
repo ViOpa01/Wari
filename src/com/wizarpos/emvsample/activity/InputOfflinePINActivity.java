@@ -5,6 +5,7 @@ package com.wizarpos.emvsample.activity;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Message;
+import android.util.Log;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
@@ -53,7 +54,16 @@ public class InputOfflinePINActivity extends FuncActivity implements PinPadCallb
 		super.onStart();
 		setEmvOfflinePinCallbackHandler(InputOfflinePINActivity.this);
 		EMVJNIInterface.emv_process_next();
-		mHandler.setFunActivity(this);
+		Log.d(">>>> complete pinblock1", "appState.trans.getPinBlock() : " + appState.trans.getPinBlock());
+		Log.d(">>>> complete pinblock1", "appState.trans.getPinBlock()).length == 0 : " + String.valueOf((appState.trans.getPinBlock()).length == 0));
+
+		if((appState.trans.getPinBlock()).length == 0) {
+//		mHandler.setFunActivity(this);
+		}
+		else {
+			mHandler.setFunActivity(this);
+		}
+
 	}
 	
     @Override

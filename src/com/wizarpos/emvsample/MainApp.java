@@ -13,9 +13,11 @@ import android.support.multidex.MultiDex;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.cloudpos.jniinterface.PINPadInterface;
 import com.google.gson.Gson;
 
 
+import com.iisysgroup.poslib.ISO.GTMS.GtmsHost;
 import com.iisysgroup.poslib.ISO.GTMS.GtmsKeyProcessor;
 import com.iisysgroup.poslib.ISO.POSVAS.PosvasHost;
 import com.iisysgroup.poslib.ISO.POSVAS.PosvasKeyProcessor;
@@ -25,9 +27,11 @@ import com.iisysgroup.poslib.host.Host;
 import com.iisysgroup.poslib.host.HostInteractor;
 import com.iisysgroup.poslib.host.dao.PosLibDatabase;
 import com.iisysgroup.poslib.host.entities.KeyHolder;
+import com.iisysgroup.poslib.host.entities.VasTerminalData;
 import com.itex.richard.payviceconnect.model.DstvModel;
 import com.itex.richard.payviceconnect.model.StartimesModel;
 import com.wizarpos.emvsample.activity.DataModel;
+import com.wizarpos.emvsample.activity.login.Helper;
 import com.wizarpos.emvsample.activity.login.securestorage.SecureStorage;
 import com.wizarpos.emvsample.card.SmartCardControl;
 import com.wizarpos.emvsample.constant.Constants;
@@ -115,6 +119,8 @@ public class MainApp extends Application implements Constants
 	public int logo =0;
 	public String product ="";
 	public String dataAmount ="";
+	public String clearPinKey ="";
+	public String clearSessionKey ="";
 
 
 	public String accountName ;
@@ -247,7 +253,13 @@ public class MainApp extends Application implements Constants
 
 //	public VasTransactionDoa vasDb;
 //	public TransactionDataDoa transactionDb;
-//
+
+	private Boolean isKeyInjected;
+	private Boolean isPrepped;
+
+
+
+
 
 	@Override
 	public void onCreate()
@@ -256,7 +268,10 @@ public class MainApp extends Application implements Constants
 		MultiDex.install(this);
 
 
-           //decrypt pin key with master key to get clear pin key and then encrypt with the static master key
+
+
+
+		//decrypt pin key with master key to get clear pin key and then encrypt with the static master key
 //		KeyHolder res=mainApp.nibssData.getKeyHolder();
 //		String clearmasterKey;
 //		String clearPinKey = null;
@@ -315,7 +330,8 @@ public class MainApp extends Application implements Constants
 //			host =  new TamsHost(this);
 //		}
 //		else if (sharedPreferences.getString(hostKey, "").equalsIgnoreCase("POSVAS")){
-		host =  new PosvasHost(this);
+//		host =  new PosvasHost(this);
+		host =  new GtmsHost(this);
 //		}
 //		else  {
 //			host =  new GtmsHost(this);
@@ -349,6 +365,13 @@ public class MainApp extends Application implements Constants
 //		contactlessUserCard = new SmartCardControl(SmartCardControl.CARD_CONTACTLESS);
 		loadData();
 		initData();
+
+
+
+		isKeyInjected=SecureStorage.retrieve(Helper.IS_KEY_INJECTED,false);
+		isPrepped=SecureStorage.retrieve(Helper.IS_PREPPING,false);
+
+
 
 		new Thread(new Runnable() {
 			@Override
@@ -493,6 +516,13 @@ public class MainApp extends Application implements Constants
 		});
 	}
 
+
+
+
+
+
+
+
 	public void initData()
 	{
 		tranType = TRAN_GOODS;    // 交易类型
@@ -604,12 +634,19 @@ public class MainApp extends Application implements Constants
 //		final ProgressDialog pd = new ProgressDialog(context, R.style.AlertDialogCustom);
 //		pd.setMessage("Preping please wait");
 //		pd.show();
+
+		SecureStorage.store(Helper.IS_PREPPING,true);
+
 		Toast.makeText(context, "Configuring please wait", Toast.LENGTH_SHORT).show();
 
 		setupNibbsData(termId,new Nibss.Nibs<String>() {
 			@Override
 			public void complete(String res) {
 //				pd.dismiss();
+//				updateKey();
+
+//				SecureStorage.store(Helper.IS_PREPPING,false);
+
 				Toast.makeText(context, "Succesfully Configured", Toast.LENGTH_SHORT).show();
 				callback.complete("Success");
 
@@ -623,6 +660,117 @@ public class MainApp extends Application implements Constants
 			}
 		});
 	}
+
+
+
+	private void updateKey(){
+
+
+		Log.i(">>>> complete pinblock1", "isKeyInjected: " + isKeyInjected);
+		Log.i(">>>> complete pinblock1", "isPrepped: " + isPrepped);
+
+
+
+		if(isKeyInjected && isPrepped) {
+
+
+			KeyHolder res = appState.nibssData.getKeyHolder();
+			String clearmasterKey;
+			String clearPinKey = null;
+			String encryptedPinKey;
+
+			Log.i(">>>> complete pinblock1", "getPinKey: " + res.getPinKey());
+			Log.i(">>>> complete pinblock1", "getMasterKey: " + res.getMasterKey());
+			Log.i(">>>> complete pinblock1", "getSessionKey: " + res.getSessionKey());
+			clearmasterKey = GtmsKeyProcessor.getMasterKey(res.getMasterKey(), res.isTestPlatform());
+			encryptedPinKey = res.getPinKey();
+			Log.d(">>>> complete", "clearmasterKey: " + clearmasterKey);
+			try {
+
+
+//				{"tid":"20331L14","mid":"203315000001987","merchantName":"ITEX INTERGRATED SER   LA           LANG","sessionKey":"6E3101202A2331701AC845BFEF611C9E","pinKey":"1692E0C189E63B7A34266D201F751C94","masterKey":"731C079EF1C8F8198AB562B08675C151","currencyCode":"566","countryCode":"566","mcc":"8061"}
+
+
+				clearPinKey = GtmsKeyProcessor.decryptKey(res.getPinKey(), clearmasterKey);
+
+
+//					appState.clearPinKey = clearPinKey;
+//
+//					SecureStorage.store(Helper.CLEAR_PIN_KEY,clearPinKey);
+				VasTerminalData vasTerminalDetails = new Gson().fromJson(SecureStorage.retrieve(Helper.VAS_COMMUNICATOR,""), VasTerminalData.class);
+
+
+				appState.clearPinKey = vasTerminalDetails.getPinKey();
+
+				SecureStorage.store(Helper.CLEAR_PIN_KEY,vasTerminalDetails.getPinKey());
+
+
+
+				String clearSessionKey = GtmsKeyProcessor.decryptKey(res.getSessionKey(), clearmasterKey);
+				Log.d(">>>> complete pinblock1", "clearSessionKey : " + clearSessionKey);
+
+//					appState.clearSessionKey = clearSessionKey;
+//					SecureStorage.store(Helper.CLEAR_SESSION_KEY,clearSessionKey);
+
+				appState.clearSessionKey = vasTerminalDetails.getSessionKey();
+				SecureStorage.store(Helper.CLEAR_SESSION_KEY,vasTerminalDetails.getSessionKey());
+
+
+//					Log.d(">>>> complete pinblock1", "clearPinKey : " + clearPinKey);
+				Log.d(">>>> complete pinblock1", "appState.clearPinKey  : " + appState.clearPinKey );
+				Log.d(">>>> complete pinblock1", "appState.clearSessionKey : " + appState.clearSessionKey);
+
+
+			} catch (Throwable e) {
+
+			}
+//				String stringCipherNewUserKey = StringUtil.tripleDesEncrypt("31313131313131313232323232323232", clearPinKey);
+
+			String stringCipherNewUserKey = StringUtil.tripleDesEncrypt("31313131313131313232323232323232", appState.clearPinKey);
+
+			appState.stringCipherNewUserKey = stringCipherNewUserKey;
+
+
+			Log.d(">>>> complete", "stringCipherNewUserKey : " + appState.stringCipherNewUserKey);
+			Log.d(">>>> complete", "static key : " + appState.PlainKeyInjected);
+
+
+			byte arryCipherNewUserKey[] = StringUtil.StrToHexByte(stringCipherNewUserKey);
+
+			Log.d(">>>> complete", "arryCipherNewUserKey : " + arryCipherNewUserKey);
+
+			PINPadInterface.open();
+			int value = com.cloudpos.jniinterface.PINPadInterface.updateUserKey(1, 0, arryCipherNewUserKey, 16);
+
+			Log.d(">>>>>> pinblock1 PinPadInterface.updateUserKey ", String.valueOf(value));
+
+
+			byte[] checkvalue = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+
+			Log.d(">>>>>> pinblock1  complete pinblock1", "byte of masterkey : " + checkvalue);
+
+			String checkvalueString = StringUtil.bytes2HexString(checkvalue);
+
+			Log.d(">>>>>> pinblock1  complete pinblock1", "byte of string checkvalueString  : " + checkvalueString);
+
+			String outcome = StringUtil.tripleDesEncrypt(clearPinKey, checkvalueString);
+
+
+			Log.d(">>>> complete pinblock1", "checkvalue  : " + outcome);
+			SecureStorage.store(Helper.IS_KEY_INJECTED,true);
+
+			SecureStorage.store(Helper.IS_PREPPING,false);
+
+
+
+			PINPadInterface.close();
+
+		}
+	}
+
+
+
+
 
 //	public void StartStopCallHome(boolean startStop){
 //		 final int INTERVAL = 1000 * 60 * 10; //10 minutes

@@ -66,10 +66,16 @@ public class Nibss {
 
     private static final String TAG = "Nibss";
 
+    String _clearpinKey=null;
+    String _clearSessionKey=null;
+
     public Nibss(Context context){
         this.context = context;
-//        hostInteractor = HostInteractor.getInstance(new GtmsHost(context));
-        hostInteractor = HostInteractor.getInstance(new PosvasHost(context));
+        hostInteractor = HostInteractor.getInstance(new GtmsHost(context));
+//        hostInteractor = HostInteractor.getInstance(new PosvasHost(context));
+
+        _clearpinKey=SecureStorage.retrieve(Helper.CLEAR_PIN_KEY,"");
+        _clearSessionKey=SecureStorage.retrieve(Helper.CLEAR_SESSION_KEY,"");
 
         mainApp = MainApp.getInstance();
         SharedPreferences sharedPreferences = context.getSharedPreferences(Constants.netWork_pref, Context.MODE_PRIVATE);
@@ -77,12 +83,18 @@ public class Nibss {
 //        port = sharedPreferences.getString("port", "5043");//
 
 //        Raw epms
-//        ip = sharedPreferences.getString("ip","196.6.103.73");
-//        port = sharedPreferences.getString("port", "5043");
+        ip = sharedPreferences.getString("ip","196.6.103.73");
+        port = sharedPreferences.getString("port", "5043");
+
+   //Epms Test
+//        ip = sharedPreferences.getString("ip","197.253.19.78");
+//        port = sharedPreferences.getString("port", "5001");
 
 //        //Raw Posvas
-        ip = sharedPreferences.getString("ip","196.6.103.18");
-        port = sharedPreferences.getString("port", "5014");
+//        ip = sharedPreferences.getString("ip","196.6.103.18");
+//        port = sharedPreferences.getString("port", "5014");
+
+
 
 //        196.6.103.18 5014
 //         ip = "197.253.19.78";
@@ -438,7 +450,13 @@ public class Nibss {
 
 //       Log.d("okh", Arrays.toString(emvCard.getPinInfo().getPinBlock()) + " " + transactionType + " " + inputData.getAccountType() + " " + keyHolder + " " + configData + " " + connectionData + resultNibs);
 
-        hostInteractor.getTransactionResult(transactionType,connectionData,transactionData,null,null)
+//        hostInteractor.getTransactionResult(transactionType,connectionData,transactionData,appState.clearSessionKey,appState.clearPinKey)
+
+
+        VasTerminalData vasTerminalDetails = new Gson().fromJson(SecureStorage.retrieve(Helper.VAS_COMMUNICATOR,""), VasTerminalData.class);
+
+        hostInteractor.getTransactionResult(transactionType,connectionData,transactionData,_clearSessionKey,_clearpinKey)
+//        hostInteractor.getTransactionResult(transactionType,connectionData,transactionData,vasTerminalDetails.getSessionKey(),vasTerminalDetails.getPinKey())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new SingleObserver<TransactionResult>() {
@@ -487,7 +505,9 @@ public class Nibss {
 
 //       Log.d("okh", Arrays.toString(emvCard.getPinInfo().getPinBlock()) + " " + transactionType + " " + inputData.getAccountType() + " " + keyHolder + " " + configData + " " + connectionData + resultNibs);
 
-        hostInteractor.getTransactionResult(transactionType,connectionData,transactionData,keyHolder.getSessionKey(),keyHolder.getPinKey())
+        VasTerminalData vasTerminalDetails = new Gson().fromJson(SecureStorage.retrieve(Helper.VAS_COMMUNICATOR,""), VasTerminalData.class);
+
+        hostInteractor.getTransactionResult(transactionType,connectionData,transactionData,vasTerminalDetails.getSessionKey(),vasTerminalDetails.getPinKey())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new SingleObserver<TransactionResult>() {

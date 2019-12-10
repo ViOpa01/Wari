@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.cloudpos.jniinterface.PINPadInterface;
 import com.google.gson.Gson;
+import com.iisysgroup.poslib.ISO.GTMS.GtmsKeyProcessor;
 import com.iisysgroup.poslib.ISO.POSVAS.PosvasKeyProcessor;
 import com.iisysgroup.poslib.commons.emv.EmvCard;
 import com.iisysgroup.poslib.host.Host;
@@ -71,10 +72,19 @@ public class ProcessOnlineActivity extends FuncActivity
 	VasTerminalData vasTerminalDetails=null;
 	KeyHolder keyHolder=null;
 	String TID=null;
+	String _clearpinKey=null;
+	String _clearSessionKey=null;
 
 	@Override
     public void onCreate(Bundle savedInstanceState)
 	{
+
+		vasTerminalDetails = new Gson().fromJson(SecureStorage.retrieve(Helper.VAS_COMMUNICATOR,""),VasTerminalData.class);
+//		appState.clearPin=SecureStorage.retrieve(Helper.CLEAR_PIN_KEY,"");
+//		appState.clearSessionKey=SecureStorage.retrieve(Helper.CLEAR_SESSION_KEY,"");
+		_clearpinKey=SecureStorage.retrieve(Helper.CLEAR_PIN_KEY,"");
+		_clearSessionKey=SecureStorage.retrieve(Helper.CLEAR_SESSION_KEY,"");
+
 
 		if(appState.balanceEnc){
 			transactionType = Host.TransactionType.BALANCE_INQUIRY;
@@ -185,7 +195,36 @@ public class ProcessOnlineActivity extends FuncActivity
 //					e.printStackTrace();
 //				}
 
-								pinInfo = new EmvCard.PinInfo(appState.trans.getPinBlock(),null, pinblock);
+				Log.d(">>>> complete pinblock1", "clearPinKey before converting to byte  : " + appState.clearPinKey);
+
+				byte [] clearPinKey=StringUtil.hexString2bytes(_clearpinKey);
+				Log.d(">>>> complete pinblock1", "clearPinKey in byte  : " + clearPinKey);
+
+				Log.d(">>>> complete pinblock1", "clearPinKey in back to hex value   : " + StringUtil.bytes2HexString(clearPinKey));
+
+				String encPinKey= appState.nibssData.getKeyHolder().getPinKey();
+
+				try {
+					String clearPinBlock = GtmsKeyProcessor.decryptKey(appState.clearPinKey, StringedPinBlock);
+					Log.d(">>>> complete pinblock1", "clearPinBlock   : " + clearPinBlock);
+
+				}catch(Throwable e){
+					Log.d(">>>> complete pinblock1", "clearPinBlock   : " + "Error");
+
+				}
+
+
+				Log.d(">>>> complete pinblock1", "All Key  : " + new Gson().toJson(appState.nibssData.getKeyHolder()));
+
+
+                Log.d(">>>> complete pinblock1", "encPinKey hex value   : " + encPinKey);
+
+
+
+				pinInfo = new EmvCard.PinInfo(appState.trans.getPinBlock(),null,clearPinKey);
+
+
+//				pinInfo = new EmvCard.PinInfo(appState.trans.getPinBlock(),null,StringUtil.hexString2bytes(appState.nibssData.getKeyHolder().getPinKey()));
 
 
 
@@ -213,7 +252,7 @@ public class ProcessOnlineActivity extends FuncActivity
 			}
 			else{
 				Log.d("okh", "pinblock2 :" + pinblock);
-                pinInfo = new EmvCard.PinInfo(null, null, null);
+                pinInfo = new EmvCard.PinInfo(null, "", null);
             }
 //			else{
 //				Log.i("okh", "pinblock2 :" + pinblock);
@@ -223,7 +262,9 @@ public class ProcessOnlineActivity extends FuncActivity
 //			}
 			//Build emv carf
 			emvCard = new EmvCard(appState.trans.getCardHolderName(),appState.trans.getTrack2Data(),
-					appState.trans.getICCData(),pinInfo);
+					appState.trans.getICCData(),pinInfo,appState.trans.getAID(),appState.trans.getTVR(),appState.trans.getTSI());
+
+
 
 			//Build InputData
 			inputData = new InputData(appState.trans.getTransAmount().longValue(),
@@ -237,6 +278,9 @@ public class ProcessOnlineActivity extends FuncActivity
 						appState.nibssData.getConnectionData(), appState.isoRefundProcessData ,new Nibss.Nibs<TransactionResult>() {
 							@Override
 							public void complete(TransactionResult res) {
+
+
+
 								appState.trans.setMaskPan(res.PAN);
 								appState.trans.setRrn(res.RRN);
 								appState.trans.setTransactionResult(res);
@@ -386,14 +430,14 @@ public class ProcessOnlineActivity extends FuncActivity
 
 				if(appState.trans.getPinBlock() != null){
 					Log.i("okh", "pinblock :" + appState.trans.getPinBlock());
-					pinInfo = new EmvCard.PinInfo(appState.trans.getPinBlock(),null, StringUtil.hexString2bytes(appState.clearPin));
+					pinInfo = new EmvCard.PinInfo(appState.trans.getPinBlock(),null, StringUtil.hexString2bytes(_clearpinKey));
 				}
 				else{
 					pinInfo = null;
 				}
 				//Build emv carf
 				emvCard = new EmvCard(appState.trans.getCardHolderName(),appState.trans.getTrack2Data(),
-						appState.trans.getICCData(),pinInfo);
+						appState.trans.getICCData(),pinInfo,appState.trans.getAID(),appState.trans.getTVR(),appState.trans.getTSI());
 
 				//Build InputData
 				inputData = new InputData(appState.trans.getTransAmount().longValue(),
@@ -411,7 +455,6 @@ public class ProcessOnlineActivity extends FuncActivity
 						  poslibdb.getVasTerminalDataDao().get();
 //						  Log.d("OkH", "vasterminal "+poslibdb.getVasTerminalDataDao().get().getTid());
 //						  vasTerminalDetails = poslibdb.getVasTerminalDataDao().get();
-						  vasTerminalDetails = new Gson().fromJson(SecureStorage.retrieve(Helper.VAS_COMMUNICATOR,""),VasTerminalData.class);
 
 
 						  Log.d("OkH", "vasterminal Details "+ new Gson().toJson(vasTerminalDetails));
@@ -479,6 +522,8 @@ public class ProcessOnlineActivity extends FuncActivity
 						  SecureStorage.store(Helper.KEY_HOLDER,new Gson().toJson(keyHolder));
 
 						  SecureStorage.store(Helper.CONNECTION_DATA,new Gson().toJson(connectionData));
+
+
 
 						  nibss.vasGoOnline(emvCard, transactionType, inputData,
 								  keyHolder, configData,
@@ -576,8 +621,62 @@ public class ProcessOnlineActivity extends FuncActivity
 				Log.d("process online okh data", String.valueOf(appState.data));
 				Log.d("process online okh cableTv", String.valueOf(appState.cableTv));
 				Log.d("process online okh  electricityBills", String.valueOf(appState.electricityBills));
+				Log.d("process online okh  electricityBills", String.valueOf(appState.electricityBills));
+				Log.d(">>>> complete  pinblock1   emvCard.getCardHolderName() ", emvCard.getTrack2Data());
+				String Pan=emvCard.getTrack2Data().toUpperCase().split("D")[0];
+                Log.d(">>>> complete  pinblock1   PAN ",Pan );
+//                int lenghtofPan= Pan.length();
+//                int lenghtofPanMinusone= Pan.length()-1;
 
-				nibss.goOnline(emvCard, transactionType, inputData,
+               String valueOut =Pan.substring(Pan.length() - 13, Pan.length()-1);
+
+                Log.d(">>>> complete  pinblock1   valueOut ", valueOut);
+
+                String padedNumber=  StringUtil.padleft(valueOut, valueOut.length() + 4, '0');
+
+
+                Log.d(">>>> complete  pinblock1   padedNumber ", padedNumber);
+//
+//				byte[] pinb=StringUtil.toHexString(pin);
+//				byte[] panb=StringUtil.toHexString(pan);
+//
+//				for(int i=0; i<pinb.length; i++) {
+//					pinb[i]=(byte)(pinb[i]^panb[i]);
+
+
+				/*final ConfigData configData = new ConfigData();
+
+				configData.storeConfigData("04002", "90");
+
+				//Country Code
+				configData.storeConfigData("06003", vasTerminalDetails.getCountryCode());
+
+				//MCC
+				configData.storeConfigData("08004", vasTerminalDetails.getMcc());
+
+
+				//Merchant's name - 40 length
+				configData.storeConfigData("52040", vasTerminalDetails.getMerchantName());
+
+				//Merchant Id - 15 length
+				configData.storeConfigData("03015", vasTerminalDetails.getMid());
+
+				//Currency Code
+				configData.storeConfigData("05003", vasTerminalDetails.getCurrencyCode());
+
+//				}
+
+ 				ConnectionData connectionData =  new ConnectionData("20331L14", appState.nibssData.getConnectionData().getIpAddress(), appState.nibssData.getConnectionData().getIpPort(), true);
+
+				Log.d(">>>> complete  pinblock1   keyHolder ", new Gson().toJson(keyHolder));
+				Log.d(">>>> complete  pinblock1   connectionData ", new Gson().toJson(connectionData));
+
+
+                nibss.goOnline(emvCard, transactionType, inputData,
+						keyHolder, configData,
+						connectionData, new Nibss.Nibs<TransactionResult>() {*/
+
+                	nibss.goOnline(emvCard, transactionType, inputData,
 						appState.nibssData.getKeyHolder(), appState.nibssData.getConfigData(),
 						appState.nibssData.getConnectionData(), new Nibss.Nibs<TransactionResult>() {
 							@Override

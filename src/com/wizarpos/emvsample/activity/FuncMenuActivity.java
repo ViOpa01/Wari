@@ -25,9 +25,11 @@ import android.widget.Toast;
 
 
 import com.cloudpos.jniinterface.PINPadInterface;
+import com.google.gson.Gson;
 import com.iisysgroup.poslib.ISO.GTMS.GtmsKeyProcessor;
 import com.iisysgroup.poslib.ISO.POSVAS.PosvasKeyProcessor;
 import com.iisysgroup.poslib.host.entities.KeyHolder;
+import com.iisysgroup.poslib.host.entities.VasTerminalData;
 import com.wizarpos.emvsample.AllVasActivity;
 import com.wizarpos.emvsample.activity.login.Helper;
 import com.wizarpos.emvsample.activity.login.LoginActivity;
@@ -73,6 +75,8 @@ public class FuncMenuActivity extends FuncActivity implements LocationListener
 	private ImageView purchaseCashBack;
 	private AlertDialog alertDialog;
 	private ImageView ImageViewEod;
+	private Boolean isKeyInjected;
+	private Boolean isPrepped;
 
 	public static String latitude,longitude;
 
@@ -86,6 +90,9 @@ public class FuncMenuActivity extends FuncActivity implements LocationListener
 		initToolbar();
         resetAllServicesStates();
         appState.PlainKeyInjected="31313131313131313232323232323232";
+
+        isKeyInjected=SecureStorage.retrieve(Helper.IS_KEY_INJECTED,false);
+		isPrepped=SecureStorage.retrieve(Helper.IS_PREPPING,false);
 
 
         //TODO 32
@@ -139,86 +146,110 @@ public class FuncMenuActivity extends FuncActivity implements LocationListener
 
 
 
-		if(appState.nibssData !=null) {
+		if(appState.nibssData !=null  ) {
+
+			Log.i(">>>> complete pinblock1", "isKeyInjected: " + isKeyInjected);
+			Log.i(">>>> complete pinblock1", "isPrepped: " + isPrepped);
 
 
+
+			if(isKeyInjected && isPrepped) {
+
+
+				KeyHolder res = appState.nibssData.getKeyHolder();
+				String clearmasterKey;
+				String clearPinKey = null;
+				String encryptedPinKey;
+
+				Log.i(">>>> complete pinblock1", "getPinKey: " + res.getPinKey());
+				Log.i(">>>> complete pinblock1", "getMasterKey: " + res.getMasterKey());
+				Log.i(">>>> complete pinblock1", "getSessionKey: " + res.getSessionKey());
+				clearmasterKey = GtmsKeyProcessor.getMasterKey(res.getMasterKey(), res.isTestPlatform());
+				encryptedPinKey = res.getPinKey();
+				Log.d(">>>> complete", "clearmasterKey: " + clearmasterKey);
+				try {
+
+
+//				{"tid":"20331L14","mid":"203315000001987","merchantName":"ITEX INTERGRATED SER   LA           LANG","sessionKey":"6E3101202A2331701AC845BFEF611C9E","pinKey":"1692E0C189E63B7A34266D201F751C94","masterKey":"731C079EF1C8F8198AB562B08675C151","currencyCode":"566","countryCode":"566","mcc":"8061"}
+
+
+					clearPinKey = GtmsKeyProcessor.decryptKey(res.getPinKey(), clearmasterKey);
+
+
+					appState.clearPinKey = clearPinKey;
+
+					SecureStorage.store(Helper.CLEAR_PIN_KEY,clearPinKey);
+					VasTerminalData vasTerminalDetails = new Gson().fromJson(SecureStorage.retrieve(Helper.VAS_COMMUNICATOR,""), VasTerminalData.class);
+
+
+//					appState.clearPinKey = vasTerminalDetails.getPinKey();
 //
-			KeyHolder res = appState.nibssData.getKeyHolder();
-			String clearmasterKey;
-			String clearPinKey = null;
-			String encryptedPinKey;
-
-			Log.i(">>>> complete", "getPinKey: " + res.getPinKey());
-			Log.i(">>>> complete", "getMasterKey: " + res.getMasterKey());
-			Log.i(">>>> complete", "getSessionKey: " + res.getSessionKey());
-			clearmasterKey = PosvasKeyProcessor.getMasterKey(res.getMasterKey(), res.isTestPlatform());
-			encryptedPinKey = res.getPinKey();
-//                Log.d("complete", "masterKey: "+res.getKeyHolder().getMasterKey());
-			Log.d(">>>> complete", "clearmasterKey: " + clearmasterKey);
-			try {
-
-				clearPinKey = PosvasKeyProcessor.decryptKey(res.getPinKey(), clearmasterKey);
-//				byte [] byteString={0x38,0x38, 0x38,0x38, 0x38,0x38, 0x38,0x38, 0x38,0x38, 0x38,0x38, 0x38,0x38, 0x38,0x38};
-
-//                Log.d("complete pinblock1", "byte of masterkey : " + byteString);
-
-//                String value = StringUtil.bytes2HexString(byteString);
-
-//                Log.d("complete pinblock1", "byteString of masterkey : " + value);
-
-
-//				clearPinKey = PosvasKeyProcessor.decryptKey(res.getPinKey(), clearmasterKey);
-
-//				clearPinKey = PosvasKeyProcessor.decryptKey(res.getPinKey(), value);
-
-				Log.d(">>>> complete pinblock1", "clearPinKey : " + clearPinKey);
+//					SecureStorage.store(Helper.CLEAR_PIN_KEY,vasTerminalDetails.getPinKey());
 
 
 
+					String clearSessionKey = GtmsKeyProcessor.decryptKey(res.getSessionKey(), clearmasterKey);
+					Log.d(">>>> complete pinblock1", "clearSessionKey : " + clearSessionKey);
 
-			} catch (Throwable e) {
+					appState.clearSessionKey = clearSessionKey;
+					SecureStorage.store(Helper.CLEAR_SESSION_KEY,clearSessionKey);
+
+//					appState.clearSessionKey = vasTerminalDetails.getSessionKey();
+//					SecureStorage.store(Helper.CLEAR_SESSION_KEY,vasTerminalDetails.getSessionKey());
+
+
+//					Log.d(">>>> complete pinblock1", "clearPinKey : " + clearPinKey);
+					Log.d(">>>> complete pinblock1", "appState.clearPinKey  : " + appState.clearPinKey );
+					Log.d(">>>> complete pinblock1", "appState.clearSessionKey : " + appState.clearSessionKey);
+
+
+				} catch (Throwable e) {
+
+				}
+//				String stringCipherNewUserKey = StringUtil.tripleDesEncrypt("31313131313131313232323232323232", clearPinKey);
+
+				String stringCipherNewUserKey = StringUtil.tripleDesEncrypt("31313131313131313232323232323232", appState.clearPinKey);
+
+				appState.stringCipherNewUserKey = stringCipherNewUserKey;
+
+
+				Log.d(">>>> complete", "stringCipherNewUserKey : " + appState.stringCipherNewUserKey);
+				Log.d(">>>> complete", "static key : " + appState.PlainKeyInjected);
+
+
+				byte arryCipherNewUserKey[] = StringUtil.StrToHexByte(stringCipherNewUserKey);
+
+				Log.d(">>>> complete", "arryCipherNewUserKey : " + arryCipherNewUserKey);
+
+				PINPadInterface.open();
+				int value = com.cloudpos.jniinterface.PINPadInterface.updateUserKey(1, 0, arryCipherNewUserKey, 16);
+
+				Log.d(">>>>>> pinblock1 PinPadInterface.updateUserKey ", String.valueOf(value));
+
+
+				byte[] checkvalue = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+
+				Log.d(">>>>>> pinblock1  complete pinblock1", "byte of masterkey : " + checkvalue);
+
+				String checkvalueString = StringUtil.bytes2HexString(checkvalue);
+
+				Log.d(">>>>>> pinblock1  complete pinblock1", "byte of string checkvalueString  : " + checkvalueString);
+
+				String outcome = StringUtil.tripleDesEncrypt(clearPinKey, checkvalueString);
+
+
+				Log.d(">>>> complete pinblock1", "checkvalue  : " + outcome);
+				SecureStorage.store(Helper.IS_KEY_INJECTED,true);
+
+				SecureStorage.store(Helper.IS_PREPPING,false);
+
+
+
+				PINPadInterface.close();
 
 			}
-     //Use the plain key(E7CB159098F02682308B82321EBA2C0A) to decrypt stringCipherNewUserKey to get the clear pin key
-			String stringCipherNewUserKey = StringUtil.tripleDesEncrypt("31313131313131313232323232323232", clearPinKey);
-
-            appState.stringCipherNewUserKey=stringCipherNewUserKey;
 
 
-
-			Log.d(">>>> complete", "stringCipherNewUserKey : " +  appState.stringCipherNewUserKey);
-			Log.d(">>>> complete", "static key : " + appState.PlainKeyInjected);
-
-
-			byte arryCipherNewUserKey[] = StringUtil.StrToHexByte(stringCipherNewUserKey);
-
-			Log.d(">>>> complete", "arryCipherNewUserKey : " + arryCipherNewUserKey);
-
-//			int value = PinPadInterface.updateUserKey(1, 0, arryCipherNewUserKey, 16);
-            PINPadInterface.open();
-			int value = com.cloudpos.jniinterface.PINPadInterface.updateUserKey(1, 0, arryCipherNewUserKey, 16);
-
-            Log.d(">>>>>> pinblock1 PinPadInterface.updateUserKey ",String.valueOf(value));
-
-
-							byte [] checkvalue={0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
-
-			Log.d(">>>>>> pinblock1  complete pinblock1", "byte of masterkey : " + checkvalue);
-
-                String checkvalueString = StringUtil.bytes2HexString(checkvalue);
-
-			Log.d(">>>>>> pinblock1  complete pinblock1", "byte of string checkvalueString  : " + checkvalueString);
-
-			String outcome = StringUtil.tripleDesEncrypt(clearPinKey, checkvalueString);
-
-
-			Log.d(">>>> complete pinblock1", "checkvalue  : " + outcome);
-
-			PINPadInterface.close();
-
-
-//
-//
 		}
 
 
@@ -592,9 +623,11 @@ public class FuncMenuActivity extends FuncActivity implements LocationListener
 	}
 
 	private void configure(String termId) {
+
 		appState.prep(termId,this,new Nibss.Nibs<String>() {
 			@Override
 			public void complete(String res) {
+//				updateKey();
 				Toast.makeText(FuncMenuActivity.this,"Successfully Configured",Toast.LENGTH_LONG).show();
 
 
@@ -610,6 +643,96 @@ public class FuncMenuActivity extends FuncActivity implements LocationListener
 			}
 		});
 	}
+
+
+
+	private void updateKey(){
+
+		Log.i("Got in  ","rED ");
+
+//		KeyHolder res = appState.nibssData.getKeyHolder();
+		KeyHolder res = appState.nibssData.getKeyHolder();
+		String clearmasterKey;
+		String clearPinKey = null;
+		String encryptedPinKey;
+
+		Log.i(">>>> complete", "getPinKey: " + res.getPinKey());
+		Log.i(">>>> complete", "getMasterKey: " + res.getMasterKey());
+		Log.i(">>>> complete", "getSessionKey: " + res.getSessionKey());
+//		clearmasterKey = PosvasKeyProcessor.getMasterKey(res.getMasterKey(), res.isTestPlatform());
+		clearmasterKey = GtmsKeyProcessor.getMasterKey(res.getMasterKey(), res.isTestPlatform());
+		encryptedPinKey = res.getPinKey();
+//                Log.d("complete", "masterKey: "+res.getKeyHolder().getMasterKey());
+		Log.d(">>>> complete", "clearmasterKey: " + clearmasterKey);
+		try {
+
+//			clearPinKey = PosvasKeyProcessor.decryptKey(res.getPinKey(), clearmasterKey);
+			clearPinKey = GtmsKeyProcessor.getMasterKey(res.getMasterKey(), res.isTestPlatform());
+
+//				byte [] byteString={0x38,0x38, 0x38,0x38, 0x38,0x38, 0x38,0x38, 0x38,0x38, 0x38,0x38, 0x38,0x38, 0x38,0x38};
+
+//                Log.d("complete pinblock1", "byte of masterkey : " + byteString);
+
+//                String value = StringUtil.bytes2HexString(byteString);
+
+//                Log.d("complete pinblock1", "byteString of masterkey : " + value);
+
+			appState.clearPinKey=clearPinKey;
+//				clearPinKey = PosvasKeyProcessor.decryptKey(res.getPinKey(), clearmasterKey);
+
+//				clearPinKey = PosvasKeyProcessor.decryptKey(res.getPinKey(), value);
+
+			Log.d(">>>> complete pinblock1", "clearPinKey : " + clearPinKey);
+
+
+
+
+		} catch (Throwable e) {
+
+		}
+		//Use the plain key(E7CB159098F02682308B82321EBA2C0A) to decrypt stringCipherNewUserKey to get the clear pin key
+		String stringCipherNewUserKey = StringUtil.tripleDesEncrypt("31313131313131313232323232323232", clearPinKey);
+
+		appState.stringCipherNewUserKey=stringCipherNewUserKey;
+
+
+
+		Log.d(">>>> complete", "stringCipherNewUserKey : " +  appState.stringCipherNewUserKey);
+		Log.d(">>>> complete", "static key : " + appState.PlainKeyInjected);
+
+
+		byte arryCipherNewUserKey[] = StringUtil.StrToHexByte(stringCipherNewUserKey);
+
+		Log.d(">>>> complete", "arryCipherNewUserKey : " + arryCipherNewUserKey);
+
+//			int value = PinPadInterface.updateUserKey(1, 0, arryCipherNewUserKey, 16);
+		PINPadInterface.open();
+		int value = com.cloudpos.jniinterface.PINPadInterface.updateUserKey(1, 0, arryCipherNewUserKey, 16);
+
+		Log.d(">>>>>> pinblock1 PinPadInterface.updateUserKey ",String.valueOf(value));
+
+
+		byte [] checkvalue={0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
+
+		Log.d(">>>>>> pinblock1  complete pinblock1", "byte of masterkey : " + checkvalue);
+
+		String checkvalueString = StringUtil.bytes2HexString(checkvalue);
+
+		Log.d(">>>>>> pinblock1  complete pinblock1", "byte of string checkvalueString  : " + checkvalueString);
+
+		String outcome = StringUtil.tripleDesEncrypt(clearPinKey, checkvalueString);
+
+
+		Log.d(">>>> complete pinblock1", "checkvalue  : " + outcome);
+
+		SecureStorage.store(Helper.IS_KEY_INJECTED,true);
+						SecureStorage.store(Helper.IS_PREPPING,false);
+
+
+		PINPadInterface.close();
+	}
+
+
 
 	private static final String EncryptTag = "EncryptTest";
 

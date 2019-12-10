@@ -152,6 +152,8 @@ public class TransResultActivity extends FuncActivity
 
 		MemoryUtil.setValue(this, MemoryUtil.LastTransactionTimeKey, new Date());
 
+		Log.i(">>>> complete  pinblock1  "," TransResultActivity Here Now " );
+
 
 		// title
         textTitle = (TextView)findViewById(R.id.tAppTitle);

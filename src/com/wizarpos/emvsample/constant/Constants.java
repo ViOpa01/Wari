@@ -90,7 +90,7 @@ public interface Constants
 	final byte PROCESS_REVERSAL       = 3;
 	final byte PROCESS_ADVICE_ONLINE  = 4;
 	final byte PROCESS_BATCH          = 5;
-	final byte PROCESS_ADVICE_OFFLINE = 6;
+	final byte PROCESS_ADVICE_OFFLINE = 4;//6;
 	
 	  
 	//----------------------------------------------------------------------
@@ -142,7 +142,7 @@ public interface Constants
 	final int PINPAD_NONE      = 3;
 
 	//TODO 28
-	final byte STATE_INPUT_OFFLINE_PIN       =15;
+	final byte STATE_INPUT_OFFLINE_PIN       =10;//15;
 
 
 	final byte STATE_PROCESS_EMV_CARD        =16;
@@ -235,7 +235,7 @@ public interface Constants
 	final byte EMV_APP_SELECTED             = 2;  // Application Select Completed
 	final byte EMV_READ_APP_DATA            = 3;  // Read Application Data Completed
 	final byte EMV_DATA_AUTH                = 4;  // Data Authentication Completed
-	final byte EMV_OFFLINE_PIN              = 5;
+	final byte EMV_OFFLINE_PIN              = 6;//5;
 	final byte EMV_ONLINE_ENC_PIN           = 6;  // notify Application prompt Caldholder enter Online PIN
 	final byte EMV_PIN_BYPASS_CONFIRM       = 7;  // notify Application confirm to Accepted PIN Bypass or not
 	final byte EMV_PROCESS_ONLINE           = 8;  // notify Application to Process Online

@@ -44,7 +44,6 @@ dependencies {
 //    implementation "org.jetbrains.anko:anko-sdk25-coroutines:$anko_version"
 //    implementation "org.jetbrains.anko:anko-appcompat-v7-coroutines:$anko_version"
     implementation 'com.android.support:multidex:1.0.3'
-    implementation project(':poslib-device-debug')
     implementation project(':cloudpossdk')
 
 //            {
@@ -113,6 +112,8 @@ dependencies {
     }
     implementation project(path: ':payviceconnect')
     implementation project(path: ':poslib-host')
+    implementation project(':poslib-device-debug')
+
     // optional - RxJava support for Room
 
 

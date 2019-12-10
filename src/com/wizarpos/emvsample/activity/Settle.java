@@ -54,13 +54,17 @@ public class Settle extends FuncActivity implements Constants
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
-		if(debug)Log.d(APP_TAG, "Settle onActivityResult, state[" + requestCode + "]result[" + resultCode + "]");
+		if(debug)Log.d(APP_TAG, " pinblock1  Settle onActivityResult, state[" + requestCode + "]result[" + resultCode + "]");
 		if(    requestCode != STATE_TRANS_END
 			&& (	appState.getErrorCode() > 0
 				|| resultCode != Activity.RESULT_OK
 			   )
 		  )
 		{
+			Log.i(">>>> complete  Settle Activity   pinblock1    requestCode != STATE_TRANS_END\n" +
+					"\t\t\t&& (\tappState.getErrorCode() > 0\n" +
+					"\t\t\t\t|| resultCode != Activity.RESULT_OK  "," showTransResult() " );
+
 			showTransResult();
 			return;
 		}

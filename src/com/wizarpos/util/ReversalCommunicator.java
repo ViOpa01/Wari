@@ -107,7 +107,9 @@ public class ReversalCommunicator {
 //        String decryptedKey = "";
 //        Log.d("reverse host",host);
 
-        host = "POSVAS";
+//        host = "POSVAS";
+          host = "EPMS";
+
 //        String decryptedKey = "";
         Log.d("reverse host",host);
 
@@ -313,25 +315,49 @@ public class ReversalCommunicator {
             } else {
                 String pinKey;
                 String decryptingKey;
-                if (this.mPinKey == null) {
-                    if (pinInfo.getPinBlock() != null) {
-                        pinKey = this.decryptKeyWithMasterKey(keyHolder.getPinKey(), keyHolder.getMasterKey(), keyHolder.isTestPlatform());
-                        decryptingKey = PosvasKeyProcessor.decryptWithTransportKey(StringUtil.toHexString(pinInfo.getKey()));
-                        String clearPinBlock = TripleDES.threeDesDecrypt(StringUtil.toHexString(pinInfo.getPinBlock()), decryptingKey);
-                        reEncryptedPinBlock = Utility.tripleDesEncrypt(pinKey, clearPinBlock);
+
+                if (host.equals("POSVAS")) {
+                    if (this.mPinKey == null) {
+                        if (pinInfo.getPinBlock() != null) {
+                            pinKey = this.decryptKeyWithMasterKey(keyHolder.getPinKey(), keyHolder.getMasterKey(), keyHolder.isTestPlatform());
+                            decryptingKey = PosvasKeyProcessor.decryptWithTransportKey(StringUtil.toHexString(pinInfo.getKey()));
+                            String clearPinBlock = TripleDES.threeDesDecrypt(StringUtil.toHexString(pinInfo.getPinBlock()), decryptingKey);
+                            reEncryptedPinBlock = Utility.tripleDesEncrypt(pinKey, clearPinBlock);
+                        }
+
+//                        return reEncryptedPinBlock;
+                    } else {
+                        pinKey = PosvasKeyProcessor.decryptWithTransportKey(StringUtil.toHexString(pinInfo.getKey()));
+                        decryptingKey = TripleDES.threeDesDecrypt(StringUtil.toHexString(pinInfo.getPinBlock()), pinKey);
+                        reEncryptedPinBlock = Utility.tripleDesEncrypt(this.mPinKey, decryptingKey);
+//                        return reEncryptedPinBlock;
+                    }
+                } else if (host.equals("EPMS")) {
+
+
+                    if (this.mPinKey == null) {
+                        if (pinInfo.getPinBlock() != null) {
+                            pinKey = this.decryptKeyWithMasterKey(keyHolder.getPinKey(), keyHolder.getMasterKey(), keyHolder.isTestPlatform());
+                            decryptingKey = GtmsKeyProcessor.decryptWithTransportKey(StringUtil.toHexString(pinInfo.getKey()));
+                            String clearPinBlock = TripleDES.threeDesDecrypt(StringUtil.toHexString(pinInfo.getPinBlock()), decryptingKey);
+                            reEncryptedPinBlock = Utility.tripleDesEncrypt(pinKey, clearPinBlock);
+                        }
+
+//                        return reEncryptedPinBlock;
+                    } else {
+                        pinKey = GtmsKeyProcessor.decryptWithTransportKey(StringUtil.toHexString(pinInfo.getKey()));
+                        decryptingKey = TripleDES.threeDesDecrypt(StringUtil.toHexString(pinInfo.getPinBlock()), pinKey);
+                        reEncryptedPinBlock = Utility.tripleDesEncrypt(this.mPinKey, decryptingKey);
+//                        return reEncryptedPinBlock;
                     }
 
-                    return reEncryptedPinBlock;
-                } else {
-                    pinKey = PosvasKeyProcessor.decryptWithTransportKey(StringUtil.toHexString(pinInfo.getKey()));
-                    decryptingKey = TripleDES.threeDesDecrypt(StringUtil.toHexString(pinInfo.getPinBlock()), pinKey);
-                    reEncryptedPinBlock = Utility.tripleDesEncrypt(this.mPinKey, decryptingKey);
-                    return reEncryptedPinBlock;
                 }
             }
         } catch (Exception var7) {
             throw new RuntimeException(var7);
         }
+
+        return reEncryptedPinBlock;
     }
 
     protected String getSessionKey(){
@@ -417,6 +443,10 @@ public class ReversalCommunicator {
                 case "POSVAS" :
                     dKey = PosvasKeyProcessor.getMasterKey(encryptedMasterKey, isTestPlatform);
                     break;
+
+//                case "EPMS" :
+//                    dKey = GtmsKeyProcessor.getMasterKey(encryptedMasterKey, isTestPlatform);
+//                    break;
 
                 default:
                     dKey = GtmsKeyProcessor.getMasterKey(encryptedMasterKey, isTestPlatform);

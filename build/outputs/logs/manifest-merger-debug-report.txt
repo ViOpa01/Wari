@@ -4,12 +4,11 @@ ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidM
 INJECTED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:2:1-226:12
 INJECTED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:2:1-226:12
 MERGED from [com.android.support:multidex:1.0.3] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\multidex-1.0.3.aar\3299eceb33cb2b04dfd19c247636a053\AndroidManifest.xml:17:1-22:12
-MERGED from [:poslib-commons-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-commons-debug.aar\09ea6188926781b063a134fd6f2ac0d6\AndroidManifest.xml:2:1-16:12
+MERGED from [:poslib-commons-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-commons-debug.aar\3c3200135e791a43f9d989b127824bc5\AndroidManifest.xml:2:1-16:12
 MERGED from [com.jakewharton.rxbinding2:rxbinding-design:2.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\rxbinding-design-2.1.1.aar\767eb9d928f4629a713e74511b68abb0\AndroidManifest.xml:2:1-8:12
 MERGED from [com.jakewharton.rxbinding2:rxbinding-kotlin:2.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\rxbinding-kotlin-2.1.1.aar\ea089fa3b90954ae3e0305c972457aca\AndroidManifest.xml:2:1-8:12
 MERGED from [com.jakewharton.rxbinding2:rxbinding:2.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\rxbinding-2.1.1.aar\88f96c42f41b54953aa5657f44b12936\AndroidManifest.xml:2:1-8:12
 MERGED from [io.reactivex.rxjava2:rxandroid:2.1.0] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\rxandroid-2.1.0.aar\d0ef9ce5c752154e934fbc85028fb750\AndroidManifest.xml:15:1-20:12
-MERGED from [:poslib-device-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-device-debug.aar\3867bc9ca85c011268ae0e699f0f9090\AndroidManifest.xml:2:1-18:12
 MERGED from [:cloudpossdk] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\cloudpossdk.aar\75e726610d1c6b7cdcdc3a7095455ef8\AndroidManifest.xml:2:1-11:12
 MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\cce2611189455a27145e4396003954c9\AndroidManifest.xml:2:1-11:12
 MERGED from [com.squareup.picasso:picasso:2.71828] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\picasso-2.71828.aar\911c4f5e78b4db998cc311ee9919e8c1\AndroidManifest.xml:2:1-14:12
@@ -27,7 +26,8 @@ MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\Favour\.gradle\cac
 MERGED from [android.arch.lifecycle:livedata:1.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\livedata-1.1.1.aar\d27f8bc687fb514a127f8ec84c04f373\AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.persistence.room:runtime:1.1.0] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\cdbffa06d212e1533c7ca583892707d2\AndroidManifest.xml:17:1-22:12
 MERGED from [:payviceconnect] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\92d2784b9022d9068af75ef2fafffa7d\AndroidManifest.xml:2:1-23:12
-MERGED from [:poslib-host] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-host-debug.aar\99cd1c1925c2e0f3789e56a6680bc00c\AndroidManifest.xml:2:1-16:12
+MERGED from [:poslib-host] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-host-debug.aar\c3eee8813b89509a5644def8df65a875\AndroidManifest.xml:2:1-16:12
+MERGED from [:poslib-device-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-device-debug.aar\a54f85ade64d7b97c74cb96b09669906\AndroidManifest.xml:2:1-18:12
 MERGED from [com.android.support:animated-vector-drawable:27.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-27.1.1.aar\7eb8a1e670a3eadd99fe8a5822fcc761\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:support-vector-drawable:27.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-27.1.1.aar\c153d2660bbc9d7b28c9db818cc732ba\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:support-core-ui:27.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\support-core-ui-27.1.1.aar\8ce338c4bd801a61d2cdd3598e4c2106\AndroidManifest.xml:17:1-22:12
@@ -61,8 +61,8 @@ INJECTED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\Andro
 INJECTED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:7:5-9:41
 MERGED from [com.android.support:multidex:1.0.3] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\multidex-1.0.3.aar\3299eceb33cb2b04dfd19c247636a053\AndroidManifest.xml:20:5-43
 MERGED from [com.android.support:multidex:1.0.3] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\multidex-1.0.3.aar\3299eceb33cb2b04dfd19c247636a053\AndroidManifest.xml:20:5-43
-MERGED from [:poslib-commons-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-commons-debug.aar\09ea6188926781b063a134fd6f2ac0d6\AndroidManifest.xml:7:5-9:41
-MERGED from [:poslib-commons-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-commons-debug.aar\09ea6188926781b063a134fd6f2ac0d6\AndroidManifest.xml:7:5-9:41
+MERGED from [:poslib-commons-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-commons-debug.aar\3c3200135e791a43f9d989b127824bc5\AndroidManifest.xml:7:5-9:41
+MERGED from [:poslib-commons-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-commons-debug.aar\3c3200135e791a43f9d989b127824bc5\AndroidManifest.xml:7:5-9:41
 MERGED from [com.jakewharton.rxbinding2:rxbinding-design:2.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\rxbinding-design-2.1.1.aar\767eb9d928f4629a713e74511b68abb0\AndroidManifest.xml:6:5-44
 MERGED from [com.jakewharton.rxbinding2:rxbinding-design:2.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\rxbinding-design-2.1.1.aar\767eb9d928f4629a713e74511b68abb0\AndroidManifest.xml:6:5-44
 MERGED from [com.jakewharton.rxbinding2:rxbinding-kotlin:2.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\rxbinding-kotlin-2.1.1.aar\ea089fa3b90954ae3e0305c972457aca\AndroidManifest.xml:6:5-44
@@ -71,8 +71,6 @@ MERGED from [com.jakewharton.rxbinding2:rxbinding:2.1.1] C:\Users\Favour\.gradle
 MERGED from [com.jakewharton.rxbinding2:rxbinding:2.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\rxbinding-2.1.1.aar\88f96c42f41b54953aa5657f44b12936\AndroidManifest.xml:6:5-44
 MERGED from [io.reactivex.rxjava2:rxandroid:2.1.0] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\rxandroid-2.1.0.aar\d0ef9ce5c752154e934fbc85028fb750\AndroidManifest.xml:18:5-43
 MERGED from [io.reactivex.rxjava2:rxandroid:2.1.0] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\rxandroid-2.1.0.aar\d0ef9ce5c752154e934fbc85028fb750\AndroidManifest.xml:18:5-43
-MERGED from [:poslib-device-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-device-debug.aar\3867bc9ca85c011268ae0e699f0f9090\AndroidManifest.xml:7:5-9:41
-MERGED from [:poslib-device-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-device-debug.aar\3867bc9ca85c011268ae0e699f0f9090\AndroidManifest.xml:7:5-9:41
 MERGED from [:cloudpossdk] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\cloudpossdk.aar\75e726610d1c6b7cdcdc3a7095455ef8\AndroidManifest.xml:7:5-9:41
 MERGED from [:cloudpossdk] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\cloudpossdk.aar\75e726610d1c6b7cdcdc3a7095455ef8\AndroidManifest.xml:7:5-9:41
 MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\cce2611189455a27145e4396003954c9\AndroidManifest.xml:5:5-7:41
@@ -107,8 +105,10 @@ MERGED from [android.arch.persistence.room:runtime:1.1.0] C:\Users\Favour\.gradl
 MERGED from [android.arch.persistence.room:runtime:1.1.0] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\cdbffa06d212e1533c7ca583892707d2\AndroidManifest.xml:20:5-44
 MERGED from [:payviceconnect] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\92d2784b9022d9068af75ef2fafffa7d\AndroidManifest.xml:7:5-9:41
 MERGED from [:payviceconnect] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\92d2784b9022d9068af75ef2fafffa7d\AndroidManifest.xml:7:5-9:41
-MERGED from [:poslib-host] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-host-debug.aar\99cd1c1925c2e0f3789e56a6680bc00c\AndroidManifest.xml:7:5-9:41
-MERGED from [:poslib-host] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-host-debug.aar\99cd1c1925c2e0f3789e56a6680bc00c\AndroidManifest.xml:7:5-9:41
+MERGED from [:poslib-host] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-host-debug.aar\c3eee8813b89509a5644def8df65a875\AndroidManifest.xml:7:5-9:41
+MERGED from [:poslib-host] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-host-debug.aar\c3eee8813b89509a5644def8df65a875\AndroidManifest.xml:7:5-9:41
+MERGED from [:poslib-device-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-device-debug.aar\a54f85ade64d7b97c74cb96b09669906\AndroidManifest.xml:7:5-9:41
+MERGED from [:poslib-device-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-device-debug.aar\a54f85ade64d7b97c74cb96b09669906\AndroidManifest.xml:7:5-9:41
 MERGED from [com.android.support:animated-vector-drawable:27.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-27.1.1.aar\7eb8a1e670a3eadd99fe8a5822fcc761\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:animated-vector-drawable:27.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-27.1.1.aar\7eb8a1e670a3eadd99fe8a5822fcc761\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-vector-drawable:27.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-27.1.1.aar\c153d2660bbc9d7b28c9db818cc732ba\AndroidManifest.xml:20:5-44
@@ -147,10 +147,10 @@ INJECTED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\Andro
 		INJECTED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml
 uses-permission#android.permission.INTERNET
 ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:11:5-67
-MERGED from [:poslib-commons-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-commons-debug.aar\09ea6188926781b063a134fd6f2ac0d6\AndroidManifest.xml:11:5-67
-MERGED from [:poslib-commons-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-commons-debug.aar\09ea6188926781b063a134fd6f2ac0d6\AndroidManifest.xml:11:5-67
-MERGED from [:poslib-host] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-host-debug.aar\99cd1c1925c2e0f3789e56a6680bc00c\AndroidManifest.xml:11:5-67
-MERGED from [:poslib-host] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-host-debug.aar\99cd1c1925c2e0f3789e56a6680bc00c\AndroidManifest.xml:11:5-67
+MERGED from [:poslib-commons-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-commons-debug.aar\3c3200135e791a43f9d989b127824bc5\AndroidManifest.xml:11:5-67
+MERGED from [:poslib-commons-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-commons-debug.aar\3c3200135e791a43f9d989b127824bc5\AndroidManifest.xml:11:5-67
+MERGED from [:poslib-host] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-host-debug.aar\c3eee8813b89509a5644def8df65a875\AndroidManifest.xml:11:5-67
+MERGED from [:poslib-host] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-host-debug.aar\c3eee8813b89509a5644def8df65a875\AndroidManifest.xml:11:5-67
 	android:name
 		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:11:22-64
 uses-permission#android.permission.CLOUDPOS_MSR
@@ -542,47 +542,33 @@ ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidM
 	android:name
 		ADDED from C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok\AndroidManifest.xml:223:19-66
 uses-permission#android.permission.READ_PHONE_STATE
-ADDED from [:poslib-commons-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-commons-debug.aar\09ea6188926781b063a134fd6f2ac0d6\AndroidManifest.xml:12:5-75
-MERGED from [:poslib-device-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-device-debug.aar\3867bc9ca85c011268ae0e699f0f9090\AndroidManifest.xml:11:5-75
-MERGED from [:poslib-device-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-device-debug.aar\3867bc9ca85c011268ae0e699f0f9090\AndroidManifest.xml:11:5-75
+ADDED from [:poslib-commons-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-commons-debug.aar\3c3200135e791a43f9d989b127824bc5\AndroidManifest.xml:12:5-75
 MERGED from [:payviceconnect] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\92d2784b9022d9068af75ef2fafffa7d\AndroidManifest.xml:14:5-75
 MERGED from [:payviceconnect] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\92d2784b9022d9068af75ef2fafffa7d\AndroidManifest.xml:14:5-75
-MERGED from [:poslib-host] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-host-debug.aar\99cd1c1925c2e0f3789e56a6680bc00c\AndroidManifest.xml:12:5-75
-MERGED from [:poslib-host] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-host-debug.aar\99cd1c1925c2e0f3789e56a6680bc00c\AndroidManifest.xml:12:5-75
+MERGED from [:poslib-host] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-host-debug.aar\c3eee8813b89509a5644def8df65a875\AndroidManifest.xml:12:5-75
+MERGED from [:poslib-host] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-host-debug.aar\c3eee8813b89509a5644def8df65a875\AndroidManifest.xml:12:5-75
+MERGED from [:poslib-device-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-device-debug.aar\a54f85ade64d7b97c74cb96b09669906\AndroidManifest.xml:11:5-75
+MERGED from [:poslib-device-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-device-debug.aar\a54f85ade64d7b97c74cb96b09669906\AndroidManifest.xml:11:5-75
 	android:name
-		ADDED from [:poslib-commons-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-commons-debug.aar\09ea6188926781b063a134fd6f2ac0d6\AndroidManifest.xml:12:22-72
+		ADDED from [:poslib-commons-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-commons-debug.aar\3c3200135e791a43f9d989b127824bc5\AndroidManifest.xml:12:22-72
 uses-permission#ANDROID.PERMISSION.CHANGE_NETWORK_STATE
-ADDED from [:poslib-commons-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-commons-debug.aar\09ea6188926781b063a134fd6f2ac0d6\AndroidManifest.xml:13:5-79
-MERGED from [:poslib-device-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-device-debug.aar\3867bc9ca85c011268ae0e699f0f9090\AndroidManifest.xml:12:5-79
-MERGED from [:poslib-device-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-device-debug.aar\3867bc9ca85c011268ae0e699f0f9090\AndroidManifest.xml:12:5-79
-MERGED from [:poslib-host] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-host-debug.aar\99cd1c1925c2e0f3789e56a6680bc00c\AndroidManifest.xml:13:5-79
-MERGED from [:poslib-host] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-host-debug.aar\99cd1c1925c2e0f3789e56a6680bc00c\AndroidManifest.xml:13:5-79
+ADDED from [:poslib-commons-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-commons-debug.aar\3c3200135e791a43f9d989b127824bc5\AndroidManifest.xml:13:5-79
+MERGED from [:poslib-host] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-host-debug.aar\c3eee8813b89509a5644def8df65a875\AndroidManifest.xml:13:5-79
+MERGED from [:poslib-host] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-host-debug.aar\c3eee8813b89509a5644def8df65a875\AndroidManifest.xml:13:5-79
+MERGED from [:poslib-device-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-device-debug.aar\a54f85ade64d7b97c74cb96b09669906\AndroidManifest.xml:12:5-79
+MERGED from [:poslib-device-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-device-debug.aar\a54f85ade64d7b97c74cb96b09669906\AndroidManifest.xml:12:5-79
 	android:name
-		ADDED from [:poslib-commons-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-commons-debug.aar\09ea6188926781b063a134fd6f2ac0d6\AndroidManifest.xml:13:22-76
+		ADDED from [:poslib-commons-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-commons-debug.aar\3c3200135e791a43f9d989b127824bc5\AndroidManifest.xml:13:22-76
 uses-permission#android.permission.ACCESS_NETWORK_STATE
-ADDED from [:poslib-commons-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-commons-debug.aar\09ea6188926781b063a134fd6f2ac0d6\AndroidManifest.xml:14:5-79
-MERGED from [:poslib-device-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-device-debug.aar\3867bc9ca85c011268ae0e699f0f9090\AndroidManifest.xml:13:5-79
-MERGED from [:poslib-device-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-device-debug.aar\3867bc9ca85c011268ae0e699f0f9090\AndroidManifest.xml:13:5-79
+ADDED from [:poslib-commons-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-commons-debug.aar\3c3200135e791a43f9d989b127824bc5\AndroidManifest.xml:14:5-79
 MERGED from [:payviceconnect] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\92d2784b9022d9068af75ef2fafffa7d\AndroidManifest.xml:13:5-79
 MERGED from [:payviceconnect] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\92d2784b9022d9068af75ef2fafffa7d\AndroidManifest.xml:13:5-79
-MERGED from [:poslib-host] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-host-debug.aar\99cd1c1925c2e0f3789e56a6680bc00c\AndroidManifest.xml:14:5-79
-MERGED from [:poslib-host] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-host-debug.aar\99cd1c1925c2e0f3789e56a6680bc00c\AndroidManifest.xml:14:5-79
+MERGED from [:poslib-host] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-host-debug.aar\c3eee8813b89509a5644def8df65a875\AndroidManifest.xml:14:5-79
+MERGED from [:poslib-host] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-host-debug.aar\c3eee8813b89509a5644def8df65a875\AndroidManifest.xml:14:5-79
+MERGED from [:poslib-device-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-device-debug.aar\a54f85ade64d7b97c74cb96b09669906\AndroidManifest.xml:13:5-79
+MERGED from [:poslib-device-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-device-debug.aar\a54f85ade64d7b97c74cb96b09669906\AndroidManifest.xml:13:5-79
 	android:name
-		ADDED from [:poslib-commons-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-commons-debug.aar\09ea6188926781b063a134fd6f2ac0d6\AndroidManifest.xml:14:22-76
-uses-permission#android.permission.BLUETOOTH
-ADDED from [:poslib-device-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-device-debug.aar\3867bc9ca85c011268ae0e699f0f9090\AndroidManifest.xml:14:5-68
-	android:name
-		ADDED from [:poslib-device-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-device-debug.aar\3867bc9ca85c011268ae0e699f0f9090\AndroidManifest.xml:14:22-65
-uses-permission#android.permission.BLUETOOTH_ADMIN
-ADDED from [:poslib-device-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-device-debug.aar\3867bc9ca85c011268ae0e699f0f9090\AndroidManifest.xml:15:5-74
-	android:name
-		ADDED from [:poslib-device-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-device-debug.aar\3867bc9ca85c011268ae0e699f0f9090\AndroidManifest.xml:15:22-71
-uses-permission#android.permission.ACCESS_COARSE_LOCATION
-ADDED from [:poslib-device-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-device-debug.aar\3867bc9ca85c011268ae0e699f0f9090\AndroidManifest.xml:16:5-81
-MERGED from [:payviceconnect] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\92d2784b9022d9068af75ef2fafffa7d\AndroidManifest.xml:11:5-81
-MERGED from [:payviceconnect] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\92d2784b9022d9068af75ef2fafffa7d\AndroidManifest.xml:11:5-81
-	android:name
-		ADDED from [:poslib-device-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-device-debug.aar\3867bc9ca85c011268ae0e699f0f9090\AndroidManifest.xml:16:22-78
+		ADDED from [:poslib-commons-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-commons-debug.aar\3c3200135e791a43f9d989b127824bc5\AndroidManifest.xml:14:22-76
 provider#com.squareup.picasso.PicassoProvider
 ADDED from [com.squareup.picasso:picasso:2.71828] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\picasso-2.71828.aar\911c4f5e78b4db998cc311ee9919e8c1\AndroidManifest.xml:8:9-11:40
 	android:authorities
@@ -601,6 +587,12 @@ ADDED from [android.arch.lifecycle:extensions:1.1.1] C:\Users\Favour\.gradle\cac
 		ADDED from [android.arch.lifecycle:extensions:1.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\extensions-1.1.1.aar\43512bbb026a7600365892aebde41eb1\AndroidManifest.xml:26:13-37
 	android:name
 		ADDED from [android.arch.lifecycle:extensions:1.1.1] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\extensions-1.1.1.aar\43512bbb026a7600365892aebde41eb1\AndroidManifest.xml:24:13-83
+uses-permission#android.permission.ACCESS_COARSE_LOCATION
+ADDED from [:payviceconnect] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\92d2784b9022d9068af75ef2fafffa7d\AndroidManifest.xml:11:5-81
+MERGED from [:poslib-device-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-device-debug.aar\a54f85ade64d7b97c74cb96b09669906\AndroidManifest.xml:16:5-81
+MERGED from [:poslib-device-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-device-debug.aar\a54f85ade64d7b97c74cb96b09669906\AndroidManifest.xml:16:5-81
+	android:name
+		ADDED from [:payviceconnect] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\92d2784b9022d9068af75ef2fafffa7d\AndroidManifest.xml:11:22-78
 uses-permission#android.permission.ACCESS_FINE_LOCATION
 ADDED from [:payviceconnect] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\92d2784b9022d9068af75ef2fafffa7d\AndroidManifest.xml:12:5-79
 	android:name
@@ -613,3 +605,11 @@ ADDED from [:payviceconnect] C:\Users\Favour\.gradle\caches\transforms-1\files-1
 		ADDED from [:payviceconnect] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\92d2784b9022d9068af75ef2fafffa7d\AndroidManifest.xml:20:13-36
 	android:name
 		ADDED from [:payviceconnect] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\payviceconnect-debug.aar\92d2784b9022d9068af75ef2fafffa7d\AndroidManifest.xml:18:13-83
+uses-permission#android.permission.BLUETOOTH
+ADDED from [:poslib-device-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-device-debug.aar\a54f85ade64d7b97c74cb96b09669906\AndroidManifest.xml:14:5-68
+	android:name
+		ADDED from [:poslib-device-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-device-debug.aar\a54f85ade64d7b97c74cb96b09669906\AndroidManifest.xml:14:22-65
+uses-permission#android.permission.BLUETOOTH_ADMIN
+ADDED from [:poslib-device-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-device-debug.aar\a54f85ade64d7b97c74cb96b09669906\AndroidManifest.xml:15:5-74
+	android:name
+		ADDED from [:poslib-device-debug] C:\Users\Favour\.gradle\caches\transforms-1\files-1.1\poslib-device-debug.aar\a54f85ade64d7b97c74cb96b09669906\AndroidManifest.xml:15:22-71

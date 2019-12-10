@@ -9,9 +9,8 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="pan" />
     <option name="TOOL_WINDOW_LOG_LEVEL" value="verbose" />
-    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
     <option name="TOOL_WINDOW_REGEXP_FILTER" value="false" />
   </component>
   <component name="AutomaticModuleUnloader">
@@ -43,7 +42,7 @@
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="0274510815006001" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="New_Device_API_25" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -75,41 +74,75 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/InputOnlinePINActivity.java">
+        <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/ProcessOnlineActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="385">
-              <caret line="220" column="46" selection-start-line="220" selection-start-column="22" selection-end-line="220" selection-end-column="46" />
+            <state relative-caret-position="95">
+              <caret line="74" column="4" selection-start-line="74" selection-start-column="4" selection-end-line="75" selection-end-column="33" />
               <folding>
                 <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/db/TransDetailInfo.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="12">
-              <caret line="172" column="29" selection-start-line="172" selection-start-column="18" selection-end-line="172" selection-end-column="29" />
-              <folding>
-                <element signature="e#4310#4311#0" expanded="true" />
-                <element signature="e#4338#4339#0" expanded="true" />
-                <element signature="e#4993#4994#0" expanded="true" />
-                <element signature="e#5022#5023#0" expanded="true" />
-                <element signature="e#5078#5079#0" expanded="true" />
-                <element signature="e#5117#5118#0" expanded="true" />
-                <element signature="e#5469#5470#0" expanded="true" />
-                <element signature="e#5511#5512#0" expanded="true" />
+                <element signature="e#17160#21655#0" expanded="true" />
+                <element signature="e#21654#21655#0" expanded="true" />
+                <element signature="class#doVAs#0;class#ProcessOnlineActivity#0" />
+                <element signature="e#27926#27927#0" expanded="true" />
+                <element signature="e#27953#27954#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/FunctionsAll.java">
+        <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/FuncMenuActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="211" column="56" selection-start-line="211" selection-start-column="56" selection-end-line="211" selection-end-column="56" />
+            <state relative-caret-position="-208">
+              <caret line="180" column="47" selection-start-line="180" selection-start-column="47" selection-end-line="180" selection-end-column="47" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#8679#8680#0" expanded="true" />
+                <element signature="e#8695#8696#0" expanded="true" />
+                <element signature="e#10389#10390#0" expanded="true" />
+                <element signature="e#10451#10452#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/InputOfflinePINActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="815">
+              <caret line="56" column="42" selection-start-line="56" selection-start-column="42" selection-end-line="56" selection-end-column="70" />
+              <folding>
+                <element signature="e#2339#2340#0" expanded="true" />
+                <element signature="e#2422#2423#0" expanded="true" />
+                <element signature="e#2870#2871#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/ProcessEMVCardActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1309">
+              <caret line="124" column="4" selection-start-line="124" selection-start-column="4" selection-end-line="124" selection-end-column="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/wizarpos/util/StringUtil.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-402">
+              <caret line="452" selection-start-line="452" selection-end-line="452" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/MainApp.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1292">
+              <caret line="704" column="43" selection-start-line="704" selection-start-column="43" selection-end-line="704" selection-end-column="43" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -118,46 +151,23 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/cloudpossdk.aar/75e726610d1c6b7cdcdc3a7095455ef8/jars/libs/cloudpossdkinterfaceimpl_001_en.jar!/com/cloudpos/jniinterface/PINPadInterface.class">
+        <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-26/android/app/Application.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="76">
-              <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+            <state relative-caret-position="437">
+              <caret line="46" column="13" selection-start-line="46" selection-start-column="13" selection-end-line="46" selection-end-column="13" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/cloudpossdk.aar/75e726610d1c6b7cdcdc3a7095455ef8/jars/classes.jar!/com/wizarpos/jni/PinPadInterface.class">
+        <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/transaction/Nibss.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="76">
-              <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/keys/AuthInfo.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
-              <caret line="8" column="42" lean-forward="true" selection-start-line="8" selection-start-column="42" selection-end-line="8" selection-end-column="42" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/keys/PINPadException.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="38">
-              <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/keys/KeyInjector.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="95">
-              <caret line="10" column="19" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
+            <state relative-caret-position="58">
+              <caret line="74" column="79" lean-forward="true" selection-start-line="74" selection-start-column="79" selection-end-line="74" selection-end-column="79" />
+              <folding>
+                <element signature="e#31663#31664#0" expanded="true" />
+                <element signature="e#31698#31699#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -165,8 +175,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/FuncActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="1238" column="12" selection-start-line="1238" selection-start-column="8" selection-end-line="1238" selection-end-column="16" />
+            <state relative-caret-position="19">
+              <caret line="80" column="26" selection-start-line="80" selection-start-column="26" selection-end-line="80" selection-end-column="26" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -175,10 +185,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/InputPINActivity.java">
+        <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/constant/Constants.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="227">
-              <caret line="296" column="16" selection-start-line="296" selection-start-column="16" selection-end-line="296" selection-end-column="16" />
+            <state relative-caret-position="620">
+              <caret line="274" selection-start-line="274" selection-end-line="274" />
             </state>
           </provider>
         </entry>
@@ -199,36 +209,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>updateUserKey</find>
-      <find>poslibdb</find>
-      <find>nibssData</find>
-      <find>pinblock1</find>
-      <find>Sale</find>
-      <find>resetCardError</find>
-      <find>PlainKeyInjected</find>
-      <find>msg</find>
-      <find>getCardEntryMode</find>
-      <find>getEMVStatus</find>
-      <find>setEMVStatus</find>
-      <find>eventType</find>
-      <find>CARD_INSERT_NOTIFIER</find>
-      <find>emvProcessNextCompleted</find>
-      <find>capk</find>
-      <find>aid</find>
-      <find>Nibss</find>
-      <find>A0000003710001</find>
-      <find>_instance</find>
-      <find>setPinBlock</find>
-      <find>setPINLength</find>
-      <find>Update</find>
-      <find>updateUser</find>
-      <find>clearPinKey</find>
-      <find>PINPadInterface</find>
-      <find>PinPadInterface</find>
-      <find>AuthInfo</find>
-      <find>posli</find>
-      <find>pinblock</find>
-      <find>getPinBlock</find>
+      <find>showTransResult()</find>
+      <find>showTransResult</find>
+      <find>setErrorCode</find>
+      <find>transactionResult</find>
+      <find>STATE_INPUT_OFFLINE_PIN</find>
+      <find>IdleActivity</find>
+      <find>handleMessageSafe</find>
+      <find>Here again handleMessageSafe</find>
+      <find>COMPLETE_APPROVE_ONLINE</find>
+      <find>handleMessage method  is called</find>
+      <find>setFunActivity</find>
+      <find>setEmvOfflinePinCallbackHandler</find>
+      <find>STATUS_COMPLETION</find>
+      <find>EMVCard</find>
+      <find>StringedPinBlock</find>
+      <find>EMV_PROCESS_NEXT_COMPLETED_NOTIFIER</find>
+      <find>FuncMenu</find>
+      <find>mActivity</find>
+      <find>emv_process_next</find>
+      <find>appState.clearPinKey</find>
+      <find>InputOf</find>
+      <find>s</find>
+      <find>appState.clearPin</find>
+      <find>_clearpinKey</find>
+      <find>offline</find>
+      <find>online</find>
+      <find>ProcessEMVCardActivity</find>
+      <find>start</find>
+      <find>pin</find>
+      <find>CLEAR_PIN_KEY</find>
     </findStrings>
     <replaceStrings>
       <replace>printerDevices</replace>
@@ -266,14 +276,9 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/com/wizarpos/emvsample/history_summary/EODActivity.kt" />
-        <option value="$PROJECT_DIR$/src/com/wizarpos/emvsample/db/detailed/EodData.kt" />
-        <option value="$PROJECT_DIR$/src/com/wizarpos/emvsample/db/detailed/EodDoa.kt" />
-        <option value="$PROJECT_DIR$/src/com/wizarpos/emvsample/db/detailed/EodData.java" />
         <option value="$PROJECT_DIR$/src/com/wizarpos/emvsample/db/detailed/EodDoa.java" />
         <option value="$PROJECT_DIR$/src/com/wizarpos/emvsample/db/detailed/TransDataBase.kt" />
         <option value="$PROJECT_DIR$/res/layout/activity_idle.xml" />
-        <option value="$PROJECT_DIR$/src/com/wizarpos/emvsample/constant/Constants.java" />
         <option value="$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/ConfirmBypassPinActivity.java" />
         <option value="$PROJECT_DIR$/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/src/com/wizarpos/emvsample/services/cable_tv/multichoice/viewmodels/MultichoiceViewModel.kt" />
@@ -296,27 +301,32 @@
         <option value="$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/InputAmountActivity.java" />
         <option value="$PROJECT_DIR$/src/com/wizarpos/emvsample/service/CallHomeService.java" />
         <option value="$PROJECT_DIR$/src/com/wizarpos/emvsample/BaseCard.java" />
-        <option value="$PROJECT_DIR$/src/com/wizarpos/util/StringUtil.java" />
         <option value="$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/CardFunctions.java" />
-        <option value="$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/Sale.java" />
         <option value="$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/RequestCardActivity.java" />
-        <option value="$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/ProcessEMVCardActivity.java" />
         <option value="$PROJECT_DIR$/src/com/wizarpos/emvsample/db/AIDService.java" />
-        <option value="$PROJECT_DIR$/src/com/wizarpos/emvsample/MainApp.java" />
         <option value="$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/login/TripleDES.java" />
-        <option value="$PROJECT_DIR$/src/com/wizarpos/emvsample/transaction/Nibss.java" />
-        <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/src/com/wizarpos/jni/PinPadInterface.java" />
-        <option value="$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/ProcessOnlineActivity.java" />
-        <option value="$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/FuncMenuActivity.java" />
-        <option value="$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/InputOnlinePINActivity.java" />
         <option value="$PROJECT_DIR$/src/com/wizarpos/emvsample/keys/KeyInjector.java" />
-        <option value="$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/IdleActivity.java" />
-        <option value="$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/FunctionsAll.java" />
-        <option value="$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/FuncActivity.java" />
-        <option value="$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/TransResultActivity.java" />
         <option value="$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/InputPINActivity.java" />
         <option value="$PROJECT_DIR$/src/com/wizarpos/emvsample/keys/AuthInfo.java" />
+        <option value="$PROJECT_DIR$/src/com/wizarpos/util/ReversalCommunicator.java" />
+        <option value="$PROJECT_DIR$/src/com/wizarpos/util/StringUtil.java" />
+        <option value="$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/TransResultActivity.java" />
+        <option value="$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/Settle.java" />
+        <option value="$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/Sale.java" />
+        <option value="$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/FunctionsAll.java" />
+        <option value="$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/IdleActivity.java" />
+        <option value="$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/InputOnlinePINActivity.java" />
+        <option value="$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/FuncActivity.java" />
+        <option value="$PROJECT_DIR$/build.gradle" />
+        <option value="$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/login/Helper.java" />
+        <option value="$PROJECT_DIR$/src/com/wizarpos/emvsample/MainApp.java" />
+        <option value="$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/FuncMenuActivity.java" />
+        <option value="$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/ProcessOnlineActivity.java" />
+        <option value="$PROJECT_DIR$/src/com/wizarpos/emvsample/constant/Constants.java" />
+        <option value="$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/InputOfflinePINActivity.java" />
+        <option value="$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/ProcessEMVCardActivity.java" />
+        <option value="$PROJECT_DIR$/src/com/wizarpos/emvsample/transaction/Nibss.java" />
       </list>
     </option>
   </component>
@@ -331,30 +341,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
-      <pane id="PackagesPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="Wariok" type="58d84e3e:PackageViewProjectNode" />
-              <item name="Wariok" type="616d4139:PackageViewModuleNode" />
-            </path>
-            <path>
-              <item name="Wariok" type="58d84e3e:PackageViewProjectNode" />
-              <item name="Wariok" type="616d4139:PackageViewModuleNode" />
-              <item name="com" type="1f31426a:PackageElementNode" />
-            </path>
-            <path>
-              <item name="Wariok" type="58d84e3e:PackageViewProjectNode" />
-              <item name="Wariok" type="616d4139:PackageViewModuleNode" />
-              <item name="com" type="1f31426a:PackageElementNode" />
-              <item name="wizarpos" type="1f31426a:PackageElementNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -384,12 +370,36 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="Wariok" type="58d84e3e:PackageViewProjectNode" />
+              <item name="Wariok" type="616d4139:PackageViewModuleNode" />
+            </path>
+            <path>
+              <item name="Wariok" type="58d84e3e:PackageViewProjectNode" />
+              <item name="Wariok" type="616d4139:PackageViewModuleNode" />
+              <item name="com" type="1f31426a:PackageElementNode" />
+            </path>
+            <path>
+              <item name="Wariok" type="58d84e3e:PackageViewProjectNode" />
+              <item name="Wariok" type="616d4139:PackageViewModuleNode" />
+              <item name="com" type="1f31426a:PackageElementNode" />
+              <item name="wizarpos" type="1f31426a:PackageElementNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="AndroidView" />
       <pane id="Course" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="WP19201Q10000906" />
-    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2019-11-23T16:22:19.861Z" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2019-12-09T12:30:10.464Z" />
     <property name="ExportApk.ApkPath" value="C:\Users\Favour\AndroidStudioProjects\wari-onlinecard\Wariok" />
     <property name="ExportApk.BuildVariants" value="release" />
     <property name="ExportApk.SignV1" value="true" />
@@ -1007,9 +1017,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49253732" weight="0.4738255" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49253732" weight="0.2872483" />
       <window_info id="Captures" order="1" sideWeight="0.5060241" side_tool="true" weight="0.22416107" />
       <window_info id="Structure" order="2" sideWeight="0.50389105" side_tool="true" weight="0.22751679" />
       <window_info id="Favorites" order="3" sideWeight="0.5074627" side_tool="true" weight="0.47478476" />
@@ -1019,18 +1028,18 @@
       <window_info id="Resources Explorer" order="7" weight="0.32885906" />
       <window_info id="Build Variants" order="8" sideWeight="0.5060241" side_tool="true" weight="0.22416107" />
       <window_info anchor="bottom" x="23" y="205" width="1490" height="413" id="Version Control" order="0" weight="0.58498585" />
-      <window_info anchor="bottom" x="23" y="266" width="1490" height="291" id="Build" order="1" sideWeight="0.4986577" weight="0.6487252" />
-      <window_info anchor="bottom" id="TODO" order="2" weight="0.3243626" />
-      <window_info anchor="bottom" id="Educational.CheckDetails" order="3" />
-      <window_info anchor="bottom" id="Terminal" order="4" weight="0.31586403" />
-      <window_info anchor="bottom" id="Event Log" order="5" sideWeight="0.50201344" side_tool="true" weight="0.47875354" />
-      <window_info anchor="bottom" id="Android Profiler" order="6" />
-      <window_info anchor="bottom" id="Run" order="7" weight="0.4348442" />
-      <window_info anchor="bottom" id="Debug" order="8" weight="0.3286119" />
-      <window_info anchor="bottom" id="Find" order="9" weight="0.32719547" />
-      <window_info anchor="bottom" id="Messages" order="10" />
-      <window_info anchor="bottom" id="Inspection Results" order="11" weight="0.3286119" />
-      <window_info anchor="bottom" x="29" y="484" width="1490" height="353" id="Logcat" order="12" sideWeight="0.49798658" weight="0.50708216" />
+      <window_info active="true" anchor="bottom" x="29" y="484" width="1490" height="353" id="Logcat" order="1" sideWeight="0.49798658" visible="true" weight="0.60339946" />
+      <window_info anchor="bottom" x="23" y="266" width="1490" height="291" id="Build" order="2" sideWeight="0.4986577" weight="0.47025496" />
+      <window_info anchor="bottom" id="TODO" order="3" weight="0.3243626" />
+      <window_info anchor="bottom" id="Educational.CheckDetails" order="4" />
+      <window_info anchor="bottom" id="Terminal" order="5" weight="0.47592068" />
+      <window_info anchor="bottom" id="Event Log" order="6" sideWeight="0.50201344" side_tool="true" weight="0.47875354" />
+      <window_info anchor="bottom" id="Android Profiler" order="7" />
+      <window_info anchor="bottom" id="Run" order="8" weight="0.4348442" />
+      <window_info anchor="bottom" id="Debug" order="9" weight="0.3286119" />
+      <window_info anchor="bottom" id="Find" order="10" weight="0.32719547" />
+      <window_info anchor="bottom" id="Messages" order="11" />
+      <window_info anchor="bottom" id="Inspection Results" order="12" weight="0.3286119" />
       <window_info anchor="right" x="0" y="0" width="337" height="638" id="Documentation" order="0" side_tool="true" weight="0.3295302" />
       <window_info anchor="right" id="Device File Explorer" order="1" side_tool="true" />
       <window_info anchor="right" id="Capture Analysis" order="2" />
@@ -1042,8 +1051,8 @@
       <window_info anchor="right" id="Schema Explorer" order="8" />
     </layout>
     <layout-to-restore>
-      <window_info id="Captures" order="0" sideWeight="0.5060241" side_tool="true" weight="0.22416107" />
-      <window_info content_ui="combo" id="Project" order="1" sideWeight="0.49253732" visible="true" weight="0.47449663" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49253732" visible="true" weight="0.2872483" />
+      <window_info id="Captures" order="1" sideWeight="0.5060241" side_tool="true" weight="0.22416107" />
       <window_info id="Structure" order="2" sideWeight="0.50389105" side_tool="true" weight="0.22751679" />
       <window_info id="Favorites" order="3" sideWeight="0.5074627" side_tool="true" weight="0.47478476" />
       <window_info id="Image Layers" order="4" />
@@ -1052,7 +1061,7 @@
       <window_info id="Resources Explorer" order="7" weight="0.32885906" />
       <window_info id="Build Variants" order="8" sideWeight="0.5060241" side_tool="true" weight="0.22416107" />
       <window_info anchor="bottom" x="23" y="205" width="1490" height="413" id="Version Control" order="0" weight="0.58498585" />
-      <window_info active="true" anchor="bottom" x="23" y="266" width="1490" height="291" id="Build" order="1" sideWeight="0.4986577" visible="true" weight="0.407932" />
+      <window_info anchor="bottom" x="23" y="266" width="1490" height="291" id="Build" order="1" sideWeight="0.4986577" weight="0.47025496" />
       <window_info anchor="bottom" id="TODO" order="2" weight="0.3243626" />
       <window_info anchor="bottom" id="Educational.CheckDetails" order="3" />
       <window_info anchor="bottom" id="Terminal" order="4" weight="0.31586403" />
@@ -1063,7 +1072,7 @@
       <window_info anchor="bottom" id="Find" order="9" weight="0.32719547" />
       <window_info anchor="bottom" id="Messages" order="10" />
       <window_info anchor="bottom" id="Inspection Results" order="11" weight="0.3286119" />
-      <window_info anchor="bottom" x="29" y="484" width="1490" height="353" id="Logcat" order="12" sideWeight="0.49798658" weight="0.47875354" />
+      <window_info anchor="bottom" x="29" y="484" width="1490" height="353" id="Logcat" order="12" sideWeight="0.49798658" weight="0.60764873" />
       <window_info anchor="right" x="0" y="0" width="337" height="638" id="Documentation" order="0" side_tool="true" weight="0.3295302" />
       <window_info anchor="right" id="Device File Explorer" order="1" side_tool="true" />
       <window_info anchor="right" id="Capture Analysis" order="2" />
@@ -1161,331 +1170,10 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/wizarpos/util/ReversalCommunicator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="227">
-          <caret line="71" column="27" selection-start-line="71" selection-start-column="27" selection-end-line="71" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/TransResultActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="675">
-          <caret line="729" column="18" selection-start-line="729" selection-start-column="18" selection-end-line="729" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/poslib-host-debug.aar/99cd1c1925c2e0f3789e56a6680bc00c/jars/classes.jar!/com/iisysgroup/poslib/ISO/POSVAS/PosvasKeyProcessor.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="79">
-          <caret line="37" selection-start-line="37" selection-end-line="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-26/javax/crypto/Cipher.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="174">
-          <caret line="2675" selection-start-line="2675" selection-end-line="2675" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/poslib-commons-debug.aar/09ea6188926781b063a134fd6f2ac0d6/jars/classes.jar!/com/iisysgroup/poslib/commons/TripleDES.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="73">
-          <caret line="216" column="13" selection-start-line="216" selection-start-column="13" selection-end-line="216" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/CardFunctions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4984">
-          <caret line="33" column="15" selection-start-line="33" selection-start-column="15" selection-end-line="33" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/BaseCard.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="118">
-          <caret line="122" column="16" selection-start-line="122" selection-start-column="16" selection-end-line="122" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-26/android/view/View.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="10709" column="25" selection-start-line="10709" selection-start-column="25" selection-end-line="10709" selection-end-column="25" />
-          <folding>
-            <element signature="e#429274#429275#0" expanded="true" />
-            <element signature="e#429326#429327#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-26/java/util/Timer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="227">
-          <caret line="242" column="16" selection-start-line="242" selection-start-column="16" selection-end-line="242" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/db/TransDetailTable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="116">
-          <caret line="110" column="16" selection-start-line="110" selection-start-column="16" selection-end-line="110" selection-end-column="16" />
-          <folding>
-            <element signature="e#2207#2208#0" expanded="true" />
-            <element signature="e#2250#2251#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/InputAmountActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/Sale.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="127" column="26" selection-start-line="127" selection-start-column="26" selection-end-line="127" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/IdleActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="98">
-          <caret line="157" column="27" selection-start-line="157" selection-start-column="27" selection-end-line="157" selection-end-column="27" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/RequestCardActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="173" column="41" selection-start-line="173" selection-start-column="41" selection-end-line="173" selection-end-column="41" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/constant/Constants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="233" column="15" selection-start-line="233" selection-start-column="15" selection-end-line="233" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/ProcessEMVCardActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="248">
-          <caret line="649" column="54" selection-start-line="649" selection-start-column="54" selection-end-line="649" selection-end-column="54" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#22174#22350#1" />
-            <element signature="e#22394#22570#1" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/cloudpossdk.aar/75e726610d1c6b7cdcdc3a7095455ef8/jars/classes.jar!/com/cloudpos/jniinterface/EMVJNIInterface.class" />
-    <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/db/AIDTable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="111" column="20" selection-start-line="111" selection-start-column="20" selection-end-line="111" selection-end-column="20" />
-          <folding>
-            <element signature="e#3194#3195#0" expanded="true" />
-            <element signature="e#3211#3212#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/AirtimeVasActivity.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="12217">
-          <caret line="677" column="35" selection-start-line="677" selection-start-column="35" selection-end-line="677" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/db/TransactionResultService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="21" selection-start-line="21" selection-end-line="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/poslib-host-debug.aar/99cd1c1925c2e0f3789e56a6680bc00c/jars/classes.jar!/com/iisysgroup/poslib/host/HostInteractor.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="24" column="33" selection-start-line="24" selection-start-column="33" selection-end-line="24" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-26/android/app/Activity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="883" column="29" selection-start-line="883" selection-start-column="29" selection-end-line="883" selection-end-column="29" />
-          <folding>
-            <element signature="e#41385#41386#0" expanded="true" />
-            <element signature="e#41420#41421#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/poslib-host-debug.aar/99cd1c1925c2e0f3789e56a6680bc00c/jars/classes.jar!/com/iisysgroup/poslib/host/dao/PosLibDatabase.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="21" column="22" selection-start-line="21" selection-start-column="22" selection-end-line="21" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/db/AIDService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="322" column="23" selection-start-line="322" selection-start-column="23" selection-end-line="322" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/login/TripleDES.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="82">
-          <caret line="149" selection-start-line="149" selection-end-line="149" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/poslib-host-debug.aar/51273127a0e6d9ba5251a88c54f20e0a/jars/classes.jar!/com/iisysgroup/poslib/host/entities/VasTerminalData.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/poslib-host-debug.aar/7e76f8fa75868b2ba16975160a95a809/jars/classes.jar!/com/iisysgroup/poslib/host/entities/KeyHolder.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="25" column="11" selection-start-line="25" selection-start-column="11" selection-end-line="25" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/login/Helper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="33">
-          <caret line="286" column="28" selection-start-line="286" selection-start-column="28" selection-end-line="286" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/transaction/Nibss.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2214">
-          <caret line="230" column="78" selection-start-line="230" selection-start-column="78" selection-end-line="230" selection-end-column="78" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/poslib-host-debug.aar/7e76f8fa75868b2ba16975160a95a809/jars/classes.jar!/com/iisysgroup/poslib/host/entities/VasTerminalData.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="237">
-          <caret line="42" column="5" selection-start-line="42" selection-start-column="5" selection-end-line="42" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/wizarpos/jni/PinPadInterface.java" />
-    <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/MainApp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6149">
-          <caret line="671" column="29" selection-start-line="671" selection-start-column="29" selection-end-line="671" selection-end-column="29" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/parameter/TerminalConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5662">
-          <caret line="329" column="26" selection-start-line="329" selection-start-column="15" selection-end-line="329" selection-end-column="26" />
-          <folding>
-            <element signature="e#12080#12081#0" expanded="true" />
-            <element signature="e#12108#12109#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.andrognito.pinlockview/pinlockview/2.1.0/78bfb6077974bd1deeb388269172ef09f097b9b7/pinlockview-2.1.0-sources.jar!/com/andrognito/pinlockview/PinLockView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2185">
-          <caret line="115" column="41" selection-start-line="115" selection-start-column="41" selection-end-line="115" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/wizarpos/util/StringUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6479">
-          <caret line="366" column="23" selection-start-line="366" selection-start-column="23" selection-end-line="366" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/ProcessOnlineActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="379" selection-start-line="379" selection-end-line="379" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="class#doVAs#0;class#ProcessOnlineActivity#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Desktop/device-2019-12-03-154120.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$USER_HOME$/Desktop/device-2019-12-03-154458.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$USER_HOME$/Desktop/device-2019-12-03-155731.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/FuncMenuActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="810">
-          <caret line="220" column="2" selection-start-line="220" selection-start-column="2" selection-end-line="220" selection-end-column="2" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/InputOnlinePINActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="385">
-          <caret line="220" column="46" selection-start-line="220" selection-start-column="22" selection-end-line="220" selection-end-column="46" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/cloudpossdk.aar/75e726610d1c6b7cdcdc3a7095455ef8/jars/classes.jar!/com/wizarpos/jni/PinPadInterface.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="76">
           <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/InputPINActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="227">
-          <caret line="296" column="16" selection-start-line="296" selection-start-column="16" selection-end-line="296" selection-end-column="16" />
         </state>
       </provider>
     </entry>
@@ -1496,13 +1184,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/cloudpossdk.aar/75e726610d1c6b7cdcdc3a7095455ef8/jars/libs/cloudpossdkinterfaceimpl_001_en.jar!/com/cloudpos/jniinterface/PINPadInterface.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/keys/KeyInjector.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="95">
@@ -1510,28 +1191,111 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/FuncActivity.java">
+    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/poslib-commons-debug.aar/09ea6188926781b063a134fd6f2ac0d6/jars/classes.jar!/com/iisysgroup/poslib/commons/emv/EmvCard.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="1238" column="12" selection-start-line="1238" selection-start-column="8" selection-end-line="1238" selection-end-column="16" />
+        <state relative-caret-position="227">
+          <caret line="42" column="15" selection-start-line="42" selection-start-column="15" selection-end-line="42" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/db/ConfigService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="18" column="16" selection-start-line="18" selection-start-column="16" selection-end-line="18" selection-end-column="16" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#466#467#0" expanded="true" />
+            <element signature="e#541#542#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/keys/AuthInfo.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="8" column="42" lean-forward="true" selection-start-line="8" selection-start-column="42" selection-end-line="8" selection-end-column="42" />
+        <state relative-caret-position="1691">
+          <caret line="102" column="5" selection-start-line="102" selection-start-column="5" selection-end-line="102" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/poslib-host-debug.aar/8528eabcb7048d25e2670842cce89196/jars/classes.jar!/com/iisysgroup/poslib/host/entities/VasTerminalData.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/wizarpos/util/ReversalCommunicator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="339" column="57" selection-start-line="339" selection-start-column="57" selection-end-line="339" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/poslib-host-debug.aar/d67f562f578eb7d7aef7ae55777c7f80/jars/classes.jar!/com/iisysgroup/poslib/ISO/POSVAS/PosvasKeyProcessor.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="475">
+          <caret line="36" column="25" selection-start-line="36" selection-start-column="25" selection-end-line="36" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/poslib-host-debug.aar/d67f562f578eb7d7aef7ae55777c7f80/jars/classes.jar!/com/iisysgroup/poslib/ISO/GTMS/GtmsKeyProcessor.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="86">
+          <caret line="19" column="25" selection-start-line="19" selection-start-column="25" selection-end-line="19" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/poslib-host-debug.aar/c0057209ec908c02f8a3e9e1896720b6/jars/classes.jar!/com/iisysgroup/poslib/host/entities/KeyHolder.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="103">
+          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/poslib-commons-debug.aar/3c3200135e791a43f9d989b127824bc5/jars/classes.jar!/com/iisysgroup/poslib/commons/TripleDES.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="112" column="25" selection-start-line="112" selection-start-column="25" selection-end-line="112" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/poslib-host-debug.aar/c0057209ec908c02f8a3e9e1896720b6/jars/classes.jar!/com/iisysgroup/poslib/ISO/POSVAS/PosvasKeyProcessor.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="26" column="5" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/VasCommunicator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1387">
+          <caret line="243" column="28" selection-start-line="243" selection-start-column="28" selection-end-line="243" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-836">
+          <caret line="61" column="19" selection-start-line="61" selection-start-column="19" selection-end-line="61" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/Settle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="392">
+          <caret line="77" column="12" selection-start-line="77" selection-start-column="12" selection-end-line="77" selection-end-column="12" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/db/TransDetailInfo.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="12">
-          <caret line="172" column="29" selection-start-line="172" selection-start-column="18" selection-end-line="172" selection-end-column="29" />
+        <state relative-caret-position="19">
+          <caret line="58" column="18" selection-start-line="58" selection-start-column="18" selection-end-line="58" selection-end-column="18" />
           <folding>
+            <element signature="e#2303#2304#0" expanded="true" />
+            <element signature="e#2335#2336#0" expanded="true" />
             <element signature="e#4310#4311#0" expanded="true" />
             <element signature="e#4338#4339#0" expanded="true" />
             <element signature="e#4993#4994#0" expanded="true" />
@@ -1544,12 +1308,293 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/RequestCardActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="19" column="18" selection-start-line="19" selection-start-column="18" selection-end-line="19" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-26/java/lang/ref/Reference.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="246">
+          <caret line="97" column="21" selection-start-line="97" selection-start-column="21" selection-end-line="97" selection-end-column="21" />
+          <folding>
+            <element signature="e#4067#4068#0" expanded="true" />
+            <element signature="e#4103#4104#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/auth/PinInterFace.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="263">
+          <caret line="57" column="8" selection-start-line="57" selection-start-column="8" selection-end-line="57" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-26/java/lang/Object.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="271" column="18" selection-start-line="271" selection-start-column="18" selection-end-line="271" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-26/android/app/Activity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="5503" column="16" selection-start-line="5503" selection-start-column="16" selection-end-line="5503" selection-end-column="16" />
+          <folding>
+            <element signature="e#234044#234045#0" expanded="true" />
+            <element signature="e#234098#234099#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/cloudpossdk.aar/75e726610d1c6b7cdcdc3a7095455ef8/jars/classes.jar!/com/wizarpos/jni/PinPadCallbackHandler.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/cloudpossdk.aar/75e726610d1c6b7cdcdc3a7095455ef8/jars/libs/cloudpossdkinterfaceimpl_001_en.jar!/com/cloudpos/jniinterface/PINPadInterface.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="78" column="22" selection-start-line="78" selection-start-column="22" selection-end-line="78" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/TransResultActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="2608" selection-start-line="2608" selection-end-line="2608" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/FunctionsAll.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="211" column="56" selection-start-line="211" selection-start-column="56" selection-end-line="211" selection-end-column="56" />
+        <state relative-caret-position="227">
+          <caret line="702" column="44" selection-start-line="702" selection-start-column="44" selection-end-line="702" selection-end-column="44" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-26/android/os/Handler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="219">
+          <caret line="534" column="25" selection-start-line="534" selection-start-column="25" selection-end-line="534" selection-end-column="25" />
+          <folding>
+            <element signature="e#21998#21999#0" expanded="true" />
+            <element signature="e#22047#22048#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/Sale.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2109">
+          <caret line="128" column="42" selection-start-line="128" selection-start-column="28" selection-end-line="128" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/cloudpossdk.aar/75e726610d1c6b7cdcdc3a7095455ef8/jars/classes.jar!/com/cloudpos/jniinterface/EMVJNIInterface.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="86" column="29" selection-start-line="86" selection-start-column="29" selection-end-line="86" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/IdleActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="620">
+          <caret line="294" column="90" selection-start-line="294" selection-start-column="90" selection-end-line="294" selection-end-column="90" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/AirtimeVasActivity.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="492" column="49" selection-start-line="492" selection-start-column="49" selection-end-line="492" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/login/TripleDES.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="87">
+          <caret line="146" selection-start-line="146" selection-end-line="146" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="120" selection-start-line="120" selection-end-line="120" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/InputOnlinePINActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1354">
+          <caret line="127" column="36" selection-start-line="127" selection-start-column="36" selection-end-line="127" selection-end-column="36" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2118#2645#0" expanded="true" />
+            <element signature="e#2644#2645#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/InputPINActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="701">
+          <caret line="131" column="5" selection-start-line="131" selection-start-column="5" selection-end-line="131" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/poslib-host-debug.aar/c3eee8813b89509a5644def8df65a875/jars/classes.jar!/com/iisysgroup/poslib/utils/InputData.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/poslib-commons-debug.aar/3c3200135e791a43f9d989b127824bc5/jars/classes.jar!/com/iisysgroup/poslib/commons/emv/EmvCard.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/poslib-host-debug.aar/c3eee8813b89509a5644def8df65a875/jars/classes.jar!/com/iisysgroup/poslib/host/entities/ConfigData.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/login/Helper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="219">
+          <caret line="105" column="30" selection-start-line="105" selection-start-column="30" selection-end-line="105" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/login/securestorage/SecureStorage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="44" selection-start-line="44" selection-end-line="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-26/android/app/Application.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="437">
+          <caret line="46" column="13" selection-start-line="46" selection-start-column="13" selection-end-line="46" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-26/android/app/Instrumentation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="41">
+          <caret line="1118" selection-start-line="1118" selection-end-line="1118" />
+          <folding>
+            <element signature="e#42744#42745#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/wizarpos/util/StringUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-402">
+          <caret line="452" selection-start-line="452" selection-end-line="452" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/constant/Constants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="620">
+          <caret line="274" selection-start-line="274" selection-end-line="274" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/FuncActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="80" column="26" selection-start-line="80" selection-start-column="26" selection-end-line="80" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/ProcessEMVCardActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1309">
+          <caret line="124" column="4" selection-start-line="124" selection-start-column="4" selection-end-line="124" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/InputOfflinePINActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="815">
+          <caret line="56" column="42" selection-start-line="56" selection-start-column="42" selection-end-line="56" selection-end-column="70" />
+          <folding>
+            <element signature="e#2339#2340#0" expanded="true" />
+            <element signature="e#2422#2423#0" expanded="true" />
+            <element signature="e#2870#2871#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/MainApp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1292">
+          <caret line="704" column="43" selection-start-line="704" selection-start-column="43" selection-end-line="704" selection-end-column="43" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/ProcessOnlineActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="74" column="4" selection-start-line="74" selection-start-column="4" selection-end-line="75" selection-end-column="33" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#17160#21655#0" expanded="true" />
+            <element signature="e#21654#21655#0" expanded="true" />
+            <element signature="class#doVAs#0;class#ProcessOnlineActivity#0" />
+            <element signature="e#27926#27927#0" expanded="true" />
+            <element signature="e#27953#27954#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/transaction/Nibss.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="58">
+          <caret line="74" column="79" lean-forward="true" selection-start-line="74" selection-start-column="79" selection-end-line="74" selection-end-column="79" />
+          <folding>
+            <element signature="e#31663#31664#0" expanded="true" />
+            <element signature="e#31698#31699#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/wizarpos/emvsample/activity/FuncMenuActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-208">
+          <caret line="180" column="47" selection-start-line="180" selection-start-column="47" selection-end-line="180" selection-end-column="47" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#8679#8680#0" expanded="true" />
+            <element signature="e#8695#8696#0" expanded="true" />
+            <element signature="e#10389#10390#0" expanded="true" />
+            <element signature="e#10451#10452#0" expanded="true" />
           </folding>
         </state>
       </provider>
