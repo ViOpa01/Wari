@@ -17,6 +17,7 @@ import android.provider.Settings;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.TextView;
@@ -41,6 +42,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
@@ -69,6 +71,12 @@ public class Helper {
     public static String CONNECTION_DATA = "connectiondata";
     public static String KEY_HOLDER = "keyholder";
     public static String TRANSACTION_RESULT = "transaction_result";
+    public static String CARD_TRANSACTION_RESULT = "card_transaction_result";
+    public static String PAYMENT_METHOD_CARD = "CARD";
+    public static String ROW_ID = "row_id";
+    public static String TYPE_VAS="vas";
+
+
 
     public static String VAS_TERMINAL_ID = "vas_terminalId";
     public static String VAS_MERCHANT_NAME = "vas_merchant_name";
@@ -151,6 +159,26 @@ public class Helper {
 
         return prefs.getBoolean(key, defaultValue);
     }
+
+
+    public static long getTimeInMills(){
+        Calendar c= Calendar.getInstance();
+        int month = c.get(Calendar.MONTH);
+        Log.i("xoxo", " Before -- Month " + month);
+
+//        val dayOfTheMonth = c.get(Calendar.DAY_OF_MONTH)
+//        val month = c.get(Calendar.MONTH)
+//        c.add(Calendar.DAY_OF_MONTH, 1)
+        c.set(Calendar.HOUR_OF_DAY, 0);
+        c.set(Calendar.MINUTE, 0);
+        c.set(Calendar.SECOND, 0);
+        c.set(Calendar.MILLISECOND, 0);
+        long dateTime= System.currentTimeMillis();
+        Log.i("xoxo", " Before -- TimeDateMill " + dateTime);
+
+        return  dateTime;
+    }
+
 
 
     public static void savePreference(Context context,

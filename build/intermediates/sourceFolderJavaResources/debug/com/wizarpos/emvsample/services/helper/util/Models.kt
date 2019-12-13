@@ -31,9 +31,40 @@ import java.io.Serializable
     data class VasDetails( val stan:String? ="",val amount: String="0.00", val walletId: String="", val marchantAddress: String="", val marchantTid: String="", val marchantName:String="",  val merchantId:String="",val product: String="", var transactionStatusMessage: String="", val vasTid: String="", val transactionRef: String="", val paymentmethod: String="cash",val logo:Int=0,val dateTime:String="",val error:Boolean=true,val vasType:String="",val  VasTypeModel:Any=AirtimeModel(false,"")):Serializable
 
 
+
+//    val VasStan:String? ="",
+//    val amount: String="0.00",
+//    val walletId: String="",
+//    val marchantAddress: String="",
+//    val marchantTid: String="",
+//    val marchantName:String="",
+//    val merchantId:String="",
+//    val product: String="",
+//    var transactionStatusMessage: String="",
+//    val vasTid: String="",
+//    val transactionRef: String="",
+//    val paymentmethod: String="cash",
+//    val logo:Int=0,
+//    val dateTime:String="",
+//    val error:Boolean,
+//    val vasType:String="",
+//    val iuc: String,
+//    val meterType:String
+//    val unit:String,
+//    val unit_value:String="",
+//    val vat:String="",
+//    val meterNumber:String="",
+//    val token:String="",
+//    val address:String="",
+//    val arras:String="",
+//    val tarrif:String=""
+
+
+
+
     companion object{
         const val DISCO :String ="disco"
-        const val AIRTIME :String ="airtime"
+         const val AIRTIME :String ="airtime"
         const val TRANSFER :String ="transfer"
         const val WITHDRAWAL :String ="withdrawal"
         const val CABLE_TV :String ="cable_tv"

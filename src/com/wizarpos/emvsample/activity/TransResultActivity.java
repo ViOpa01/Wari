@@ -43,6 +43,7 @@ import com.itex.richard.payviceconnect.model.StartimesModel;
 import com.wizarpos.emvsample.MainApp;
 import com.wizarpos.emvsample.activity.login.Helper;
 import com.wizarpos.emvsample.activity.login.securestorage.SecureStorageUtils;
+import com.wizarpos.emvsample.db.detailed.EodData;
 import com.wizarpos.emvsample.generators.PfmStateGenerator;
 import com.wizarpos.emvsample.models.WithdrawalWalletResponse.WithdrawalWalletCreditModel;
 import com.iisysgroup.poslib.commons.emv.EmvCard;
@@ -56,6 +57,7 @@ import com.wizarpos.emvsample.services.discos.activities.ElectricityPaymentActiv
 import com.wizarpos.emvsample.services.discos.viewmodels.EleectricityPaymentVM;
 import com.wizarpos.emvsample.services.helper.activity.util.Models.GeneralElectricityDetails;
 import com.wizarpos.emvsample.services.helper.activity.util.Models;
+import com.wizarpos.emvsample.transaction.Nibss;
 import com.wizarpos.emvsample.transaction.TransDefine;
 import com.wizarpos.jni.PinPadInterface;
 import com.wizarpos.util.MemoryUtil;
@@ -557,6 +559,9 @@ public class TransResultActivity extends FuncActivity
 				Log.d("Trans result", "onChanged() called with: paymentResponse, vasDetails= [" + vasDetails + "]");
 
 
+
+
+
 				 if(error){
 
 					 new Thread(new Runnable() {
@@ -565,9 +570,9 @@ public class TransResultActivity extends FuncActivity
 
 
 
-							 poslibdb.getVasTerminalDataDao().get();
-							 Log.d("OkH", "vasterminal "+poslibdb.getVasTerminalDataDao().get().getTid());
-							 vasTerminalDetails = poslibdb.getVasTerminalDataDao().get();
+							 Nibss.Companion.getPoslibdb().getVasTerminalDataDao().get();
+							 Log.d("OkH", "vasterminal "+ Nibss.Companion.getPoslibdb().getVasTerminalDataDao().get().getTid());
+							 vasTerminalDetails = Nibss.Companion.getPoslibdb().getVasTerminalDataDao().get();
 
 							 Log.d("OkH", "vasterminal Details "+ new Gson().toJson(vasTerminalDetails));
 //				Log.d("OkH", "vasterminal "+poslibdb.getVasTerminalDataDao().get().getTid());
@@ -675,6 +680,11 @@ public class TransResultActivity extends FuncActivity
 
 
 					 printReceipt(vasDetails);
+
+
+
+
+
 				 }
 
 
@@ -749,9 +759,9 @@ public class TransResultActivity extends FuncActivity
 
 
 
-					   poslibdb.getVasTerminalDataDao().get();
-					   Log.d("OkH", "vasterminal "+poslibdb.getVasTerminalDataDao().get().getTid());
-					   vasTerminalDetails = poslibdb.getVasTerminalDataDao().get();
+					   Nibss.Companion.getPoslibdb().getVasTerminalDataDao().get();
+					   Log.d("OkH", "vasterminal "+ Nibss.Companion.getPoslibdb().getVasTerminalDataDao().get().getTid());
+					   vasTerminalDetails = Nibss.Companion.getPoslibdb().getVasTerminalDataDao().get();
 
 					   Log.d("OkH", "vasterminal Details "+ new Gson().toJson(vasTerminalDetails));
 //				Log.d("OkH", "vasterminal "+poslibdb.getVasTerminalDataDao().get().getTid());
@@ -911,9 +921,9 @@ public class TransResultActivity extends FuncActivity
 
 
 
-						  poslibdb.getVasTerminalDataDao().get();
-						  Log.d("OkH", "vasterminal "+poslibdb.getVasTerminalDataDao().get().getTid());
-						  vasTerminalDetails = poslibdb.getVasTerminalDataDao().get();
+						  Nibss.Companion.getPoslibdb().getVasTerminalDataDao().get();
+						  Log.d("OkH", "vasterminal "+ Nibss.Companion.getPoslibdb().getVasTerminalDataDao().get().getTid());
+						  vasTerminalDetails = Nibss.Companion.getPoslibdb().getVasTerminalDataDao().get();
 
 						  Log.d("OkH", "vasterminal Details "+ new Gson().toJson(vasTerminalDetails));
 //				Log.d("OkH", "vasterminal "+poslibdb.getVasTerminalDataDao().get().getTid());
@@ -1206,9 +1216,9 @@ public class TransResultActivity extends FuncActivity
 
 
 
-							poslibdb.getVasTerminalDataDao().get();
-							Log.d("OkH", "vasterminal "+poslibdb.getVasTerminalDataDao().get().getTid());
-							vasTerminalDetails = poslibdb.getVasTerminalDataDao().get();
+							Nibss.Companion.getPoslibdb().getVasTerminalDataDao().get();
+							Log.d("OkH", "vasterminal "+ Nibss.Companion.getPoslibdb().getVasTerminalDataDao().get().getTid());
+							vasTerminalDetails = Nibss.Companion.getPoslibdb().getVasTerminalDataDao().get();
 
 							Log.d("OkH", "vasterminal Details "+ new Gson().toJson(vasTerminalDetails));
 //				Log.d("OkH", "vasterminal "+poslibdb.getVasTerminalDataDao().get().getTid());
@@ -1781,9 +1791,9 @@ public class TransResultActivity extends FuncActivity
 
 
 
-					   poslibdb.getVasTerminalDataDao().get();
-					   Log.d("OkH", "vasterminal "+poslibdb.getVasTerminalDataDao().get().getTid());
-					   vasTerminalDetails = poslibdb.getVasTerminalDataDao().get();
+						Nibss.Companion.getPoslibdb().getVasTerminalDataDao().get();
+					   Log.d("OkH", "vasterminal "+ Nibss.Companion.getPoslibdb().getVasTerminalDataDao().get().getTid());
+					   vasTerminalDetails = Nibss.Companion.getPoslibdb().getVasTerminalDataDao().get();
 
 //					   Log.d("OkH", "vasterminal Details "+ new Gson().toJson(vasTerminalDetails));
 //				Log.d("OkH", "vasterminal "+poslibdb.getVasTerminalDataDao().get().getTid());
@@ -2001,9 +2011,9 @@ public class TransResultActivity extends FuncActivity
 
 
 
-                            poslibdb.getVasTerminalDataDao().get();
-                            Log.d("OkH", "vasterminal "+poslibdb.getVasTerminalDataDao().get().getTid());
-                            vasTerminalDetails = poslibdb.getVasTerminalDataDao().get();
+                            Nibss.Companion.getPoslibdb().getVasTerminalDataDao().get();
+                            Log.d("OkH", "vasterminal "+ Nibss.Companion.getPoslibdb().getVasTerminalDataDao().get().getTid());
+                            vasTerminalDetails = Nibss.Companion.getPoslibdb().getVasTerminalDataDao().get();
 
                             Log.d("OkH", "vasterminal Details "+ new Gson().toJson(vasTerminalDetails));
 //				Log.d("OkH", "vasterminal "+poslibdb.getVasTerminalDataDao().get().getTid());
@@ -2145,9 +2155,9 @@ public class TransResultActivity extends FuncActivity
 
 
 
-                        poslibdb.getVasTerminalDataDao().get();
-                        Log.d("OkH", "vasterminal "+poslibdb.getVasTerminalDataDao().get().getTid());
-                        vasTerminalDetails = poslibdb.getVasTerminalDataDao().get();
+                        Nibss.Companion.getPoslibdb().getVasTerminalDataDao().get();
+                        Log.d("OkH", "vasterminal "+ Nibss.Companion.getPoslibdb().getVasTerminalDataDao().get().getTid());
+                        vasTerminalDetails = Nibss.Companion.getPoslibdb().getVasTerminalDataDao().get();
 
                         Log.d("OkH", "vasterminal Details "+ new Gson().toJson(vasTerminalDetails));
 //				Log.d("OkH", "vasterminal "+poslibdb.getVasTerminalDataDao().get().getTid());
@@ -2316,7 +2326,7 @@ public class TransResultActivity extends FuncActivity
 //									val stan= formattedResponse.transactionID
 //									val logo = FuncActivity.appState.logo
 //									val error :Boolean= formattedResponse.error
-//									val airtimeModel = Models.AirtimeModel(error, mPhoneNumber)
+//									val airtimeModel = Models.AirtimeEntity(error, mPhoneNumber)
 //
 //									val isCardTransaction = true
 //									val transactionTID = ""
@@ -2400,7 +2410,7 @@ public class TransResultActivity extends FuncActivity
 //									val logo = FuncActivity.appState.logo
 //									val stan  = "";
 //									val error = formattedResponse.error
-//									val airtimeModel = Models.AirtimeModel(error, mPhoneNumber)
+//									val airtimeModel = Models.AirtimeEntity(error, mPhoneNumber)
 //
 //									val isCardTransaction = true
 //									val transactionTID = ""

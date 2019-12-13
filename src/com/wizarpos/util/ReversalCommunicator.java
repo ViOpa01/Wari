@@ -107,8 +107,8 @@ public class ReversalCommunicator {
 //        String decryptedKey = "";
 //        Log.d("reverse host",host);
 
-//        host = "POSVAS";
-          host = "EPMS";
+        host = "POSVAS";
+//          host = "EPMS";
 
 //        String decryptedKey = "";
         Log.d("reverse host",host);

@@ -69,6 +69,10 @@
             android:name=".activity.FuncMenuActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".history_summary.EODActivity"
+            android:launchMode="singleTask" />
+
 <!--        <activity-->
 <!--            android:name=".history_summary.EODActivity"-->
 <!--            android:screenOrientation="portrait" />-->

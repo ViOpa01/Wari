@@ -34,6 +34,7 @@ import com.wizarpos.emvsample.AllVasActivity;
 import com.wizarpos.emvsample.activity.login.Helper;
 import com.wizarpos.emvsample.activity.login.LoginActivity;
 import com.wizarpos.emvsample.activity.login.securestorage.SecureStorage;
+import com.wizarpos.emvsample.history_summary.EODActivity;
 import com.wizarpos.emvsample.payments_menu.CashBActivity;
 import com.wizarpos.emvsample.payments_menu.CashBack;
 import com.wizarpos.emvsample.payments_menu.transfer.TransferAmountEntry;
@@ -80,6 +81,9 @@ public class FuncMenuActivity extends FuncActivity implements LocationListener
 
 	public static String latitude,longitude;
 
+	String _clearpinKey=null;
+	String _clearSessionKey=null;
+
 
 	@Override
 	public void onCreate(Bundle savedInstanceState)
@@ -91,11 +95,15 @@ public class FuncMenuActivity extends FuncActivity implements LocationListener
         resetAllServicesStates();
         appState.PlainKeyInjected="31313131313131313232323232323232";
 
-        isKeyInjected=SecureStorage.retrieve(Helper.IS_KEY_INJECTED,false);
+        isKeyInjected=SecureStorage.retrieve(Helper.IS_KEY_INJECTED,true);
 		isPrepped=SecureStorage.retrieve(Helper.IS_PREPPING,false);
 
+		_clearpinKey=SecureStorage.retrieve(Helper.CLEAR_PIN_KEY,"");
+		_clearSessionKey=SecureStorage.retrieve(Helper.CLEAR_SESSION_KEY,"");
 
-        //TODO 32
+
+
+		//TODO 32
 //		new FuncActivity();
 
 //		textTitle = (TextView)findViewById(R.id.tAppTitle);
@@ -143,6 +151,9 @@ public class FuncMenuActivity extends FuncActivity implements LocationListener
 		ImageViewsignOut = findViewById(R.id.signOut);
 		ImageViewsignOut.setOnClickListener(new ClickListener());
 
+		Log.d(">>>>>> pinblock1 _clearpinKey ", _clearpinKey);
+		Log.d(">>>>>> pinblock1 _clearSessionKey ", _clearSessionKey);
+
 
 
 
@@ -164,7 +175,7 @@ public class FuncMenuActivity extends FuncActivity implements LocationListener
 				Log.i(">>>> complete pinblock1", "getPinKey: " + res.getPinKey());
 				Log.i(">>>> complete pinblock1", "getMasterKey: " + res.getMasterKey());
 				Log.i(">>>> complete pinblock1", "getSessionKey: " + res.getSessionKey());
-				clearmasterKey = GtmsKeyProcessor.getMasterKey(res.getMasterKey(), res.isTestPlatform());
+				clearmasterKey = PosvasKeyProcessor.getMasterKey(res.getMasterKey(), res.isTestPlatform());
 				encryptedPinKey = res.getPinKey();
 				Log.d(">>>> complete", "clearmasterKey: " + clearmasterKey);
 				try {
@@ -173,7 +184,7 @@ public class FuncMenuActivity extends FuncActivity implements LocationListener
 //				{"tid":"20331L14","mid":"203315000001987","merchantName":"ITEX INTERGRATED SER   LA           LANG","sessionKey":"6E3101202A2331701AC845BFEF611C9E","pinKey":"1692E0C189E63B7A34266D201F751C94","masterKey":"731C079EF1C8F8198AB562B08675C151","currencyCode":"566","countryCode":"566","mcc":"8061"}
 
 
-					clearPinKey = GtmsKeyProcessor.decryptKey(res.getPinKey(), clearmasterKey);
+					clearPinKey = PosvasKeyProcessor.decryptKey(res.getPinKey(), clearmasterKey);
 
 
 					appState.clearPinKey = clearPinKey;
@@ -187,8 +198,7 @@ public class FuncMenuActivity extends FuncActivity implements LocationListener
 //					SecureStorage.store(Helper.CLEAR_PIN_KEY,vasTerminalDetails.getPinKey());
 
 
-
-					String clearSessionKey = GtmsKeyProcessor.decryptKey(res.getSessionKey(), clearmasterKey);
+					String clearSessionKey = PosvasKeyProcessor.decryptKey(res.getSessionKey(), clearmasterKey);
 					Log.d(">>>> complete pinblock1", "clearSessionKey : " + clearSessionKey);
 
 					appState.clearSessionKey = clearSessionKey;
@@ -401,9 +411,9 @@ public class FuncMenuActivity extends FuncActivity implements LocationListener
 				break;
 
 			case R.id.bFunc_Trans:
-			startActivity(new Intent(FuncMenuActivity.this, CashBack.class));
+//			startActivity(new Intent(FuncMenuActivity.this, CashBack.class));
 
-//				startActivity(new Intent(FuncMenuActivity.this, WalletBalance.class));
+				startActivity(new Intent(FuncMenuActivity.this, WalletBalance.class));
 
 				break;
 
@@ -471,9 +481,12 @@ public class FuncMenuActivity extends FuncActivity implements LocationListener
 
 			case R.id.eod:
 
-			    startActivity(new Intent(FuncMenuActivity.this, PinInterFace.class));
+//			    startActivity(new Intent(FuncMenuActivity.this, PinInterFace.class));
+			    startActivity(new Intent(FuncMenuActivity.this, EODActivity.class));
 
 				break;
+
+//				startActivity(Intent(this, TransactionsMenu::class.java))
 
 			case R.id.transfer:
 				Intent transfer = new Intent(getApplicationContext(), TransferBankSelection.class);
@@ -569,7 +582,7 @@ public class FuncMenuActivity extends FuncActivity implements LocationListener
 			@Override
 			public void onClick(View view) {
 				if(pwd.getText().toString().isEmpty()){
-					pwd.setError("Please eneter password");
+					pwd.setError("Please enter password");
 					Toast.makeText(FuncMenuActivity.this,"No password Entered",Toast.LENGTH_LONG).show();
 					return;
 				}
@@ -783,3 +796,19 @@ public class FuncMenuActivity extends FuncActivity implements LocationListener
 
 
 }
+
+
+// pinblock1 _clearpinKey: 8A3134570EDC26D02FD92A8640549E1C
+//        2019-12-11 19:13:29.141 9239-9239/com.wizarpos.emvsample D/>>>>>> pinblock1 _clearSessionKey: F710CB3B29454CD051D515E3809BFB58
+//        2019-12-11 19:13:29.141 9239-9239/com.wizarpos.emvsample I/>>>> complete pinblock1: isKeyInjected: true
+//        2019-12-11 19:13:29.141 9239-9239/com.wizarpos.emvsample I/>>>> complete pinblock1: isPrepped: true
+//        2019-12-11 19:13:29.141 9239-9239/com.wizarpos.emvsample I/>>>> complete pinblock1: getPinKey: FFDE292E2F94709D401606695576D5EC
+//        2019-12-11 19:13:29.141 9239-9239/com.wizarpos.emvsample I/>>>> complete pinblock1: getMasterKey: 9B790A549AA02C3474E278D6129B50AC
+//        2019-12-11 19:13:29.141 9239-9239/com.wizarpos.emvsample I/>>>> complete pinblock1: getSessionKey: AFA5983D43025F635A07AF861EF214FD
+//        2019-12-11 19:13:29.144 9239-9239/com.wizarpos.emvsample D/>>>> complete pinblock1: getMasterKey  EPMS :
+//        2019-12-11 19:13:29.152 9239-9239/com.wizarpos.emvsample D/>>>> complete: clearmasterKey: E5986E5B4A941F51D3ABD0CEB064EC75
+//        2019-12-11 19:13:29.179 9239-9239/com.wizarpos.emvsample D/>>>> complete pinblock1: clearSessionKey : 4AF71C948CC7FECE6138197C37ADDA98
+//        2019-12-11 19:13:29.181 9239-9239/com.wizarpos.emvsample D/>>>> complete pinblock1: appState.clearPinKey  : F1046816209EA21AF4F81C2649E0683D
+//        2019-12-11 19:13:29.181 9239-9239/com.wizarpos.emvsample D/>>>> complete pinblock1: appState.clearSessionKey : 4AF71C948CC7FECE6138197C37ADDA98
+//        2019-12-11 19:13:29.186 9239-9239/com.wizarpos.emvsample D/>>>> complete: stringCipherNewUserKey : 9977C37C105D39EA4AE7C352340EF204
+//        2019-12-11 19:13:29.187 9239-9239/com.wizarpos.emvsample D/>>>> complete: static key : 31313131313131313232323232323232

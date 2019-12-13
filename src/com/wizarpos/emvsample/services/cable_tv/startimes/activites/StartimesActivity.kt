@@ -32,6 +32,14 @@ import com.wizarpos.emvsample.activity.login.Helper
 import com.wizarpos.emvsample.activity.login.Helper.WALLET
 import com.wizarpos.emvsample.activity.login.securestorage.SecureStorage
 import com.wizarpos.emvsample.activity.login.securestorage.SecureStorageUtils
+import com.wizarpos.emvsample.db.detailed.EodData
+import com.wizarpos.emvsample.db.detailed.EodDoa
+import com.wizarpos.emvsample.db.detailed.TransactionDataDoa
+import com.wizarpos.emvsample.db.detailed.VasTransactionDoa
+import com.wizarpos.emvsample.db.detailed.vas.vas_doa.AirtimeDoa
+import com.wizarpos.emvsample.db.detailed.vas.vas_doa.CableTvDoa
+import com.wizarpos.emvsample.db.detailed.vas.vas_doa.DiscoDoa
+import com.wizarpos.emvsample.db.detailed.vas.vas_doa.TransferDoa
 import com.wizarpos.emvsample.generators.PfmStateGenerator
 import com.wizarpos.emvsample.models.PfmJournalGenerator
 import com.wizarpos.emvsample.services.discos.activities.DiscosActivity.Companion.SERVICE
@@ -45,6 +53,8 @@ import com.wizarpos.util.VasServices
 import kotlinx.android.synthetic.main.activity_login.*
 
 import kotlinx.android.synthetic.main.content_startimes.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.toast
 import java.text.SimpleDateFormat
@@ -80,6 +90,14 @@ class StartimesActivity : BaseServiceActivity() {
                     otherLayout.visibility = View.VISIBLE
                 }.create()
     }
+
+    lateinit var initCardDb: TransactionDataDoa
+    lateinit var initEodDb: EodDoa
+    lateinit var initAirtimeDb: AirtimeDoa
+    lateinit var initCableTvDb: CableTvDoa
+    lateinit var initDiscoDb: DiscoDoa
+    lateinit var initTransferDb: TransferDoa
+    lateinit var initVasDb: VasTransactionDoa
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -204,6 +222,20 @@ class StartimesActivity : BaseServiceActivity() {
             val vasmerchantID = SecureStorage.retrieve(Helper.VAS_TERMINAL_ID, "")
             val vasmerchantName = SecureStorage.retrieve(Helper.VAS_MERCHANT_NAME, "")
 //				String vasTerminalId = SecureStorage.retrieve(Helper.,"");
+
+
+
+            val eodData = EodData(transactionRef = transactionRef.substring(0,9), transactionType = Helper.TYPE_VAS, dateTime = Helper.getTimeInMills(),responseCode =  "",amount =  amount.toString())
+
+
+
+            GlobalScope.launch{
+
+                //                                            initAirtimeDb.saveAirtimeData(vasTransactionResult =airtimeEntity )
+//                                            initVasDb.saveVasTransData(vasTransactionResult = vasTransactionDetail)
+                initEodDb.saveEodData(eodData)
+
+            }
 
 
             val vasDetails = Models.VasDetails(stan,amount, wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product, responsemessage, vasmerchantID, transactionRef, VasServices.CASH, logo, date, error, Models.CABLE_TV, cabletvModel!!)

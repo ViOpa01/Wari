@@ -22,17 +22,21 @@ allprojects {
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
 
 //PASSWORD for release is android, ALIAS is androiddebugkey, JKS file is waripos.jks
-//kotlin { experimental { coroutines 'enable' } }
+
 ext.anko_version = '0.10.4'
 ext.rxbinding_version = '2.1.1'
 configurations.all {
     exclude group: 'com.android.support', module: 'support-v4'
-//    exclude group: 'com.cloudpos.jniinterface.EMVJNIInterfaces', module: 'cloudpossdk'
-//    exclude group: 'com.cloudpos.jniinterface.IFuntionListeners', module: 'cloudpossdk'
 
 
+}
+
+androidExtensions {
+    experimental = true
 }
 
 
@@ -41,41 +45,26 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
     implementation 'io.reactivex.rxjava2:rxjava:2.2.0'
     implementation "org.jetbrains.anko:anko-commons:$anko_version"
-//    implementation "org.jetbrains.anko:anko-sdk25-coroutines:$anko_version"
-//    implementation "org.jetbrains.anko:anko-appcompat-v7-coroutines:$anko_version"
     implementation 'com.android.support:multidex:1.0.3'
     implementation project(':cloudpossdk')
 
-//            {
-//        exclude group: 'com.cloudpos.jniinterface.EMVJNIInterfaces'
-//        exclude group: 'com.cloudpos.jniinterface.IFuntionListeners'
-//    }
     implementation 'org.bouncycastle:bcprov-jdk15:1.38'
-    configurations {
-        compile.exclude group: 'org.jetbrains', module: 'annotations'
-    }
+//    configurations {
+//        compile.exclude group: 'org.jetbrains', module: 'annotations'
+//    }
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
-//    implementation('org.simpleframework:simple-xml:2.7.1') {
-//        exclude group: 'stax', module: 'stax-api'
-//        exclude group: 'xpp3', module: 'xpp3'
-//    }
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.0.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.8.1'
     implementation 'com.squareup.okhttp3:okhttp:3.2.0'
     implementation 'com.squareup.okhttp3:okhttp-urlconnection:3.2.0'
     implementation 'android.arch.lifecycle:extensions:1.1.1'
 
-
-    kapt 'android.arch.lifecycle:compiler:1.1.1'
-
-
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation "org.jetbrains.anko:anko-sdk25-coroutines:$anko_version"
     implementation "org.jetbrains.anko:anko-appcompat-v7-coroutines:$anko_version"
     implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2'
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
-    // compile project(':poslib-device-debug')
     implementation 'com.github.danielgindi:httprequest:1.2.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
     implementation 'com.andrognito.pinlockview:pinlockview:2.1.0'
@@ -85,8 +74,6 @@ dependencies {
     implementation 'com.android.support:design:27.1.1'
     implementation 'com.android.support:recyclerview-v7:27.1.1'
     implementation "android.arch.lifecycle:reactivestreams:1.1.1"
-    //implementation 'com.google.zxing:core:3.2.1'
-    //implementation 'com.journeyapps:zxing-android-embedded:3.2.0@aar'
     implementation 'com.android.support:appcompat-v7:27.1.1'
 
     //Acts as TextvieWatcher
@@ -99,17 +86,29 @@ dependencies {
     implementation 'android.arch.lifecycle:livedata:1.1.1'
     implementation 'com.github.bumptech.glide:glide:4.7.1'
 
-    //implementation 'com.android.support:support-v4:27.1.1'
-    def room_version = "1.1.0"
-    implementation('android.arch.persistence.room:runtime:1.1.0') {
-        exclude module: 'commons-codec'
-    }
+
+    implementation 'android.arch.persistence.room:runtime:1.1.1'
+    kapt 'android.arch.persistence.room:compiler:1.1.1'
+
+//    def room_version = "1.1.0"
+//    implementation('android.arch.persistence.room:runtime:1.0.0-alpha1') {
+////        exclude module: 'commons-codec'
+//    }
     //    implementation ('android.arch.persistence.room:compiler:1.1.0'){
     //        exclude module: 'commons-codec'
     //    }
-    annotationProcessor('android.arch.persistence.room:compiler:1.1.0') {
-        exclude module: 'commons-codec'
-    }
+//    annotationProcessor('android.arch.persistence.room:compiler:1.1.0') {
+//        exclude module: 'commons-codec'
+//    }
+
+
+//    implementation 'android.arch.persistence.room:runtime:1.1.0'
+
+//    annotationProcessor "android.arch.persistence.room:compiler:1.0.0-alpha1"
+//
+//    kapt 'android.arch.persistence.room:compiler:1.0.0-alpha1'
+
+
     implementation project(path: ':payviceconnect')
     implementation project(path: ':poslib-host')
     implementation project(':poslib-device-debug')
@@ -132,8 +131,7 @@ android {
         exclude 'META-INF/notice.txt'
         exclude 'META-INF/ASL2.0'
         exclude 'META-INF/compiler.kotlin_module'
-//        exclude '**/com/cloudpos/jniinterface/EMVJNIInterfaces.class'
-//        exclude '**/com/cloudpos/jniinterface/IFuntionListeners.class'
+
     }
 
 
@@ -146,12 +144,7 @@ android {
             renderscript.srcDirs = ['src']
             res.srcDirs = ['res']
             assets.srcDirs = ['assets']
-            java {
-//                exclude '**/com/cloudpos/jniinterface/EMVJNIInterfaces.class'
-//                exclude '**/com/cloudpos/jniinterface/IFuntionListeners'
-//                exclude '**/EMVJNIInterfaces.class'
-//                exclude '**/IFuntionListeners'
-            }
+
 
         }
 

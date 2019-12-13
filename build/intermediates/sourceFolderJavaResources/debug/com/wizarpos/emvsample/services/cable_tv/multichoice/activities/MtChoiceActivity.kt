@@ -18,6 +18,7 @@ import com.iisysgroup.payvice.startimes.activites.StartimesActivity
 import com.iisysgroup.poslib.commons.emv.EmvCard
 import com.itex.richard.payviceconnect.model.DstvModel
 import com.jakewharton.rxbinding2.widget.textChanges
+import com.wizarpos.emvsample.MainApp
 import com.wizarpos.emvsample.R
 import com.wizarpos.emvsample.activity.FuncActivity
 import com.wizarpos.emvsample.activity.FuncActivity.appState
@@ -25,6 +26,14 @@ import com.wizarpos.emvsample.activity.Sale
 import com.wizarpos.emvsample.activity.login.Helper
 import com.wizarpos.emvsample.activity.login.securestorage.SecureStorage
 import com.wizarpos.emvsample.activity.login.securestorage.SecureStorageUtils
+import com.wizarpos.emvsample.db.detailed.EodData
+import com.wizarpos.emvsample.db.detailed.EodDoa
+import com.wizarpos.emvsample.db.detailed.TransactionDataDoa
+import com.wizarpos.emvsample.db.detailed.VasTransactionDoa
+import com.wizarpos.emvsample.db.detailed.vas.vas_doa.AirtimeDoa
+import com.wizarpos.emvsample.db.detailed.vas.vas_doa.CableTvDoa
+import com.wizarpos.emvsample.db.detailed.vas.vas_doa.DiscoDoa
+import com.wizarpos.emvsample.db.detailed.vas.vas_doa.TransferDoa
 import com.wizarpos.emvsample.generators.PfmStateGenerator
 import com.wizarpos.emvsample.models.PfmJournalGenerator
 import com.wizarpos.emvsample.services.discos.activities.DiscosActivity.Companion.SERVICE
@@ -44,6 +53,8 @@ import kotlinx.android.synthetic.main.content_multichoice.selectAmountLayout
 import kotlinx.android.synthetic.main.content_multichoice.selectProductBtn
 import kotlinx.android.synthetic.main.content_multichoice.serviceImage
 import kotlinx.android.synthetic.main.content_multichoice.subTitleText
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.jetbrains.anko.alert
 import java.text.SimpleDateFormat
 import java.util.*
@@ -77,12 +88,33 @@ class MtChoiceActivity : BaseServiceActivity() {
     }
 
 
+    lateinit var initCardDb: TransactionDataDoa
+    lateinit var initEodDb: EodDoa
+    lateinit var initAirtimeDb: AirtimeDoa
+    lateinit var initCableTvDb: CableTvDoa
+    lateinit var initDiscoDb: DiscoDoa
+    lateinit var initTransferDb: TransferDoa
+    lateinit var initVasDb: VasTransactionDoa
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_multichoice)
         setSupportActionBar(toolbar)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+
+
+        initCardDb = MainApp.getInstance().transactionDb
+        initEodDb = MainApp.getInstance().eodDb
+        initAirtimeDb = MainApp.getInstance().airtimeDb
+        initCableTvDb = MainApp.getInstance().cableTvDb
+        initDiscoDb = MainApp.getInstance().discoDb
+        initTransferDb = MainApp.getInstance().transferDb
+        initVasDb = MainApp.getInstance().vasDb
+
+
+
 
         intent?.let {
             it.getStringExtra(SERVICE)?.let {
@@ -199,6 +231,21 @@ class MtChoiceActivity : BaseServiceActivity() {
 
             val vasDetails = Models.VasDetails(stan,amount, wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product, responsemessage, vasmerchantID, transactionRef, VasServices.CASH, logo, date, error, Models.CABLE_TV, cabletvModel!!)
             Log.d("About to print", "onChanged() called with: VasDetails = [$vasDetails]")
+
+
+
+            val eodData = EodData(transactionRef = transactionRef, transactionType = Helper.TYPE_VAS, dateTime = Helper.getTimeInMills(),responseCode =  "",amount =  amount.toString())
+
+
+
+            GlobalScope.launch{
+
+                //                                            initAirtimeDb.saveAirtimeData(vasTransactionResult =airtimeEntity )
+//                                            initVasDb.saveVasTransData(vasTransactionResult = vasTransactionDetail)
+                initEodDb.saveEodData(eodData)
+
+            }
+
 
             ElectricityPaymentActivity.print(this@MtChoiceActivity,vasDetails)
         })

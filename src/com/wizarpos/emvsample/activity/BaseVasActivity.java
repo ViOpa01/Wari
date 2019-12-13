@@ -7,7 +7,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.wizarpos.emvsample.MainApp;
 import com.wizarpos.emvsample.R;
+import com.wizarpos.emvsample.db.detailed.EodDoa;
+import com.wizarpos.emvsample.db.detailed.TransactionDataDoa;
+import com.wizarpos.emvsample.db.detailed.VasTransactionDoa;
+import com.wizarpos.emvsample.db.detailed.vas.vas_doa.AirtimeDoa;
+import com.wizarpos.emvsample.db.detailed.vas.vas_doa.CableTvDoa;
+import com.wizarpos.emvsample.db.detailed.vas.vas_doa.DiscoDoa;
+import com.wizarpos.emvsample.db.detailed.vas.vas_doa.TransferDoa;
 
 /**
  * Created by Agbede on 2/26/2018.
@@ -17,6 +25,14 @@ public abstract class BaseVasActivity extends AppCompatActivity implements View.
     public static final String AIRTIME_AMOUNT = "airtime_amount";
     public static final String AIRTIME_RECIPIENT = "airtime_recipient";
     public static final String AIRTIME_PROVIDER = "airtime_provider";
+    TransactionDataDoa initCardDb;
+    public EodDoa initEodDb;
+    public  AirtimeDoa initAirtimeDb;
+    public CableTvDoa initCableTvDb;
+    public  DiscoDoa initDiscoDb;
+    public TransferDoa initTransferDb;
+    public VasTransactionDoa initVasDb;
+
 
 
     protected abstract int getTextLayoutId();
@@ -30,6 +46,16 @@ public abstract class BaseVasActivity extends AppCompatActivity implements View.
         amount = findViewById(getTextLayoutId());
 
         initializeAmountEntryElements() ;
+
+        initCardDb = MainApp.getInstance().transactionDb;
+        initEodDb = MainApp.getInstance().eodDb;
+        initAirtimeDb = MainApp.getInstance().airtimeDb;
+        initCableTvDb = MainApp.getInstance().cableTvDb;
+        initDiscoDb = MainApp.getInstance().discoDb;
+        initTransferDb = MainApp.getInstance().transferDb;
+        initVasDb = MainApp.getInstance().vasDb;
+//        initCardDb = MainApp.getInstance().transactionDb;
+//        initEodDb = MainApp.getInstance().eodDb;
 
     }
 

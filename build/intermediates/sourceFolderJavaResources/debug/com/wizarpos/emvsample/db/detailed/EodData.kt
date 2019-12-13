@@ -23,6 +23,10 @@ data class EodData(@PrimaryKey(autoGenerate = true)
                    var dateTime:Long=0,
                    var responseCode:String="",
                    var amount:String="" ): Serializable {
+//    constructor(rrn: String, paymentMethodCard: String, timeInMills: Long, responseCode: String, valueOf: String) : this() {
+
+//    }
+
 
     fun isApproved(): Boolean {
         return this.responseCode.trim { it <= ' ' } == "00"

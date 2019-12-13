@@ -18,6 +18,14 @@ import com.wizarpos.emvsample.activity.FuncActivity.appState
 import com.wizarpos.emvsample.activity.login.Helper
 import com.wizarpos.emvsample.activity.login.securestorage.SecureStorage
 import com.wizarpos.emvsample.activity.login.securestorage.SecureStorageUtils
+import com.wizarpos.emvsample.db.detailed.EodData
+import com.wizarpos.emvsample.db.detailed.EodDoa
+import com.wizarpos.emvsample.db.detailed.TransactionDataDoa
+import com.wizarpos.emvsample.db.detailed.VasTransactionDoa
+import com.wizarpos.emvsample.db.detailed.vas.vas_doa.AirtimeDoa
+import com.wizarpos.emvsample.db.detailed.vas.vas_doa.CableTvDoa
+import com.wizarpos.emvsample.db.detailed.vas.vas_doa.DiscoDoa
+import com.wizarpos.emvsample.db.detailed.vas.vas_doa.TransferDoa
 import com.wizarpos.emvsample.generators.PfmStateGenerator
 import com.wizarpos.emvsample.models.Pfm
 import com.wizarpos.emvsample.models.PfmJournalGenerator
@@ -80,6 +88,15 @@ class DataPhoneEntry : AppCompatActivity(), View.OnClickListener {
         intent.getParcelableExtra(AllData.KEYS.DATA_VALUE) as DataModel.DataResponseElements
 
     }
+
+
+    lateinit var initCardDb: TransactionDataDoa
+    lateinit var initEodDb: EodDoa
+    lateinit var initAirtimeDb: AirtimeDoa
+    lateinit var initCableTvDb: CableTvDoa
+    lateinit var initDiscoDb: DiscoDoa
+    lateinit var initTransferDb: TransferDoa
+    lateinit var initVasDb: VasTransactionDoa
 
     private fun payWithWallet() {
 
@@ -202,6 +219,19 @@ class DataPhoneEntry : AppCompatActivity(), View.OnClickListener {
 //                                            vasDetails = Models.VasDetails(amount, wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product, responsemessage, vasmerchantID, transactionRef, VasServices.CARD, logo, date, error, Models.AIRTIME, airtimeModel)
 //                                        }
 
+                                        val eodData = EodData(transactionRef = transactionRef, transactionType = Helper.TYPE_VAS, dateTime = Helper.getTimeInMills(),responseCode =  "",amount =  amount.toString())
+
+
+
+                                        GlobalScope.launch{
+
+//                                            initAirtimeDb.saveAirtimeData(vasTransactionResult =airtimeEntity )
+//                                            initVasDb.saveVasTransData(vasTransactionResult = vasTransactionDetail)
+                                            initEodDb.saveEodData(eodData)
+
+                                        }
+
+
                                         ElectricityPaymentActivity.print(this@DataPhoneEntry,vasDetails)
                                     } catch (e: Exception) {
                                     }
@@ -287,6 +317,19 @@ class DataPhoneEntry : AppCompatActivity(), View.OnClickListener {
 //                                        }
 
                                         ElectricityPaymentActivity.print(this@DataPhoneEntry,vasDetails!!)
+
+                                        val eodData = EodData(transactionRef = transactionRef, transactionType = Helper.TYPE_VAS, dateTime = Helper.getTimeInMills(),responseCode =  "",amount =  amount.toString())
+
+
+
+                                        GlobalScope.launch{
+
+                                            //                                            initAirtimeDb.saveAirtimeData(vasTransactionResult =airtimeEntity )
+//                                            initVasDb.saveVasTransData(vasTransactionResult = vasTransactionDetail)
+                                            initEodDb.saveEodData(eodData)
+
+                                        }
+
                                         // PrinterHelper.getInstance().airtimeReceipt(FuncActivity.appState, 1,  model)
                                     } catch (e: Exception) {
                                     }
@@ -487,6 +530,15 @@ class DataPhoneEntry : AppCompatActivity(), View.OnClickListener {
             txtAmount.text = phoneNumber
             onEnterPressed()
         }
+
+        initCardDb = MainApp.getInstance().transactionDb
+        initEodDb = MainApp.getInstance().eodDb
+        initAirtimeDb = MainApp.getInstance().airtimeDb
+        initCableTvDb = MainApp.getInstance().cableTvDb
+        initDiscoDb = MainApp.getInstance().discoDb
+        initTransferDb = MainApp.getInstance().transferDb
+        initVasDb = MainApp.getInstance().vasDb
+
     }
 
 
@@ -576,7 +628,7 @@ class DataPhoneEntry : AppCompatActivity(), View.OnClickListener {
 //                                                                    val logo = FuncActivity.appState.logo
 //                                                                    val stan  = ""
 //                                                                    val error = false
-//                                                                    val airtimeModel = Models.AirtimeModel(error, mPhoneNumber)
+//                                                                    val airtimeModel = Models.AirtimeEntity(error, mPhoneNumber)
 //
 //                                                                    val isCardTransaction = false
 //                                                                    val transactionTID = ""
@@ -675,7 +727,7 @@ class DataPhoneEntry : AppCompatActivity(), View.OnClickListener {
 //                                                                    val logo = FuncActivity.appState.logo
 //                                                                    val stan  = ""
 //                                                                    val error = false
-//                                                                    val airtimeModel = Models.AirtimeModel(error, mPhoneNumber)
+//                                                                    val airtimeModel = Models.AirtimeEntity(error, mPhoneNumber)
 //
 //                                                                    val isCardTransaction = true
 //                                                                    val transactionTID = ""

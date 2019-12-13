@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
+import com.google.gson.Gson
 import com.iisysgroup.poslib.deviceinterface.DeviceState
 import com.iisysgroup.poslib.host.entities.TransactionResult
 import com.wizarpos.emvsample.MainApp
@@ -18,6 +19,11 @@ import com.wizarpos.emvsample.activity.FuncActivity.appState
 import com.wizarpos.emvsample.activity.login.Helper
 import com.wizarpos.emvsample.activity.login.securestorage.SecureStorage
 import com.wizarpos.emvsample.activity.login.securestorage.SecureStorageUtils
+import com.wizarpos.emvsample.db.detailed.EodData
+import com.wizarpos.emvsample.db.detailed.EodDoa
+import com.wizarpos.emvsample.db.detailed.TransactionDataDoa
+import com.wizarpos.emvsample.db.detailed.VasTransactionResult
+import com.wizarpos.emvsample.db.detailed.vas.vas_entity.AirtimeEntity
 import com.wizarpos.emvsample.generators.PfmStateGenerator
 import com.wizarpos.emvsample.services.discos.activities.ElectricityPaymentActivity
 import com.wizarpos.emvsample.services.helper.activity.util.Models
@@ -67,7 +73,7 @@ class AirtimeVasActivity : BaseVasActivity(), AirtimeProcessor.onAirtimeTransact
 
 
     private val progressDialog by lazy {
-        indeterminateProgressDialog(message = "Processing request", title = "Status") {}
+        indeterminateProgressDialog(message = "Processing request.....", title = "Status") {}
     }
 
     var airtime_amount: String = ""
@@ -79,6 +85,8 @@ class AirtimeVasActivity : BaseVasActivity(), AirtimeProcessor.onAirtimeTransact
     private var ref : String = ""
     lateinit var constraintLayout: ConstraintLayout
     var isFromVasPage = false
+
+
 
     override fun onResponse(model: AirtimeSuccessResponse) {
 
@@ -142,9 +150,40 @@ class AirtimeVasActivity : BaseVasActivity(), AirtimeProcessor.onAirtimeTransact
 //                        vasDetails = Models.VasDetails(amount, wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product, responsemessage, vasmerchantID, transactionRef, VasServices.CARD, logo, date, error, Models.AIRTIME, airtimeModel)
 //                    }
 
+//                      val airtimeEntity= AirtimeEntity(cardrowId = null,transactionRef = terminalID,recepiant_phone = phone_number)
+//                      val vasTransactionDetail= VasTransactionResult(vasTid = vasmerchantID,stan =stan ,amount =amount,walletId =wallet ,marchantAddress =merchantName ,marchantTid =merchantID ,marchantName =merchantName ,merchantId =merchantTerminalId ,product =product,transactionStatusMessage = responsemessage,transactionRef = transactionRef,paymentmethod =VasServices.CASH ,logo=logo,dateTime =date ,error =error,vasType =Models.AIRTIME  )
+//
+//
+//                      GlobalScope.launch{
+//
+//                          initAirtimeDb.saveAirtimeData(vasTransactionResult =airtimeEntity )
+//                          initVasDb.saveVasTransData(vasTransactionResult = vasTransactionDetail)
+//
+//                      }
+
+
                       ElectricityPaymentActivity.print(this@AirtimeVasActivity,vasDetails!!)
 
+                      val airtimeEntity= AirtimeEntity(cardrowId = null,transactionRef = terminalID,recepiant_phone = phone_number)
+                      val vasTransactionDetail= VasTransactionResult(vasTid = vasmerchantID,stan =stan ,amount =amount,walletId =wallet ,marchantAddress =merchantName ,marchantTid =merchantID ,marchantName =merchantName ,merchantId =merchantTerminalId ,product =product,transactionStatusMessage = responsemessage,transactionRef = transactionRef,paymentmethod =VasServices.CASH ,logo=logo,dateTime =date ,error =error,vasType =Models.AIRTIME  )
 
+                      val eodData = EodData(transactionRef = transactionRef, transactionType = Helper.TYPE_VAS, dateTime = Helper.getTimeInMills(),responseCode =  "",amount =  amount.toString())
+
+
+                      Log.d("val eodData value >>>", Gson().toJson(eodData))
+
+                      GlobalScope.launch{
+
+                          Log.d("val eodData value","In here ")                                          //initAirtimeDb.saveAirtimeData(vasTransactionResult =airtimeEntity )
+//                                            initVasDb.saveVasTransData(vasTransactionResult = vasTransactionDetail)
+                          var value=initEodDb.saveEodData(eodData)
+
+                          Log.i("Value  >>>>>", value.toString())
+
+                          Log.d("val eodData value >>>>>>","After  ")                                         // initAirtimeDb.saveAirtimeData(vasTransactionResult =airtimeEntity )
+
+
+                      }
 
 //                      MainApp.getInstance().transfer=TransResultActivity.transactionModel
 //                      transactionModel = MainApp.transactionModel
@@ -174,6 +213,8 @@ class AirtimeVasActivity : BaseVasActivity(), AirtimeProcessor.onAirtimeTransact
 
                 }
             }.show()
+
+
         } else {
             alert {
                 title = "Beneficiary"
@@ -239,10 +280,24 @@ class AirtimeVasActivity : BaseVasActivity(), AirtimeProcessor.onAirtimeTransact
                 ElectricityPaymentActivity.print(this@AirtimeVasActivity,vasDetails!!)
 
 
-//                Log.i("MainApp.transactionModel  >>>", MainApp.transactionModel.toString())
 
-//                transactionModel=MainApp.transactionModel;
+                val eodData = EodData(transactionRef = transactionRef.substring(0,9), transactionType = Helper.TYPE_VAS, dateTime = Helper.getTimeInMills(),responseCode =  "",amount =  amount.toString())
 
+
+                Log.d("val eodData value >>>", Gson().toJson(eodData))
+
+                GlobalScope.launch{
+
+                    Log.d("val eodData value","In here ")                                          //initAirtimeDb.saveAirtimeData(vasTransactionResult =airtimeEntity )
+//                                            initVasDb.saveVasTransData(vasTransactionResult = vasTransactionDetail)
+                    var value=initEodDb.saveEodData(eodData)
+
+                    Log.i("Value  >>>>>", value.toString())
+
+                    Log.d("val eodData value >>>>>>","After  ")                                         // initAirtimeDb.saveAirtimeData(vasTransactionResult =airtimeEntity )
+
+
+                }
 
 
 //                Log.i("Yeah >>> Show up", transactionModel.toString())
@@ -264,6 +319,8 @@ class AirtimeVasActivity : BaseVasActivity(), AirtimeProcessor.onAirtimeTransact
 //                }
 //                alertDialog.show()
             }catch (e : Exception){
+
+                Log.i("Messed up here  >>>>>","Ok ")
 
             }
         }
@@ -354,7 +411,30 @@ class AirtimeVasActivity : BaseVasActivity(), AirtimeProcessor.onAirtimeTransact
                     ElectricityPaymentActivity.print(this@AirtimeVasActivity,vasDetails)
 
 
+
+                    val eodData = EodData(transactionRef = transactionRef.substring(0,9), transactionType = Helper.TYPE_VAS, dateTime = Helper.getTimeInMills(),responseCode =  "",amount =  amount.toString())
+
+
+                    Log.d("val eodData value >>>", Gson().toJson(eodData))
+
+                    GlobalScope.launch{
+
+                        Log.d("val eodData value","In here ")                                          //initAirtimeDb.saveAirtimeData(vasTransactionResult =airtimeEntity )
+//                                            initVasDb.saveVasTransData(vasTransactionResult = vasTransactionDetail)
+                        var value=initEodDb.saveEodData(eodData)
+
+                        Log.i("Value  >>>>>", value.toString())
+
+                        Log.d("val eodData value >>>>>>","After  ")                                         // initAirtimeDb.saveAirtimeData(vasTransactionResult =airtimeEntity )
+
+
+                    }
+
+
                 }catch (e : Exception){
+
+
+                    Log.i("Messed up here  >>>>>","Ok ")
 
                 }
 
@@ -440,7 +520,7 @@ class AirtimeVasActivity : BaseVasActivity(), AirtimeProcessor.onAirtimeTransact
             showPhoneNumberScreen()
         } else if (intent.hasExtra("airtimeModel")) {
 //            nine_mobile.performClick()
-//            val airtimeModel = intent.getParcelableExtra("airtimeModel") as AirtimeModel
+//            val airtimeModel = intent.getParcelableExtra("airtimeModel") as AirtimeEntity
 //            phone_number = airtimeModel.phone_number
 //            txtAmount.text = phone_number
 //

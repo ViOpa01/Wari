@@ -50,6 +50,13 @@ import com.wizarpos.emvsample.db.RevokedCAPKTable;
 import com.wizarpos.emvsample.db.TransDetailInfo;
 import com.wizarpos.emvsample.db.TransDetailService;
 import com.wizarpos.emvsample.db.detailed.EodDoa;
+import com.wizarpos.emvsample.db.detailed.TransDataBase;
+import com.wizarpos.emvsample.db.detailed.TransactionDataDoa;
+import com.wizarpos.emvsample.db.detailed.VasTransactionDoa;
+import com.wizarpos.emvsample.db.detailed.vas.vas_doa.AirtimeDoa;
+import com.wizarpos.emvsample.db.detailed.vas.vas_doa.CableTvDoa;
+import com.wizarpos.emvsample.db.detailed.vas.vas_doa.DiscoDoa;
+import com.wizarpos.emvsample.db.detailed.vas.vas_doa.TransferDoa;
 import com.wizarpos.emvsample.parameter.BatchInfo;
 import com.wizarpos.emvsample.parameter.TerminalConfig;
 import com.wizarpos.emvsample.services.helper.activity.util.Models;
@@ -238,12 +245,12 @@ public class MainApp extends Application implements Constants
 //	val TransactionDb by lazy {
 //	AllTransDataBase.getInstance(this).getTransactionDataDoa();
 //}
-
-
+//
+//
 //	val vasDb by lazy {
 //	AllTransDataBase.getInstance(this).getVasDataBase();
 //}
-
+//
 //	val eodDb by lazy {
 //	AllTransDataBase.getInstance(this).getEodDataBase();
 //}
@@ -251,8 +258,17 @@ public class MainApp extends Application implements Constants
 //
 	public EodDoa eodDb;
 
-//	public VasTransactionDoa vasDb;
-//	public TransactionDataDoa transactionDb;
+	public VasTransactionDoa vasDb;
+	public TransactionDataDoa transactionDb;
+
+
+	public AirtimeDoa airtimeDb;
+
+	public CableTvDoa cableTvDb;
+	public DiscoDoa discoDb;
+	public TransferDoa transferDb;
+
+
 
 	private Boolean isKeyInjected;
 	private Boolean isPrepped;
@@ -305,9 +321,14 @@ public class MainApp extends Application implements Constants
 //		PinPadInterface.updateUserKey(3,0,arryCipherNewUserKey,16);
 
 
-//		eodDb =  TransDataBase.Companion.getInstance(this).getEodDataBase();
-//		vasDb =  AllTransDataBase.Companion.getInstance(this).getVasDataBase();
-//		transactionDb= AllTransDataBase.Companion.getInstance(this).getTransactionDataDoa();
+		eodDb =  TransDataBase.Companion.getInstance(this).getEodDataBase();
+		vasDb =  TransDataBase.Companion.getInstance(this).getVasDataBase();
+		transactionDb= TransDataBase.Companion.getInstance(this).getTransactionDataDoa();
+		airtimeDb =  TransDataBase.Companion.getInstance(this).getAirtimeTable();
+		cableTvDb =  TransDataBase.Companion.getInstance(this).getCableTable();
+		discoDb= TransDataBase.Companion.getInstance(this).getDiscoTable();
+		transferDb= TransDataBase.Companion.getInstance(this).getTransferTable();
+//
 //
 
 
@@ -330,8 +351,8 @@ public class MainApp extends Application implements Constants
 //			host =  new TamsHost(this);
 //		}
 //		else if (sharedPreferences.getString(hostKey, "").equalsIgnoreCase("POSVAS")){
-//		host =  new PosvasHost(this);
-		host =  new GtmsHost(this);
+		host =  new PosvasHost(this);
+//		host =  new GtmsHost(this);
 //		}
 //		else  {
 //			host =  new GtmsHost(this);

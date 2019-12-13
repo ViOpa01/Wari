@@ -195,7 +195,7 @@ public class ProcessOnlineActivity extends FuncActivity
 //					e.printStackTrace();
 //				}
 
-				Log.d(">>>> complete pinblock1", "clearPinKey before converting to byte  : " + appState.clearPinKey);
+				Log.d(">>>> complete pinblock1", "clearPinKey before converting to byte  : " + _clearpinKey);
 
 				byte [] clearPinKey=StringUtil.hexString2bytes(_clearpinKey);
 				Log.d(">>>> complete pinblock1", "clearPinKey in byte  : " + clearPinKey);
@@ -205,7 +205,7 @@ public class ProcessOnlineActivity extends FuncActivity
 				String encPinKey= appState.nibssData.getKeyHolder().getPinKey();
 
 				try {
-					String clearPinBlock = GtmsKeyProcessor.decryptKey(appState.clearPinKey, StringedPinBlock);
+					String clearPinBlock = PosvasKeyProcessor.decryptKey(appState.clearPinKey, StringedPinBlock);
 					Log.d(">>>> complete pinblock1", "clearPinBlock   : " + clearPinBlock);
 
 				}catch(Throwable e){
@@ -452,7 +452,7 @@ public class ProcessOnlineActivity extends FuncActivity
 				new Thread(new Runnable() {
 					  @Override
 					  public void run() {
-						  poslibdb.getVasTerminalDataDao().get();
+						  Nibss.Companion.getPoslibdb().getVasTerminalDataDao().get();
 //						  Log.d("OkH", "vasterminal "+poslibdb.getVasTerminalDataDao().get().getTid());
 //						  vasTerminalDetails = poslibdb.getVasTerminalDataDao().get();
 
@@ -750,9 +750,9 @@ public class ProcessOnlineActivity extends FuncActivity
 		}
 
 		protected TransactionResult doInBackground(Void...voids) {
-			poslibdb.getVasTerminalDataDao().get();
-			Log.d("OkH", "vasterminal "+poslibdb.getVasTerminalDataDao().get().getTid());
-			VasTerminalData vasTerminalDetails = poslibdb.getVasTerminalDataDao().get();
+			Nibss.Companion.getPoslibdb().getVasTerminalDataDao().get();
+			Log.d("OkH", "vasterminal "+ Nibss.Companion.getPoslibdb().getVasTerminalDataDao().get().getTid());
+			VasTerminalData vasTerminalDetails = Nibss.Companion.getPoslibdb().getVasTerminalDataDao().get();
 			//   SharedPreferenceUtils.setIsTerminalPrepped(this, true);
 			Log.d("okh", vasTerminalDetails.getTid()+" tid");
 			ConfigData configData = new ConfigData();

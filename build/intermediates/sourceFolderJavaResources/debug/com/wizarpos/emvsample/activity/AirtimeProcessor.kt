@@ -101,12 +101,12 @@ class AirtimeProcessor(val context : Context, listener : onAirtimeTransactionRes
 
             Log.d("generate State   >>>>>", Gson().toJson(PfmStateGenerator(context,tid ).generateState()))
 
-            Log.d("Journal Generator  >>>>>", Gson().toJson(PfmJournalGenerator(FuncActivity.appState.trans.getTransactionResult(), FuncActivity.appState.nibssData.getConfigData(), false, airtimeAmount, emvCard, "Airtime", airtimeProvider, "").generateJournal()))
+            Log.d("Journal Generator  >>>>>", Gson().toJson(PfmJournalGenerator(FuncActivity.appState.trans.getTransactionResult(), FuncActivity.appState.nibssData.configData, false, airtimeAmount, emvCard, "Airtime", airtimeProvider, "").generateJournal()))
 
 //        val tid = SecureStorage.retrieve(Helper.TERMINAL_ENTERED_BY_USER, "")
 
 //
-            pfm = com.itex.richard.payviceconnect.model.Pfm(PfmStateGenerator(context,tid ).generateState(), PfmJournalGenerator(FuncActivity.appState.trans.getTransactionResult(), FuncActivity.appState.nibssData.getConfigData(), false, airtimeAmount, emvCard, "Airtime", airtimeProvider, "").generateJournal())
+            pfm = com.itex.richard.payviceconnect.model.Pfm(PfmStateGenerator(context,tid ).generateState(), PfmJournalGenerator(FuncActivity.appState.trans.getTransactionResult(), FuncActivity.appState.nibssData.configData, false, airtimeAmount, emvCard, "Airtime", airtimeProvider, "").generateJournal())
             Log.d("pfm  >>>>>", Gson().toJson(pfm))
 
             val details = AirtimeRequestDetails(amount = airtimeAmount, phone = phoneNumber, service = airtimeProvider, terminal_id = wallet_id, user_id = wallet_username, password = wallet_clear_password, pin = pin, pfm = pfm,paymentMethod = "card")
@@ -124,12 +124,12 @@ class AirtimeProcessor(val context : Context, listener : onAirtimeTransactionRes
 
             Log.d("generate State   >>>>>", Gson().toJson(PfmStateGenerator(context,tid ).generateState()))
 
-            Log.d("Journal Generator  >>>>>", Gson().toJson(PfmJournalGenerator(null, FuncActivity.appState.nibssData.getConfigData(), false, airtimeAmount, emvCard, "Airtime", airtimeProvider, "").generateJournal()))
+            Log.d("Journal Generator  >>>>>", Gson().toJson(PfmJournalGenerator(null, FuncActivity.appState.nibssData.configData, false, airtimeAmount, emvCard, "Airtime", airtimeProvider, "").generateJournal()))
 
 //        val tid = SecureStorage.retrieve(Helper.TERMINAL_ENTERED_BY_USER, "")
 
 //
-            pfm = com.itex.richard.payviceconnect.model.Pfm(PfmStateGenerator(context,tid ).generateState(), PfmJournalGenerator(FuncActivity.appState.trans.getTransactionResult(), FuncActivity.appState.nibssData.getConfigData(), false, airtimeAmount, emvCard, "Airtime", airtimeProvider, "").generateJournal())
+            pfm = com.itex.richard.payviceconnect.model.Pfm(PfmStateGenerator(context,tid ).generateState(), PfmJournalGenerator(FuncActivity.appState.trans.getTransactionResult(), FuncActivity.appState.nibssData.configData, false, airtimeAmount, emvCard, "Airtime", airtimeProvider, "").generateJournal())
             Log.d("pfm  >>>>>", Gson().toJson(pfm))
 
             val details = AirtimeRequestDetails(amount = airtimeAmount, phone = phoneNumber, service = airtimeProvider, terminal_id = wallet_id, user_id = wallet_username, password = wallet_clear_password, pin = pin, pfm = pfm,paymentMethod = "cash")

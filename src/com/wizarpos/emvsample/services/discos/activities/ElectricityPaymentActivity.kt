@@ -25,6 +25,7 @@ import com.wizarpos.emvsample.activity.FuncActivity.appState
 import com.wizarpos.emvsample.activity.login.Helper
 import com.wizarpos.emvsample.activity.login.securestorage.SecureStorage
 import com.wizarpos.emvsample.activity.login.securestorage.SecureStorageUtils
+import com.wizarpos.emvsample.db.detailed.EodData
 import com.wizarpos.emvsample.generators.PfmStateGenerator
 import com.wizarpos.emvsample.models.PfmJournalGenerator
 import com.wizarpos.emvsample.services.discos.activities.MeterValidationActivity.Companion.ADDRESS
@@ -42,6 +43,8 @@ import com.wizarpos.util.TransactionModel
 import com.wizarpos.util.VasServices
 import com.wizarpos.util.VasServices.ENUGU_ELECTRICITY_POSTPAID
 import kotlinx.android.synthetic.main.enter_amount.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.longToast
 import org.jetbrains.anko.toast
@@ -342,6 +345,21 @@ open class ElectricityPaymentActivity : BaseVasActivity() {
                 val vasmerchantID = SecureStorage.retrieve(Helper.VAS_TERMINAL_ID, "")
                 val vasmerchantName = SecureStorage.retrieve(Helper.VAS_MERCHANT_NAME, "")
 //				String vasTerminalId = SecureStorage.retrieve(Helper.,"");
+
+
+
+                val eodData = EodData(transactionRef = transactionRef!!, transactionType = Helper.TYPE_VAS, dateTime = Helper.getTimeInMills(),responseCode =  "",amount =  amount.toString())
+
+
+
+                GlobalScope.launch{
+
+                    //                                            initAirtimeDb.saveAirtimeData(vasTransactionResult =airtimeEntity )
+//                                            initVasDb.saveVasTransData(vasTransactionResult = vasTransactionDetail)
+                    initEodDb.saveEodData(eodData)
+
+                }
+
 
 
                 val vasDetails = Models.VasDetails(stan,amount!!, wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product!!, responsemessage!!, vasmerchantID, transactionRef!!, VasServices.CASH, logo, date, error, Models.DISCO, discosModel!!)

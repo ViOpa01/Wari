@@ -30,6 +30,14 @@ import com.wizarpos.emvsample.activity.Sale
 import com.wizarpos.emvsample.activity.login.Helper
 import com.wizarpos.emvsample.activity.login.securestorage.SecureStorage
 import com.wizarpos.emvsample.activity.login.securestorage.SecureStorageUtils
+import com.wizarpos.emvsample.db.detailed.EodData
+import com.wizarpos.emvsample.db.detailed.EodDoa
+import com.wizarpos.emvsample.db.detailed.TransactionDataDoa
+import com.wizarpos.emvsample.db.detailed.VasTransactionDoa
+import com.wizarpos.emvsample.db.detailed.vas.vas_doa.AirtimeDoa
+import com.wizarpos.emvsample.db.detailed.vas.vas_doa.CableTvDoa
+import com.wizarpos.emvsample.db.detailed.vas.vas_doa.DiscoDoa
+import com.wizarpos.emvsample.db.detailed.vas.vas_doa.TransferDoa
 import com.wizarpos.emvsample.generators.PfmStateGenerator
 import com.wizarpos.emvsample.payments_menu.models.*
 import com.wizarpos.emvsample.printer.PrinterException
@@ -111,6 +119,16 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
 
     private lateinit var mAccountName : String
     private lateinit var mProductCode : String
+
+
+
+    lateinit var initCardDb: TransactionDataDoa
+    lateinit var initEodDb: EodDoa
+    lateinit var initAirtimeDb: AirtimeDoa
+    lateinit var initCableTvDb: CableTvDoa
+    lateinit var initDiscoDb: DiscoDoa
+    lateinit var initTransferDb: TransferDoa
+    lateinit var initVasDb: VasTransactionDoa
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -608,6 +626,17 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
 
 
 
+                                            val eodData = EodData(transactionRef = transactionRef, transactionType = Helper.TYPE_VAS, dateTime = Helper.getTimeInMills(),responseCode =  "",amount = amount.toString())
+
+
+
+                                            GlobalScope.launch{
+
+                                                //                                            initAirtimeDb.saveAirtimeData(vasTransactionResult =airtimeEntity )
+//                                            initVasDb.saveVasTransData(vasTransactionResult = vasTransactionDetail)
+                                                initEodDb.saveEodData(eodData)
+
+                                            }
 
 //                                        if (airtimetype.equals("wallet", ignoreCase = true)) {
                                             val vasDetails = Models.VasDetails(stan, amount, wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product, responsemessage, vasmerchantID, transactionRef, VasServices.CASH, logo, date, error, Models.TRANSFER, transferModel)
@@ -702,6 +731,20 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
 //                                        } else if (airtimetype.equals("card", ignoreCase = true)) {
 //                                            vasDetails = Models.VasDetails(amount, wallet, vasmerchantName, merchantID, merchantName, merchantTerminalId, product, responsemessage, vasmerchantID, transactionRef, VasServices.CARD, logo, date, error, Models.AIRTIME, airtimeModel)
 //                                        }
+
+
+                                            val eodData = EodData(transactionRef = transactionRef, transactionType = Helper.TYPE_VAS, dateTime = Helper.getTimeInMills(),responseCode = "",amount =amount.toString())
+
+
+
+                                            GlobalScope.launch{
+
+                                                //                                            initAirtimeDb.saveAirtimeData(vasTransactionResult =airtimeEntity )
+//                                            initVasDb.saveVasTransData(vasTransactionResult = vasTransactionDetail)
+                                                initEodDb.saveEodData(eodData)
+
+                                            }
+
 
                                             ElectricityPaymentActivity.print(this@TransferAmountEntry,vasDetails!!)
 
@@ -856,6 +899,21 @@ class TransferAmountEntry : AppCompatActivity(), View.OnClickListener  {
 
 
                                     var vasDetails: Models.VasDetails? = null
+
+
+
+
+                                    val eodData = EodData(transactionRef = transactionRef, transactionType = Helper.TYPE_VAS, dateTime = Helper.getTimeInMills(),responseCode =  "",amount = amount.toString())
+
+
+
+                                    GlobalScope.launch{
+
+                                        //                                            initAirtimeDb.saveAirtimeData(vasTransactionResult =airtimeEntity )
+//                                            initVasDb.saveVasTransData(vasTransactionResult = vasTransactionDetail)
+                                        initEodDb.saveEodData(eodData)
+
+                                    }
 
 
 //                                        if (airtimetype.equals("wallet", ignoreCase = true)) {
