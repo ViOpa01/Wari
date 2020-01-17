@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/bg_color"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:text="Supervisor Login"
+            android:textStyle="bold"
+            android:textColor="@color/title_bg"
+            android:textSize="30sp"
+            android:id="@+id/title"
+            android:gravity="center_horizontal"
+            android:padding="@dimen/activity_vertical_margin"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:id="@+id/password"
+            android:layout_centerInParent="true"
+            android:layout_below="@+id/title"
+            android:hint="Enter pin"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:textSize="20sp"
+            android:textColorHint="@color/black"
+            android:textColor="@color/selected"
+            android:layout_margin="@dimen/activity_vertical_margin"
+            android:padding="@dimen/activity_vertical_margin"
+            android:gravity="center_horizontal"
+            android:layout_height="wrap_content" />
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:orientation="horizontal"
+           android:id="@+id/holder"
+           android:layout_below="@+id/password"
+           android:layout_height="wrap_content">
+
+           <Button
+               android:layout_width="0dp"
+               android:layout_weight="1"
+               android:text="Confirm"
+               android:id="@+id/confirm"
+               android:background="@drawable/btn"
+               android:gravity="center"
+               android:textColor="@color/white"
+               android:layout_margin="5dp"
+               android:padding="5dp"
+               android:textSize="@dimen/btn_font_size"
+               android:layout_height="wrap_content" />
+
+           <Button
+               android:layout_width="0dp"
+               android:layout_weight="1"
+               android:gravity="center"
+               android:background="@drawable/btn"
+               android:text="@string/cancel"
+               android:layout_margin="5dp"
+               android:padding="5dp"
+               android:onClick="btnCancel"
+               android:textColor="@color/white"
+               android:textSize="@dimen/btn_font_size"
+               android:layout_height="wrap_content" />
+
+       </LinearLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/holder"
+            android:background="@drawable/btn"
+            android:gravity="center"
+            android:onClick="btnClear"
+            android:textColor="@color/white"
+            android:layout_marginHorizontal="5dp"
+            android:layout_marginVertical="15dp"
+            android:textSize="@dimen/btn_font_size"
+            android:text="Clear"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

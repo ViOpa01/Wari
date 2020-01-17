@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/cloudpossdk/cloudpossdk.iml" filepath="$PROJECT_DIR$/cloudpossdk/cloudpossdk.iml" />
+      <module fileurl="file://$PROJECT_DIR$/payviceconnect/payviceconnect.iml" filepath="$PROJECT_DIR$/payviceconnect/payviceconnect.iml" />
+      <module fileurl="file://$PROJECT_DIR$/payviceconnect-debug/payviceconnect-debug.iml" filepath="$PROJECT_DIR$/payviceconnect-debug/payviceconnect-debug.iml" />
+      <module fileurl="file://$PROJECT_DIR$/payviceconnect-pfm/payviceconnect-pfm.iml" filepath="$PROJECT_DIR$/payviceconnect-pfm/payviceconnect-pfm.iml" />
+      <module fileurl="file://$PROJECT_DIR$/payviceconnect_/payviceconnect_.iml" filepath="$PROJECT_DIR$/payviceconnect_/payviceconnect_.iml" />
+      <module fileurl="file://$PROJECT_DIR$/poslib-commons-debug/poslib-commons-debug.iml" filepath="$PROJECT_DIR$/poslib-commons-debug/poslib-commons-debug.iml" />
+      <module fileurl="file://$PROJECT_DIR$/poslib-device-debug/poslib-device-debug.iml" filepath="$PROJECT_DIR$/poslib-device-debug/poslib-device-debug.iml" />
+      <module fileurl="file://$PROJECT_DIR$/poslib-host/poslib-host.iml" filepath="$PROJECT_DIR$/poslib-host/poslib-host.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wari-wari_online.iml" filepath="$PROJECT_DIR$/wari-wari_online.iml" />
+      <module fileurl="file://$PROJECT_DIR$/payviceconnect-debug/wari-wari_online-payviceconnect-debug.iml" filepath="$PROJECT_DIR$/payviceconnect-debug/wari-wari_online-payviceconnect-debug.iml" />
+      <module fileurl="file://$PROJECT_DIR$/payviceconnect-pfm/wari-wari_online-payviceconnect-pfm.iml" filepath="$PROJECT_DIR$/payviceconnect-pfm/wari-wari_online-payviceconnect-pfm.iml" />
+      <module fileurl="file://$PROJECT_DIR$/payviceconnect_/wari-wari_online-payviceconnect_.iml" filepath="$PROJECT_DIR$/payviceconnect_/wari-wari_online-payviceconnect_.iml" />
+    </modules>
+  </component>
+</project>

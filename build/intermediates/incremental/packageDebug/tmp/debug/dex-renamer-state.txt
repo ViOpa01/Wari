@@ -1,0 +1,7 @@
+#Fri Jan 17 10:45:13 WAT 2020
+base.0=C\:\\Users\\Favour\\AndroidStudioProjects\\wari-wari_online\\wari-wari_online\\build\\intermediates\\transforms\\dexMerger\\debug\\0
+path.1=classes2.dex
+renamed.1=classes2.dex
+path.0=classes.dex
+renamed.0=classes.dex
+base.1=C\:\\Users\\Favour\\AndroidStudioProjects\\wari-wari_online\\wari-wari_online\\build\\intermediates\\transforms\\dexMerger\\debug\\0

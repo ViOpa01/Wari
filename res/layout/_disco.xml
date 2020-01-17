@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/subTitleText"
+                style="@style/subtitle_layout"
+                android:fontFamily="@font/titillium_web_boldmedium"
+                tools:text="Airtime Top-up" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bordered_all"
+                android:descendantFocusability="beforeDescendants"
+                android:focusableInTouchMode="true"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <RelativeLayout
+                    android:id="@+id/selectProductBtn"
+                    style="@style/selectable_layout_style">
+
+                    <TextView
+                        android:id="@+id/productText"
+                        style="@style/selectable_layout_text"
+                        android:layout_alignBottom="@+id/serviceImage"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_toLeftOf="@+id/serviceImage"
+                        android:layout_toStartOf="@+id/serviceImage"
+                        android:drawableLeft="@drawable/ic_smartphone"
+                        android:drawablePadding="12dp"
+                        android:fontFamily="@font/titillium_web_regular"
+                        android:gravity="center_vertical"
+                        android:text="Select product" />
+
+                    <ImageButton
+                        android:id="@+id/serviceImage"
+                        style="@style/selectable_layout_image"
+                        android:clickable="false"
+                        android:scaleType="fitCenter"
+                        app:srcCompat="@drawable/ic_track_changes" />
+
+                    <View
+                        style="@style/selectable_layout_line"
+                        android:layout_alignRight="@id/serviceImage" />
+                </RelativeLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/amountEntryLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    tools:visibility="visible">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginTop="4dp"
+                        android:orientation="horizontal">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/recipientTIL"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <EditText
+                                android:id="@+id/edtTxtMeterNumber"
+                                style="@style/airtime_input_style"
+                                android:drawableLeft="@drawable/ic_person"
+                                android:hint="Meter number "
+                                android:fontFamily="@font/titillium_web_regular"
+                                android:inputType="number|text" />
+                        </android.support.design.widget.TextInputLayout>
+
+                    </LinearLayout>
+
+                    <!--<LinearLayout-->
+                    <!--android:id="@+id/phoneTILRV"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_alignParentLeft="true"-->
+                    <!--android:layout_marginTop="4dp"-->
+                    <!--android:orientation="horizontal">-->
+
+                    <!--<android.support.design.widget.TextInputLayout-->
+                    <!--android:id="@+id/phoneTIL"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:orientation="horizontal">-->
+
+                    <!--<EditText-->
+                    <!--android:id="@+id/phoneEdit"-->
+                    <!--style="@style/airtime_input_style"-->
+                    <!--android:hint="Phone Number"-->
+                    <!--android:drawableLeft="@drawable/ic_call"-->
+                    <!--android:fontFamily="@font/titillium_web_regular"-->
+                    <!--android:inputType="number" />-->
+                    <!--</android.support.design.widget.TextInputLayout>-->
+
+                    <!--</LinearLayout>-->
+
+                    <!--<RelativeLayout-->
+                    <!--android:id="@+id/naira_signRV"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginBottom="7dp"-->
+                    <!--android:orientation="horizontal">-->
+
+                    <!--<TextView-->
+                    <!--android:id="@+id/naira_sign"-->
+                    <!--style="@style/naira_drawable_style"-->
+                    <!--android:layout_alignBottom="@+id/amountTIL"-->
+                    <!--android:fontFamily="@font/titillium_web_bolder"-->
+                    <!--android:text="\u20A6" />-->
+
+                    <!--<android.support.design.widget.TextInputLayout-->
+                    <!--android:id="@+id/amountTIL"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:paddingLeft="38dp">-->
+                    <!--<View style="@style/edit_text_underline" />-->
+                    <!--<EditText-->
+                    <!--android:id="@+id/amountEdit"-->
+                    <!--style="@style/airtime_input_style.amount"-->
+                    <!--android:fontFamily="@font/titillium_web_regular"-->
+                    <!--android:hint="Enter Amount" />-->
+                    <!--</android.support.design.widget.TextInputLayout>-->
+
+
+                    <!--</RelativeLayout>-->
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/proceedBtn"
+                style="@style/default_button_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:clickable="true"
+                android:text="Verify" />
+
+
+            <!--<LinearLayout-->
+            <!--android:id="@+id/historyLayout"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_marginTop="16dp"-->
+            <!--android:orientation="vertical"-->
+            <!--android:padding="16dp">-->
+
+            <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginBottom="0dp"-->
+            <!--android:fontFamily="@font/titillium_web_boldmedium"-->
+            <!--android:padding="10dp"-->
+            <!--android:text="Recent Transactions"-->
+            <!--android:textSize="14sp" />-->
+
+
+
+
+            <!--</LinearLayout>-->
+
+
+        </LinearLayout>
+
+
+    </android.support.v4.widget.NestedScrollView>
+
+</LinearLayout>

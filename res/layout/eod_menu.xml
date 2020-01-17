@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/bg_color"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:text="Print EOD"
+        android:onClick="btnPrintEod"
+        android:textSize="30sp"
+        android:layout_margin="@dimen/activity_vertical_margin"
+        android:background="@drawable/btn"
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:onClick="btnPrintLast"
+        android:text="Print Last Transaction"
+        android:textSize="30sp"
+        android:layout_margin="@dimen/activity_vertical_margin"
+        android:background="@drawable/btn"
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:text="Crear Trasaction"
+        android:onClick="btnClear"
+        android:textSize="30sp"
+        android:layout_margin="@dimen/activity_vertical_margin"
+        android:background="@drawable/btn"
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:onClick="btnChangePin"
+        android:text="Host Settings"
+        android:textSize="30sp"
+        android:layout_margin="@dimen/activity_vertical_margin"
+        android:background="@drawable/btn"
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:onClick="finishTr"
+        android:text="Finish"
+        android:textSize="30sp"
+        android:layout_margin="@dimen/activity_vertical_margin"
+        android:background="@drawable/btn"
+        />
+
+</LinearLayout>
