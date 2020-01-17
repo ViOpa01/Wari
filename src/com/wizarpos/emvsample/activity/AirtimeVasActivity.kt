@@ -27,10 +27,7 @@ import com.wizarpos.emvsample.db.detailed.vas.vas_entity.AirtimeEntity
 import com.wizarpos.emvsample.generators.PfmStateGenerator
 import com.wizarpos.emvsample.services.discos.activities.ElectricityPaymentActivity
 import com.wizarpos.emvsample.services.helper.activity.util.Models
-import com.wizarpos.util.PinAlertUtils
-import com.wizarpos.util.SharedPreferenceUtils
-import com.wizarpos.util.TransactionModel
-import com.wizarpos.util.VasServices
+import com.wizarpos.util.*
 import kotlinx.android.synthetic.main.airtime_provider_select.*
 import kotlinx.android.synthetic.main.enter_amount.*
 import kotlinx.coroutines.Dispatchers
@@ -60,6 +57,9 @@ class AirtimeVasActivity : BaseVasActivity(), AirtimeProcessor.onAirtimeTransact
         SharedPreferenceUtils.getTerminalId(this)
 
     }
+
+
+    val clientReference = StringUtil.getClientRef(this, "")
 
     private lateinit var mPin : String
     private lateinit var mPhoneNumber : String
@@ -535,7 +535,7 @@ class AirtimeVasActivity : BaseVasActivity(), AirtimeProcessor.onAirtimeTransact
         airtime_amount = ""
     }
 
-    private fun payWithWallet(phone_number: String, airtimeProvider: String) {
+    private fun payWithWallet(phone_number: String, airtimeProvider: String,clientRef:String) {
         isCard = false
         SecureStorage.store("airtimeType", "wallet")
         val pinView = LayoutInflater.from(this).inflate(R.layout.activity_enter_pin, null, false)
@@ -545,7 +545,7 @@ class AirtimeVasActivity : BaseVasActivity(), AirtimeProcessor.onAirtimeTransact
             val airtimeProcessor = AirtimeProcessor(this, this, airtimeProvider, phone_number.replace(" ", ""), airtime_amount)
             progressDialog.show()
             try {
-                airtimeProcessor.performTransaction(pin = pin!!)
+                airtimeProcessor.performTransaction(pin = pin!!,clientReference = clientRef)
             } catch (error: ConnectException) {
                 progressDialog.dismiss()
                 toast("Connection error, Check your internet connection")
@@ -554,6 +554,8 @@ class AirtimeVasActivity : BaseVasActivity(), AirtimeProcessor.onAirtimeTransact
             }
         }
     }
+
+
 
     private fun payWithCard(phone_number: String, airtimeProvider: String) {
         val view = View.inflate(this, R.layout.activity_enter_pin, null)
@@ -617,7 +619,7 @@ class AirtimeVasActivity : BaseVasActivity(), AirtimeProcessor.onAirtimeTransact
                 payWithCard(phone_number, airtimeProvider) }
             negativeButton(buttonText = "Wallet") { _ ->
                 appState.isWallet=true
-                payWithWallet(phone_number, airtimeProvider) }
+                payWithWallet(phone_number, airtimeProvider,clientReference) }
         }.show()
 
 
@@ -663,7 +665,7 @@ class AirtimeVasActivity : BaseVasActivity(), AirtimeProcessor.onAirtimeTransact
         val airtimeProcessor = AirtimeProcessor(this, this, airtime_provider, phone_number.replace(" ", ""), airtime_amount)
         progressDialog.show()
         try {
-            airtimeProcessor.performTransaction(true, pin = mPin)
+            airtimeProcessor.performTransaction(true, pin = mPin,clientReference = clientReference)
         } catch (error: ConnectException) {
             progressDialog.dismiss()
             toast("Connection error, Check your internet connection")

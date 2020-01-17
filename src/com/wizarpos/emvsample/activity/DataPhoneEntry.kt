@@ -31,10 +31,7 @@ import com.wizarpos.emvsample.models.Pfm
 import com.wizarpos.emvsample.models.PfmJournalGenerator
 import com.wizarpos.emvsample.services.discos.activities.ElectricityPaymentActivity
 import com.wizarpos.emvsample.services.helper.activity.util.Models
-import com.wizarpos.util.PinAlertUtils
-import com.wizarpos.util.SharedPreferenceUtils
-import com.wizarpos.util.TransactionModel
-import com.wizarpos.util.VasServices
+import com.wizarpos.util.*
 import kotlinx.android.synthetic.main.activity_data_phone_entry.*
 import kotlinx.android.synthetic.main.single_transaction.*
 import kotlinx.coroutines.Dispatchers
@@ -89,6 +86,9 @@ class DataPhoneEntry : AppCompatActivity(), View.OnClickListener {
 
     }
 
+    val clientReference = StringUtil.getClientRef(this, "")
+
+
 
     lateinit var initCardDb: TransactionDataDoa
     lateinit var initEodDb: EodDoa
@@ -125,7 +125,7 @@ class DataPhoneEntry : AppCompatActivity(), View.OnClickListener {
                 mPayvicePin = encryptedPin!!
                 appState.product=dataItem.type
                 appState.dataAmount =dataItem.amount;
-                val payDetails = DataModel.DataSubscriptionDetails  (phone = mPhoneNumber.replace(" ", ""), service = dataItem.type, amount = dataItem.amount, description = dataItem.description, code = dataItem.code, password = mWalletPassword, user_id = mWalletUsername, terminal_id = mWalletId, pin = encryptedPin,pfm = pfm!!,paymentMethod = "cash")
+                val payDetails = DataModel.DataSubscriptionDetails  (clientReference=clientReference,phone = mPhoneNumber.replace(" ", ""), service = dataItem.type, amount = dataItem.amount, description = dataItem.description, code = dataItem.code, password = mWalletPassword, user_id = mWalletUsername, terminal_id = mWalletId, pin = encryptedPin,pfm = pfm!!,paymentMethod = "cash")
 
                 Log.d("payDetails before  >>>>>", Gson().toJson(payDetails))
 
@@ -410,7 +410,7 @@ class DataPhoneEntry : AppCompatActivity(), View.OnClickListener {
 
 
 
-            var payDetails = DataModel.DataSubscriptionDetails(phone = mPhoneNumber.replace(" ", ""), service = dataItem.type, amount = dataItem.amount, description = dataItem.description, code = dataItem.code, password = mWalletPassword, user_id = mWalletUsername, terminal_id = mWalletId, pin = encryptedPin, pfm = pfm!!,paymentMethod = "card")
+            var payDetails = DataModel.DataSubscriptionDetails(clientReference = clientReference,phone = mPhoneNumber.replace(" ", ""), service = dataItem.type, amount = dataItem.amount, description = dataItem.description, code = dataItem.code, password = mWalletPassword, user_id = mWalletUsername, terminal_id = mWalletId, pin = encryptedPin, pfm = pfm!!,paymentMethod = "card")
 
             appState.dataSubscriptionDetails = payDetails
 

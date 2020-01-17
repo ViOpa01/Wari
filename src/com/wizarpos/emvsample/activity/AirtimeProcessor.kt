@@ -14,6 +14,7 @@ import com.wizarpos.emvsample.generators.PfmStateGenerator
 import com.wizarpos.emvsample.models.PfmJournalGenerator
 import com.wizarpos.util.MemoryUtil
 import com.wizarpos.util.SharedPreferenceUtils
+import com.wizarpos.util.StringUtil
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -34,6 +35,8 @@ class AirtimeProcessor(val context : Context, listener : onAirtimeTransactionRes
     private val phoneNumber = phoneNumber
     private val airtimeAmount = airtimeAmount
 
+
+
     private val terminalID =  PreferenceManager.getDefaultSharedPreferences(context).getString(context.getString(R.string.key_terminal_id), null)
 
     private val wallet_username by lazy {
@@ -52,7 +55,7 @@ class AirtimeProcessor(val context : Context, listener : onAirtimeTransactionRes
         SecureStorage.retrieve(Helper.PLAIN_PASSWORD, "")
     }
 
-    fun performTransaction(isCard: Boolean = false, pin : String){
+    fun performTransaction(isCard: Boolean = false, pin : String,clientReference:String){
         Log.d("airtimeType performTransaction >>>>>", "wallet")
 
         this.isCard = isCard
@@ -109,7 +112,9 @@ class AirtimeProcessor(val context : Context, listener : onAirtimeTransactionRes
             pfm = com.itex.richard.payviceconnect.model.Pfm(PfmStateGenerator(context,tid ).generateState(), PfmJournalGenerator(FuncActivity.appState.trans.getTransactionResult(), FuncActivity.appState.nibssData.configData, false, airtimeAmount, emvCard, "Airtime", airtimeProvider, "").generateJournal())
             Log.d("pfm  >>>>>", Gson().toJson(pfm))
 
-            val details = AirtimeRequestDetails(amount = airtimeAmount, phone = phoneNumber, service = airtimeProvider, terminal_id = wallet_id, user_id = wallet_username, password = wallet_clear_password, pin = pin, pfm = pfm,paymentMethod = "card")
+
+
+            val details = AirtimeRequestDetails(clientReference =clientReference,amount = airtimeAmount, phone = phoneNumber, service = airtimeProvider, terminal_id = wallet_id, user_id = wallet_username, password = wallet_clear_password, pin = pin, pfm = pfm,paymentMethod = "card")
             AirtimeService.create().airtimeCardPurchase(details).enqueue(this)
             return
         }else {
@@ -132,7 +137,7 @@ class AirtimeProcessor(val context : Context, listener : onAirtimeTransactionRes
             pfm = com.itex.richard.payviceconnect.model.Pfm(PfmStateGenerator(context,tid ).generateState(), PfmJournalGenerator(FuncActivity.appState.trans.getTransactionResult(), FuncActivity.appState.nibssData.configData, false, airtimeAmount, emvCard, "Airtime", airtimeProvider, "").generateJournal())
             Log.d("pfm  >>>>>", Gson().toJson(pfm))
 
-            val details = AirtimeRequestDetails(amount = airtimeAmount, phone = phoneNumber, service = airtimeProvider, terminal_id = wallet_id, user_id = wallet_username, password = wallet_clear_password, pin = pin, pfm = pfm,paymentMethod = "cash")
+            val details = AirtimeRequestDetails(clientReference=clientReference,amount = airtimeAmount, phone = phoneNumber, service = airtimeProvider, terminal_id = wallet_id, user_id = wallet_username, password = wallet_clear_password, pin = pin, pfm = pfm,paymentMethod = "cash")
 
             Log.d("AirtimeRequestDetails wallet  >>>>>", Gson().toJson(details))
 

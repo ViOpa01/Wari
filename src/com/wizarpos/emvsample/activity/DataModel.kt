@@ -47,7 +47,7 @@ class DataModel {
         }
     }
 
-    data class DataSubscriptionDetails( val terminal_id: String,  val user_id : String,  val password : String,  val pin : String, val phone : String,  val service : String,  val amount : String,  val description : String = "pay",  val code : String, val pfm:Pfm,@Expose var paymentMethod: String?)
+    data class DataSubscriptionDetails( @Expose val clientReference:String,val terminal_id: String,  val user_id : String,  val password : String,  val pin : String, val phone : String,  val service : String,  val amount : String,  val description : String = "pay",  val code : String, val pfm:Pfm,@Expose var paymentMethod: String?)
 
     data class DataSubscriptionSuccessResponse(@Expose val error : Boolean, @Expose val message : String, @Expose val amount : String, @Expose val ref : String, @Expose val date : String,@Expose val transactionID:String)
 
